@@ -28,7 +28,23 @@
         <Radio v-model="radio" label="Ada" value="Ada" />
         <Radio v-model="radio" label="Sadie" value="Sadie" disabled />
       </div>
-      <div class="grid">
+      <div class="grid gap-6">
+        <TextField
+          v-model="text"
+          label="Text Field"
+          name="text-field"
+          placeholder="Type something..."
+          required
+          showMarker
+        />
+        <SecureField
+          v-model="text"
+          label="Secure Field"
+          name="secure-field"
+          placeholder="Type something..."
+          required
+          showMarker
+        />
         <TextEditor
           v-model="text"
           label="Text Editor"
