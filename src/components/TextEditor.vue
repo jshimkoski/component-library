@@ -21,6 +21,7 @@
       :placeholder="placeholder"
       :name="name"
     />
+    <p v-if="description" class="text-sm text-gray-500">{{ description }}</p>
   </div>
 </template>
 
@@ -31,32 +32,35 @@ defineOptions({
 defineProps({
   label: {
     type: String,
-    default: ''
+    default: undefined
+  },
+  description: {
+    type: String,
+    default: undefined
   },
   name: {
     type: String,
-    default: ''
+    default: undefined
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   required: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   placeholder: {
     type: String,
-    default: ''
+    default: undefined
   },
   showMarker: {
     type: Boolean,
-    default: false
+    default: undefined
   },
 })
 const model = defineModel({
-  type: String,
-  default: ''
+  type: String
 })
 const id = useId()
 </script>

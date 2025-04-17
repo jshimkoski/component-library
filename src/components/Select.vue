@@ -37,6 +37,7 @@
         {{ option.label }}
       </option>
     </select>
+    <p v-if="description" class="text-sm text-gray-500">{{ description }}</p>
   </div>
 </template>
 
@@ -47,23 +48,27 @@ defineOptions({
 defineProps({
   label: {
     type: String,
-    default: ''
+    default: undefined
+  },
+  description: {
+    type: String,
+    default: undefined
   },
   name: {
     type: String,
-    default: ''
+    default: undefined
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   required: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   multiple: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   options: {
     type: Array as () => Array<{
@@ -71,16 +76,15 @@ defineProps({
       value: null | boolean | string | number | Record<string, any>
       disabled?: boolean
     }>,
-    default: () => []
+    default: undefined
   },
   showMarker: {
     type: Boolean,
-    default: false
+    default: undefined
   }
 })
 const model = defineModel({
-  type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>,
-  default: ''
+  type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>
 })
 const id = useId()
 </script>

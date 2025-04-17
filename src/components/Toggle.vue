@@ -1,6 +1,6 @@
 <template>
   <div
-    class="inline-flex items-center gap-1"
+    class="inline-flex items-start gap-2"
     :class="{ 'opacity-50 pointer-events-none': disabled }"
   >
     <input
@@ -20,17 +20,22 @@
         before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0.25
         before:w-4 before:h-4 before:bg-current before:rounded-full
         checked:before:left-4.25
+        mt-1.5
       "
     />
-    <label
-      :for="id"
-      class="cursor-pointer"
-      :class="[
-        required && showMarker ? `after:text-red-500 after:content-['*'] after:ml-1` : '',
-      ]"
-    >
-      <slot>{{ label }}</slot>
-    </label>
+    <div class="relative">
+      <label
+        :for="id"
+        class="cursor-pointer"
+        :class="[
+          required && showMarker ? `after:text-red-500 after:content-['*'] after:ml-1` : '',
+        ]"
+      >
+        <slot>{{ label }}</slot>
+        <span class="absolute inset-0"></span>
+      </label>
+      <p v-if="description" class="text-sm text-gray-500">{{ description }}</p>
+    </div>
   </div>
 </template>
 
@@ -38,28 +43,31 @@
 defineProps({
   label: {
     type: String,
-    default: ''
+    default: undefined
+  },
+  description: {
+    type: String,
+    default: undefined
   },
   name: {
     type: String,
-    default: ''
+    default: undefined
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   required: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   showMarker: {
     type: Boolean,
-    default: false
+    default: undefined
   },
 })
 const model = defineModel({
-  type: Boolean,
-  default: false
+  type: Boolean
 })
 const id = useId()
 </script>

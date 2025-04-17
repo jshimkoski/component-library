@@ -12,21 +12,29 @@
         <p class="p-8 bg-red-400">Show a tooltip</p>
       </Tooltip>
       <div class="flex items-center gap-1">
-        <Toggle v-model="toggle" label="Toggle 1" />
+        <Toggle v-model="toggle" label="Toggle 1" description="This is a toggle" />
         <Toggle v-model="toggle" label="Toggle 2" disabled />
       </div>
       <Modal />
       <div class="grid">
-        <Checkbox v-model="checkbox" label="Amy" value="Amy" />
-        <Checkbox v-model="checkbox" label="Jason" value="Jason" disabled />
+        <Checkbox v-model="checkbox" label="Amy" value="Amy" description="This is a Checkbox with Amy value" />
+        <Checkbox v-model="checkbox" label="Jason" value="Jason" disabled description="This is a Checkbox with Jason value" />
         <Checkbox v-model="checkbox" label="Ada" value="Ada" />
         <Checkbox v-model="checkbox" label="Sadie" value="Sadie" disabled />
       </div>
       <div class="grid">
-        <Radio v-model="radio" label="Amy" value="Amy" />
-        <Radio v-model="radio" label="Jason" value="Jason" disabled />
+        <Radio v-model="radio" label="Amy" value="Amy" descripton="This is a Radio with Amy value" />
+        <Radio v-model="radio" label="Jason" value="Jason" disabled description="This is a Radio with Jason value" />
         <Radio v-model="radio" label="Ada" value="Ada" />
         <Radio v-model="radio" label="Sadie" value="Sadie" disabled />
+      </div>
+      <div class="grid">
+        <RadioGroup
+          v-model="radiogroup"
+          :options="radioogroupoptions"
+          label="Radio Group Label"
+          description="This is a radio group"
+        />
       </div>
       <div class="grid gap-6">
         <Select
@@ -37,6 +45,7 @@
             { label: 'Option 3', value: { name: 'Ada' }, disabled: true },
           ]"
           label="Select"
+          description="This is a select field"
           name="select"
           placeholder="Select an option..."
           required
@@ -45,6 +54,7 @@
         <TextField
           v-model="text"
           label="Text Field"
+          description="This is a text field"
           name="text-field"
           placeholder="Type something..."
           required
@@ -62,6 +72,7 @@
         <TextEditor
           v-model="texteditor"
           label="Text Editor"
+          description="This is a text editor"
           name="text-editor"
           placeholder="Type something..."
           class="border rounded-md p-2"
@@ -119,8 +130,17 @@
 const toggle = ref(true)
 const checkbox = ref(['Jason', 'Sadie'])
 const radio = ref('Jason')
+
+const radiogroup = ref('Jason')
+const radioogroupoptions = ref([
+  { label: 'Jason', value: 'Jason' },
+  { label: 'Amy', value: 'Amy', disabled: true },
+  { label: 'Ada', value: 'Ada' },
+  { label: 'Sadie', value: 'Sadie' },
+])
+
 const text = ref('')
-const password = ref('')
+// const password = ref('')
 const texteditor = ref('')
 const select = ref('option1')
 

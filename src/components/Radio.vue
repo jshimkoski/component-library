@@ -1,6 +1,6 @@
 <template>
   <div
-    class="inline-flex items-center gap-1"
+    class="inline-flex items-start gap-2"
     :class="{ 'opacity-50 pointer-events-none': disabled }"
   >
     <input
@@ -12,17 +12,21 @@
       :value="value"
       :name="name"
       type="radio"
-      class="cursor-pointer"
+      class="cursor-pointer mt-1.5"
     />
-    <label
-      :for="id"
-      class="cursor-pointer"
-      :class="[
-        required && showMarker ? `after:text-red-500 after:content-['*'] after:ml-1` : '',
-      ]"
-    >
-      <slot>{{ label }}</slot>
-    </label>
+    <div class="relative">
+      <label
+        :for="id"
+        class="cursor-pointer"
+        :class="[
+          required && showMarker ? `after:text-red-500 after:content-['*'] after:ml-1` : '',
+        ]"
+      >
+        <slot>{{ label }}</slot>
+        <span class="absolute inset-0"></span>
+      </label>
+      <p v-if="description" class="text-sm text-gray-500">{{ description }}</p>
+    </div>
   </div>
 </template>
 
@@ -33,32 +37,35 @@ defineOptions({
 defineProps({
   label: {
     type: String,
-    default: ''
+    default: undefined
+  },
+  description: {
+    type: String,
+    default: undefined
   },
   name: {
     type: String,
-    default: ''
+    default: undefined
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   required: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   showMarker: {
     type: Boolean,
-    default: false
+    default: undefined
   },
   value: {
     type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>,
-    default: false
+    default: undefined
   }
 })
 const model = defineModel({
-  type: [Boolean, String, Number] as PropType<null | boolean | string | number>,
-  default: null
+  type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>
 })
 const id = useId()
 </script>
