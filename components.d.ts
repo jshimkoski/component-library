@@ -29,6 +29,7 @@ declare module 'vue' {
     Radio: typeof import('./src/components/Radio.vue')['default']
     RadioGroup: typeof import('./src/components/RadioGroup.vue')['default']
     SecureField: typeof import('./src/components/SecureField.vue')['default']
+    Select: typeof import('./src/components/Select.vue')['default']
     Table: typeof import('./src/components/Table.vue')['default']
     TextEditor: typeof import('./src/components/TextEditor.vue')['default']
     TextField: typeof import('./src/components/TextField.vue')['default']

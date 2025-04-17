@@ -35,11 +35,6 @@
 </template>
 
 <script setup lang="ts">
-const model = defineModel({
-  type: Boolean,
-  default: false
-})
-const emit = defineEmits(['change', 'update:modelValue'])
 defineProps({
   label: {
     type: String,
@@ -61,6 +56,10 @@ defineProps({
     type: Boolean,
     default: false
   },
+})
+const model = defineModel({
+  type: Boolean,
+  default: false
 })
 const id = useId()
 </script>

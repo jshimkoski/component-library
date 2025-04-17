@@ -14,29 +14,20 @@
     </label>
     <input
       v-model="model"
+      v-bind="$attrs"
       :id="id"
       :disabled="disabled"
       :required="required"
       :placeholder="placeholder"
       :name="name"
       type="text"
-      class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:pointer-events-none
-        transition-all
-        placeholder:text-gray-400 placeholder:opacity-50
-        [&:not(:placeholder-shown)]:bg-white
-        [&:placeholder-shown]:bg-gray-100
-        [&:placeholder-shown]:border-gray-300"
-      :class="{
-        'bg-gray-100': disabled,
-      }"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-const model = defineModel({
-  type: String,
-  default: ''
+defineOptions({
+  inheritAttrs: false
 })
 defineProps({
   label: {
@@ -63,6 +54,10 @@ defineProps({
     type: Boolean,
     default: false
   },
+})
+const model = defineModel({
+  type: String,
+  default: ''
 })
 const id = useId()
 </script>

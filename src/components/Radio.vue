@@ -5,6 +5,7 @@
   >
     <input
       v-model="model"
+      v-bind="$attrs"
       :id="id"
       :disabled="disabled"
       :required="required"
@@ -12,7 +13,6 @@
       :name="name"
       type="radio"
       class="cursor-pointer"
-      @change="onChange"
     />
     <label
       :for="id"
@@ -27,6 +27,9 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({
+  inheritAttrs: false
+})
 defineProps({
   label: {
     type: String,
@@ -53,7 +56,6 @@ defineProps({
     default: false
   }
 })
-const emit = defineEmits(['change', 'update:modelValue'])
 const model = defineModel({
   type: [Boolean, String, Number] as PropType<null | boolean | string | number>,
   default: null

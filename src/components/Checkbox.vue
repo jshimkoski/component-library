@@ -5,6 +5,7 @@
   >
     <input
       v-model="model"
+      v-bind="$attrs"
       :id="id"
       :true-value="trueValue"
       :false-value="falseValue"
@@ -14,7 +15,6 @@
       :name="name"
       type="checkbox"
       class="cursor-pointer"
-      @change="onChange"
     />
     <label
       :for="id"
@@ -29,6 +29,9 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({
+  inheritAttrs: false
+})
 defineProps({
   label: {
     type: String,
@@ -51,21 +54,20 @@ defineProps({
     default: false
   },
   value: {
-    type: [Boolean, String, Number] as PropType<null | boolean | string | number | Record<string, any>>,
+    type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>,
     default: false
   },
   trueValue: {
-    type: [Boolean, String, Number] as PropType<null | boolean | string | number | Record<string, any>>,
+    type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>,
     default: true
   },
   falseValue: {
-    type: [Boolean, String, Number] as PropType<null | boolean | string | number | Record<string, any>>,
+    type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>,
     default: false
   }
 })
-const emit = defineEmits(['change', 'update:modelValue'])
 const model = defineModel({
-  type: [Boolean, String, Number, Array] as PropType<null | boolean | string | number | Record<string, any> | string[] | number[] | Record<string, any>[]>,
+  type: [Boolean, String, Number, Object, Array] as PropType<null | boolean | string | number | Record<string, any> | string[] | number[] | Record<string, any>[]>,
   default: null
 })
 const id = useId()

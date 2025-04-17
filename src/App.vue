@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="mx-auto max-w-3xl p-4 bg-gray-1">
+  <div id="app" class="mx-auto max-w-3xl p-4">
     <h1>My Vue App</h1>
     <p class="text-2xl">This is a simple Vue.js application.</p>
     <div class="grid gap-4">
@@ -29,6 +29,19 @@
         <Radio v-model="radio" label="Sadie" value="Sadie" disabled />
       </div>
       <div class="grid gap-6">
+        <Select
+          v-model="select"
+          :options="[
+            { label: 'Option 1', value: { name: 'Jason' } },
+            { label: 'Option 2', value: { name: 'Amy' } },
+            { label: 'Option 3', value: { name: 'Ada' }, disabled: true },
+          ]"
+          label="Select"
+          name="select"
+          placeholder="Select an option..."
+          required
+          showMarker
+        />
         <TextField
           v-model="text"
           label="Text Field"
@@ -36,20 +49,24 @@
           placeholder="Type something..."
           required
           showMarker
+          class="border rounded-md p-2"
         />
-        <SecureField
-          v-model="text"
+        <!-- <SecureField
+          v-model="password"
           label="Secure Field"
           name="secure-field"
-          placeholder="Type something..."
+          placeholder="Type a password..."
           required
           showMarker
-        />
+        /> -->
         <TextEditor
-          v-model="text"
+          v-model="texteditor"
           label="Text Editor"
           name="text-editor"
           placeholder="Type something..."
+          class="border rounded-md p-2"
+          required
+          show-marker
         />
       </div>
       <div class="flex flex-wrap items-center gap-1">
@@ -103,6 +120,13 @@ const toggle = ref(true)
 const checkbox = ref(['Jason', 'Sadie'])
 const radio = ref('Jason')
 const text = ref('')
+const password = ref('')
+const texteditor = ref('')
+const select = ref('option1')
+
+watch(select, (newValue) => {
+  console.log('Selected option:', newValue)
+})
 
 watch(checkbox, (newValue) => {
   console.log('Checked names:', newValue)
