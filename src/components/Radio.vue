@@ -49,7 +49,7 @@ defineProps({
     default: false
   },
   value: {
-    type: [Boolean, String, Number] as PropType<null | boolean | string | number>,
+    type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>,
     default: false
   }
 })

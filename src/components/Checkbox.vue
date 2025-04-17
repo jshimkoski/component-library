@@ -6,6 +6,8 @@
     <input
       v-model="model"
       :id="id"
+      :true-value="trueValue"
+      :false-value="falseValue"
       :disabled="disabled"
       :required="required"
       :value="value"
@@ -49,13 +51,21 @@ defineProps({
     default: false
   },
   value: {
-    type: [Boolean, String, Number] as PropType<null | boolean | string | number>,
+    type: [Boolean, String, Number] as PropType<null | boolean | string | number | Record<string, any>>,
+    default: false
+  },
+  trueValue: {
+    type: [Boolean, String, Number] as PropType<null | boolean | string | number | Record<string, any>>,
+    default: true
+  },
+  falseValue: {
+    type: [Boolean, String, Number] as PropType<null | boolean | string | number | Record<string, any>>,
     default: false
   }
 })
 const emit = defineEmits(['change', 'update:modelValue'])
 const model = defineModel({
-  type: [Boolean, String, Number, Array] as PropType<null | boolean | string | number | string[] | number[]>,
+  type: [Boolean, String, Number, Array] as PropType<null | boolean | string | number | Record<string, any> | string[] | number[] | Record<string, any>[]>,
   default: null
 })
 const id = useId()
