@@ -16,11 +16,11 @@
       v-model="model"
       v-bind="$attrs"
       :id="id"
+      :type="type"
       :disabled="disabled"
       :required="required"
       :placeholder="placeholder"
       :name="name"
-      type="text"
     />
     <p v-if="description" class="text-sm text-gray-500">{{ description }}</p>
   </div>
@@ -38,6 +38,10 @@ defineProps({
   description: {
     type: String,
     default: undefined
+  },
+  type: {
+    type: String as PropType<'text' | 'email' | 'password'>,
+    default: 'text'
   },
   name: {
     type: String,

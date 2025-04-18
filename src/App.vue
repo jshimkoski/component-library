@@ -7,15 +7,18 @@
         src="https://jasonshimmy.com/jason.jpg"
         alt="Jason Shimmy"
       />
-      <Accordion />
       <Tooltip label="Hello world">
         <p class="p-8 bg-red-400">Show a tooltip</p>
       </Tooltip>
       <div class="flex items-center gap-1">
-        <Toggle v-model="toggle" label="Toggle 1" description="This is a toggle" />
-        <Toggle v-model="toggle" label="Toggle 2" disabled />
+        <Switch v-model="toggleSwitch" label="Switch 1" description="This is a Switch" />
+        <Switch v-model="toggleSwitch" label="Switch 2" disabled />
       </div>
-      <Modal />
+      <Button @click.stop="dialog = !dialog" ref="dialogTrigger">
+        <span>Open Dialog</span>
+        <Badge label="12" />
+      </Button>
+      <Dialog v-model="dialog" :trigger-ref="dialogTrigger?.$el" />
       <div class="grid">
         <Checkbox v-model="checkbox" label="Amy" value="Amy" description="This is a Checkbox with Amy value" />
         <Checkbox v-model="checkbox" label="Jason" value="Jason" disabled description="This is a Checkbox with Jason value" />
@@ -34,6 +37,14 @@
           :options="radioogroupoptions"
           label="Radio Group Label"
           description="This is a radio group"
+        />
+      </div>
+      <div>
+        <Progress
+          v-model="progress"
+          :max="100"
+          label="Progress"
+          description="This is a progress indicator"
         />
       </div>
       <div class="grid gap-6">
@@ -61,14 +72,16 @@
           showMarker
           class="border rounded-md p-2"
         />
-        <!-- <SecureField
-          v-model="password"
-          label="Secure Field"
-          name="secure-field"
-          placeholder="Type a password..."
+        <TextField
+          v-model="email"
+          label="Email Field"
+          name="email-field"
+          type="email"
+          placeholder="Type an email..."
           required
           showMarker
-        /> -->
+          class="border rounded-md p-2"
+        />
         <TextEditor
           v-model="texteditor"
           label="Text Editor"
@@ -94,21 +107,21 @@
           />
           <span>Link with Avatar</span>
         </Button>
-        <Dropdown>
-          <DropdownItem>Item 1</DropdownItem>
-          <DropdownItem disabled>Item 2</DropdownItem>
-          <DropdownItem>Item 3</DropdownItem>
-        </Dropdown>
-        <Dropdown label="Another Dropdown">
-          <DropdownItem>Item 1</DropdownItem>
-          <DropdownItem>Item 2</DropdownItem>
-          <DropdownItem>Item 3</DropdownItem>
-        </Dropdown>
-        <Dropdown label="Another Dropdown" disabled>
-          <DropdownItem>Item 1</DropdownItem>
-          <DropdownItem>Item 2</DropdownItem>
-          <DropdownItem>Item 3</DropdownItem>
-        </Dropdown>
+        <Menu>
+          <MenuItem>Item 1</MenuItem>
+          <MenuItem disabled>Item 2</MenuItem>
+          <MenuItem>Item 3</MenuItem>
+        </Menu>
+        <Menu label="Another Menu">
+          <MenuItem>Item 1</MenuItem>
+          <MenuItem>Item 2</MenuItem>
+          <MenuItem>Item 3</MenuItem>
+        </Menu>
+        <Menu label="Another Menu" disabled>
+          <MenuItem>Item 1</MenuItem>
+          <MenuItem>Item 2</MenuItem>
+          <MenuItem>Item 3</MenuItem>
+        </Menu>
       </div>
       <div class="flex flex-wrap items-center gap-1">
         <Link label="Link" href="https://example.com" target="_blank" rel="noopener noreferrer" />
@@ -127,10 +140,9 @@
 </template>
 
 <script setup lang="ts">
-const toggle = ref(true)
+const toggleSwitch = ref(true)
 const checkbox = ref(['Jason', 'Sadie'])
 const radio = ref('Jason')
-
 const radiogroup = ref('Jason')
 const radioogroupoptions = ref([
   { label: 'Jason', value: 'Jason' },
@@ -138,17 +150,11 @@ const radioogroupoptions = ref([
   { label: 'Ada', value: 'Ada' },
   { label: 'Sadie', value: 'Sadie' },
 ])
-
+const dialogTrigger = useTemplateRef('dialogTrigger')
+const dialog = ref(false)
 const text = ref('')
-// const password = ref('')
+const email = ref('')
 const texteditor = ref('')
 const select = ref('option1')
-
-watch(select, (newValue) => {
-  console.log('Selected option:', newValue)
-})
-
-watch(checkbox, (newValue) => {
-  console.log('Checked names:', newValue)
-})
+const progress = ref(50)
 </script>

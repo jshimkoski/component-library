@@ -47,6 +47,10 @@ defineProps({
     type: String,
     default: ''
   },
+  type: {
+    type: String as PropType<'plain' | 'rich'>,
+    default: 'plain'
+  },
   position: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
     default: 'top'
@@ -54,7 +58,6 @@ defineProps({
 })
 
 const open = defineModel('open', {
-  type: Boolean,
-  default: false
+  type: Boolean
 })
 </script>
