@@ -145,7 +145,7 @@ const checkbox = ref(['Jason', 'Sadie'])
 const radio = ref('Jason')
 const radiogroup = ref('Jason')
 const radioogroupoptions = ref([
-  { label: 'Jason', value: 'Jason' },
+  { label: 'Jason', value: 'Jason', description: 'This is a description.' },
   { label: 'Amy', value: 'Amy', disabled: true },
   { label: 'Ada', value: 'Ada' },
   { label: 'Sadie', value: 'Sadie' },

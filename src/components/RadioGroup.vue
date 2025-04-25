@@ -17,6 +17,7 @@
         :key="index"
         v-model="model"
         :label="option.label"
+        :description="option.description"
         :name="option.name"
         :disabled="option.disabled || disabled"
         :required="option.required || required"
@@ -65,6 +66,7 @@ defineProps({
     type: Array as () => Array<{
       value: null | boolean | string | number | Record<string, any>
       label: string
+      description?: string
       class?: string
       name?: string
       disabled?: boolean
