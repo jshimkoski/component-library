@@ -18,6 +18,7 @@
       leave-to-class="opacity-0"
     >
       <div
+        v-if="open"
         ref="floatingRef"
         :class="floatingContainerClasses"
         :style="{
