@@ -87,9 +87,17 @@ const floatingOffset = computed(() => {
   return (Math.sqrt(2 * arrowLen.value ** 2) / 2) + 4
 })
 
+/**
+ * TODO: Make arrow padding dynamic
+ */
+
 const { floatingStyles, middlewareData, placement } = useFloating(rootRef, floatingRef, {
   placement: props.placement,
-  middleware: [offset(() => floatingOffset.value), flip(), arrow({ element: arrowRef })],
+  middleware: [
+    offset(() => floatingOffset.value),
+    flip(),
+    arrow({ element: arrowRef, padding: 8 })
+  ],
   whileElementsMounted: autoUpdate
 })
 
