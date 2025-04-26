@@ -1,7 +1,10 @@
 <template>
   <div
     ref="rootRef"
-    class="relative w-fit"
+    :style="{
+      position: 'relative',
+      width: 'fit-content',
+    }"
     @mouseover="open = true"
     @mouseout="open = false"
   >
@@ -15,20 +18,23 @@
       leave-to-class="opacity-0"
     >
       <div
-        v-if="open"
         ref="floatingRef"
-        class="absolute z-10"
         :class="floatingContainerClasses"
-        :style="floatingStyles"
+        :style="{
+          zIndex: 50,
+          ...floatingStyles
+        }"
       >
         <div :class="floatingClasses">
          <slot name="label"><p>{{ label }}</p></slot>
         </div>
         <div
           ref="arrowRef"
-          class="absolute rotate-45 -z-10"
           :class="arrowClasses"
           :style="{
+            position: 'absolute',
+            rotate: '45deg',
+            zIndex: -10,
             left:
               middlewareData.arrow?.x != null
                 ? `${middlewareData.arrow.x}px`
@@ -37,7 +43,7 @@
               middlewareData.arrow?.y != null
                 ? `${middlewareData.arrow.y}px`
                 : '',
-            [oppositeSide]: `${-(arrowRef?.clientWidth ?? 0) / 2}px`,
+            [oppositeSide]: `${-arrowLen / 2}px`
           }"
         />
       </div>
@@ -71,13 +77,17 @@ const rootRef = useTemplateRef('rootRef')
 const floatingRef = useTemplateRef('floatingRef')
 const arrowRef = useTemplateRef('arrowRef')
 
-/**
- * TODO: Use offset to position the tooltip based on arrow size
- */
+const arrowLen = computed(() => {
+  return arrowRef.value?.offsetWidth || 0
+})
+
+const floatingOffset = computed(() => {
+  return Math.sqrt(2 * arrowLen.value ** 2) / 2;
+})
 
 const { floatingStyles, middlewareData, placement } = useFloating(rootRef, floatingRef, {
   placement: props.placement,
-  middleware: [flip(), offset(10), arrow({ element: arrowRef })],
+  middleware: [offset(() => floatingOffset.value + 4), flip(), arrow({ element: arrowRef })],
   whileElementsMounted: autoUpdate
 })
 
