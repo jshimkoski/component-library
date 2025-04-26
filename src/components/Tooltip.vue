@@ -54,6 +54,7 @@
 
 <script setup lang="ts">
 import { useFloating, flip, offset, arrow, autoUpdate } from '@floating-ui/vue'
+import type { Placement } from '@floating-ui/core'
 
 const props = defineProps({
   text: {
@@ -65,7 +66,7 @@ const props = defineProps({
     default: 'plain'
   },
   placement: {
-    type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
+    type: String as PropType<Placement>,
     default: 'top'
   },
 })
