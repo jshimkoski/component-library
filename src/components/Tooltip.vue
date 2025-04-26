@@ -5,8 +5,6 @@
       position: 'relative',
       width: 'fit-content',
     }"
-    @mouseover="open = true"
-    @mouseout="open = false"
   >
     <slot />
     <Transition
@@ -79,6 +77,14 @@ const rootRef = useTemplateRef('rootRef')
 const floatingRef = useTemplateRef('floatingRef')
 const arrowRef = useTemplateRef('arrowRef')
 
+const isHovered = useElementHover(rootRef, {
+  delayLeave: props.type === 'rich' ? 200 : 0
+})
+
+watch(isHovered, (val) => {
+  open.value = val
+})
+
 const arrowLen = computed(() => {
   return arrowRef.value?.offsetWidth || 0
 })
@@ -134,10 +140,10 @@ const floatingClasses = computed(() => {
 const arrowClasses = computed(() => {
   switch (props.type) {
     case 'rich':
-      return 'size-4 bg-gray-50 ring-1 ring-gray-300 dark:bg-gray-900 dark:ring-gray-700'
+      return 'size-4 bg-gray-50 ring-1 ring-gray-300 dark:bg-gray-900 dark:ring-gray-700 shadow-md'
     case 'plain':
     default:
-      return 'size-2 bg-black ring-1 ring-gray-700'
+      return 'size-2 bg-black ring-1 ring-gray-700 shadow-md'
   }
 })
 </script>
