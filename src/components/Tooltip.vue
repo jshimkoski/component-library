@@ -27,7 +27,7 @@
         }"
       >
         <div :class="floatingClasses">
-         <slot name="label"><p>{{ label }}</p></slot>
+         <slot name="text"><p>{{ text }}</p></slot>
         </div>
         <div
           ref="arrowRef"
@@ -56,7 +56,7 @@
 import { useFloating, flip, offset, arrow, autoUpdate } from '@floating-ui/vue'
 
 const props = defineProps({
-  label: {
+  text: {
     type: String,
     default: ''
   },
@@ -67,7 +67,7 @@ const props = defineProps({
   placement: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
     default: 'top'
-  }
+  },
 })
 
 const open = defineModel('open', {
@@ -83,12 +83,12 @@ const arrowLen = computed(() => {
 })
 
 const floatingOffset = computed(() => {
-  return Math.sqrt(2 * arrowLen.value ** 2) / 2;
+  return (Math.sqrt(2 * arrowLen.value ** 2) / 2) + 4
 })
 
 const { floatingStyles, middlewareData, placement } = useFloating(rootRef, floatingRef, {
   placement: props.placement,
-  middleware: [offset(() => floatingOffset.value + 4), flip(), arrow({ element: arrowRef })],
+  middleware: [offset(() => floatingOffset.value), flip(), arrow({ element: arrowRef })],
   whileElementsMounted: autoUpdate
 })
 
@@ -105,17 +105,17 @@ const oppositeSide = computed(() => OPPOSITE_SIDE_BY_SIDE[side.value])
 const floatingContainerClasses = computed(() => {
   switch (props.type) {
     case 'rich':
-      return 'ring-1 ring-gray-300 rounded-sm shadow-md'
+      return 'ring-1 ring-gray-300 rounded-sm shadow-md dark:ring-gray-700'
     case 'plain':
     default:
-      return 'pointer-events-none ring-1 ring-white rounded-sm shadow-md'
+      return 'pointer-events-none ring-1 ring-gray-700 rounded-sm shadow-md'
   }
 })
 
 const floatingClasses = computed(() => {
   switch (props.type) {
     case 'rich':
-      return 'rounded-sm bg-gray-50 text-black p-4 py-2 z-10 w-max'
+      return 'rounded-sm bg-gray-50 text-black p-4 py-2 z-10 w-max dark:bg-gray-900 dark:text-white'
     case 'plain':
     default:
       return 'rounded-sm bg-black text-white text-sm p-2 py-1 z-10 w-max'
@@ -125,10 +125,10 @@ const floatingClasses = computed(() => {
 const arrowClasses = computed(() => {
   switch (props.type) {
     case 'rich':
-      return 'size-4 bg-gray-50 ring-1 ring-gray-300'
+      return 'size-4 bg-gray-50 ring-1 ring-gray-300 dark:bg-gray-900 dark:ring-gray-700'
     case 'plain':
     default:
-      return 'size-2 bg-black ring-1 ring-white'
+      return 'size-2 bg-black ring-1 ring-gray-700'
   }
 })
 </script>
