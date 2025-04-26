@@ -17,15 +17,17 @@
       <div
         v-if="open"
         ref="floatingRef"
-        class="absolute z-10 pointer-events-none ring-1 ring-white rounded-sm shadow-md"
+        class="absolute z-10"
+        :class="floatingContainerClasses"
         :style="floatingStyles"
       >
-        <div class="rounded-sm shadow-md bg-black text-white text-sm p-2 py-1 z-10 w-max">
+        <div :class="floatingClasses">
          <slot name="label"><p>{{ label }}</p></slot>
         </div>
         <div
           ref="arrowRef"
-          class="absolute h-2 w-2 rotate-45 bg-black ring-1 ring-white -z-1"
+          class="absolute rotate-45 -z-10"
+          :class="arrowClasses"
           :style="{
             left:
               middlewareData.arrow?.x != null
@@ -69,9 +71,13 @@ const rootRef = useTemplateRef('rootRef')
 const floatingRef = useTemplateRef('floatingRef')
 const arrowRef = useTemplateRef('arrowRef')
 
+/**
+ * TODO: Use offset to position the tooltip based on arrow size
+ */
+
 const { floatingStyles, middlewareData, placement } = useFloating(rootRef, floatingRef, {
   placement: props.placement,
-  middleware: [flip(), offset(10), arrow({ element: arrowRef, padding: 5 })],
+  middleware: [flip(), offset(10), arrow({ element: arrowRef })],
   whileElementsMounted: autoUpdate
 })
 
@@ -84,4 +90,34 @@ const OPPOSITE_SIDE_BY_SIDE = {
 
 const side = computed(() => placement.value.split("-")[0])
 const oppositeSide = computed(() => OPPOSITE_SIDE_BY_SIDE[side.value])
+
+const floatingContainerClasses = computed(() => {
+  switch (props.type) {
+    case 'rich':
+      return 'ring-1 ring-gray-300 rounded-sm shadow-md'
+    case 'plain':
+    default:
+      return 'pointer-events-none ring-1 ring-white rounded-sm shadow-md'
+  }
+})
+
+const floatingClasses = computed(() => {
+  switch (props.type) {
+    case 'rich':
+      return 'rounded-sm bg-gray-50 text-black p-4 py-2 z-10 w-max'
+    case 'plain':
+    default:
+      return 'rounded-sm bg-black text-white text-sm p-2 py-1 z-10 w-max'
+  }
+})
+
+const arrowClasses = computed(() => {
+  switch (props.type) {
+    case 'rich':
+      return 'size-4 bg-gray-50 ring-1 ring-gray-300'
+    case 'plain':
+    default:
+      return 'size-2 bg-black ring-1 ring-white'
+  }
+})
 </script>

@@ -7,8 +7,11 @@
         src="https://jasonshimmy.com/jason.jpg"
         alt="Jason Shimmy"
       />
-      <Tooltip label="Hello world">
+      <Tooltip label="Hello worldl kjasdlfkjasdflkj asdflkj asdflkj sadflkj asdflkj asdflkjsadlkfjs d">
         <p class="p-8 bg-red-400">Show a tooltip</p>
+      </Tooltip>
+      <Tooltip type="rich" label="Hello world">
+        <p class="p-8 bg-red-400">Show a rich tooltip</p>
       </Tooltip>
       <div class="flex items-center gap-1">
         <Switch v-model="toggleSwitch" label="Switch 1" description="This is a Switch" />
