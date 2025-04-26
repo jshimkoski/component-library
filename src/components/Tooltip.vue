@@ -1,6 +1,6 @@
 <template>
   <div
-    ref="root"
+    ref="rootRef"
     class="relative w-fit"
     @mouseover="open = true"
     @mouseout="open = false"
@@ -16,24 +16,26 @@
     >
       <div
         v-if="open"
-        class="absolute bg-black text-white rounded-sm text-sm p-2 py-1 z-10 w-max shadow-md pointer-events-none"
-        :class="{
-          'left-1/2 -translate-x-1/2': position === 'top' || position === 'bottom',
-          'top-1/2 -translate-y-1/2': position === 'left' || position === 'right',
-          'top-full mt-2': position === 'bottom',
-          'bottom-full mb-2': position === 'top',
-          'left-full ml-2': position === 'right',
-          'right-full mr-2': position === 'left'
-        }"
+        ref="floatingRef"
+        class="absolute z-10 pointer-events-none ring-1 ring-white rounded-sm shadow-md"
+        :style="floatingStyles"
       >
-        <p>{{ label }}</p>
+        <div class="rounded-sm shadow-md bg-black text-white text-sm p-2 py-1 z-10 w-max">
+         <slot name="label"><p>{{ label }}</p></slot>
+        </div>
         <div
-          class="absolute h-0 w-0"
-          :class="{
-            'top-full left-1/2 -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black': position === 'top',
-            'bottom-full left-1/2 -translate-x-1/2 border-l-4 border-r-4 border-b-4 border-l-transparent border-r-transparent border-b-black': position === 'bottom',
-            'right-full top-1/2 -translate-y-1/2 border-r-4 border-t-4 border-b-4 border-t-transparent border-b-transparent border-r-black': position === 'right',
-            'left-full top-1/2 -translate-y-1/2 border-l-4 border-t-4 border-b-4 border-t-transparent border-b-transparent border-l-black': position === 'left'
+          ref="arrowRef"
+          class="absolute h-2 w-2 rotate-45 bg-black ring-1 ring-white -z-1"
+          :style="{
+            left:
+              middlewareData.arrow?.x != null
+                ? `${middlewareData.arrow.x}px`
+                : '',
+            top:
+              middlewareData.arrow?.y != null
+                ? `${middlewareData.arrow.y}px`
+                : '',
+            [oppositeSide]: `${-(arrowRef?.clientWidth ?? 0) / 2}px`,
           }"
         />
       </div>
@@ -42,7 +44,9 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
+import { useFloating, flip, offset, arrow, autoUpdate } from '@floating-ui/vue'
+
+const props = defineProps({
   label: {
     type: String,
     default: ''
@@ -51,7 +55,7 @@ defineProps({
     type: String as PropType<'plain' | 'rich'>,
     default: 'plain'
   },
-  position: {
+  placement: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
     default: 'top'
   }
@@ -60,4 +64,24 @@ defineProps({
 const open = defineModel('open', {
   type: Boolean
 })
+
+const rootRef = useTemplateRef('rootRef')
+const floatingRef = useTemplateRef('floatingRef')
+const arrowRef = useTemplateRef('arrowRef')
+
+const { floatingStyles, middlewareData, placement } = useFloating(rootRef, floatingRef, {
+  placement: props.placement,
+  middleware: [flip(), offset(10), arrow({ element: arrowRef, padding: 5 })],
+  whileElementsMounted: autoUpdate
+})
+
+const OPPOSITE_SIDE_BY_SIDE = {
+  top: "bottom",
+  right: "left",
+  bottom: "top",
+  left: "right",
+} as { [key: string]: string }
+
+const side = computed(() => placement.value.split("-")[0])
+const oppositeSide = computed(() => OPPOSITE_SIDE_BY_SIDE[side.value])
 </script>

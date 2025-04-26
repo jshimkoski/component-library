@@ -12,6 +12,7 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@floating-ui/vue": "^1.1.6",
     "@iconify/json": "^2.2.331",
     "@iconify/vue": "^4.3.0",
     "@tailwindcss/vite": "^4.1.4",
