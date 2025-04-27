@@ -23,6 +23,7 @@ declare module 'vue' {
     Datepicker: typeof import('./src/components/Datepicker.vue')['default']
     Dialog: typeof import('./src/components/Dialog.vue')['default']
     Disclosure: typeof import('./src/components/Disclosure.vue')['default']
+    DocsLayout: typeof import('./src/components/DocsLayout.vue')['default']
     Dropdown: typeof import('./src/components/Dropdown.vue')['default']
     DropdownItem: typeof import('./src/components/DropdownItem.vue')['default']
     IconMdiAccount: typeof import('~icons/mdi/account')['default']
