@@ -99,7 +99,7 @@ const arrowPadding = computed(() => {
   return props.type === "rich" ? 8 : 4;
 });
 
-const { floatingStyles, middlewareData, placement } = useFloating(
+const { update, floatingStyles, middlewareData, placement } = useFloating(
   rootRef,
   floatingRef,
   {
@@ -115,6 +115,10 @@ const { floatingStyles, middlewareData, placement } = useFloating(
     whileElementsMounted: autoUpdate,
   },
 );
+
+watch([() => props.type, () => props.placement], () => {
+  update();
+});
 
 const OPPOSITE_SIDE_BY_SIDE = {
   top: "bottom",
