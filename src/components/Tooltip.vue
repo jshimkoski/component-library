@@ -95,9 +95,9 @@ const floatingOffset = computed(() => {
   return Math.sqrt(2 * arrowLen.value ** 2) / 2 + 4;
 });
 
-/**
- * TODO: Make arrow padding dynamic
- */
+const arrowPadding = computed(() => {
+  return props.type === "rich" ? 8 : 4;
+});
 
 const { floatingStyles, middlewareData, placement } = useFloating(
   rootRef,
@@ -107,7 +107,10 @@ const { floatingStyles, middlewareData, placement } = useFloating(
     middleware: [
       offset(() => floatingOffset.value),
       flip(),
-      arrow({ element: arrowRef, padding: 8 }),
+      arrow({
+        element: arrowRef,
+        padding: arrowPadding.value,
+      }),
     ],
     whileElementsMounted: autoUpdate,
   },
@@ -136,10 +139,10 @@ const floatingContainerClasses = computed(() => {
 const floatingClasses = computed(() => {
   switch (props.type) {
     case "rich":
-      return "rounded-sm bg-gray-50 text-black p-4 py-2 z-10 w-max dark:bg-gray-900 dark:text-white";
+      return "rounded-sm bg-gray-50 text-black p-4 w-max dark:bg-gray-900 dark:text-white";
     case "plain":
     default:
-      return "rounded-sm bg-black text-white text-sm p-2 py-1 z-10 w-max";
+      return "rounded-sm bg-black text-white text-sm p-2 py-1 w-max";
   }
 });
 
