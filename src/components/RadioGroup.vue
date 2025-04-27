@@ -7,12 +7,21 @@
     <legend
       class="cursor-pointer block font-semibold"
       :class="[
-        required && showMarker ? `after:text-red-500 after:content-['*'] after:ml-1` : '',
+        required && showMarker
+          ? `after:text-red-500 after:content-['*'] after:ml-1`
+          : '',
       ]"
-    >{{ label }}</legend>
-    <p v-if="description" class="text-sm text-gray-500">{{ description }}</p>
+    >
+      {{ label }}
+    </legend>
+    <p
+      v-if="description"
+      class="text-sm text-gray-500"
+    >
+      {{ description }}
+    </p>
     <div class="grid">
-      <Radio 
+      <Radio
         v-for="(option, index) in options"
         :key="index"
         v-model="model"
@@ -31,52 +40,56 @@
 
 <script setup lang="ts">
 defineOptions({
-  inheritAttrs: false
-})
+  inheritAttrs: false,
+});
+
 defineProps({
   label: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   description: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   name: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   form: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   disabled: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   required: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   showMarker: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   options: {
     type: Array as () => Array<{
-      value: null | boolean | string | number | Record<string, any>
-      label: string
-      description?: string
-      class?: string
-      name?: string
-      disabled?: boolean
-      required?: boolean
-      showMarker?: boolean
+      value: null | boolean | string | number | Record<string, any>;
+      label: string;
+      description?: string;
+      class?: string;
+      name?: string;
+      disabled?: boolean;
+      required?: boolean;
+      showMarker?: boolean;
     }>,
-    required: true
-  }
-})
+    required: true,
+  },
+});
+
 const model = defineModel({
-  type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>
-})
+  type: [Boolean, String, Number, Object] as PropType<
+    null | boolean | string | number | Record<string, any>
+  >,
+});
 </script>

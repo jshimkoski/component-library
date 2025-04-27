@@ -8,7 +8,7 @@
       :aria-haspopup="true"
       @click="show = !show"
     >
-      {{ label || 'Dropdown' }}
+      {{ label || "Dropdown" }}
       <IconMdiChevronDown class="text-lg" />
     </Button>
     <Transition
@@ -36,28 +36,28 @@
 defineProps({
   label: {
     type: String,
-    default: ''
+    default: "",
   },
   disabled: {
     type: Boolean,
-    default: false
-  }
-})
+    default: false,
+  },
+});
 
-const show = shallowRef(false)
-const triggerRef = useTemplateRef('triggerRef')
-const dropdownRef = useTemplateRef('dropdownRef')
+const show = shallowRef(false);
+const triggerRef = useTemplateRef("triggerRef");
+const dropdownRef = useTemplateRef("dropdownRef");
 
 onClickOutside(dropdownRef, (event) => {
-  if (!show.value) return
-  if (event.target === triggerRef.value?.$el) return
-  if (triggerRef.value?.$el.contains(event.target)) return
-  show.value = false
-})
+  if (!show.value) return;
+  if (event.target === triggerRef.value?.$el) return;
+  if (triggerRef.value?.$el.contains(event.target)) return;
+  show.value = false;
+});
 
-onKeyStroke('Escape', (event) => {
-  if (!show.value) return
-  event.preventDefault()
-  show.value = false
-})
+onKeyStroke("Escape", (event) => {
+  if (!show.value) return;
+  event.preventDefault();
+  show.value = false;
+});
 </script>

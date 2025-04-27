@@ -7,7 +7,9 @@
       :for="id"
       class="cursor-pointer block font-semibold"
       :class="[
-        required && showMarker ? `after:text-red-500 after:content-['*'] after:ml-1` : '',
+        required && showMarker
+          ? `after:text-red-500 after:content-['*'] after:ml-1`
+          : '',
       ]"
     >
       <slot>{{ label }}</slot>
@@ -21,46 +23,54 @@
       :placeholder="placeholder"
       :name="name"
     />
-    <p v-if="description" class="text-sm text-gray-500">{{ description }}</p>
+    <p
+      v-if="description"
+      class="text-sm text-gray-500"
+    >
+      {{ description }}
+    </p>
   </div>
 </template>
 
 <script setup lang="ts">
 defineOptions({
-  inheritAttrs: false
-})
+  inheritAttrs: false,
+});
+
 defineProps({
   label: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   description: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   name: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   disabled: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   required: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   placeholder: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   showMarker: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
-})
+});
+
 const model = defineModel({
-  type: String
-})
-const id = useId()
+  type: String,
+});
+
+const id = useId();
 </script>

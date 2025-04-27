@@ -19,53 +19,67 @@
         :for="id"
         class="cursor-pointer"
         :class="[
-          required && showMarker ? `after:text-red-500 after:content-['*'] after:ml-1` : '',
+          required && showMarker
+            ? `after:text-red-500 after:content-['*'] after:ml-1`
+            : '',
         ]"
       >
         <slot>{{ label }}</slot>
         <span class="absolute inset-0"></span>
       </label>
-      <p v-if="description" class="text-sm text-gray-500">{{ description }}</p>
+      <p
+        v-if="description"
+        class="text-sm text-gray-500"
+      >
+        {{ description }}
+      </p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 defineOptions({
-  inheritAttrs: false
-})
+  inheritAttrs: false,
+});
+
 defineProps({
   label: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   description: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   name: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   disabled: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   required: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   showMarker: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   value: {
-    type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>,
-    default: undefined
-  }
-})
+    type: [Boolean, String, Number, Object] as PropType<
+      null | boolean | string | number | Record<string, any>
+    >,
+    default: undefined,
+  },
+});
+
 const model = defineModel({
-  type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>
-})
-const id = useId()
+  type: [Boolean, String, Number, Object] as PropType<
+    null | boolean | string | number | Record<string, any>
+  >,
+});
+
+const id = useId();
 </script>

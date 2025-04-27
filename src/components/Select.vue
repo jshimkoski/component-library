@@ -7,7 +7,9 @@
       :for="id"
       class="cursor-pointer block font-semibold"
       :class="[
-        required && showMarker ? `after:text-red-500 after:content-['*'] after:ml-1` : '',
+        required && showMarker
+          ? `after:text-red-500 after:content-['*'] after:ml-1`
+          : '',
       ]"
     >
       <slot>{{ label }}</slot>
@@ -37,54 +39,64 @@
         {{ option.label }}
       </option>
     </select>
-    <p v-if="description" class="text-sm text-gray-500">{{ description }}</p>
+    <p
+      v-if="description"
+      class="text-sm text-gray-500"
+    >
+      {{ description }}
+    </p>
   </div>
 </template>
 
 <script setup lang="ts">
 defineOptions({
-  inheritAttrs: false
-})
+  inheritAttrs: false,
+});
+
 defineProps({
   label: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   description: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   name: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   disabled: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   required: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   multiple: {
     type: Boolean,
-    default: undefined
+    default: undefined,
   },
   options: {
     type: Array as () => Array<{
-      label: string
-      value: null | boolean | string | number | Record<string, any>
-      disabled?: boolean
+      label: string;
+      value: null | boolean | string | number | Record<string, any>;
+      disabled?: boolean;
     }>,
-    default: undefined
+    default: undefined,
   },
   showMarker: {
     type: Boolean,
-    default: undefined
-  }
-})
+    default: undefined,
+  },
+});
+
 const model = defineModel({
-  type: [Boolean, String, Number, Object] as PropType<null | boolean | string | number | Record<string, any>>
-})
-const id = useId()
+  type: [Boolean, String, Number, Object] as PropType<
+    null | boolean | string | number | Record<string, any>
+  >,
+});
+
+const id = useId();
 </script>

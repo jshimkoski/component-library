@@ -4,20 +4,21 @@
 
 <script setup lang="ts">
 defineOptions({
-  inheritAttrs: false
-})
+  inheritAttrs: false,
+});
+
 defineProps({
   label: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   description: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   type: {
-    type: String as PropType<'elevated' | 'filled' | 'outlined'>,
-    default: 'outlined'
-  }
-})
+    type: String as PropType<"elevated" | "filled" | "outlined">,
+    default: "outlined",
+  },
+});
 </script>

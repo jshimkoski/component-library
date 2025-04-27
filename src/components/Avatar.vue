@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { PropType } from 'vue';
+import type { PropType } from "vue";
 
 defineProps({
   src: {
@@ -33,15 +33,28 @@ defineProps({
   },
   alt: {
     type: String,
-    default: 'Avatar',
+    default: "Avatar",
   },
   size: {
-    type: String as PropType<'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl'>,
-    default: 'md'
+    type: String as PropType<
+      | "xs"
+      | "sm"
+      | "md"
+      | "lg"
+      | "xl"
+      | "2xl"
+      | "3xl"
+      | "4xl"
+      | "5xl"
+      | "6xl"
+      | "7xl"
+      | "8xl"
+    >,
+    default: "md",
   },
   shape: {
-    type: String as PropType<'circle' | 'square'>,
-    default: 'circle',
+    type: String as PropType<"circle" | "square">,
+    default: "circle",
   },
-})
+});
 </script>

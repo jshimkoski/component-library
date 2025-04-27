@@ -9,11 +9,7 @@
       :data-disabled="disabled || undefined"
       :aria-disabled="disabled ? 'true' : undefined"
       :type="tag === 'button' ? type : undefined"
-      class="
-        w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer
-        disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none
-        [&[data-active='true']]:bg-gray-200 active:bg-gray-200
-      "
+      class="w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none [&[data-active='true']]:bg-gray-200 active:bg-gray-200"
       @click="tag === 'button' ? onClick($event) : undefined"
     >
       <slot>{{ label }}</slot>
@@ -25,41 +21,41 @@
 const props = defineProps({
   label: {
     type: String,
-    default: ''
+    default: "",
   },
   href: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   target: {
     type: String,
-    default: ''
+    default: "",
   },
   rel: {
     type: String,
-    default: ''
+    default: "",
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   active: {
     type: Boolean,
-    default: false
+    default: false,
   },
   type: {
-    type: String as PropType<'button' | 'submit' | 'reset'>,
-    default: 'button'
-  }
-})
+    type: String as PropType<"button" | "submit" | "reset">,
+    default: "button",
+  },
+});
 
 const tag = computed(() => {
-  return props.href ? 'a' : 'button'
-})
+  return props.href ? "a" : "button";
+});
 
-const emit = defineEmits(['click'])
+const emit = defineEmits(["click"]);
 
 const onClick = (event: MouseEvent) => {
-  emit('click', event)
-}
+  emit("click", event);
+};
 </script>
