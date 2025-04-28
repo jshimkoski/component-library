@@ -1,19 +1,23 @@
 <template>
-  <div class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+  <div
+    class="bg-white text-black dark:bg-black dark:text-white flex flex-col min-h-screen"
+  >
     <!-- Sticky Top Nav -->
     <header
       ref="header"
-      class="sticky top-0 z-30 w-full bg-white border-b shadow-sm"
+      class="sticky top-0 z-30 w-full bg-white/70 dark:bg-black/60 backdrop-blur-md border-b border-gray-200 dark:border-gray-800"
     >
-      <slot name="header" />
+      <div
+        class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3"
+      >
+        <slot name="header" />
+      </div>
     </header>
 
     <!-- Main Layout -->
     <div class="flex flex-1 w-full max-w-7xl mx-auto">
       <!-- Sidebar -->
-      <aside
-        class="hidden lg:block w-64 border-r bg-white sticky-to-header overflow-y-auto p-6"
-      >
+      <aside class="hidden lg:block w-64 sticky-to-header overflow-y-auto p-6">
         <slot name="left-bar" />
       </aside>
 
@@ -23,15 +27,16 @@
       </main>
 
       <!-- Table of Contents (Scrollspy) -->
-      <div
-        class="hidden xl:block w-64 border-l bg-white sticky-to-header overflow-y-auto p-6 calc-height"
-      >
+      <div class="hidden xl:block w-64 sticky-to-header overflow-y-auto p-6">
         <slot name="right-bar" />
       </div>
     </div>
 
     <!-- Footer -->
-    <footer class="w-full bg-gray-100 text-center py-6 mt-auto border-t">
+    <footer
+      v-if="!!$slots.footer"
+      class="w-full text-center py-6 mt-auto border-t border-gray-200 dark:border-gray-800"
+    >
       <slot name="footer" />
     </footer>
   </div>
@@ -43,7 +48,8 @@ const header = useTemplateRef("header");
 const { height } = useElementSize(header);
 
 const heightPx = computed(() => {
-  return `${height.value}px`;
+  // height + 1 to compensate for border
+  return `${height.value + 1}px`;
 });
 </script>
 

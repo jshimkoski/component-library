@@ -1,61 +1,57 @@
 <template>
   <DocsLayout>
     <template #header>
-      <div
-        class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3"
-      >
-        <div class="flex items-center space-x-3">
-          <span class="text-green-600 font-bold text-xl">Docs Layout</span>
-        </div>
-        <nav class="hidden md:flex space-x-6">
-          <a
-            href="#"
-            class="text-gray-700 hover:text-green-600 font-medium"
-            >Guide</a
-          >
-          <a
-            href="#"
-            class="text-gray-700 hover:text-green-600 font-medium"
-            >API</a
-          >
-          <a
-            href="#"
-            class="text-gray-700 hover:text-green-600 font-medium"
-            >Examples</a
-          >
-          <a
-            href="#"
-            class="text-gray-700 hover:text-green-600 font-medium"
-            >Blog</a
-          >
-        </nav>
+      <div class="flex items-center space-x-3">
+        <span class="font-bold text-xl">Docs Layout</span>
       </div>
+      <nav class="hidden md:flex space-x-6">
+        <a
+          href="#"
+          class="text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 font-medium"
+          >Guide</a
+        >
+        <a
+          href="#"
+          class="text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 font-medium"
+          >API</a
+        >
+        <a
+          href="#"
+          class="text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 font-medium"
+          >Examples</a
+        >
+        <a
+          href="#"
+          class="text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 font-medium"
+          >Blog</a
+        >
+      </nav>
     </template>
     <template #left-bar>
       <nav class="space-y-2">
         <a
           href="#"
-          class="block py-2 px-3 rounded hover:bg-green-50 font-medium text-green-700"
+          class="block py-2 px-3 rounded font-medium transition-colors text-green-600 dark:text-green-400 hover:bg-gray-50 dark:hover:bg-gray-900"
           >Introduction</a
         >
         <a
           href="#"
-          class="block py-2 px-3 rounded hover:bg-green-50"
+          class="block py-2 px-3 rounded transition-colors hover:bg-gray-50 dark:hover:bg-gray-900"
           >Getting Started</a
         >
         <a
           href="#"
-          class="block py-2 px-3 rounded hover:bg-green-50"
+          class="block py-2 px-3 rounded transition-colors hover:bg-gray-50 dark:hover:bg-gray-900"
           >Directory Structure</a
         >
         <a
           href="#"
-          class="block py-2 px-3 rounded hover:bg-green-50"
+          class="block py-2 px-3 rounded transition-colors hover:bg-gray-50 dark:hover:bg-gray-900"
           >Configuration</a
         >
         <a
           href="#"
-          class="block py-2 px-3 rounded hover:bg-green-50"
+          class="block py-2 px-3 rounded transition-colors hover:bg-gray-50 dark:hover:bg-gray-900"
           >Deployment</a
         >
       </nav>
@@ -345,33 +341,33 @@
     </template>
     <template #right-bar>
       <nav>
-        <div class="font-semibold text-gray-700 mb-4">On this page</div>
+        <div class="font-semibold text-gray-500 mb-4">On this page</div>
         <ul class="space-y-2 text-sm">
           <li>
             <a
               href="#getting-started"
-              class="block px-2 py-1 rounded hover:bg-green-50"
+              class="block px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-900"
               >Getting Started</a
             >
           </li>
           <li>
             <a
               href="#directory-structure"
-              class="block px-2 py-1 rounded hover:bg-green-50"
+              class="block px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-900"
               >Directory Structure</a
             >
           </li>
           <li>
             <a
               href="#configuration"
-              class="block px-2 py-1 rounded hover:bg-green-50"
+              class="block px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-900"
               >Configuration</a
             >
           </li>
           <li>
             <a
               href="#deployment"
-              class="block px-2 py-1 rounded hover:bg-green-50"
+              class="block px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-900"
               >Deployment</a
             >
           </li>
