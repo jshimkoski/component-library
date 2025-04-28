@@ -1,6 +1,6 @@
 <template>
   <div class="relative inline-block">
-    <Button
+    <Action
       ref="triggerRef"
       :disabled="disabled"
       :active="show"
@@ -10,7 +10,7 @@
     >
       {{ label || "Dropdown" }}
       <IconMdiChevronDown class="text-lg" />
-    </Button>
+    </Action>
     <Transition
       enter-active-class="transition-opacity"
       enter-from-class="opacity-0"

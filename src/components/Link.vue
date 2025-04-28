@@ -5,6 +5,7 @@
     :target="tag === 'a' ? target : undefined"
     :rel="tag === 'a' ? rel : undefined"
     :disabled="tag === 'button' ? disabled : undefined"
+    :data-active="tag === 'button' ? active : undefined"
     :data-disabled="disabled || undefined"
     :aria-disabled="disabled ? 'true' : undefined"
     :type="tag === 'button' ? type : undefined"
@@ -17,33 +18,15 @@
 
 <script setup lang="ts">
 const props = defineProps({
-  label: {
-    type: String,
-    default: "",
-  },
-  href: {
-    type: String,
-    default: "",
-  },
-  target: {
-    type: String,
-    default: "",
-  },
-  rel: {
-    type: String,
-    default: "",
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  active: {
-    type: Boolean,
-    default: false,
-  },
+  label: { type: String, default: "" },
+  href: { type: String, default: "" },
+  target: { type: String, default: "" },
+  rel: { type: String, default: "" },
+  disabled: { type: Boolean, default: false },
+  active: { type: Boolean, default: false },
   type: {
     type: String as PropType<"button" | "submit" | "reset">,
-    default: "a",
+    default: "button",
   },
 });
 

@@ -111,13 +111,13 @@
               disabled
             />
           </div>
-          <Button
+          <Action
             @click.stop="dialog = !dialog"
             ref="dialogTrigger"
           >
             <span>Open Dialog</span>
             <Badge label="12" />
-          </Button>
+          </Action>
           <Dialog
             v-model="dialog"
             :trigger-ref="dialogTrigger?.$el"
@@ -237,31 +237,31 @@
             />
           </div>
           <div class="flex flex-wrap items-center gap-1">
-            <Button
+            <Action
               label="Click me"
               @click="() => console.log('Button clicked!')"
             />
-            <Button
+            <Action
               label="Link"
               href="https://example.com"
               target="_blank"
               rel="noopener noreferrer"
             />
-            <Button
+            <Action
               label="Disabled Button"
               disabled
             />
-            <Button
+            <Action
               label="Submit Button"
               type="submit"
               @click="() => console.log('Button clicked!')"
             />
-            <Button
+            <Action
               label="Reset Button"
               type="reset"
               @click="() => console.log('Button clicked!')"
             />
-            <Button
+            <Action
               label="Link with Avatar"
               href="https://example.com"
               target="_blank"
@@ -273,7 +273,7 @@
                 size="sm"
               />
               <span>Link with Avatar</span>
-            </Button>
+            </Action>
             <Menu>
               <MenuItem>Item 1</MenuItem>
               <MenuItem disabled>Item 2</MenuItem>
@@ -293,32 +293,61 @@
               <MenuItem>Item 3</MenuItem>
             </Menu>
           </div>
-          <div class="flex flex-wrap items-center gap-1">
-            <Link
+          <div class="flex flex-wrap items-center gap-4">
+            <Action
+              label="Link"
+              variant="solid"
+              href="https://example.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+            <Action
+              label="Link"
+              variant="outline"
+              href="https://example.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+            <Action
+              label="Link"
+              variant="ghost"
+              href="https://example.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+            <Action
               label="Link"
               href="https://example.com"
               target="_blank"
               rel="noopener noreferrer"
             />
-            <Link
+          </div>
+          <div class="flex flex-wrap items-center gap-1">
+            <Action
+              label="Link"
+              href="https://example.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+            <Action
               label="Button"
               @click="() => console.log('Button clicked!')"
             />
-            <Link
+            <Action
               label="Disabled Button"
               disabled
             />
-            <Link
+            <Action
               label="Submit Button"
               type="submit"
               @click="() => console.log('Button clicked!')"
             />
-            <Link
+            <Action
               label="Reset Button"
               type="reset"
               @click="() => console.log('Button clicked!')"
             />
-            <Link
+            <Action
               label="Link with Icon"
               href="https://example.com"
               target="_blank"
@@ -334,7 +363,7 @@
                   d="M10 2a8 8 0 100 16 8 8 0 000-16zm1.5 11.5a1.5 1.5 0 11-3 0V9a1.5 1.5 0 013 0v4.5zM10 7a1.5 1.5 0 110-3A1.5 1.5 0 0110 7z"
                 />
               </svg>
-            </Link>
+            </Action>
           </div>
         </div>
       </div>

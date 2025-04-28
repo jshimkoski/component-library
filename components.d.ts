@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Accordion: typeof import('./src/components/Accordion.vue')['default']
+    Action: typeof import('./src/components/Action.vue')['default']
     Avatar: typeof import('./src/components/Avatar.vue')['default']
     Badge: typeof import('./src/components/Badge.vue')['default']
     BaseButton: typeof import('./src/components/BaseButton.vue')['default']
@@ -19,7 +20,7 @@ declare module 'vue' {
     Checkbox: typeof import('./src/components/Checkbox.vue')['default']
     CheckboxGroup: typeof import('./src/components/CheckboxGroup.vue')['default']
     Chip: typeof import('./src/components/Chip.vue')['default']
-    copy: typeof import('./src/components/Button copy.vue')['default']
+    copy: typeof import('./src/components/Link copy.vue')['default']
     Datepicker: typeof import('./src/components/Datepicker.vue')['default']
     Dialog: typeof import('./src/components/Dialog.vue')['default']
     Disclosure: typeof import('./src/components/Disclosure.vue')['default']
