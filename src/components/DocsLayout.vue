@@ -1,7 +1,10 @@
 <template>
   <div class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
     <!-- Sticky Top Nav -->
-    <header class="sticky top-0 z-30 w-full bg-white border-b shadow-sm">
+    <header
+      ref="header"
+      class="sticky top-0 z-30 w-full bg-white border-b shadow-sm"
+    >
       <slot name="header" />
     </header>
 
@@ -9,7 +12,7 @@
     <div class="flex flex-1 w-full max-w-7xl mx-auto">
       <!-- Sidebar -->
       <aside
-        class="hidden lg:block w-64 border-r bg-white sticky top-[56px] h-[calc(100vh-56px)] overflow-y-auto p-6"
+        class="hidden lg:block w-64 border-r bg-white sticky-to-header overflow-y-auto p-6"
       >
         <slot name="left-bar" />
       </aside>
@@ -21,7 +24,7 @@
 
       <!-- Table of Contents (Scrollspy) -->
       <div
-        class="hidden xl:block w-64 border-l bg-white sticky top-[56px] h-[calc(100vh-56px)] overflow-y-auto p-6"
+        class="hidden xl:block w-64 border-l bg-white sticky-to-header overflow-y-auto p-6 calc-height"
       >
         <slot name="right-bar" />
       </div>
@@ -33,3 +36,21 @@
     </footer>
   </div>
 </template>
+
+<script setup lang="ts">
+const header = useTemplateRef("header");
+
+const { height } = useElementSize(header);
+
+const heightPx = computed(() => {
+  return `${height.value}px`;
+});
+</script>
+
+<style>
+.sticky-to-header {
+  position: sticky;
+  height: calc(100dvh - v-bind(heightPx));
+  top: v-bind(heightPx);
+}
+</style>
