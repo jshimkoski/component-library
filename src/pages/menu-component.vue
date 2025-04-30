@@ -1,6 +1,9 @@
 <template>
   <div class="flex flex-wrap items-center gap-1">
-    <Menu>
+    <Menu auto-width>
+      <MenuContent>
+        <p>This is just arbitrary content inside a menu.</p>
+      </MenuContent>
       <MenuItem href="#">Home page</MenuItem>
       <MenuItem disabled>Item 2</MenuItem>
       <MenuItem>Item 3</MenuItem>

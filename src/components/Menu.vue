@@ -20,7 +20,11 @@
     <template #popover>
       <ul
         ref="popoverRef"
-        class="py-3 w-48"
+        class="py-3"
+        :class="{
+          'w-48': !autoWidth,
+          'w-auto': autoWidth,
+        }"
         @click="handlePopoverClick"
       >
         <slot
@@ -48,6 +52,10 @@
     placement: {
       type: String as PropType<Placement>,
       default: "bottom-start",
+    },
+    autoWidth: {
+      type: Boolean,
+      default: false,
     },
   });
 
