@@ -21,7 +21,7 @@
       {{ description }}
     </p>
     <div class="grid">
-      <Radio
+      <Checkbox
         v-for="(option, index) in options"
         :key="index"
         v-model="model"
@@ -74,7 +74,15 @@
     },
     options: {
       type: Array as () => Array<{
-        value: null | boolean | string | number | Record<string, any>;
+        value:
+          | null
+          | boolean
+          | string
+          | number
+          | Record<string, any>
+          | string[]
+          | number[]
+          | Record<string, any>[];
         label: string;
         description?: string;
         class?: string;
@@ -89,7 +97,14 @@
 
   const model = defineModel({
     type: [Boolean, String, Number, Object] as PropType<
-      null | boolean | string | number | Record<string, any>
+      | null
+      | boolean
+      | string
+      | number
+      | Record<string, any>
+      | string[]
+      | number[]
+      | Record<string, any>[]
     >,
   });
 </script>

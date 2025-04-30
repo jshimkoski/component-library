@@ -11,7 +11,7 @@
       :name="name"
       :required="required"
       :disabled="disabled"
-      class="appearance-none relative inline-block w-9 h-5 border rounded-full align-bottom m-auto text-white cursor-pointer bg-gray-300 border-gray-300 before:shadow-sm checked:bg-green-500 checked:border-green-500 transition-all before:transition-all before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0.25 before:w-4 before:h-4 before:bg-current before:rounded-full checked:before:left-4.25 mt-1.5"
+      class="appearance-none relative inline-block w-9 h-5 border rounded-full align-bottom m-auto text-white cursor-pointer bg-neutral-300 border-neutral-300 before:shadow-sm checked:bg-green-500 checked:border-green-500 transition-all before:transition-all before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0.25 before:w-4 before:h-4 before:bg-current before:rounded-full checked:before:left-4.25 mt-1.5"
     />
     <div class="relative">
       <label
@@ -28,7 +28,7 @@
       </label>
       <p
         v-if="description"
-        class="text-sm text-gray-500"
+        class="text-sm text-neutral-500"
       >
         {{ description }}
       </p>
@@ -37,36 +37,36 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  label: {
-    type: String,
-    default: undefined,
-  },
-  description: {
-    type: String,
-    default: undefined,
-  },
-  name: {
-    type: String,
-    default: undefined,
-  },
-  disabled: {
-    type: Boolean,
-    default: undefined,
-  },
-  required: {
-    type: Boolean,
-    default: undefined,
-  },
-  showMarker: {
-    type: Boolean,
-    default: undefined,
-  },
-});
+  defineProps({
+    label: {
+      type: String,
+      default: undefined,
+    },
+    description: {
+      type: String,
+      default: undefined,
+    },
+    name: {
+      type: String,
+      default: undefined,
+    },
+    disabled: {
+      type: Boolean,
+      default: undefined,
+    },
+    required: {
+      type: Boolean,
+      default: undefined,
+    },
+    showMarker: {
+      type: Boolean,
+      default: undefined,
+    },
+  });
 
-const model = defineModel({
-  type: Boolean,
-});
+  const model = defineModel({
+    type: Boolean,
+  });
 
-const id = useId();
+  const id = useId();
 </script>

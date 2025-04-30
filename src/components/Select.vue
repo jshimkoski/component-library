@@ -22,7 +22,6 @@
       :required="required"
       :multiple="multiple"
       :name="name"
-      class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:pointer-events-none transition-all"
     >
       <option
         value=""
@@ -41,7 +40,7 @@
     </select>
     <p
       v-if="description"
-      class="text-sm text-gray-500"
+      class="text-sm text-neutral-500"
     >
       {{ description }}
     </p>
@@ -49,54 +48,54 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({
-  inheritAttrs: false,
-});
+  defineOptions({
+    inheritAttrs: false,
+  });
 
-defineProps({
-  label: {
-    type: String,
-    default: undefined,
-  },
-  description: {
-    type: String,
-    default: undefined,
-  },
-  name: {
-    type: String,
-    default: undefined,
-  },
-  disabled: {
-    type: Boolean,
-    default: undefined,
-  },
-  required: {
-    type: Boolean,
-    default: undefined,
-  },
-  multiple: {
-    type: Boolean,
-    default: undefined,
-  },
-  options: {
-    type: Array as () => Array<{
-      label: string;
-      value: null | boolean | string | number | Record<string, any>;
-      disabled?: boolean;
-    }>,
-    default: undefined,
-  },
-  showMarker: {
-    type: Boolean,
-    default: undefined,
-  },
-});
+  defineProps({
+    label: {
+      type: String,
+      default: undefined,
+    },
+    description: {
+      type: String,
+      default: undefined,
+    },
+    name: {
+      type: String,
+      default: undefined,
+    },
+    disabled: {
+      type: Boolean,
+      default: undefined,
+    },
+    required: {
+      type: Boolean,
+      default: undefined,
+    },
+    multiple: {
+      type: Boolean,
+      default: undefined,
+    },
+    options: {
+      type: Array as () => Array<{
+        label: string;
+        value: null | boolean | string | number | Record<string, any>;
+        disabled?: boolean;
+      }>,
+      default: undefined,
+    },
+    showMarker: {
+      type: Boolean,
+      default: undefined,
+    },
+  });
 
-const model = defineModel({
-  type: [Boolean, String, Number, Object] as PropType<
-    null | boolean | string | number | Record<string, any>
-  >,
-});
+  const model = defineModel({
+    type: [Boolean, String, Number, Object] as PropType<
+      null | boolean | string | number | Record<string, any>
+    >,
+  });
 
-const id = useId();
+  const id = useId();
 </script>

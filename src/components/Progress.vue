@@ -17,7 +17,7 @@
     </progress>
     <p
       v-if="description"
-      class="text-sm text-gray-500"
+      class="text-sm text-neutral-500"
     >
       {{ description }}
     </p>
@@ -25,21 +25,21 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  label: { type: String, default: undefined },
-  description: { type: String, default: undefined },
-  max: { type: Number, default: undefined },
-});
+  const props = defineProps({
+    label: { type: String, default: undefined },
+    description: { type: String, default: undefined },
+    max: { type: Number, default: undefined },
+  });
 
-const model = defineModel({
-  type: Number,
-  default: undefined,
-});
+  const model = defineModel({
+    type: Number,
+    default: undefined,
+  });
 
-const id = useId();
+  const id = useId();
 
-const percentComplete = computed(() => {
-  if (!model.value || !props.max) return "0%";
-  return `${(model.value / props.max) * 100}%`;
-});
+  const percentComplete = computed(() => {
+    if (!model.value || !props.max) return "0%";
+    return `${(model.value / props.max) * 100}%`;
+  });
 </script>

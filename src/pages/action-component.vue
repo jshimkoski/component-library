@@ -1,0 +1,179 @@
+<template>
+  <div class="flex flex-col items-start gap-4">
+    <p>Action</p>
+    <div class="flex items-center gap-2 my-12">
+      <Action
+        kind="primary"
+        label="Submit"
+      />
+      <Action
+        kind="secondary"
+        label="Save Draft"
+      />
+      <Action label="Cancel" />
+    </div>
+    <template v-for="kind in kinds">
+      <div class="flex flex-wrap items-center gap-2">
+        <Action
+          :label="kind"
+          variant="solid"
+          :kind="kind"
+          size="xl"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="outline"
+          :kind="kind"
+          size="xl"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="ghost"
+          :kind="kind"
+          size="xl"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="link"
+          :kind="kind"
+          size="xl"
+          href="https://example.com"
+        />
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <Action
+          :label="kind"
+          variant="solid"
+          :kind="kind"
+          size="lg"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="outline"
+          :kind="kind"
+          size="lg"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="ghost"
+          :kind="kind"
+          size="lg"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="link"
+          :kind="kind"
+          size="lg"
+          href="https://example.com"
+        />
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <Action
+          :label="kind"
+          variant="solid"
+          :kind="kind"
+          size="md"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="outline"
+          :kind="kind"
+          size="md"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="ghost"
+          :kind="kind"
+          size="md"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="link"
+          :kind="kind"
+          size="md"
+          href="https://example.com"
+        />
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <Action
+          :label="kind"
+          variant="solid"
+          :kind="kind"
+          size="sm"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="outline"
+          :kind="kind"
+          size="sm"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="ghost"
+          :kind="kind"
+          size="sm"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="link"
+          :kind="kind"
+          size="sm"
+          href="https://example.com"
+        />
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <Action
+          :label="kind"
+          variant="solid"
+          :kind="kind"
+          size="xs"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="outline"
+          :kind="kind"
+          size="xs"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="ghost"
+          :kind="kind"
+          size="xs"
+          href="https://example.com"
+        />
+        <Action
+          :label="kind"
+          variant="link"
+          :kind="kind"
+          size="xs"
+          href="https://example.com"
+        />
+      </div>
+    </template>
+  </div>
+</template>
+
+<script setup lang="ts">
+  const kinds = [
+    "primary",
+    "secondary",
+    "success",
+    "info",
+    "warning",
+    "danger",
+  ] as Kind[];
+</script>

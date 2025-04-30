@@ -3,7 +3,7 @@
     :src="src"
     :alt="alt"
     :class="{
-      'object-cover ring-white': true,
+      'object-cover ring-neutral-300 dark:ring-neutral-700': true,
       'w-4 h-4 ring-1': size === 'xs',
       'w-8 h-8 ring-1': size === 'sm',
       'w-12 h-12 ring-2': size === 'md',
@@ -20,41 +20,48 @@
       'rounded-none': shape === 'square',
     }"
     v-bind="$attrs"
+    @error="handleError"
   />
 </template>
 
 <script lang="ts" setup>
-import type { PropType } from "vue";
+  import fallbackImg from "../assets/vue.svg";
+  import type { PropType } from "vue";
 
-defineProps({
-  src: {
-    type: String,
-    required: true,
-  },
-  alt: {
-    type: String,
-    default: "Avatar",
-  },
-  size: {
-    type: String as PropType<
-      | "xs"
-      | "sm"
-      | "md"
-      | "lg"
-      | "xl"
-      | "2xl"
-      | "3xl"
-      | "4xl"
-      | "5xl"
-      | "6xl"
-      | "7xl"
-      | "8xl"
-    >,
-    default: "md",
-  },
-  shape: {
-    type: String as PropType<"circle" | "square">,
-    default: "circle",
-  },
-});
+  defineProps({
+    src: {
+      type: String,
+      required: true,
+    },
+    alt: {
+      type: String,
+      default: "Avatar",
+    },
+    size: {
+      type: String as PropType<
+        | "xs"
+        | "sm"
+        | "md"
+        | "lg"
+        | "xl"
+        | "2xl"
+        | "3xl"
+        | "4xl"
+        | "5xl"
+        | "6xl"
+        | "7xl"
+        | "8xl"
+      >,
+      default: "md",
+    },
+    shape: {
+      type: String as PropType<"circle" | "square">,
+      default: "circle",
+    },
+  });
+
+  const handleError = (event: Event) => {
+    if (!event.target) return;
+    (event.target as HTMLImageElement).src = fallbackImg;
+  };
 </script>

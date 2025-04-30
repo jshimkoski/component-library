@@ -25,7 +25,7 @@
     />
     <p
       v-if="description"
-      class="text-sm text-gray-500"
+      class="text-sm text-neutral-500"
     >
       {{ description }}
     </p>
@@ -33,44 +33,44 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({
-  inheritAttrs: false,
-});
+  defineOptions({
+    inheritAttrs: false,
+  });
 
-defineProps({
-  label: {
-    type: String,
-    default: undefined,
-  },
-  description: {
-    type: String,
-    default: undefined,
-  },
-  name: {
-    type: String,
-    default: undefined,
-  },
-  disabled: {
-    type: Boolean,
-    default: undefined,
-  },
-  required: {
-    type: Boolean,
-    default: undefined,
-  },
-  placeholder: {
-    type: String,
-    default: undefined,
-  },
-  showMarker: {
-    type: Boolean,
-    default: undefined,
-  },
-});
+  defineProps({
+    label: {
+      type: String,
+      default: undefined,
+    },
+    description: {
+      type: String,
+      default: undefined,
+    },
+    name: {
+      type: String,
+      default: undefined,
+    },
+    disabled: {
+      type: Boolean,
+      default: undefined,
+    },
+    required: {
+      type: Boolean,
+      default: undefined,
+    },
+    placeholder: {
+      type: String,
+      default: undefined,
+    },
+    showMarker: {
+      type: Boolean,
+      default: undefined,
+    },
+  });
 
-const model = defineModel({
-  type: String,
-});
+  const model = defineModel({
+    type: String,
+  });
 
-const id = useId();
+  const id = useId();
 </script>

@@ -5,7 +5,7 @@
     <!-- Sticky Top Nav -->
     <header
       ref="header"
-      class="sticky top-0 z-30 w-full bg-white/70 dark:bg-black/60 backdrop-blur-md border-b border-gray-200 dark:border-gray-800"
+      class="sticky top-0 z-30 w-full bg-white/70 dark:bg-black/60 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
     >
       <div
         class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3"
@@ -35,7 +35,7 @@
     <!-- Footer -->
     <footer
       v-if="!!$slots.footer"
-      class="w-full text-center py-6 mt-auto border-t border-gray-200 dark:border-gray-800"
+      class="w-full text-center py-6 mt-auto border-t border-neutral-200 dark:border-neutral-800"
     >
       <slot name="footer" />
     </footer>
@@ -43,20 +43,20 @@
 </template>
 
 <script setup lang="ts">
-const header = useTemplateRef("header");
+  const header = useTemplateRef("header");
 
-const { height } = useElementSize(header);
+  const { height } = useElementSize(header);
 
-const heightPx = computed(() => {
-  // height + 1 to compensate for border
-  return `${height.value + 1}px`;
-});
+  const heightPx = computed(() => {
+    // height + 1 to compensate for border
+    return `${height.value + 1}px`;
+  });
 </script>
 
 <style>
-.sticky-to-header {
-  position: sticky;
-  height: calc(100dvh - v-bind(heightPx));
-  top: v-bind(heightPx);
-}
+  .sticky-to-header {
+    position: sticky;
+    height: calc(100dvh - v-bind(heightPx));
+    top: v-bind(heightPx);
+  }
 </style>

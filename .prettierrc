@@ -4,5 +4,6 @@
   "semi": true,
   "objectWrap": "preserve",
   "bracketSameLine": false,
-  "singleAttributePerLine": true
+  "singleAttributePerLine": true,
+  "vueIndentScriptAndStyle": true,
 }

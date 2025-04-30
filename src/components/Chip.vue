@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-/**
- * This is basically a Tag component.
- */
+  /**
+   * This is basically a Tag component.
+   */
 </script>

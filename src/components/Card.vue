@@ -3,22 +3,22 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({
-  inheritAttrs: false,
-});
+  defineOptions({
+    inheritAttrs: false,
+  });
 
-defineProps({
-  label: {
-    type: String,
-    default: undefined,
-  },
-  description: {
-    type: String,
-    default: undefined,
-  },
-  type: {
-    type: String as PropType<"elevated" | "filled" | "outlined">,
-    default: "outlined",
-  },
-});
+  defineProps({
+    label: {
+      type: String,
+      default: undefined,
+    },
+    description: {
+      type: String,
+      default: undefined,
+    },
+    type: {
+      type: String as PropType<"elevated" | "filled" | "outlined">,
+      default: "outlined",
+    },
+  });
 </script>

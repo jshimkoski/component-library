@@ -7,10 +7,10 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  label: {
-    type: String,
-    default: undefined,
-  },
-});
+  defineProps({
+    label: {
+      type: String,
+      default: undefined,
+    },
+  });
 </script>

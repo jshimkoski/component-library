@@ -1,63 +1,81 @@
 <template>
-  <div class="relative inline-block">
-    <Action
-      ref="triggerRef"
-      :disabled="disabled"
-      :active="show"
-      :aria-expanded="show ? 'true' : 'false'"
-      :aria-haspopup="true"
-      @click="show = !show"
-    >
-      {{ label || "Dropdown" }}
-      <IconMdiChevronDown class="text-lg" />
-    </Action>
-    <Transition
-      enter-active-class="transition-opacity"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div
-        v-if="show"
-        ref="dropdownRef"
-        class="absolute w-48 mt-2 bg-white border border-gray-200 rounded shadow-lg z-10"
+  <FloatingUi
+    v-model:open="open"
+    :placement="placement"
+    type="rich"
+  >
+    <template #default>
+      <Action
+        ref="triggerRef"
+        :disabled="disabled"
+        :active="open"
+        :aria-expanded="open ? 'true' : 'false'"
+        :aria-haspopup="true"
+        @click="open = !open"
       >
-        <ul class="py-2">
-          <slot />
-        </ul>
-      </div>
-    </Transition>
-  </div>
+        {{ label }}
+        <IconMdiChevronDown class="text-lg" />
+      </Action>
+    </template>
+    <template #popover>
+      <ul
+        ref="popoverRef"
+        class="py-3 w-48"
+        @click="handlePopoverClick"
+      >
+        <slot
+          :isOpen="open"
+          :open="() => (open = true)"
+          :close="() => (open = false)"
+          :toggle="() => (open = !open)"
+        />
+      </ul>
+    </template>
+  </FloatingUi>
 </template>
 
 <script setup lang="ts">
-defineProps({
-  label: {
-    type: String,
-    default: "",
-  },
-  disabled: {
+  import type { Placement } from "@floating-ui/core";
+  defineProps({
+    label: {
+      type: String,
+      default: "",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    placement: {
+      type: String as PropType<Placement>,
+      default: "bottom-start",
+    },
+  });
+
+  const open = defineModel("open", {
     type: Boolean,
-    default: false,
-  },
-});
+  });
 
-const show = shallowRef(false);
-const triggerRef = useTemplateRef("triggerRef");
-const dropdownRef = useTemplateRef("dropdownRef");
+  const triggerRef = useTemplateRef("triggerRef");
+  const popoverRef = useTemplateRef("popoverRef");
 
-onClickOutside(dropdownRef, (event) => {
-  if (!show.value) return;
-  if (event.target === triggerRef.value?.$el) return;
-  if (triggerRef.value?.$el.contains(event.target)) return;
-  show.value = false;
-});
+  onClickOutside(popoverRef, (event) => {
+    if (!open.value) return;
+    if (event.target === triggerRef.value?.$el) return;
+    if (triggerRef.value?.$el.contains(event.target)) return;
+    open.value = false;
+  });
 
-onKeyStroke("Escape", (event) => {
-  if (!show.value) return;
-  event.preventDefault();
-  show.value = false;
-});
+  onKeyStroke("Escape", (event) => {
+    if (!open.value) return;
+    event.preventDefault();
+    open.value = false;
+  });
+
+  const handlePopoverClick = (event: Event) => {
+    if (!event.target) return;
+    const clickableNodes = ["A", "BUTTON"];
+    if (clickableNodes.includes((event.target as HTMLElement).nodeName)) {
+      open.value = false;
+    }
+  };
 </script>
