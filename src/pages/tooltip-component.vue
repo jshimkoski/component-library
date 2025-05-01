@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-2 gap-6">
     <Tooltip text="Hello world">
-      <p class="p-8 bg-red-400">Show a tooltip</p>
+      <p class="p-8 bg-danger-400">Show a tooltip</p>
     </Tooltip>
     <Tooltip type="rich">
       <template #text>
@@ -10,7 +10,7 @@
           <p>This is a rich content tooltip.</p>
         </div>
       </template>
-      <p class="p-8 bg-red-400">Show a rich tooltip</p>
+      <p class="p-8 bg-danger-400">Show a rich tooltip</p>
     </Tooltip>
   </div>
 </template>

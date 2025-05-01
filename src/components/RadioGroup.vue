@@ -8,7 +8,7 @@
       class="cursor-pointer block font-semibold"
       :class="[
         required && showMarker
-          ? `after:text-red-500 after:content-['*'] after:ml-1`
+          ? `after:text-danger-500 after:content-['*'] after:ml-1`
           : '',
       ]"
     >

@@ -14,7 +14,11 @@
       :value="value"
       :name="name"
       type="checkbox"
-      class="cursor-pointer mt-1.5"
+      :class="`
+        cursor-pointer
+        mt-1.5 w-4 h-4
+        accent-primary-500
+      `"
     />
     <div class="relative">
       <label
@@ -22,7 +26,7 @@
         class="cursor-pointer"
         :class="[
           required && showMarker
-            ? `after:text-red-500 after:content-['*'] after:ml-1`
+            ? `after:text-danger-500 after:content-['*'] after:ml-1`
             : '',
         ]"
       >

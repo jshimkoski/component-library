@@ -41,6 +41,7 @@
           </slot>
         </div>
         <div
+          v-if="!hideArrow"
           ref="arrowRef"
           :class="arrowClasses"
           :style="{
@@ -85,6 +86,10 @@
     placement: {
       type: String as PropType<Placement>,
       default: "top",
+    },
+    hideArrow: {
+      type: Boolean,
+      default: false,
     },
   });
 

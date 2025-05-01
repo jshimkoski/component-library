@@ -11,7 +11,16 @@
       :name="name"
       :required="required"
       :disabled="disabled"
-      class="appearance-none relative inline-block w-9 h-5 border rounded-full align-bottom m-auto text-white cursor-pointer bg-neutral-300 border-neutral-300 before:shadow-sm checked:bg-green-500 checked:border-green-500 transition-all before:transition-all before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0.25 before:w-4 before:h-4 before:bg-current before:rounded-full checked:before:left-4.25 mt-1.5"
+      :class="{
+        'checked:bg-primary-500 checked:border-primary-500': kind === 'primary',
+        'checked:bg-secondary-500 checked:border-secondary-500':
+          kind === 'secondary',
+        'checked:bg-success-500 checked:border-success-500': kind === 'success',
+        'checked:bg-info-500 checked:border-info-500': kind === 'info',
+        'checked:bg-warning-500 checked:border-warning-500': kind === 'warning',
+        'checked:bg-danger-500 checked:border-danger-500': kind === 'danger',
+      }"
+      class="appearance-none relative inline-block w-9 h-5 border rounded-full align-bottom m-auto cursor-pointer bg-neutral-300 dark:bg-neutral-700 border-neutral-300 dark:border-neutral-700 before:shadow-sm transition-all before:transition-all before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0.25 before:w-4 before:h-4 before:bg-white dark:before:bg-neutral-300 before:rounded-full checked:before:left-4.25 mt-1.5"
     />
     <div class="relative">
       <label
@@ -19,7 +28,7 @@
         class="cursor-pointer"
         :class="[
           required && showMarker
-            ? `after:text-red-500 after:content-['*'] after:ml-1`
+            ? `after:text-danger-500 after:content-['*'] after:ml-1`
             : '',
         ]"
       >
@@ -38,6 +47,10 @@
 
 <script setup lang="ts">
   defineProps({
+    kind: {
+      type: String as PropType<Kind>,
+      default: "primary",
+    },
     label: {
       type: String,
       default: undefined,

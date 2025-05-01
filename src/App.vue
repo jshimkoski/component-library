@@ -96,6 +96,7 @@
   const components = [
     { to: "action-component", label: "Action" },
     { to: "avatar-component", label: "Avatar" },
+    { to: "badge-component", label: "Badge" },
     { to: "checkbox-component", label: "Checkbox" },
     { to: "checkboxgroup-component", label: "Checkbox Group" },
     { to: "dialog-component", label: "Dialog" },

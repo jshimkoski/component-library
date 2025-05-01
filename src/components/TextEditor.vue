@@ -8,7 +8,7 @@
       class="cursor-pointer block font-semibold"
       :class="[
         required && showMarker
-          ? `after:text-red-500 after:content-['*'] after:ml-1`
+          ? `after:text-danger-500 after:content-['*'] after:ml-1`
           : '',
       ]"
     >
@@ -22,6 +22,16 @@
       :required="required"
       :placeholder="placeholder"
       :name="name"
+      :class="`
+        w-full h-24 px-4 py-2
+        outline-none
+        rounded-theme-md
+        border border-neutral-300 dark:border-neutral-700
+        bg-neutral-50 dark:bg-neutral-950
+        text-neutral-700 dark:text-neutral-300
+        focus:border-neutral-500
+        transition-colors
+      `"
     />
     <p
       v-if="description"
