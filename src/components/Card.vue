@@ -22,7 +22,7 @@
           </p>
         </div>
       </slot>
-      <slot />
+      <slot name="content">{{ content }}</slot>
       <slot name="footer">
         <div class="flex justify-end">
           <Action
@@ -57,6 +57,10 @@
       default: undefined,
     },
     description: {
+      type: String,
+      default: undefined,
+    },
+    content: {
       type: String,
       default: undefined,
     },

@@ -8,7 +8,7 @@
       variant="outlined"
       action-label="Perform action"
     >
-      <template #default>
+      <template #content>
         <p>Outlined (default) Card Content</p>
       </template>
     </Card>
@@ -20,7 +20,7 @@
       variant="filled"
       action-label="Perform action"
     >
-      <template #default>
+      <template #content>
         <p>Filled Card Content</p>
       </template>
     </Card>
@@ -32,7 +32,7 @@
       variant="elevated"
       action-label="Perform action"
     >
-      <template #default>
+      <template #content>
         <p>Elevated Card Content</p>
       </template>
     </Card>
