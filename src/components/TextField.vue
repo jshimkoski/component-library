@@ -25,15 +25,14 @@
       :name="name"
       :class="`
         w-full px-4 py-2
-        outline-none
         rounded-theme-md
         border border-neutral-300 dark:border-neutral-700
         bg-white dark:bg-black
         text-neutral-700 dark:text-neutral-300
         hover:bg-neutral-50 dark:hover:bg-neutral-900
         focus:bg-white dark:focus:bg-black
-        focus:border-neutral-500
-        focus:ring-2 focus:ring-primary-300 dark:focus:ring-primary-900
+        focus:border-primary-500
+        focus:outline-2 focus:-outline-offset-2 focus:outline-primary-500 dark:focus:outline-primary-400
         transition-colors
       `"
     />
