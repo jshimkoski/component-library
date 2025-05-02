@@ -4,7 +4,7 @@
     ref="dialogTrigger"
   >
     <span>Open Dialog</span>
-    <Badge label="12" />
+    <Badge label="999+" />
   </Action>
   <Dialog
     v-model="dialog"

@@ -28,9 +28,12 @@
         outline-none
         rounded-theme-md
         border border-neutral-300 dark:border-neutral-700
-        bg-neutral-50 dark:bg-neutral-950
+        bg-white dark:bg-black
         text-neutral-700 dark:text-neutral-300
+        hover:bg-neutral-50 dark:hover:bg-neutral-900
+        focus:bg-white dark:focus:bg-black
         focus:border-neutral-500
+        focus:ring-2 focus:ring-primary-300 dark:focus:ring-primary-900
         transition-colors
       `"
     />

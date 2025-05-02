@@ -1,27 +1,12 @@
 <template>
-  <Component
-    :is="tag"
-    :href="tag === 'a' ? href : undefined"
-    :target="tag === 'a' ? target : undefined"
-    :rel="tag === 'a' ? rel : undefined"
-    :disabled="tag === 'button' ? disabled : undefined"
-    :data-active="active || undefined"
-    :data-disabled="disabled || undefined"
-    :aria-disabled="disabled ? 'true' : undefined"
-    :type="tag === 'button' ? type : undefined"
-    class="inline-block text-white dark:text-black font-semibold rounded-full full text-xs"
-    :class="[
-      kindClass,
-      tag === 'a' ? 'cursor-pointer' : '',
-      !label ? 'h-1 w-1' : 'px-2 py-0.5',
-    ]"
-    @click="tag === 'button' ? onClick($event) : undefined"
-    >{{ label }}</Component
+  <span
+    class="pointer-events-none inline-block text-white dark:text-black font-semibold rounded-full text-[0.625rem]"
+    :class="[kindClass, !label ? 'h-1.5 w-1.5' : 'px-1.5 py-0.25']"
+    >{{ label }}</span
   >
 </template>
 
 <script setup lang="ts">
-  export type Type = "button" | "submit" | "reset";
   const props = defineProps({
     label: {
       type: String,
@@ -29,28 +14,9 @@
     },
     kind: {
       type: String as PropType<Kind>,
-      default: "primary",
-    },
-    href: { type: String, default: undefined },
-    target: { type: String, default: undefined },
-    rel: { type: String, default: undefined },
-    disabled: { type: Boolean, default: false },
-    active: { type: Boolean, default: false },
-    type: {
-      type: String as PropType<Type>,
-      default: "button",
+      default: "danger",
     },
   });
-
-  const tag = computed(() => {
-    return props.href ? "a" : "button";
-  });
-
-  const emit = defineEmits(["click"]);
-
-  const onClick = (event: MouseEvent) => {
-    emit("click", event);
-  };
 
   const kindClass = computed(() => {
     switch (props.kind) {

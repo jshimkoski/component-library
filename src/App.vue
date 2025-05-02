@@ -101,7 +101,7 @@
     // // { to: "carousel-component", label: "Carousel" },
     { to: "checkbox-component", label: "Checkbox" },
     { to: "checkboxgroup-component", label: "Checkbox Group" },
-    // // { to: "chip-component", label: "Chip" },
+    { to: "chip-component", label: "Chip" },
     // // // { to: "datepicker-component", label: "Datepicker" },
     { to: "dialog-component", label: "Dialog" },
     // // // { to: "docslayout-component", label: "Docs Layout" },

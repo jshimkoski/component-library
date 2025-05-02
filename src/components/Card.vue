@@ -2,9 +2,9 @@
   <Component :is="tag">
     <div
       :class="{
-        'bg-neutral-50 dark:bg-neutral-950 shadow-lg dark:ring-1 dark:ring-neutral-900':
+        'bg-neutral-50 dark:bg-neutral-950 ring-1 ring-neutral-100 dark:ring-neutral-900 shadow-lg':
           variant === 'elevated',
-        'bg-neutral-50 dark:bg-neutral-950 dark:ring-1 dark:ring-neutral-900':
+        'bg-neutral-100 dark:bg-neutral-900 dark:ring-1 dark:ring-neutral-900':
           variant === 'filled',
         'bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800':
           variant === 'outlined',
