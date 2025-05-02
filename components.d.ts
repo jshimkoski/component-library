@@ -36,6 +36,8 @@ declare module 'vue' {
     ListItem: typeof import('./src/components/ListItem.vue')['default']
     Menu: typeof import('./src/components/Menu.vue')['default']
     MenuContent: typeof import('./src/components/MenuContent.vue')['default']
+    MenuDivider: typeof import('./src/components/MenuDivider.vue')['default']
+    MenuHeader: typeof import('./src/components/MenuHeader.vue')['default']
     MenuItem: typeof import('./src/components/MenuItem.vue')['default']
     Modal: typeof import('./src/components/Modal.vue')['default']
     Popover: typeof import('./src/components/Popover.vue')['default']

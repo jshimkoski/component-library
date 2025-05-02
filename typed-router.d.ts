@@ -22,6 +22,7 @@ declare module 'vue-router/auto-routes' {
     '/action-component': RouteRecordInfo<'/action-component', '/action-component', Record<never, never>, Record<never, never>>,
     '/avatar-component': RouteRecordInfo<'/avatar-component', '/avatar-component', Record<never, never>, Record<never, never>>,
     '/badge-component': RouteRecordInfo<'/badge-component', '/badge-component', Record<never, never>, Record<never, never>>,
+    '/card-component': RouteRecordInfo<'/card-component', '/card-component', Record<never, never>, Record<never, never>>,
     '/checkbox-component': RouteRecordInfo<'/checkbox-component', '/checkbox-component', Record<never, never>, Record<never, never>>,
     '/checkboxgroup-component': RouteRecordInfo<'/checkboxgroup-component', '/checkboxgroup-component', Record<never, never>, Record<never, never>>,
     '/dialog-component': RouteRecordInfo<'/dialog-component', '/dialog-component', Record<never, never>, Record<never, never>>,

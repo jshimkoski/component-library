@@ -136,11 +136,11 @@
           `;
         case "outline":
           return `
-            border
-            border-neutral-300 text-primary-600
-            hover:bg-neutral-100
-            dark:border-neutral-700 dark:text-primary-400
-            dark:hover:bg-neutral-900
+          border
+          border-neutral-300 bg-white text-primary-600
+          hover:bg-neutral-50
+          dark:border-neutral-700 dark:bg-black dark:text-primary-300
+          dark:hover:bg-neutral-900
           `;
         case "ghost":
           return `
@@ -171,9 +171,9 @@
         case "outline":
           return `
             border
-            border-neutral-300 text-success-600
-            hover:bg-neutral-100
-            dark:border-neutral-700 dark:text-success-400
+            border-neutral-300 bg-white text-success-600
+            hover:bg-neutral-50
+            dark:border-neutral-700 dark:bg-black dark:text-success-300
             dark:hover:bg-neutral-900
           `;
         case "ghost":
@@ -205,9 +205,9 @@
         case "outline":
           return `
             border
-            border-neutral-300 text-info-600
-            hover:bg-neutral-100
-            dark:border-neutral-700 dark:text-info-400
+            border-neutral-300 bg-white text-info-600
+            hover:bg-neutral-50
+            dark:border-neutral-700 dark:bg-black dark:text-info-300
             dark:hover:bg-neutral-900
           `;
         case "ghost":
@@ -239,9 +239,9 @@
         case "outline":
           return `
             border
-            border-neutral-300 text-warning-600
-            hover:bg-neutral-100
-            dark:border-neutral-700 dark:text-warning-400
+            border-neutral-300 bg-white text-warning-600
+            hover:bg-neutral-50
+            dark:border-neutral-700 dark:bg-black dark:text-warning-300
             dark:hover:bg-neutral-900
           `;
         case "ghost":
@@ -273,9 +273,9 @@
         case "outline":
           return `
             border
-            border-neutral-300 text-danger-600
-            hover:bg-neutral-100
-            dark:border-neutral-700 dark:text-danger-400
+            border-neutral-300 bg-white text-danger-600
+            hover:bg-neutral-50
+            dark:border-neutral-700 dark:bg-black dark:text-danger-300
             dark:hover:bg-neutral-900
           `;
         case "ghost":
@@ -308,9 +308,9 @@
         case "outline":
           return `
             border
-            border-neutral-300 text-secondary-600
-            hover:bg-neutral-100
-            dark:border-neutral-700 dark:text-secondary-300
+            border-neutral-300 bg-white text-secondary-600
+            hover:bg-neutral-50
+            dark:border-neutral-700 dark:bg-black dark:text-secondary-300
             dark:hover:bg-neutral-900
           `;
         case "ghost":
