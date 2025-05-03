@@ -4,7 +4,7 @@
       <div class="flex items-center space-x-3">
         <span class="font-medium text-xl">AJS Design System</span>
       </div>
-      <nav class="hidden md:flex space-x-6">
+      <nav class="hidden md:flex gap-2">
         <RouterLink
           v-slot="{ href, isExactActive }"
           to="/"
@@ -62,27 +62,6 @@
               >Getting Started</a
             >
           </li>
-          <li>
-            <a
-              href="#directory-structure"
-              class="block px-2 py-1 rounded hover:bg-neutral-50 dark:hover:bg-neutral-900"
-              >Directory Structure</a
-            >
-          </li>
-          <li>
-            <a
-              href="#configuration"
-              class="block px-2 py-1 rounded hover:bg-neutral-50 dark:hover:bg-neutral-900"
-              >Configuration</a
-            >
-          </li>
-          <li>
-            <a
-              href="#deployment"
-              class="block px-2 py-1 rounded hover:bg-neutral-50 dark:hover:bg-neutral-900"
-              >Deployment</a
-            >
-          </li>
         </ul>
       </nav>
     </template>
@@ -108,6 +87,7 @@
     // // // { to: "list-component", label: "List" },
     { to: "menu-component", label: "Menu" },
     { to: "progress-component", label: "Progress" },
+    { to: "prose-component", label: "Prose" },
     { to: "radio-component", label: "Radio" },
     { to: "radiogroup-component", label: "Radio Group" },
     { to: "select-component", label: "Select" },

@@ -29,6 +29,7 @@ declare module 'vue-router/auto-routes' {
     '/dialog-component': RouteRecordInfo<'/dialog-component', '/dialog-component', Record<never, never>, Record<never, never>>,
     '/menu-component': RouteRecordInfo<'/menu-component', '/menu-component', Record<never, never>, Record<never, never>>,
     '/progress-component': RouteRecordInfo<'/progress-component', '/progress-component', Record<never, never>, Record<never, never>>,
+    '/prose-component': RouteRecordInfo<'/prose-component', '/prose-component', Record<never, never>, Record<never, never>>,
     '/radio-component': RouteRecordInfo<'/radio-component', '/radio-component', Record<never, never>, Record<never, never>>,
     '/radiogroup-component': RouteRecordInfo<'/radiogroup-component', '/radiogroup-component', Record<never, never>, Record<never, never>>,
     '/select-component': RouteRecordInfo<'/select-component', '/select-component', Record<never, never>, Record<never, never>>,

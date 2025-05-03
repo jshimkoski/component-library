@@ -21,7 +21,9 @@
       class="flex flex-1 w-full mx-auto"
     >
       <!-- Sidebar -->
-      <aside class="hidden lg:block w-64 sticky-to-header overflow-y-auto p-6">
+      <aside
+        class="hidden lg:block w-64 sticky-to-header overflow-y-auto p-6 shrink-0"
+      >
         <slot name="left-bar" />
       </aside>
 
@@ -31,7 +33,9 @@
       </main>
 
       <!-- Table of Contents (Scrollspy) -->
-      <div class="hidden xl:block w-64 sticky-to-header overflow-y-auto p-6">
+      <div
+        class="hidden xl:block w-64 sticky-to-header overflow-y-auto p-6 shrink-0"
+      >
         <slot name="right-bar" />
       </div>
     </div>

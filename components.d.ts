@@ -48,6 +48,7 @@ declare module 'vue' {
     Popover: typeof import('./src/components/Popover.vue')['default']
     Progress: typeof import('./src/components/Progress.vue')['default']
     ProgressIndicator: typeof import('./src/components/ProgressIndicator.vue')['default']
+    Prose: typeof import('./src/components/Prose.vue')['default']
     Radio: typeof import('./src/components/Radio.vue')['default']
     RadioGroup: typeof import('./src/components/RadioGroup.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
