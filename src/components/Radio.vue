@@ -16,6 +16,14 @@
         cursor-pointer
         mt-1.5 w-4 h-4
         accent-primary-500
+        appearance-none
+        forced-colors:appearance-auto
+        bg-white dark:bg-black
+        hover:not-checked:bg-neutral-100 dark:hover:not-checked:bg-neutral-900
+        checked:bg-primary-500 dark:checked:bg-primary-400
+        checked:outline-2 checked:outline-white checked:-outline-offset-3
+        rounded-full
+        border border-neutral-300 dark:border-neutral-700
       `"
     />
     <div class="relative">

@@ -18,7 +18,7 @@
         aria-modal="true"
       >
         <div
-          class="fixed inset-0 bg-neutral-500/75 dark:bg-neutral-800/75 transition-opacity"
+          class="fixed inset-0 bg-neutral-500/75 dark:bg-black/70 transition-opacity"
           aria-hidden="true"
         />
 
@@ -39,10 +39,10 @@
               <div
                 v-if="showDialog"
                 ref="dialogRef"
-                class="relative transform overflow-hidden rounded-theme-lg bg-white dark:bg-black text-left shadow-lg dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                class="relative transform overflow-hidden rounded-theme-lg bg-neutral-50 dark:bg-neutral-950 dark:ring-1 dark:ring-neutral-800 text-left shadow-lg dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
               >
-                <div class="bg-white dark:bg-black p-6">
-                  <div class="sm:flex sm:items-start">
+                <div class="bg-neutral-50 dark:bg-neutral-950 p-6">
+                  <div class="flex items-start gap-4">
                     <!-- <div
                       class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
                     >
@@ -62,7 +62,7 @@
                         />
                       </svg>
                     </div> -->
-                    <div class="mt-4 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <div>
                       <h2
                         v-if="label || !!$slots.description"
                         :id="modalTitleId"
@@ -76,15 +76,23 @@
                       >
                         <slot name="description">{{ description }}</slot>
                       </p>
-                      <div class="mt-4 text-neutral-700 dark:text-neutral-300">
+                      <div class="mt-6 text-neutral-700 dark:text-neutral-300">
                         <slot name="content">{{ content }}</slot>
                       </div>
+                    </div>
+                    <div class="absolute top-2 right-2">
+                      <Action
+                        square
+                        @click="showDialog = false"
+                      >
+                        <IconMdiTimes class="h-6 w-6" />
+                      </Action>
                     </div>
                   </div>
                 </div>
                 <div
                   v-if="!!$slots.footer"
-                  class="p-6 pt-4 flex flex-row-reverse gap-3"
+                  class="p-6 pt-6 flex flex-row-reverse gap-3"
                 >
                   <slot
                     name="footer"
@@ -133,10 +141,18 @@
   const dialogRef = useTemplateRef("dialogRef");
   const { activate, deactivate } = useFocusTrap(dialogRef);
 
+  let isLocked: Ref<boolean>;
+
+  onMounted(() => {
+    isLocked = useScrollLock(document.body);
+  });
+
   watch(dialogIsVisible, async (visible) => {
     if (visible) {
+      isLocked.value = true;
       activate();
     } else {
+      isLocked.value = false;
       deactivate();
       props.triggerRef?.focus();
     }

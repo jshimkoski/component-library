@@ -11,8 +11,10 @@
     :trigger-ref="dialogTrigger?.$el"
     label="Dialog label"
     description="Dialog description"
-    content="This is the dialog content section."
   >
+    <template #content>
+      <p>This is content for the dialog.</p>
+    </template>
     <template #footer="{ close }">
       <Action
         kind="danger"

@@ -3,23 +3,36 @@
     class="inline-flex items-start gap-2"
     :class="{ 'opacity-50 pointer-events-none': disabled }"
   >
-    <input
-      v-model="model"
-      v-bind="$attrs"
-      :id="id"
-      :true-value="trueValue"
-      :false-value="falseValue"
-      :disabled="disabled"
-      :required="required"
-      :value="value"
-      :name="name"
-      type="checkbox"
-      :class="`
-        cursor-pointer
-        mt-1.5 w-4 h-4
-        accent-primary-500
-      `"
-    />
+    <div class="relative">
+      <input
+        v-model="model"
+        v-bind="$attrs"
+        :id="id"
+        :true-value="trueValue"
+        :false-value="falseValue"
+        :disabled="disabled"
+        :required="required"
+        :value="value"
+        :name="name"
+        type="checkbox"
+        :class="`
+          peer
+          cursor-pointer
+          mt-1.5 w-4 h-4
+          accent-primary-500
+          appearance-none
+          forced-colors:appearance-auto
+          bg-white dark:bg-black
+          hover:not-checked:bg-neutral-100 dark:hover:not-checked:bg-neutral-900
+          checked:bg-primary-500 dark:checked:bg-primary-400
+          rounded-theme-sm
+          border border-neutral-300 dark:border-neutral-700
+        `"
+      />
+      <IconMdiCheckBold
+        class="hidden peer-checked:block h-4 w-4 text-white absolute top-1.5 left-0 z-10 pointer-events-none"
+      />
+    </div>
     <div class="relative">
       <label
         :for="id"

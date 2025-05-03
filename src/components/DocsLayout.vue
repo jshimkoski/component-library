@@ -8,14 +8,18 @@
       class="sticky top-0 z-30 w-full bg-white/70 dark:bg-black/60 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
     >
       <div
-        class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3"
+        :class="{ 'max-w-7xl': !fullWidth }"
+        class="mx-auto flex items-center justify-between px-6 py-3"
       >
         <slot name="header" />
       </div>
     </header>
 
     <!-- Main Layout -->
-    <div class="flex flex-1 w-full max-w-7xl mx-auto">
+    <div
+      :class="{ 'max-w-7xl': !fullWidth }"
+      class="flex flex-1 w-full mx-auto"
+    >
       <!-- Sidebar -->
       <aside class="hidden lg:block w-64 sticky-to-header overflow-y-auto p-6">
         <slot name="left-bar" />
@@ -43,6 +47,13 @@
 </template>
 
 <script setup lang="ts">
+  defineProps({
+    fullWidth: {
+      type: Boolean,
+      default: false,
+    },
+  });
+
   const header = useTemplateRef("header");
 
   const { height } = useElementSize(header);
