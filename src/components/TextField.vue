@@ -60,7 +60,9 @@
       default: undefined,
     },
     type: {
-      type: String as PropType<"text" | "email" | "password">,
+      type: String as PropType<
+        "text" | "number" | "tel" | "url" | "email" | "password"
+      >,
       default: "text",
     },
     name: {

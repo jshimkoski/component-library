@@ -8,7 +8,7 @@
       class="sticky top-0 z-30 w-full bg-white/70 dark:bg-black/60 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
     >
       <div
-        :class="{ 'max-w-7xl': !fullWidth }"
+        :class="{ 'max-w-7xl': variant !== 'fullwidth' }"
         class="mx-auto flex items-center justify-between px-6 py-3"
       >
         <slot name="header" />
@@ -17,7 +17,7 @@
 
     <!-- Main Layout -->
     <div
-      :class="{ 'max-w-7xl': !fullWidth }"
+      :class="{ 'max-w-7xl': variant !== 'fullwidth' }"
       class="flex flex-1 w-full mx-auto"
     >
       <!-- Sidebar -->
@@ -28,7 +28,7 @@
       </aside>
 
       <!-- Main Content Area -->
-      <main class="flex-1 px-6 py-10 prose prose-green max-w-none">
+      <main class="flex-1 px-6 py-10 max-w-none">
         <slot name="content" />
       </main>
 
@@ -52,8 +52,8 @@
 
 <script setup lang="ts">
   defineProps({
-    fullWidth: {
-      type: Boolean,
+    variant: {
+      type: String as PropType<"fullwidth" | "margined">,
       default: false,
     },
   });

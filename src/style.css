@@ -231,6 +231,22 @@
       }
     }
 
+    & :where(figure) {
+      :where(& *) {
+        &:where(:not(:last-child)) {
+          margin-bottom: calc(var(--spacing) * 3);
+        }
+      }
+
+      &:where(:not(:last-child)) {
+        margin-bottom: calc(var(--spacing) * 6);
+      }
+    }
+
+    & :where(figcaption) {
+      color: var(--color-neutral-500);
+    }
+
     & :where(hr) {
       border-color: var(--color-neutral-200);
 

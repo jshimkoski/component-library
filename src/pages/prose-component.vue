@@ -1,6 +1,6 @@
 <template>
   <Prose>
-    <h1>Typopgraphy</h1>
+    <h1>Typography</h1>
     <p class="lead">
       Until now, trying to style an article, document, or blog post with
       Tailwind has been a tedious task that required a keen eye for typography
@@ -102,7 +102,7 @@
     <figure>
       <img
         src="https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
-        alt=""
+        alt="Sample image"
       />
       <figcaption>
         Contrary to popular belief, Lorem Ipsum is not simply random text. It
