@@ -43,9 +43,13 @@
     <!-- Footer -->
     <footer
       v-if="!!$slots.footer"
-      class="w-full text-center py-6 mt-auto border-t border-neutral-200 dark:border-neutral-800"
+      class="w-full mt-auto"
     >
-      <slot name="footer" />
+      <div
+        class="text-center mt-12 py-12 border-t border-neutral-200 dark:border-neutral-800"
+      >
+        <slot name="footer" />
+      </div>
     </footer>
   </div>
 </template>
@@ -54,7 +58,7 @@
   defineProps({
     variant: {
       type: String as PropType<"fullwidth" | "margined">,
-      default: false,
+      default: "margined",
     },
   });
 
