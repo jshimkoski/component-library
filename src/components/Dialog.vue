@@ -39,7 +39,7 @@
               <div
                 v-if="showDialog"
                 ref="dialogRef"
-                class="relative transform overflow-hidden rounded-theme-lg bg-neutral-50 dark:bg-neutral-950 dark:ring-1 dark:ring-neutral-800 text-left shadow-lg dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                class="relative transform overflow-hidden rounded-theme-md bg-neutral-50 dark:bg-neutral-950 dark:ring-1 dark:ring-neutral-800 text-left shadow-lg dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
               >
                 <div class="bg-neutral-50 dark:bg-neutral-950 p-6">
                   <div class="flex items-start gap-4">

@@ -20,7 +20,7 @@
     <template #popover>
       <ul
         ref="popoverRef"
-        class="py-3"
+        class="py-2"
         :class="{
           'w-48': !autoWidth,
           'w-auto': autoWidth,
