@@ -33,6 +33,7 @@ declare module 'vue-router/auto-routes' {
     '/radio-component': RouteRecordInfo<'/radio-component', '/radio-component', Record<never, never>, Record<never, never>>,
     '/radiogroup-component': RouteRecordInfo<'/radiogroup-component', '/radiogroup-component', Record<never, never>, Record<never, never>>,
     '/select-component': RouteRecordInfo<'/select-component', '/select-component', Record<never, never>, Record<never, never>>,
+    '/sheet-component': RouteRecordInfo<'/sheet-component', '/sheet-component', Record<never, never>, Record<never, never>>,
     '/switch-component': RouteRecordInfo<'/switch-component', '/switch-component', Record<never, never>, Record<never, never>>,
     '/texteditor-component': RouteRecordInfo<'/texteditor-component', '/texteditor-component', Record<never, never>, Record<never, never>>,
     '/textfield-component': RouteRecordInfo<'/textfield-component', '/textfield-component', Record<never, never>, Record<never, never>>,

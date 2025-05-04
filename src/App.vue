@@ -94,7 +94,7 @@
     { to: "radio-component", label: "Radio" },
     { to: "radiogroup-component", label: "Radio Group" },
     { to: "select-component", label: "Select" },
-    // { to: "sheet-component", label: "Sheet" },
+    { to: "sheet-component", label: "Sheet" },
     // { to: "slider-component", label: "Slider" },
     // { to: "snackbar-component", label: "Snackbar" },
     { to: "switch-component", label: "Switch" },

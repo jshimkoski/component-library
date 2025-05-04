@@ -10,7 +10,7 @@
     :aria-disabled="disabled ? 'true' : undefined"
     :type="tag === 'button' ? type : undefined"
     :class="[variantClasses, sizeClasses, activeClasses]"
-    class="inline-flex items-center gap-1 cursor-pointer disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none"
+    class="inline-flex items-center gap-1 cursor-pointer disabled:opacity-100 disabled:pointer-events-none [&[data-disabled]]:opacity-100 [&[data-disabled]]:pointer-events-none"
     @click="tag === 'button' ? onClick($event) : undefined"
   >
     <slot :label="label">{{ label }}</slot>
@@ -142,9 +142,9 @@
           return `
           border
           border-base-300 bg-white text-primary-600
-          hover:bg-base-50
+          hover:bg-base-100
           dark:border-base-700 dark:bg-base-950 dark:text-primary-300
-          dark:hover:bg-base-900
+          dark:hover:bg-base-800
           `;
         case "ghost":
           return `
@@ -152,7 +152,7 @@
             border-transparent text-primary-600
             hover:border-base-100 hover:bg-base-100
             dark:text-primary-400
-            dark:hover:border-base-900 dark:hover:bg-base-900
+            dark:hover:border-base-800 dark:hover:bg-base-800
           `;
         case "link":
           return `
@@ -176,9 +176,9 @@
           return `
             border
             border-base-300 bg-white text-success-600
-            hover:bg-base-50
+            hover:bg-base-100
             dark:border-base-700 dark:bg-base-950 dark:text-success-300
-            dark:hover:bg-base-900
+            dark:hover:bg-base-800
           `;
         case "ghost":
           return `
@@ -186,7 +186,7 @@
             border-transparent text-success-600
             hover:border-base-100 hover:bg-base-100
             dark:text-success-400
-            dark:hover:border-base-900 dark:hover:bg-base-900
+            dark:hover:border-base-800 dark:hover:bg-base-800
           `;
         case "link":
           return `
@@ -210,9 +210,9 @@
           return `
             border
             border-base-300 bg-white text-info-600
-            hover:bg-base-50
+            hover:bg-base-100
             dark:border-base-700 dark:bg-base-950 dark:text-info-300
-            dark:hover:bg-base-900
+            dark:hover:bg-base-800
           `;
         case "ghost":
           return `
@@ -220,7 +220,7 @@
             border-transparent text-info-600
             hover:border-base-100 hover:bg-base-100
             dark:text-info-400
-            dark:hover:border-base-900 dark:hover:bg-base-900
+            dark:hover:border-base-800 dark:hover:bg-base-800
           `;
         case "link":
           return `
@@ -244,9 +244,9 @@
           return `
             border
             border-base-300 bg-white text-warning-600
-            hover:bg-base-50
+            hover:bg-base-100
             dark:border-base-700 dark:bg-base-950 dark:text-warning-300
-            dark:hover:bg-base-900
+            dark:hover:bg-base-800
           `;
         case "ghost":
           return `
@@ -254,7 +254,7 @@
             border-transparent text-warning-600
             hover:border-base-100 hover:bg-base-100
             dark:text-warning-400
-            dark:hover:border-base-900 dark:hover:bg-base-900
+            dark:hover:border-base-800 dark:hover:bg-base-800
           `;
         case "link":
           return `
@@ -278,9 +278,9 @@
           return `
             border
             border-base-300 bg-white text-danger-600
-            hover:bg-base-50
+            hover:bg-base-100
             dark:border-base-700 dark:bg-base-950 dark:text-danger-300
-            dark:hover:bg-base-900
+            dark:hover:bg-base-800
           `;
         case "ghost":
           return `
@@ -288,7 +288,7 @@
             border-transparent text-danger-600
             hover:border-base-100 hover:bg-base-100
             dark:text-danger-400
-            dark:hover:border-base-900 dark:hover:bg-base-900
+            dark:hover:border-base-800 dark:hover:bg-base-800
           `;
         case "link":
           return `
@@ -313,9 +313,9 @@
           return `
             border
             border-base-300 bg-white text-secondary-600
-            hover:bg-base-50
+            hover:bg-base-100
             dark:border-base-700 dark:bg-base-950 dark:text-secondary-300
-            dark:hover:bg-base-900
+            dark:hover:bg-base-800
           `;
         case "ghost":
           return `
@@ -323,7 +323,7 @@
             border-transparent text-secondary-600
             hover:border-base-100 hover:bg-base-100
             dark:text-secondary-300
-            dark:hover:border-base-900 dark:hover:bg-base-900
+            dark:hover:border-base-800 dark:hover:bg-base-800
           `;
         case "link":
           return `

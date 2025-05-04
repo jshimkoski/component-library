@@ -39,9 +39,9 @@
               <div
                 v-if="showDialog"
                 ref="dialogRef"
-                class="relative transform overflow-hidden p-4 rounded-base radius-full:rounded-4xl bg-base-50 dark:bg-base-950 dark:ring-1 dark:ring-base-800 text-left shadow-md dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                class="relative transform overflow-hidden p-4 rounded-base radius-full:rounded-4xl bg-base-50 dark:bg-base-900 dark:ring-1 dark:ring-base-800 text-left shadow-md dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
               >
-                <div class="bg-base-50 dark:bg-base-950 p-4">
+                <div class="bg-base-50 dark:bg-base-900 p-4">
                   <div class="flex items-start gap-4">
                     <!-- <div
                       class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
@@ -66,7 +66,7 @@
                       <h2
                         v-if="label || !!$slots.description"
                         :id="modalTitleId"
-                        class="text-xl"
+                        class="text-xl text-black dark:text-white"
                       >
                         <slot name="label">{{ label }}</slot>
                       </h2>
