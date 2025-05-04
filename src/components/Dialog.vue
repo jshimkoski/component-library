@@ -39,9 +39,9 @@
               <div
                 v-if="showDialog"
                 ref="dialogRef"
-                class="relative transform overflow-hidden rounded-theme-md bg-base-50 dark:bg-base-950 dark:ring-1 dark:ring-base-800 text-left shadow-md dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                class="relative transform overflow-hidden p-4 rounded-base radius-full:rounded-4xl bg-base-50 dark:bg-base-950 dark:ring-1 dark:ring-base-800 text-left shadow-md dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
               >
-                <div class="bg-base-50 dark:bg-base-950 p-6">
+                <div class="bg-base-50 dark:bg-base-950 p-4">
                   <div class="flex items-start gap-4">
                     <!-- <div
                       class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
@@ -92,7 +92,7 @@
                 </div>
                 <div
                   v-if="!!$slots.footer"
-                  class="p-6 pt-6 flex flex-row-reverse gap-3"
+                  class="p-4 flex flex-row-reverse gap-3"
                 >
                   <slot
                     name="footer"

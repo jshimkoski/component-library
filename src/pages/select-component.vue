@@ -12,7 +12,6 @@
     placeholder="Select an option..."
     required
     showMarker
-    class="appearance-none border border-base-300 dark:border-base-700 rounded-md p-2"
   />
 </template>
 

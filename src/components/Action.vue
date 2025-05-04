@@ -353,26 +353,17 @@
     } else {
       switch (props.size) {
         case "xs":
-          return (
-            "text-xs rounded-theme-xs " + (props.square ? "p-1" : "px-2 py-1")
-          );
+          return "text-xs rounded-base " + (props.square ? "p-1" : "px-2 py-1");
         case "sm":
-          return (
-            "text-sm rounded-theme-sm " + (props.square ? "p-1" : "px-2 py-1")
-          );
+          return "text-sm rounded-base " + (props.square ? "p-1" : "px-2 py-1");
         case "md":
           return (
-            "text-base rounded-theme-md " +
-            (props.square ? "p-2" : "px-4 py-1.5")
+            "text-base rounded-base " + (props.square ? "p-2" : "px-4 py-1.5")
           );
         case "lg":
-          return (
-            "text-lg rounded-theme-lg " + (props.square ? "p-2" : "px-6 py-2")
-          );
+          return "text-lg rounded-base " + (props.square ? "p-2" : "px-6 py-2");
         case "xl":
-          return (
-            "text-xl rounded-theme-xl " + (props.square ? "p-3" : "px-8 py-3")
-          );
+          return "text-xl rounded-base " + (props.square ? "p-3" : "px-8 py-3");
       }
     }
   });

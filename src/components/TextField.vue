@@ -25,7 +25,7 @@
       :name="name"
       :class="`
         w-full px-4 py-2
-        rounded-theme-md
+        rounded-base
         border border-base-300 dark:border-base-700
         bg-white dark:bg-base-950
         text-base-700 dark:text-base-300

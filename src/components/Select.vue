@@ -38,7 +38,7 @@
         :class="`
           col-start-1 row-start-1
           w-full px-4 py-2
-          rounded-theme-md
+          rounded-base
           border border-base-300 dark:border-base-700
           bg-white dark:bg-base-950
           text-base-700 dark:text-base-300
@@ -47,6 +47,7 @@
           focus:border-primary-500
           focus:outline-2 focus:-outline-offset-2 focus:outline-primary-500 dark:focus:outline-primary-400
           transition-colors
+          appearance-none force-colors:appearance-auto
         `"
       >
         <option

@@ -25,7 +25,8 @@
           bg-white dark:bg-base-950
           hover:not-checked:bg-base-100 dark:hover:not-checked:bg-base-900
           checked:bg-primary-500 dark:checked:bg-primary-400
-          rounded-theme-sm
+          rounded-base
+          radius-sm:rounded-sm
           border border-base-300 dark:border-base-700
         `"
       />

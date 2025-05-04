@@ -10,7 +10,7 @@
           variant === 'outlined',
         'hover:shadow-lg transition-shadow': tag === 'a',
       }"
-      class="relative p-4 rounded-theme-xl text-black dark:text-white dark:shadow-white/5"
+      class="relative p-4 rounded-base radius-xl:p-6 radius-3xl:p-8 radius-full:rounded-4xl text-black dark:text-white dark:shadow-white/5"
     >
       <slot name="header">
         <div class="mb-4">

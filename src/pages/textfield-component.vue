@@ -8,7 +8,6 @@
       placeholder="Type something..."
       required
       showMarker
-      class="border border-base-300 dark:border-base-700 rounded-md p-2"
     />
     <TextField
       v-model="email"
@@ -18,7 +17,6 @@
       placeholder="Type an email..."
       required
       showMarker
-      class="border border-base-300 dark:border-base-700 rounded-md p-2"
     />
   </div>
 </template>

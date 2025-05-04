@@ -9,7 +9,7 @@
     :data-disabled="disabled || undefined"
     :aria-disabled="disabled ? 'true' : undefined"
     :type="tag === 'button' ? type : undefined"
-    class="inline-block text-white dark:text-black font-semibold rounded-full full text-xs"
+    class="inline-block text-white dark:text-black font-semibold rounded-base text-xs"
     :class="[
       kindClass,
       tag === 'a' ? 'cursor-pointer' : '',
