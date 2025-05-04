@@ -1,0 +1,137 @@
+@theme {
+  --radius-base: var(--radius-md);
+}
+
+@custom-variant radius-xs {
+  &:where(
+      .radius-xs *,
+      .radius-sm *,
+      .radius-md *,
+      .radius-lg *,
+      .radius-xl *,
+      .radius-2xl *,
+      .radius-3xl *,
+      .radius-4xl *,
+      .radius-full *
+    ) {
+    @slot;
+  }
+}
+
+@custom-variant radius-sm {
+  &:where(
+      .radius-sm *,
+      .radius-md *,
+      .radius-lg *,
+      .radius-xl *,
+      .radius-2xl *,
+      .radius-3xl *,
+      .radius-4xl *,
+      .radius-full *
+    ) {
+    @slot;
+  }
+}
+
+@custom-variant radius-md {
+  &:where(
+      .radius-md *,
+      .radius-lg *,
+      .radius-xl *,
+      .radius-2xl *,
+      .radius-3xl *,
+      .radius-4xl *,
+      .radius-full *
+    ) {
+    @slot;
+  }
+}
+
+@custom-variant radius-lg {
+  &:where(
+      .radius-lg *,
+      .radius-xl *,
+      .radius-2xl *,
+      .radius-3xl *,
+      .radius-4xl *,
+      .radius-full *
+    ) {
+    @slot;
+  }
+}
+
+@custom-variant radius-xl {
+  &:where(
+      .radius-xl *,
+      .radius-2xl *,
+      .radius-3xl *,
+      .radius-4xl *,
+      .radius-full *
+    ) {
+    @slot;
+  }
+}
+
+@custom-variant radius-2xl {
+  &:where(.radius-2xl *, .radius-3xl *, .radius-4xl *, .radius-full *) {
+    @slot;
+  }
+}
+
+@custom-variant radius-3xl {
+  &:where(.radius-3xl *, .radius-4xl *, .radius-full *) {
+    @slot;
+  }
+}
+
+@custom-variant radius-4xl {
+  &:where(.radius-4xl *, .radius-full *) {
+    @slot;
+  }
+}
+
+@custom-variant radius-full {
+  &:where(.radius-full *) {
+    @slot;
+  }
+}
+
+@utility radius-none {
+  --radius-base: 0;
+}
+
+@utility radius-xs {
+  --radius-base: var(--radius-xs);
+}
+
+@utility radius-sm {
+  --radius-base: var(--radius-sm);
+}
+
+@utility radius-md {
+  --radius-base: var(--radius-md);
+}
+
+@utility radius-lg {
+  --radius-base: var(--radius-lg);
+}
+
+@utility radius-xl {
+  --radius-base: var(--radius-xl);
+}
+
+@utility radius-2xl {
+  --radius-base: var(--radius-2xl);
+}
+
+@utility radius-3xl {
+  --radius-base: var(--radius-3xl);
+}
+
+@utility radius-4xl {
+  --radius-base: var(--radius-4xl);
+}
+
+@utility radius-full {
+  --radius-base: calc(infinity * 1px);
+}
