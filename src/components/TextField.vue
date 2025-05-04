@@ -26,11 +26,11 @@
       :class="`
         w-full px-4 py-2
         rounded-theme-md
-        border border-neutral-300 dark:border-neutral-700
-        bg-white dark:bg-black
-        text-neutral-700 dark:text-neutral-300
-        hover:bg-neutral-50 dark:hover:bg-neutral-900
-        focus:bg-white dark:focus:bg-black
+        border border-base-300 dark:border-base-700
+        bg-white dark:bg-base-950
+        text-base-700 dark:text-base-300
+        hover:bg-base-50 dark:hover:bg-base-900
+        focus:bg-white dark:focus:bg-base-950
         focus:border-primary-500
         focus:outline-2 focus:-outline-offset-2 focus:outline-primary-500 dark:focus:outline-primary-400
         transition-colors
@@ -38,7 +38,7 @@
     />
     <p
       v-if="description"
-      class="text-sm text-neutral-500"
+      class="text-sm text-base-600 dark:text-base-400"
     >
       {{ description }}
     </p>

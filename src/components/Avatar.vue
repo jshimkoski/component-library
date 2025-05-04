@@ -3,7 +3,7 @@
     :src="src"
     :alt="alt"
     :class="{
-      'object-cover ring-neutral-300 dark:ring-neutral-700': true,
+      'object-cover ring-base-300 dark:ring-base-700': true,
       'w-4 h-4 ring-1': size === 'xs',
       'w-8 h-8 ring-1': size === 'sm',
       'w-12 h-12 ring-2': size === 'md',

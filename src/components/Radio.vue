@@ -18,12 +18,12 @@
         accent-primary-500
         appearance-none
         forced-colors:appearance-auto
-        bg-white dark:bg-black
-        hover:not-checked:bg-neutral-100 dark:hover:not-checked:bg-neutral-900
+        bg-white dark:bg-base-950
+        hover:not-checked:bg-base-100 dark:hover:not-checked:bg-base-900
         checked:bg-primary-500 dark:checked:bg-primary-400
         checked:outline-2 checked:outline-white checked:-outline-offset-3
         rounded-full
-        border border-neutral-300 dark:border-neutral-700
+        border border-base-300 dark:border-base-700
       `"
     />
     <div class="relative">
@@ -41,7 +41,7 @@
       </label>
       <p
         v-if="description"
-        class="text-sm text-neutral-500"
+        class="text-sm text-base-600 dark:text-base-400"
       >
         {{ description }}
       </p>

@@ -18,7 +18,7 @@
         aria-modal="true"
       >
         <div
-          class="fixed inset-0 bg-neutral-500/75 dark:bg-black/70 transition-opacity"
+          class="fixed inset-0 bg-base-500/75 dark:bg-black/70 transition-opacity"
           aria-hidden="true"
         />
 
@@ -39,9 +39,9 @@
               <div
                 v-if="showDialog"
                 ref="dialogRef"
-                class="relative transform overflow-hidden rounded-theme-md bg-neutral-50 dark:bg-neutral-950 dark:ring-1 dark:ring-neutral-800 text-left shadow-lg dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                class="relative transform overflow-hidden rounded-theme-md bg-base-50 dark:bg-base-950 dark:ring-1 dark:ring-base-800 text-left shadow-md dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
               >
-                <div class="bg-neutral-50 dark:bg-neutral-950 p-6">
+                <div class="bg-base-50 dark:bg-base-950 p-6">
                   <div class="flex items-start gap-4">
                     <!-- <div
                       class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
@@ -72,11 +72,11 @@
                       </h2>
                       <p
                         v-if="description || !!$slots.description"
-                        class="text-sm text-neutral-600 dark:text-neutral-400"
+                        class="text-sm text-base-600 dark:text-base-400"
                       >
                         <slot name="description">{{ description }}</slot>
                       </p>
-                      <div class="mt-6 text-neutral-700 dark:text-neutral-300">
+                      <div class="mt-6 text-base-700 dark:text-base-300">
                         <slot name="content">{{ content }}</slot>
                       </div>
                     </div>

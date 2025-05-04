@@ -9,7 +9,7 @@
       :data-disabled="disabled || undefined"
       :aria-disabled="disabled ? 'true' : undefined"
       :type="tag === 'button' ? type : undefined"
-      class="block w-full text-left px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-900 cursor-pointer disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none [&[data-active='true']]:bg-neutral-200"
+      class="block w-full text-left px-4 py-2 hover:bg-base-100 dark:hover:bg-base-800 cursor-pointer disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none [&[data-active='true']]:bg-base-200"
       @click="tag === 'button' ? onClick($event) : undefined"
     >
       <slot>{{ label }}</slot>

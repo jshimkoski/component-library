@@ -1,11 +1,11 @@
 <template>
   <div
-    class="bg-white text-black dark:bg-black dark:text-white flex flex-col min-h-screen"
+    class="bg-white text-black dark:bg-base-950 dark:text-white flex flex-col min-h-screen"
   >
     <!-- Sticky Top Nav -->
     <header
       ref="header"
-      class="sticky top-0 z-30 w-full bg-white/70 dark:bg-black/60 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
+      class="sticky top-0 z-30 w-full bg-white/70 dark:bg-base-950/60 backdrop-blur-md border-b border-base-200 dark:border-base-800"
     >
       <div
         :class="{ 'max-w-7xl': variant !== 'fullwidth' }"
@@ -46,7 +46,7 @@
       class="w-full mt-auto"
     >
       <div
-        class="text-center mt-12 py-12 border-t border-neutral-200 dark:border-neutral-800"
+        class="text-center mt-12 py-12 border-t border-base-200 dark:border-base-800"
       >
         <slot name="footer" />
       </div>

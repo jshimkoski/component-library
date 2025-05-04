@@ -13,7 +13,7 @@
         :aria-haspopup="true"
         @click="open = !open"
       >
-        {{ label }}
+        {{ label || "Menu" }}
         <IconMdiChevronDown class="text-lg" />
       </Action>
     </template>

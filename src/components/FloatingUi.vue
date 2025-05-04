@@ -147,17 +147,17 @@
   const floatingContainerClasses = computed(() => {
     switch (props.type) {
       case "rich":
-        return "ring-1 ring-neutral-300 rounded-sm shadow-xl dark:shadow-white/5 dark:ring-neutral-700";
+        return "ring-1 ring-base-300 rounded-sm shadow-md dark:shadow-white/5 dark:ring-base-700";
       case "plain":
       default:
-        return "pointer-events-none ring-1 ring-neutral-700 rounded-sm shadow-xl dark:shadow-white/5";
+        return "pointer-events-none ring-1 ring-base-700 rounded-sm shadow-md dark:shadow-white/5";
     }
   });
 
   const floatingClasses = computed(() => {
     switch (props.type) {
       case "rich":
-        return "rounded-sm bg-neutral-50 text-black w-max dark:bg-neutral-950 dark:text-white";
+        return "rounded-sm bg-base-50 text-black w-max dark:bg-base-900 dark:text-white";
       case "plain":
       default:
         return "rounded-sm bg-black text-white text-sm w-max";
@@ -167,10 +167,10 @@
   const arrowClasses = computed(() => {
     switch (props.type) {
       case "rich":
-        return "size-4 bg-neutral-50 ring-1 ring-neutral-300 dark:bg-neutral-950 dark:ring-neutral-700 shadow-xl dark:shadow-white/5";
+        return "size-4 bg-base-50 ring-1 ring-base-300 dark:bg-base-900 dark:ring-base-700 shadow-md dark:shadow-white/5";
       case "plain":
       default:
-        return "size-2 bg-black ring-1 ring-neutral-700 shadow-xl dark:shadow-white/5";
+        return "size-2 bg-black ring-1 ring-base-700 shadow-md dark:shadow-white/5";
     }
   });
 </script>

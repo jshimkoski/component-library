@@ -20,7 +20,7 @@
         'checked:bg-warning-500 checked:border-warning-500': kind === 'warning',
         'checked:bg-danger-500 checked:border-danger-500': kind === 'danger',
       }"
-      class="appearance-none relative inline-block w-9 h-5 border rounded-full align-bottom m-auto cursor-pointer bg-neutral-300 dark:bg-neutral-700 border-neutral-300 dark:border-neutral-700 before:shadow-sm transition-all before:transition-all before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0.25 before:w-4 before:h-4 before:bg-white dark:before:bg-neutral-300 before:rounded-full checked:before:left-4.25 mt-1.5"
+      class="appearance-none relative inline-block w-9 h-5 border rounded-full align-bottom m-auto cursor-pointer bg-base-300 dark:bg-base-700 border-base-300 dark:border-base-700 before:shadow-sm transition-all before:transition-all before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0.25 before:w-4 before:h-4 before:bg-white dark:before:bg-base-300 before:rounded-full checked:before:left-4.25 mt-1.5"
     />
     <div class="relative">
       <label
@@ -37,7 +37,7 @@
       </label>
       <p
         v-if="description"
-        class="text-sm text-neutral-500"
+        class="text-sm text-base-600 dark:text-base-400"
       >
         {{ description }}
       </p>

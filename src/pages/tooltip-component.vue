@@ -1,16 +1,24 @@
 <template>
   <div class="grid grid-cols-2 gap-6">
     <Tooltip text="Hello world">
-      <p class="p-8 bg-danger-400">Show a tooltip</p>
+      <Chip
+        label="Show a tooltip"
+        kind="secondary"
+      />
     </Tooltip>
     <Tooltip type="rich">
       <template #text>
         <div>
-          <p class="text-neutral-500 font-semibold text-sm">Hello world</p>
+          <p class="text-base-600 dark:text-base-400 font-semibold text-sm">
+            Hello world
+          </p>
           <p>This is a rich content tooltip.</p>
         </div>
       </template>
-      <p class="p-8 bg-danger-400">Show a rich tooltip</p>
+      <Chip
+        label="Show a rich tooltip"
+        kind="secondary"
+      />
     </Tooltip>
   </div>
 </template>

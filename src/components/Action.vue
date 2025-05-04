@@ -141,18 +141,18 @@
         case "outline":
           return `
           border
-          border-neutral-300 bg-white text-primary-600
-          hover:bg-neutral-50
-          dark:border-neutral-700 dark:bg-black dark:text-primary-300
-          dark:hover:bg-neutral-900
+          border-base-300 bg-white text-primary-600
+          hover:bg-base-50
+          dark:border-base-700 dark:bg-base-950 dark:text-primary-300
+          dark:hover:bg-base-900
           `;
         case "ghost":
           return `
             border
             border-transparent text-primary-600
-            hover:border-neutral-100 hover:bg-neutral-100
+            hover:border-base-100 hover:bg-base-100
             dark:text-primary-400
-            dark:hover:border-neutral-900 dark:hover:bg-neutral-900
+            dark:hover:border-base-900 dark:hover:bg-base-900
           `;
         case "link":
           return `
@@ -175,18 +175,18 @@
         case "outline":
           return `
             border
-            border-neutral-300 bg-white text-success-600
-            hover:bg-neutral-50
-            dark:border-neutral-700 dark:bg-black dark:text-success-300
-            dark:hover:bg-neutral-900
+            border-base-300 bg-white text-success-600
+            hover:bg-base-50
+            dark:border-base-700 dark:bg-base-950 dark:text-success-300
+            dark:hover:bg-base-900
           `;
         case "ghost":
           return `
             border
             border-transparent text-success-600
-            hover:border-neutral-100 hover:bg-neutral-100
+            hover:border-base-100 hover:bg-base-100
             dark:text-success-400
-            dark:hover:border-neutral-900 dark:hover:bg-neutral-900
+            dark:hover:border-base-900 dark:hover:bg-base-900
           `;
         case "link":
           return `
@@ -209,18 +209,18 @@
         case "outline":
           return `
             border
-            border-neutral-300 bg-white text-info-600
-            hover:bg-neutral-50
-            dark:border-neutral-700 dark:bg-black dark:text-info-300
-            dark:hover:bg-neutral-900
+            border-base-300 bg-white text-info-600
+            hover:bg-base-50
+            dark:border-base-700 dark:bg-base-950 dark:text-info-300
+            dark:hover:bg-base-900
           `;
         case "ghost":
           return `
             border
             border-transparent text-info-600
-            hover:border-neutral-100 hover:bg-neutral-100
+            hover:border-base-100 hover:bg-base-100
             dark:text-info-400
-            dark:hover:border-neutral-900 dark:hover:bg-neutral-900
+            dark:hover:border-base-900 dark:hover:bg-base-900
           `;
         case "link":
           return `
@@ -243,18 +243,18 @@
         case "outline":
           return `
             border
-            border-neutral-300 bg-white text-warning-600
-            hover:bg-neutral-50
-            dark:border-neutral-700 dark:bg-black dark:text-warning-300
-            dark:hover:bg-neutral-900
+            border-base-300 bg-white text-warning-600
+            hover:bg-base-50
+            dark:border-base-700 dark:bg-base-950 dark:text-warning-300
+            dark:hover:bg-base-900
           `;
         case "ghost":
           return `
             border
             border-transparent text-warning-600
-            hover:border-neutral-100 hover:bg-neutral-100
+            hover:border-base-100 hover:bg-base-100
             dark:text-warning-400
-            dark:hover:border-neutral-900 dark:hover:bg-neutral-900
+            dark:hover:border-base-900 dark:hover:bg-base-900
           `;
         case "link":
           return `
@@ -277,18 +277,18 @@
         case "outline":
           return `
             border
-            border-neutral-300 bg-white text-danger-600
-            hover:bg-neutral-50
-            dark:border-neutral-700 dark:bg-black dark:text-danger-300
-            dark:hover:bg-neutral-900
+            border-base-300 bg-white text-danger-600
+            hover:bg-base-50
+            dark:border-base-700 dark:bg-base-950 dark:text-danger-300
+            dark:hover:bg-base-900
           `;
         case "ghost":
           return `
             border
             border-transparent text-danger-600
-            hover:border-neutral-100 hover:bg-neutral-100
+            hover:border-base-100 hover:bg-base-100
             dark:text-danger-400
-            dark:hover:border-neutral-900 dark:hover:bg-neutral-900
+            dark:hover:border-base-900 dark:hover:bg-base-900
           `;
         case "link":
           return `
@@ -312,18 +312,18 @@
         case "outline":
           return `
             border
-            border-neutral-300 bg-white text-secondary-600
-            hover:bg-neutral-50
-            dark:border-neutral-700 dark:bg-black dark:text-secondary-300
-            dark:hover:bg-neutral-900
+            border-base-300 bg-white text-secondary-600
+            hover:bg-base-50
+            dark:border-base-700 dark:bg-base-950 dark:text-secondary-300
+            dark:hover:bg-base-900
           `;
         case "ghost":
           return `
             border
             border-transparent text-secondary-600
-            hover:border-neutral-100 hover:bg-neutral-100
+            hover:border-base-100 hover:bg-base-100
             dark:text-secondary-300
-            dark:hover:border-neutral-900 dark:hover:bg-neutral-900
+            dark:hover:border-base-900 dark:hover:bg-base-900
           `;
         case "link":
           return `

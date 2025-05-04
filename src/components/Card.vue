@@ -2,13 +2,13 @@
   <Component :is="tag">
     <div
       :class="{
-        'bg-neutral-50 dark:bg-neutral-950 ring-1 ring-neutral-100 dark:ring-neutral-900 shadow-lg':
+        'bg-base-50 dark:bg-base-900 ring-1 ring-base-100 dark:ring-base-800 shadow-md':
           variant === 'elevated',
-        'bg-neutral-100 dark:bg-neutral-900 dark:ring-1 dark:ring-neutral-900':
+        'bg-base-100 dark:bg-base-800 dark:ring-1 dark:ring-base-900':
           variant === 'filled',
-        'bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800':
+        'bg-white dark:bg-base-950 border border-base-200 dark:border-base-800':
           variant === 'outlined',
-        'hover:shadow-xl transition-shadow': tag === 'a',
+        'hover:shadow-lg transition-shadow': tag === 'a',
       }"
       class="relative p-4 rounded-theme-xl text-black dark:text-white dark:shadow-white/5"
     >
@@ -17,7 +17,7 @@
           <h2 class="text-xl">
             {{ label }}
           </h2>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400">
+          <p class="text-sm text-base-600 dark:text-base-400">
             {{ description }}
           </p>
         </div>

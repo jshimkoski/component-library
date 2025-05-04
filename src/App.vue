@@ -22,7 +22,7 @@
     <template #left-bar>
       <div class="flex items-center space-x-3 mb-4">
         <span
-          class="font-bold text-xs uppercase text-neutral-600 dark:text-neutral-400"
+          class="font-bold text-xs uppercase text-base-600 dark:text-base-400"
           >Components</span
         >
       </div>
@@ -50,7 +50,7 @@
     <template #right-bar>
       <nav>
         <div
-          class="font-bold text-xs uppercase text-neutral-600 dark:text-neutral-400 mb-4"
+          class="font-bold text-xs uppercase text-base-600 dark:text-base-400 mb-4"
         >
           On this page
         </div>
@@ -58,7 +58,7 @@
           <li>
             <a
               href="#getting-started"
-              class="block px-2 py-1 rounded hover:bg-neutral-50 dark:hover:bg-neutral-900"
+              class="block px-2 py-1 rounded hover:bg-base-50 dark:hover:bg-base-900"
               >Getting Started</a
             >
           </li>
@@ -66,7 +66,9 @@
       </nav>
     </template>
     <template #footer>
-      <span class="text-neutral-500">© 2025 AJS Communications</span>
+      <span class="text-base-600 dark:text-base-400"
+        >© 2025 AJS Communications</span
+      >
     </template>
   </DocsLayout>
 </template>
@@ -86,6 +88,7 @@
     // // // { to: "docslayout-component", label: "Docs Layout" },
     // // // { to: "list-component", label: "List" },
     { to: "menu-component", label: "Menu" },
+    // { to: "paginator-component", label: "Paginator" },
     { to: "progress-component", label: "Progress" },
     { to: "prose-component", label: "Prose" },
     { to: "radio-component", label: "Radio" },
@@ -99,6 +102,8 @@
     // { to: "tabs-component", label: "Tabs" },
     { to: "texteditor-component", label: "Text Editor" },
     { to: "textfield-component", label: "Text Field" },
+    // { to: "toast-component", label: "Toast" },
     { to: "tooltip-component", label: "Tooltip" },
+    // { to: "tree-component", label: "Tree" },
   ];
 </script>

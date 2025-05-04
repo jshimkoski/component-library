@@ -17,7 +17,7 @@
     </progress>
     <p
       v-if="description"
-      class="text-sm text-neutral-500"
+      class="text-sm text-base-600 dark:text-base-400"
     >
       {{ description }}
     </p>
