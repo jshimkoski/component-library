@@ -6,7 +6,7 @@
   >
     <template #default>
       <Action
-        ref="triggerRef"
+        ref="triggerElement"
         :disabled="disabled"
         :active="open"
         :aria-expanded="open ? 'true' : 'false'"
@@ -63,13 +63,13 @@
     type: Boolean,
   });
 
-  const triggerRef = useTemplateRef("triggerRef");
+  const triggerElement = useTemplateRef("triggerElement");
   const popoverRef = useTemplateRef("popoverRef");
 
   onClickOutside(popoverRef, (event) => {
     if (!open.value) return;
-    if (event.target === triggerRef.value?.$el) return;
-    if (triggerRef.value?.$el.contains(event.target)) return;
+    if (event.target === triggerElement.value?.$el) return;
+    if (triggerElement.value?.$el.contains(event.target)) return;
     open.value = false;
   });
 

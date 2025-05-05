@@ -8,7 +8,7 @@
   </Action>
   <Sheet
     v-model="sheet"
-    :trigger-ref="sheetTrigger?.$el"
+    :trigger-element="sheetTrigger?.$el"
     label="Sheet label"
     description="Sheet description"
   >

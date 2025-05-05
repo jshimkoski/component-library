@@ -110,7 +110,7 @@
   import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
 
   const props = defineProps({
-    triggerRef: {
+    triggerElement: {
       type: Object as PropType<HTMLElement | null>,
       default: undefined,
     },
@@ -156,13 +156,13 @@
     } else {
       isLocked.value = false;
       deactivate();
-      props.triggerRef?.focus();
+      props.triggerElement?.focus();
     }
   });
 
   onClickOutside(sheetRef, (event) => {
-    if (event.target === props.triggerRef) return;
-    if (props.triggerRef?.contains(event.target as Node)) return;
+    if (event.target === props.triggerElement) return;
+    if (props.triggerElement?.contains(event.target as Node)) return;
     show.value = false;
   });
 
