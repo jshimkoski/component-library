@@ -3,7 +3,7 @@
     @click="sheet = !sheet"
     ref="sheetTrigger"
   >
-    <span>Open Sheet</span>
+    <span>Toggle Sheet</span>
     <Badge label="999+" />
   </Action>
   <Sheet
