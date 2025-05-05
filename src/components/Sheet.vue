@@ -46,14 +46,15 @@
                   <div
                     :class="{
                       'bg-base-50 dark:bg-base-900': variant === 'standard',
-                      'bg-white dark:bg-base-950': variant === 'modal',
+                      'bg-white dark:bg-base-950 rounded-l-base radius-4xl:rounded-l-4xl':
+                        variant === 'modal',
                     }"
                     class="flex h-full flex-col overflow-y-scroll pt-6 ring-1 ring-base-300 dark:ring-base-700 shadow-xl dark:shadow-white/5"
                   >
                     <div class="px-4 sm:px-6 flex gap-2 items-center">
                       <div>
                         <h2
-                          v-if="label || !!$slots.description"
+                          v-if="label || !!$slots.label"
                           :id="titleId"
                           class="text-xl text-black dark:text-white"
                         >
@@ -78,7 +79,7 @@
                     <div
                       class="relative mt-6 flex-1 px-4 sm:px-6 text-black dark:text-white"
                     >
-                      <slot name="content">{{ content }}</slot>
+                      <slot>{{ content }}</slot>
                     </div>
                     <div
                       v-if="!!$slots.footer"

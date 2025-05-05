@@ -12,7 +12,7 @@
     label="Sheet label"
     description="Sheet description"
   >
-    <template #content>
+    <template #default>
       <p>This is content for the sheet.</p>
       <p>This is content for the sheet.</p>
       <p>This is content for the sheet.</p>

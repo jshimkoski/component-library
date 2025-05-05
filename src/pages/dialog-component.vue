@@ -12,7 +12,7 @@
     label="Dialog label"
     description="Dialog description"
   >
-    <template #content>
+    <template #default>
       <p>This is content for the dialog.</p>
     </template>
     <template #footer="{ close }">

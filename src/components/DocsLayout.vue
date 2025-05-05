@@ -29,7 +29,7 @@
 
       <!-- Main Content Area -->
       <main class="flex-1 px-6 py-10 max-w-none">
-        <slot name="content" />
+        <slot />
       </main>
 
       <!-- Table of Contents (Scrollspy) -->

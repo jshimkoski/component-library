@@ -22,7 +22,7 @@
           </p>
         </div>
       </slot>
-      <slot name="content">{{ content }}</slot>
+      <slot>{{ content }}</slot>
       <slot name="footer">
         <div class="flex justify-end">
           <Action

@@ -64,7 +64,7 @@
                     </div> -->
                     <div>
                       <h2
-                        v-if="label || !!$slots.description"
+                        v-if="label || !!$slots.label"
                         :id="modalTitleId"
                         class="text-xl text-black dark:text-white"
                       >
@@ -77,7 +77,7 @@
                         <slot name="description">{{ description }}</slot>
                       </p>
                       <div class="mt-6 text-base-700 dark:text-base-300">
-                        <slot name="content">{{ content }}</slot>
+                        <slot>{{ content }}</slot>
                       </div>
                     </div>
                     <div class="absolute top-2 right-2">

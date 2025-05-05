@@ -44,7 +44,7 @@
         </RouterLink>
       </nav>
     </template>
-    <template #content>
+    <template #default>
       <RouterView />
     </template>
     <template #right-bar>
