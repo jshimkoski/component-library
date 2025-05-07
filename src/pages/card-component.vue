@@ -1,8 +1,13 @@
 <template>
-  <div class="grid gap-6">
+  <div class="grid grid-cols-2 gap-6">
     <Card
-      label="Card label"
-      description="Card description"
+      headline="Headline"
+      subhead="Subhead"
+      text="Explain more about the topic shown in the headline and subhead through supporting text."
+    />
+    <Card
+      headline="Card headline"
+      subhead="Card subhead"
       href="https://google.com"
       target="_blank"
       variant="outlined"
@@ -11,8 +16,8 @@
       <p>Outlined (default) Card Content</p>
     </Card>
     <Card
-      label="Card label"
-      description="Card description"
+      headline="Card headline"
+      subhead="Card subhead"
       href="https://google.com"
       target="_blank"
       variant="filled"
@@ -21,8 +26,8 @@
       <p>Filled Card Content</p>
     </Card>
     <Card
-      label="Card label"
-      description="Card description"
+      headline="Card headline"
+      subhead="Card subhead"
       href="https://google.com"
       target="_blank"
       variant="elevated"

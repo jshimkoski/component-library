@@ -10,28 +10,32 @@
           variant === 'outlined',
         'hover:shadow-lg transition-shadow': tag === 'a',
       }"
-      class="relative p-4 rounded-base radius-xl:p-6 radius-3xl:p-8 radius-full:rounded-4xl text-black dark:text-white dark:shadow-white/5"
+      class="relative p-6 pt-5 rounded-base radius-full:rounded-4xl text-black dark:text-white dark:shadow-white/5"
     >
-      <slot name="header">
-        <div class="mb-4">
-          <h2 class="text-xl">
-            {{ label }}
-          </h2>
-          <p class="text-sm text-base-600 dark:text-base-400">
-            {{ description }}
-          </p>
+      <div class="grid gap-2 mb-2">
+        <h2 class="text-2xl">
+          {{ headline }}
+        </h2>
+        <p class="text-lg text-base-700 dark:text-base-300">
+          {{ subhead }}
+        </p>
+        <div
+          v-if="!!$slots.default || text"
+          class="text-sm text-base-600 dark:text-base-400 max-w-prose text-pretty"
+        >
+          <slot>{{ text }}</slot>
         </div>
-      </slot>
-      <slot>{{ content }}</slot>
+      </div>
       <slot name="footer">
-        <div class="flex justify-end">
+        <div
+          v-if="tag === 'a' && actionLabel"
+          class="mt-6 flex justify-end"
+        >
           <Action
-            v-if="tag === 'a' && actionLabel"
             :href="href"
             :target="target"
             :rel="rel"
             :kind="kind"
-            class="mt-4"
           >
             <span>{{ actionLabel }}</span>
             <span class="absolute inset-0 z-10"></span>
@@ -52,15 +56,15 @@
       type: String as PropType<Kind>,
       default: "secondary",
     },
-    label: {
+    headline: {
       type: String,
       default: undefined,
     },
-    description: {
+    subhead: {
       type: String,
       default: undefined,
     },
-    content: {
+    text: {
       type: String,
       default: undefined,
     },

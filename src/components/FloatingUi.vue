@@ -2,8 +2,8 @@
   <div
     ref="rootRef"
     :style="{
+      display: 'inline-block',
       position: 'relative',
-      width: 'fit-content',
     }"
   >
     <slot
@@ -110,7 +110,7 @@
   });
 
   const arrowPadding = computed(() => {
-    return props.type === "rich" ? 8 : 4;
+    return props.type === "rich" ? 24 : 4;
   });
 
   const { update, floatingStyles, middlewareData, placement } = useFloating(

@@ -1,5 +1,5 @@
 @theme {
-  --radius-base: var(--radius-md);
+  --radius-base: var(--radius-sm);
 }
 
 @custom-variant radius-xs {

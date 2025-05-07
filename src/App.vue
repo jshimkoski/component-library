@@ -66,9 +66,11 @@
       </nav>
     </template>
     <template #footer>
-      <span class="text-base-600 dark:text-base-400"
-        >© 2025 AJS Communications</span
-      >
+      <div class="text-center">
+        <span class="text-base-600 dark:text-base-400"
+          >© 2025 AJS Communications</span
+        >
+      </div>
     </template>
   </DocsLayout>
 </template>
@@ -80,18 +82,17 @@
     { to: "badge-component", label: "Badge" },
     { to: "card-component", label: "Card" },
     // // { to: "carousel-component", label: "Carousel" },
-    { to: "checkbox-component", label: "Checkbox" },
     { to: "checkboxgroup-component", label: "Checkbox Group" },
     { to: "chip-component", label: "Chip" },
     // // // { to: "datepicker-component", label: "Datepicker" },
     { to: "dialog-component", label: "Dialog" },
+    // { to: "divider-component", label: "Divider" },
     // // // { to: "docslayout-component", label: "Docs Layout" },
     // // // { to: "list-component", label: "List" },
     { to: "menu-component", label: "Menu" },
     // { to: "paginator-component", label: "Paginator" },
     { to: "progress-component", label: "Progress" },
     { to: "prose-component", label: "Prose" },
-    { to: "radio-component", label: "Radio" },
     { to: "radiogroup-component", label: "Radio Group" },
     { to: "select-component", label: "Select" },
     { to: "sheet-component", label: "Sheet" },
@@ -102,7 +103,6 @@
     // { to: "tabs-component", label: "Tabs" },
     { to: "texteditor-component", label: "Text Editor" },
     { to: "textfield-component", label: "Text Field" },
-    // { to: "toast-component", label: "Toast" },
     { to: "tooltip-component", label: "Tooltip" },
     // { to: "tree-component", label: "Tree" },
   ];

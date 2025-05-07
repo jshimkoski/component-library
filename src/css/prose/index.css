@@ -1,6 +1,7 @@
 @layer components {
   :where(.prose):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     max-width: 65ch;
+
     text-wrap: pretty;
     color: var(--color-base-800);
 
@@ -65,7 +66,7 @@
 
     & :where(blockquote) {
       border-left: 4px solid var(--color-base-300);
-      padding-left: --spacing(6);
+      padding-left: --spacing(4);
       padding-block: --spacing(2);
       font-weight: var(--font-weight-medium);
       font-style: italic;

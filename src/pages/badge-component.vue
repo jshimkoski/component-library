@@ -27,7 +27,7 @@
           kind="secondary"
         />
         <Badge
-          class="absolute -top-1 -right-4"
+          class="absolute -top-2 -right-4"
           label="999+"
         />
       </div>

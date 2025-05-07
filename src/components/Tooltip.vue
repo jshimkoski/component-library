@@ -4,6 +4,7 @@
     :placement="placement"
     :type="type"
     ref="rootRef"
+    class="w-fit"
   >
     <template #default>
       <slot
@@ -15,7 +16,7 @@
       <div
         :class="{
           'p-4': type === 'rich',
-          'px-2 py-1': type === 'plain',
+          'px-3 py-1': type === 'plain',
         }"
       >
         <slot name="text">

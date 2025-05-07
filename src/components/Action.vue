@@ -10,7 +10,7 @@
     :aria-disabled="disabled ? 'true' : undefined"
     :type="tag === 'button' ? type : undefined"
     :class="[variantClasses, sizeClasses, activeClasses]"
-    class="inline-flex items-center gap-1 cursor-pointer disabled:opacity-100 disabled:pointer-events-none [&[data-disabled]]:opacity-100 [&[data-disabled]]:pointer-events-none"
+    class="inline-flex items-center gap-1 cursor-pointer font-medium disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none"
     @click="tag === 'button' ? onClick($event) : undefined"
   >
     <slot :label="label">{{ label }}</slot>
@@ -18,9 +18,6 @@
 </template>
 
 <script setup lang="ts">
-  export type Type = "button" | "submit" | "reset";
-  export type Variant = "solid" | "outline" | "ghost" | "link";
-
   const props = defineProps({
     label: { type: String, default: undefined },
     href: { type: String, default: undefined },
@@ -29,11 +26,11 @@
     disabled: { type: Boolean, default: false },
     active: { type: Boolean, default: false },
     type: {
-      type: String as PropType<Type>,
+      type: String as PropType<ActionType>,
       default: "button",
     },
     variant: {
-      type: String as PropType<Variant>,
+      type: String as PropType<ActionVariant>,
       default: undefined, // Default is determined by the tag type
     },
     kind: {
@@ -57,7 +54,7 @@
     return props.href ? "a" : "button";
   });
 
-  const variant = computed<Variant>(() => {
+  const variant = computed<ActionVariant>(() => {
     if (!props.variant) {
       switch (props.kind) {
         case "primary":

@@ -24,7 +24,7 @@
 
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
           <div
-            class="flex min-h-full items-end justify-center p-6 text-center sm:items-center sm:p-0"
+            class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
           >
             <Transition
               enter-active-class="ease-out duration-150"
@@ -39,65 +39,70 @@
               <div
                 v-if="showDialog"
                 ref="dialogRef"
-                class="relative transform overflow-hidden p-4 rounded-base radius-full:rounded-4xl bg-base-50 dark:bg-base-900 dark:ring-1 dark:ring-base-800 text-left shadow-md dark:shadow-white/5 transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                class="transform overflow-auto grid gap-6 bg-base-50 dark:bg-base-900 dark:ring-1 dark:ring-base-800 text-left shadow-md dark:shadow-white/5 transition-all"
+                :class="{
+                  'relative p-6 rounded-base radius-full:rounded-4xl sm:my-8 sm:w-full sm:max-w-lg':
+                    variant === 'basic',
+                  'fixed inset-0': variant === 'fullscreen',
+                }"
               >
-                <div class="bg-base-50 dark:bg-base-900 p-4">
-                  <div class="flex items-start gap-4">
-                    <!-- <div
-                      class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
+                <div class="bg-base-50 dark:bg-base-900">
+                  <div
+                    :class="{
+                      'sticky top-0 bg-base-50 dark:bg-base-900 border-b border-base-200 dark:border-base-800 p-4':
+                        variant === 'fullscreen',
+                    }"
+                    class="flex gap-3 items-center"
+                  >
+                    <Action
+                      v-if="variant === 'fullscreen'"
+                      variant="link"
+                      class="mt-0.5"
+                      @click="onDismiss"
                     >
-                      <svg
-                        class="size-6 text-red-600"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                        data-slot="icon"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-                        />
-                      </svg>
-                    </div> -->
-                    <div>
-                      <h2
-                        v-if="label || !!$slots.label"
-                        :id="modalTitleId"
-                        class="text-xl text-black dark:text-white"
-                      >
-                        <slot name="label">{{ label }}</slot>
-                      </h2>
-                      <p
-                        v-if="description || !!$slots.description"
-                        class="text-sm text-base-600 dark:text-base-400"
-                      >
-                        <slot name="description">{{ description }}</slot>
-                      </p>
-                      <div class="mt-6 text-base-700 dark:text-base-300">
-                        <slot>{{ content }}</slot>
-                      </div>
-                    </div>
-                    <div class="absolute top-2 right-2">
-                      <Action
-                        square
-                        @click="showDialog = false"
-                      >
-                        <IconMdiTimes class="h-6 w-6" />
-                      </Action>
-                    </div>
+                      <IconMdiTimes class="h-6 w-6" />
+                      <span class="sr-only">{{ dismissLabel }}</span>
+                    </Action>
+                    <h2
+                      v-if="headline || !!$slots.headline"
+                      :id="modalTitleId"
+                      tabindex="0"
+                      class="text-2xl text-black dark:text-white"
+                    >
+                      <slot name="headline">{{ headline }}</slot>
+                    </h2>
+                    <Action
+                      v-if="variant === 'fullscreen' && actionLabel"
+                      :kind="actionKind"
+                      :label="actionLabel"
+                      variant="link"
+                      class="ml-auto"
+                      @click="onClick"
+                    />
+                  </div>
+                  <div
+                    :class="{
+                      'p-6 pt-3': variant === 'fullscreen',
+                    }"
+                    class="mt-4 text-base-600 dark:text-base-400"
+                  >
+                    <slot>{{ text }}</slot>
                   </div>
                 </div>
                 <div
-                  v-if="!!$slots.footer"
-                  class="p-4 flex flex-row-reverse gap-3"
+                  v-if="variant === 'basic'"
+                  class="flex flex-row-reverse gap-3"
                 >
-                  <slot
-                    name="footer"
-                    :close="() => (showDialog = false)"
+                  <Action
+                    v-if="actionLabel"
+                    :kind="actionKind"
+                    :variant="actionVariant"
+                    :label="actionLabel"
+                    @click="onClick"
                   />
+                  <Action @click="onDismiss">
+                    {{ dismissLabel }}
+                  </Action>
                 </div>
               </div>
             </Transition>
@@ -111,28 +116,58 @@
 <script setup lang="ts">
   import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
 
+  defineOptions({
+    inheritAttrs: false,
+  });
+
   const props = defineProps({
     triggerElement: {
       type: Object as PropType<HTMLElement | null>,
       default: undefined,
     },
-    label: {
+    variant: {
+      type: String as PropType<"basic" | "fullscreen">,
+      default: "basic",
+    },
+    headline: {
       type: String,
       default: undefined,
     },
-    description: {
+    text: {
       type: String,
       default: undefined,
     },
-    content: {
+    actionKind: {
+      type: String as PropType<Kind>,
+      default: "primary",
+    },
+    actionVariant: {
+      type: String as PropType<ActionVariant>,
+      default: "ghost",
+    },
+    actionLabel: {
       type: String,
       default: undefined,
+    },
+    dismissLabel: {
+      type: String,
+      default: "Close",
     },
   });
 
   const model = defineModel({
     type: Boolean,
   });
+
+  const emit = defineEmits(["click", "dismiss"]);
+
+  const onClick = (event: Event) => {
+    emit("click", event);
+  };
+
+  const onDismiss = (event: Event) => {
+    emit("dismiss", event);
+  };
 
   const showDialog = ref(false);
   const dialogIsVisible = ref(false);
@@ -161,11 +196,13 @@
   onClickOutside(dialogRef, (event) => {
     if (event.target === props.triggerElement) return;
     if (props.triggerElement?.contains(event.target as Node)) return;
-    showDialog.value = false;
+    event.stopImmediatePropagation();
+    onDismiss(event);
   });
 
-  onKeyStroke("Escape", () => {
+  onKeyStroke("Escape", (event: Event) => {
     if (!showDialog.value) return;
-    showDialog.value = false;
+    event.stopImmediatePropagation();
+    onDismiss(event);
   });
 </script>

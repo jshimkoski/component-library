@@ -17,24 +17,29 @@
 
     <!-- Main Layout -->
     <div
-      :class="{ 'max-w-7xl': variant !== 'fullwidth' }"
-      class="flex flex-1 w-full mx-auto"
+      :class="{
+        'max-w-7xl xl:grid-cols-[16rem_calc(80rem-32rem)_16rem]':
+          variant !== 'fullwidth',
+        'xl:grid-cols-[16rem_calc(100dvw-32rem)_16rem]':
+          variant === 'fullwidth',
+      }"
+      class="grid flex-1 mx-auto grid-cols-[100dvw] lg:grid-cols-[16rem_calc(100dvw-16rem)]"
     >
       <!-- Sidebar -->
       <aside
-        class="hidden lg:block w-64 sticky-to-header overflow-y-auto p-6 shrink-0"
+        class="hidden lg:block sticky-to-header overflow-y-auto px-6 py-10 shrink-0"
       >
         <slot name="left-bar" />
       </aside>
 
       <!-- Main Content Area -->
-      <main class="flex-1 px-6 py-10 max-w-none">
+      <main class="flex-1 px-6 py-10 overflow-clip">
         <slot />
       </main>
 
       <!-- Table of Contents (Scrollspy) -->
       <div
-        class="hidden xl:block w-64 sticky-to-header overflow-y-auto p-6 shrink-0"
+        class="hidden xl:block sticky-to-header overflow-y-auto px-6 py-10 shrink-0"
       >
         <slot name="right-bar" />
       </div>
@@ -43,10 +48,11 @@
     <!-- Footer -->
     <footer
       v-if="!!$slots.footer"
-      class="w-full mt-auto"
+      class="w-full mt-auto border-t border-base-200 dark:border-base-800"
     >
       <div
-        class="text-center mt-12 py-12 border-t border-base-200 dark:border-base-800"
+        :class="{ 'max-w-7xl': variant !== 'fullwidth' }"
+        class="py-6 mx-auto"
       >
         <slot name="footer" />
       </div>

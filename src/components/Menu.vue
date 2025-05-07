@@ -3,24 +3,38 @@
     v-model:open="open"
     :placement="placement"
     type="rich"
+    :class="{
+      'w-full': variant === 'nested',
+    }"
   >
     <template #default>
       <Action
+        data-menu="true"
         ref="triggerElement"
         :disabled="disabled"
         :active="open"
         :aria-expanded="open ? 'true' : 'false'"
         :aria-haspopup="true"
+        :class="{
+          'w-full': variant === 'nested',
+        }"
         @click="open = !open"
       >
-        {{ label || "Menu" }}
-        <IconMdiChevronDown class="text-lg" />
+        <span class="grow text-left">{{ label || "Menu" }}</span>
+        <IconMdiChevronDown
+          v-if="placement.includes('top') || placement.includes('bottom')"
+          class="text-lg"
+        />
+        <IconMdiChevronRight
+          v-if="placement.includes('left') || placement.includes('right')"
+          class="text-lg"
+        />
       </Action>
     </template>
     <template #popover>
       <ul
         ref="popoverRef"
-        class="py-2 radius-xl:py-4"
+        class="p-2"
         :class="{
           'w-48': !autoWidth,
           'w-auto': autoWidth,
@@ -40,7 +54,14 @@
 
 <script setup lang="ts">
   import type { Placement } from "@floating-ui/core";
+  defineOptions({
+    inheritAttrs: false,
+  });
   defineProps({
+    variant: {
+      type: String as PropType<"standard" | "nested">,
+      default: "standard",
+    },
     label: {
       type: String,
       default: "",
@@ -82,7 +103,10 @@
   const handlePopoverClick = (event: Event) => {
     if (!event.target) return;
     const clickableNodes = ["A", "BUTTON"];
-    if (clickableNodes.includes((event.target as HTMLElement).nodeName)) {
+    if (
+      clickableNodes.includes((event.target as HTMLElement).nodeName) &&
+      !(event.target as HTMLElement).hasAttribute("data-menu")
+    ) {
       open.value = false;
     }
   };
