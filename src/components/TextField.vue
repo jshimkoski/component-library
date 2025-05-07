@@ -14,28 +14,34 @@
     >
       <slot>{{ label }}</slot>
     </label>
-    <input
-      v-model="model"
-      v-bind="$attrs"
-      :id="id"
-      :type="type"
-      :disabled="disabled"
-      :required="required"
-      :placeholder="placeholder"
-      :name="name"
-      :class="`
-        w-full px-4 py-2
-        rounded-base
-        border border-base-300 dark:border-base-700
-        bg-white dark:bg-base-950
-        text-base-700 dark:text-base-300
-        hover:bg-base-50 dark:hover:bg-base-900
-        focus:bg-white dark:focus:bg-base-950
-        focus:border-primary-500
-        focus:outline-2 focus:-outline-offset-2 focus:outline-primary-500 dark:focus:outline-primary-400
-        transition-colors
-      `"
-    />
+    <div class="relative">
+      <input
+        v-model="model"
+        v-bind="$attrs"
+        :id="id"
+        :type="type"
+        :disabled="disabled"
+        :required="required"
+        :placeholder="placeholder"
+        :name="name"
+        :class="`
+          w-full px-4 py-2
+          rounded-base
+          border border-base-300 dark:border-base-700
+          bg-white dark:bg-base-950
+          text-base-700 dark:text-base-300
+          hover:bg-base-50 dark:hover:bg-base-900
+          focus:bg-white dark:focus:bg-base-950
+          focus:border-primary-500
+          focus:outline-2 focus:-outline-offset-2 focus:outline-primary-500 dark:focus:outline-primary-400
+          transition-colors
+          ${$slots.suffix ? 'pr-10' : ''}
+        `"
+      />
+      <div v-if="$slots.suffix" class="absolute inset-y-0 right-0 flex items-center pr-3">
+        <slot name="suffix"></slot>
+      </div>
+    </div>
     <p
       v-if="description"
       class="text-sm text-base-600 dark:text-base-400"

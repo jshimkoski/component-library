@@ -29,10 +29,17 @@
           radius-sm:rounded-sm
           border border-base-300 dark:border-base-700
         `"
+        ref="checkboxRef"
+        :indeterminate="indeterminate"
       />
       <IconMdiCheckBold
         class="hidden peer-checked:block h-4 w-4 text-white absolute top-1.5 left-0 z-10 pointer-events-none"
+        v-if="!indeterminate"
       />
+      <div
+        v-if="indeterminate"
+        class="absolute top-[0.65rem] left-1 w-2 h-2 bg-white rounded-sm z-10 pointer-events-none"
+      ></div>
     </div>
     <div class="relative">
       <label
@@ -58,11 +65,12 @@
 </template>
 
 <script setup lang="ts">
+  import { onMounted, watch } from "vue";
   defineOptions({
     inheritAttrs: false,
   });
 
-  defineProps({
+  const props = defineProps({
     label: {
       type: String,
       default: undefined,
@@ -86,6 +94,10 @@
     showMarker: {
       type: Boolean,
       default: undefined,
+    },
+    indeterminate: {
+      type: Boolean,
+      default: false,
     },
     value: {
       type: [Boolean, String, Number, Object] as PropType<
@@ -121,4 +133,22 @@
   });
 
   const id = useId();
+  const checkboxRef = ref<HTMLInputElement | null>(null);
+
+  // Update the indeterminate state when the prop changes
+  watch(
+    () => props.indeterminate,
+    (newVal) => {
+      if (checkboxRef.value) {
+        checkboxRef.value.indeterminate = newVal;
+      }
+    },
+  );
+
+  // Set the initial indeterminate state
+  onMounted(() => {
+    if (checkboxRef.value && props.indeterminate) {
+      checkboxRef.value.indeterminate = true;
+    }
+  });
 </script>
