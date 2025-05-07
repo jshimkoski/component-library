@@ -30,7 +30,9 @@
       >
         <div class="flex-grow truncate">
           <template v-if="modelValue">
-            <span v-if="mode === 'single'">{{ formatDate(modelValue) }}</span>
+            <span v-if="mode === 'single'">{{
+              formatDate(modelValue as Date | null)
+            }}</span>
             <span v-else-if="mode === 'range' && Array.isArray(modelValue)">
               {{ formatDate(modelValue[0]) }} - {{ formatDate(modelValue[1]) }}
             </span>
