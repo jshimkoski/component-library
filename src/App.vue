@@ -84,7 +84,7 @@
     // // { to: "carousel-component", label: "Carousel" },
     { to: "checkboxgroup-component", label: "Checkbox Group" },
     { to: "chip-component", label: "Chip" },
-    // { to: "datepicker-component", label: "Datepicker" },
+    { to: "datepicker-component", label: "Datepicker" },
     { to: "dialog-component", label: "Dialog" },
     // { to: "divider-component", label: "Divider" },
     // // // { to: "docslayout-component", label: "Docs Layout" },

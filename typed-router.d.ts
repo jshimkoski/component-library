@@ -26,6 +26,7 @@ declare module 'vue-router/auto-routes' {
     '/checkbox-component': RouteRecordInfo<'/checkbox-component', '/checkbox-component', Record<never, never>, Record<never, never>>,
     '/checkboxgroup-component': RouteRecordInfo<'/checkboxgroup-component', '/checkboxgroup-component', Record<never, never>, Record<never, never>>,
     '/chip-component': RouteRecordInfo<'/chip-component', '/chip-component', Record<never, never>, Record<never, never>>,
+    '/datepicker-component': RouteRecordInfo<'/datepicker-component', '/datepicker-component', Record<never, never>, Record<never, never>>,
     '/dialog-component': RouteRecordInfo<'/dialog-component', '/dialog-component', Record<never, never>, Record<never, never>>,
     '/menu-component': RouteRecordInfo<'/menu-component', '/menu-component', Record<never, never>, Record<never, never>>,
     '/progress-component': RouteRecordInfo<'/progress-component', '/progress-component', Record<never, never>, Record<never, never>>,
