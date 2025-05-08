@@ -1,6 +1,6 @@
 # TreeView
 
-A hierarchical tree component for displaying nested navigation items with expandable/collapsible sections. The TreeView component is ideal for representing file systems, site navigation, categories, or any data that has a nested structure.
+A hierarchical tree component for displaying nested navigation items with expandable/collapsible sections. The TreeView component is ideal for representing file systems, site navigation, categories, or any data that has a nested structure. For parent items without specific actions, the entire heading acts as an expand/collapse toggle for better usability.
 
 ## Overview
 
@@ -8,6 +8,7 @@ The TreeView component offers a flexible way to display hierarchical data in a t
 - Nested navigation items with expand/collapse functionality
 - Custom icons or no icons
 - Positioning of expand/collapse controls on either left or right side
+- Automatic expand/collapse behavior when clicking parent items that don't have links
 - Events for node click, expansion, and collapse operations
 - Default expansion of specified nodes
 
@@ -134,6 +135,7 @@ To expand all nodes by default:
 - **Appropriate Labels**: Use concise, clear labels for tree items
 - **Icon Usage**: Use icons that clearly communicate the item type or purpose
 - **Keyboard Navigation**: The component supports keyboard navigation for accessibility
+- **Action vs Navigation**: For parent items that should only expand/collapse, don't specify a `to`, `href`, or other action properties
 
 ## Accessibility
 
@@ -158,6 +160,10 @@ const items = [
         children: [...]    // Can be nested further
       }
     ],
+    // For items that should navigate or perform actions:
+    to: "/path",           // Optional: Router path (if using vue-router)
+    href: "https://...",   // Optional: Direct URL (renders as <a> tag)
+    action: function(){},  // Optional: Custom action to perform
     // You can include any other properties to use in custom rendering
     type: "folder",        // Optional: Can be used for custom icon rendering
     // ...other custom properties
@@ -226,6 +232,7 @@ function onFileClick(node) {
   if (node.type === 'file') {
     // Handle file click
     console.log(`Opening file: ${node.label}`);
+    // If a node has children but no specific action, clicking will toggle expand/collapse
   }
 }
 

@@ -3,16 +3,17 @@
     <div 
       :class="[
         'tree-item-content',
-        'flex items-center gap-1 py-1.5 px-2 rounded-base cursor-pointer hover:bg-base-50 dark:hover:bg-base-900 transition',
+        'flex items-center gap-1 py-1.5 px-2 rounded-base hover:bg-base-50 dark:hover:bg-base-900 transition',
+        hasSpecificAction || hasChildren ? 'cursor-pointer' : 'cursor-default',
         { 'active-item': active || props.activeItemId === props.item.id }
       ]"
       :style="{ paddingLeft: controlsPosition === 'left' ? `${(level * 0.75) + 0.5}rem` : '0.5rem' }"
-      @click="onItemClick"
+      @click="itemClickHandler"
     >
-      <!-- Left side expand/collapse button -->
+      <!-- Left side expand/collapse button (only shown when item has a specific action) -->
       <Action 
-        v-if="hasChildren && controlsPosition === 'left'"
-        @click.stop="onToggleExpand"
+        v-if="hasChildren && controlsPosition === 'left' && hasSpecificAction"
+        @click.stop="(event) => onToggleExpand(event)"
         variant="ghost" 
         square 
         size="xs"
@@ -30,6 +31,19 @@
           <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </Action>
+      
+      <!-- Chevron indicator when entire heading is clickable -->
+      <div v-else-if="hasChildren && controlsPosition === 'left'" class="w-4 h-4 mr-1">
+        <svg 
+          class="w-4 h-4 transition-transform"
+          :class="{ 'rotate-90': isExpanded }"
+          viewBox="0 0 24 24" 
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
       
       <!-- Empty space for indentation when no expand button on left side -->
       <div v-else-if="controlsPosition === 'left'" class="w-6"></div>
@@ -83,9 +97,10 @@
       
       <!-- Right side expand/collapse button -->
       <div class="ml-auto" v-if="controlsPosition === 'right'">
+        <!-- Button when item has a specific action -->
         <Action 
-          v-if="hasChildren"
-          @click.stop="onToggleExpand"
+          v-if="hasChildren && hasSpecificAction"
+          @click.stop="(event) => onToggleExpand(event)"
           variant="ghost" 
           square 
           size="xs"
@@ -102,6 +117,19 @@
             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </Action>
+        
+        <!-- Simple indicator when entire heading is clickable -->
+        <div v-else-if="hasChildren" class="w-4 h-4">
+          <svg 
+            class="w-4 h-4 transition-transform"
+            :class="{ 'rotate-90': isExpanded }"
+            viewBox="0 0 24 24" 
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
       </div>
     </div>
 
@@ -118,7 +146,7 @@
           :controls-position="controlsPosition"
           :active-item-id="activeItemId"
           @update:expanded="onChildExpanded"
-          @item-click="$emit('item-click', $event)"
+          @item-click="emitItemClick"
         >
           <template #icon="slotProps" v-if="$slots.icon">
             <slot name="icon" :item="slotProps.item" :level="slotProps.level"></slot>
@@ -185,7 +213,15 @@ const isExpanded = computed(() => {
   return props.expandedKeys.includes(props.item.id);
 });
 
-function onToggleExpand() {
+// Determine if the item has a specific action (like navigation)
+const hasSpecificAction = computed(() => {
+  return props.item.to || props.item.action || props.item.href || props.item.onClick;
+});
+
+function onToggleExpand(event) {
+  if (event) {
+    event.stopPropagation(); // Prevent event bubbling
+  }
   emit('update:expanded', props.item.id);
 }
 
@@ -194,8 +230,28 @@ function onChildExpanded(itemId: string | number) {
 }
 
 function onItemClick(event) {
-  event.stopPropagation(); // Prevent parent items from receiving the click
+  if (event) {
+    event.stopPropagation(); // Prevent parent items from receiving the click
+  }
   emit('item-click', props.item);
+}
+
+function emitItemClick(item) {
+  emit('item-click', item);
+}
+
+function itemClickHandler(event) {
+  if (event) {
+    event.stopPropagation(); // Prevent event bubbling
+  }
+  
+  if (hasSpecificAction.value) {
+    onItemClick(event);
+  } else if (hasChildren.value) {
+    onToggleExpand();
+  } else {
+    onItemClick(event);
+  }
 }
 </script>
 

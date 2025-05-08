@@ -2,7 +2,7 @@
   <div class="max-w-3xl mx-auto p-6">
     <h1 class="text-3xl font-bold mb-2">Tree View Component</h1>
     <p class="mb-6 text-base-600 dark:text-base-400">
-      A hierarchical tree component for displaying nested navigation items.
+      A hierarchical tree component for displaying nested navigation items. Parent items without specific actions allow the entire heading to function as an expand/collapse toggle.
     </p>
 
     <section class="mb-10">
@@ -166,7 +166,7 @@
     <section class="mb-10">
       <Card>
         <template #header>
-          <h2 class="text-xl font-semibold">Right Controls</h2>
+          <h2 class="text-xl font-semibold">Right Controls (No Icons)</h2>
         </template>
         <div class="p-4">
           <TreeView
@@ -174,6 +174,23 @@
             controls-position="right"
             :show-icons="false"
           />
+        </div>
+      </Card>
+    </section>
+
+    <section class="mb-10">
+      <Card>
+        <template #header>
+          <h2 class="text-xl font-semibold">Clickable Parent Items</h2>
+        </template>
+        <div class="p-4">
+          <TreeView
+            :items="parentClickableItems"
+            @node-click="onNodeClick"
+          />
+        </div>
+        <div class="px-4 pb-4 text-base-600 dark:text-base-400 text-sm">
+          Note: Parent items without "to" or "action" properties allow the entire heading to function as the expand/collapse toggle.
         </div>
       </Card>
     </section>
@@ -218,7 +235,8 @@
             </td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">
               Array of tree items. Each item should have an id, label and
-              optional children array.
+              optional children array. Items can also have a 'to', 'href', or other action
+              property to indicate clickable behavior.
             </td>
           </tr>
           <tr>
@@ -491,6 +509,52 @@
       label: "Settings",
       type: "default",
     },
+  ];
+  
+  // Items showing clickable parent headings
+  const parentClickableItems = [
+    {
+      id: "components",
+      label: "Components",
+      // No "to" property, so entire heading is clickable to expand/collapse
+      children: [
+        {
+          id: "ui-components",
+          label: "UI Components",
+          // No "to" property, so entire heading is clickable to expand/collapse
+          children: [
+            {
+              id: "button",
+              label: "Button",
+              to: "button-page" // Has "to" property, so clicking navigates
+            },
+            {
+              id: "form",
+              label: "Form",
+              to: "form-page" // Has "to" property, so clicking navigates
+            }
+          ]
+        },
+        {
+          id: "layout-components",
+          label: "Layout Components",
+          // No "to" property, so entire heading is clickable to expand/collapse
+          children: [
+            {
+              id: "grid",
+              label: "Grid",
+              to: "grid-page" // Has "to" property, so clicking navigates
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: "utilities",
+      label: "Utilities",
+      to: "utilities-page" // Has "to" property, so clicking navigates, separate expand button shown
+      // This item demonstrates a parent with a navigation action
+    }
   ];
 
   function onNodeClick(node) {

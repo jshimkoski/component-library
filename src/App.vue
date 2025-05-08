@@ -27,8 +27,8 @@
         >
       </div>
       <nav>
-        <TreeView 
-          :items="navigationItems" 
+        <TreeView
+          :items="navigationItems"
           :show-icons="false"
           :active-item-id="activeItemId"
           :default-expanded-keys="defaultExpandedKeys"
@@ -68,13 +68,13 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed } from 'vue';
-  import { useRouter, useRoute } from 'vue-router';
-  import TreeView from './components/TreeView.vue';
-  
+  import { ref, computed } from "vue";
+  import { useRouter, useRoute } from "vue-router";
+  import TreeView from "./components/TreeView.vue";
+
   const router = useRouter();
   const route = useRoute();
-  
+
   // Original flat list of components for reference
   const components = [
     { to: "action-component", label: "Action" },
@@ -106,32 +106,38 @@
     { to: "tooltip-component", label: "Tooltip" },
     { to: "tree-view-component", label: "Tree View" },
   ];
-  
+
   // Organized navigation items for TreeView
   const navigationItems = [
     {
       id: "home",
       label: "Home",
-      to: "/"
+      to: "/",
     },
     {
       id: "inputs",
       label: "Input Components",
+      // No 'to' property, so entire heading is clickable for expand/collapse
       children: [
         { id: "action-component", label: "Action", to: "action-component" },
-        { id: "checkbox-group", label: "Checkbox Group", to: "checkboxgroup-component" },
+        {
+          id: "checkbox-group",
+          label: "Checkbox Group",
+          to: "checkboxgroup-component",
+        },
         { id: "datepicker", label: "Datepicker", to: "datepicker-component" },
         { id: "radio-group", label: "Radio Group", to: "radiogroup-component" },
         { id: "select", label: "Select", to: "select-component" },
         { id: "slider", label: "Slider", to: "slider-component" },
         { id: "switch", label: "Switch", to: "switch-component" },
         { id: "text-editor", label: "Text Editor", to: "texteditor-component" },
-        { id: "text-field", label: "Text Field", to: "textfield-component" }
-      ]
+        { id: "text-field", label: "Text Field", to: "textfield-component" },
+      ],
     },
     {
       id: "display",
       label: "Display Components",
+      // No 'to' property, so entire heading is clickable for expand/collapse
       children: [
         { id: "avatar", label: "Avatar", to: "avatar-component" },
         { id: "badge", label: "Badge", to: "badge-component" },
@@ -139,48 +145,55 @@
         { id: "chip", label: "Chip", to: "chip-component" },
         { id: "progress", label: "Progress", to: "progress-component" },
         { id: "prose", label: "Prose", to: "prose-component" },
-        { id: "table", label: "Table", to: "table-component" }
-      ]
+        { id: "table", label: "Table", to: "table-component" },
+      ],
     },
     {
       id: "navigation",
       label: "Navigation Components",
+      // No 'to' property, so entire heading is clickable for expand/collapse
       children: [
         { id: "menu", label: "Menu", to: "menu-component" },
         { id: "tabs", label: "Tabs", to: "tabs-component" },
-        { id: "tree-view", label: "Tree View", to: "tree-view-component" }
-      ]
+        { id: "tree-view", label: "Tree View", to: "tree-view-component" },
+      ],
     },
     {
       id: "overlay",
       label: "Overlay Components",
+      // No 'to' property, so entire heading is clickable for expand/collapse
       children: [
         { id: "dialog", label: "Dialog", to: "dialog-component" },
         { id: "sheet", label: "Sheet", to: "sheet-component" },
         { id: "snackbar", label: "Snackbar", to: "snackbar-component" },
-        { id: "tooltip", label: "Tooltip", to: "tooltip-component" }
-      ]
-    }
+        { id: "tooltip", label: "Tooltip", to: "tooltip-component" },
+      ],
+    },
   ];
-  
+
   // Default expanded categories for navigation
-  const defaultExpandedKeys = ref(['inputs', 'display', 'navigation', 'overlay']);
-  
+  const defaultExpandedKeys = ref([
+    "inputs",
+    "display",
+    "navigation",
+    "overlay",
+  ]);
+
   // Get current active item ID based on route
   const activeItemId = computed(() => {
     // Get current path
     const currentPath = route.path;
-    
+
     // Handle home route
-    if (currentPath === '/') {
-      return 'home';
+    if (currentPath === "/") {
+      return "home";
     }
-    
+
     // Find the matching navigation item
     const findActiveItem = (items) => {
       for (const item of items) {
         // Check if route matches the component path
-        if (item.to && ('/' + item.to === currentPath)) {
+        if (item.to && "/" + item.to === currentPath) {
           return item.id;
         }
         // Recursively check children
@@ -191,14 +204,16 @@
       }
       return null;
     };
-    
+
     return findActiveItem(navigationItems);
   });
-  
+
   // Handle navigation when tree node is clicked
   function handleNavigation(node) {
     if (node.to) {
-      router.push(node.to);
+      // Check if the path already starts with a slash
+      const path = node.to.startsWith("/") ? node.to : "/" + node.to;
+      router.push(path);
     }
   }
 </script>
