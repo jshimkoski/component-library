@@ -96,14 +96,14 @@
     { to: "radiogroup-component", label: "Radio Group" },
     { to: "select-component", label: "Select" },
     { to: "sheet-component", label: "Sheet" },
-    // { to: "slider-component", label: "Slider" },
+    { to: "slider-component", label: "Slider" },
     { to: "snackbar-component", label: "Snackbar" },
     { to: "switch-component", label: "Switch" },
     { to: "table-component", label: "Table" },
-    // { to: "tabs-component", label: "Tabs" },
+    { to: "tabs-component", label: "Tabs" },
     { to: "texteditor-component", label: "Text Editor" },
     { to: "textfield-component", label: "Text Field" },
     { to: "tooltip-component", label: "Tooltip" },
-    // { to: "tree-component", label: "Tree" },
+    { to: "tree-view-component", label: "Tree View" },
   ];
 </script>

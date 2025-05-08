@@ -49,15 +49,9 @@
               class="w-5 h-5"
             />
             <!-- Icon slot from TabPanel -->
-            <span
-              v-else-if="
-                tab.tabPanelId !== undefined && iconSlots[tab.tabPanelId]
-              "
-            >
-              <component
-                :is="{
-                  render: () => h('div', {}, [iconSlots[tab.tabPanelId]()]),
-                }"
+            <span v-else-if="tab.tabPanelId !== undefined && iconSlots[tab.tabPanelId]">
+              <component 
+                :is="{ render: () => h('div', {}, [iconSlots[tab.tabPanelId]()]) }" 
               />
             </span>
           </slot>
@@ -132,7 +126,7 @@
               v-else-if="tab.content"
               v-html="tab.content"
             ></div>
-
+            
             <!-- Declarative API: render TabPanel content -->
             <template v-else-if="tab.tabPanelId !== undefined">
               <component
@@ -147,7 +141,7 @@
                     } else {
                       return h('div', {}, ['No content available']);
                     }
-                  },
+                  }
                 }"
               />
             </template>
@@ -277,7 +271,7 @@
     if (modelValue.value === index) {
       return true;
     }
-
+    
     // For other tabs, follow lazy/keepAlive rules
     if (!props.lazy || props.keepAlive) return true;
     return renderedTabs.value.has(index);
@@ -287,15 +281,15 @@
   const allTabs = computed(() => {
     // First add tabs from props
     const combinedTabs = [...props.tabs];
-
+    
     // Then add tabs from TabPanel components
     tabPanels.value.forEach((panel, index) => {
       combinedTabs.push({
         ...panel,
-        tabPanelId: index, // Store the index of the TabPanel for content rendering
+        tabPanelId: index // Store the index of the TabPanel for content rendering
       });
     });
-
+    
     return combinedTabs;
   });
 
@@ -304,33 +298,33 @@
     // If updating an existing panel
     if ("_id" in panel && typeof panel._id === "number") {
       const index = panel._id;
-
+      
       // Update the panel data
-      tabPanels.value[index] = {
+      tabPanels.value[index] = { 
         ...tabPanels.value[index],
         label: panel.label,
         disabled: panel.disabled,
         badge: panel.badge,
         badgeKind: panel.badgeKind,
         icon: panel.icon,
-        id: panel.id,
+        id: panel.id
       };
-
+      
       // Update slots if provided
       if (panel.slot) {
         tabPanelSlots.value[index] = panel.slot;
       }
-
+      
       if (panel.iconSlot) {
         iconSlots.value[index] = panel.iconSlot;
       }
-
+      
       return index;
     }
 
     // Add a new panel
     const index = tabPanels.value.length;
-
+    
     // Store the panel data
     tabPanels.value.push({
       label: panel.label,
@@ -338,23 +332,23 @@
       badge: panel.badge,
       badgeKind: panel.badgeKind,
       icon: panel.icon,
-      id: panel.id,
+      id: panel.id
     });
-
+    
     // Store slots
     if (panel.slot) {
       tabPanelSlots.value[index] = panel.slot;
     }
-
+    
     if (panel.iconSlot) {
       iconSlots.value[index] = panel.iconSlot;
     }
-
+    
     // Ensure this tab is rendered if it's active
     if (modelValue.value === props.tabs.length + index && props.lazy) {
       renderedTabs.value.add(props.tabs.length + index);
     }
-
+    
     return index;
   });
 
@@ -362,20 +356,20 @@
     if (index >= 0 && index < tabPanels.value.length) {
       // Remove the panel
       tabPanels.value.splice(index, 1);
-
+      
       // Clean up slots
       delete tabPanelSlots.value[index];
       delete iconSlots.value[index];
-
+      
       // Remap higher indices
       for (let i = index + 1; i < tabPanels.value.length + 1; i++) {
         if (tabPanelSlots.value[i]) {
-          tabPanelSlots.value[i - 1] = tabPanelSlots.value[i];
+          tabPanelSlots.value[i-1] = tabPanelSlots.value[i];
           delete tabPanelSlots.value[i];
         }
-
+        
         if (iconSlots.value[i]) {
-          iconSlots.value[i - 1] = iconSlots.value[i];
+          iconSlots.value[i-1] = iconSlots.value[i];
           delete iconSlots.value[i];
         }
       }
@@ -388,22 +382,16 @@
     }
   });
 
-  provide(
-    "activeTabId",
-    computed(() => {
-      // Calculate the active TabPanel ID
-      const activeIndex = modelValue.value;
-      if (activeIndex >= props.tabs.length) {
-        return activeIndex - props.tabs.length;
-      }
-      return -1; // Not a TabPanel
-    }),
-  );
-
-  provide(
-    "isTabsParentLazy",
-    computed(() => props.lazy),
-  );
+  provide("activeTabId", computed(() => {
+    // Calculate the active TabPanel ID
+    const activeIndex = modelValue.value;
+    if (activeIndex >= props.tabs.length) {
+      return activeIndex - props.tabs.length;
+    }
+    return -1; // Not a TabPanel
+  }));
+  
+  provide("isTabsParentLazy", computed(() => props.lazy));
 
   // Update the selected tab
   const updateSelectedTab = (index: number) => {
@@ -424,7 +412,7 @@
 
     // Update the model and emit events
     modelValue.value = index;
-
+    
     nextTick(() => {
       emit("change", index);
       emit("tab-click", allTabs.value[index], index);
