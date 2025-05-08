@@ -4,14 +4,14 @@
       :class="[
         'tree-item-content',
         'flex items-center gap-1 py-1.5 px-2 rounded-base cursor-pointer hover:bg-base-50 dark:hover:bg-base-900 transition',
-        { 'active-item': active }
+        { 'active-item': active || props.activeItemId === props.item.id }
       ]"
-      :style="{ paddingLeft: `${(level * 0.75) + 0.5}rem` }"
+      :style="{ paddingLeft: controlsPosition === 'left' ? `${(level * 0.75) + 0.5}rem` : '0.5rem' }"
       @click="onItemClick"
     >
-      <!-- Expand/Collapse button for items with children -->
+      <!-- Left side expand/collapse button -->
       <Action 
-        v-if="hasChildren"
+        v-if="hasChildren && controlsPosition === 'left'"
         @click.stop="onToggleExpand"
         variant="ghost" 
         square 
@@ -31,11 +31,11 @@
         </svg>
       </Action>
       
-      <!-- Empty space for indentation when no expand button -->
-      <div v-else class="w-6"></div>
+      <!-- Empty space for indentation when no expand button on left side -->
+      <div v-else-if="controlsPosition === 'left'" class="w-6"></div>
       
       <!-- Icon slot -->
-      <slot name="icon" :item="item" :level="level">
+      <slot name="icon" :item="item" :level="level" v-if="showIcons">
         <div 
           v-if="hasChildren" 
           class="tree-folder-icon w-5 h-5 flex items-center justify-center"
@@ -80,6 +80,29 @@
       <slot :item="item" :level="level">
         <span class="tree-item-label">{{ item.label }}</span>
       </slot>
+      
+      <!-- Right side expand/collapse button -->
+      <div class="ml-auto" v-if="controlsPosition === 'right'">
+        <Action 
+          v-if="hasChildren"
+          @click.stop="onToggleExpand"
+          variant="ghost" 
+          square 
+          size="xs"
+          :aria-expanded="isExpanded ? 'true' : 'false'"
+          :aria-label="isExpanded ? 'Collapse' : 'Expand'"
+        >
+          <svg 
+            class="w-4 h-4 transition-transform"
+            :class="{ 'rotate-90': isExpanded }"
+            viewBox="0 0 24 24" 
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </Action>
+      </div>
     </div>
 
     <!-- Children -->
@@ -91,7 +114,11 @@
           :item="child"
           :level="level + 1"
           :expanded-keys="expandedKeys"
+          :show-icons="showIcons"
+          :controls-position="controlsPosition"
+          :active-item-id="activeItemId"
           @update:expanded="onChildExpanded"
+          @item-click="$emit('item-click', $event)"
         >
           <template #icon="slotProps" v-if="$slots.icon">
             <slot name="icon" :item="slotProps.item" :level="slotProps.level"></slot>
@@ -128,6 +155,18 @@ const props = defineProps({
   expandedKeys: {
     type: Array as PropType<Array<string | number>>,
     default: () => []
+  },
+  showIcons: {
+    type: Boolean,
+    default: true
+  },
+  controlsPosition: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
+  },
+  activeItemId: {
+    type: [String, Number] as PropType<string | number | null>,
+    default: null
   }
 });
 
@@ -174,11 +213,13 @@ function onItemClick(event) {
 .active-item {
   background-color: var(--color-primary-50);
   color: var(--color-primary-600);
+  font-weight: 500;
 }
 
 .dark .active-item {
   background-color: var(--color-primary-900);
   color: var(--color-primary-300);
+  font-weight: 500;
 }
 
 /* Expand/collapse animation */

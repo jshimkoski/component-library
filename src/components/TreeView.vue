@@ -7,6 +7,9 @@
         :item="item"
         :level="0"
         :expanded-keys="expandedKeys"
+        :show-icons="showIcons"
+        :controls-position="controlsPosition"
+        :active-item-id="activeItemId"
         @update:expanded="toggleExpand"
         @item-click="onItemClick"
       >
@@ -44,6 +47,18 @@ const props = defineProps({
   defaultExpandedKeys: {
     type: Array as PropType<Array<string | number>>,
     default: () => []
+  },
+  showIcons: {
+    type: Boolean,
+    default: true
+  },
+  controlsPosition: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
+  },
+  activeItemId: {
+    type: [String, Number] as PropType<string | number | null>,
+    default: null
   }
 });
 
