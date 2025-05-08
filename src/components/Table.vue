@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full overflow-x-auto bg-white dark:bg-base-950 border border-base-200 dark:border-base-800 rounded-base"
+    class="w-full overflow-x-auto bg-white dark:bg-base-950 border border-base-200 dark:border-base-800 rounded-base radius-xl:rounded-xl"
   >
     <!-- Table controls -->
     <div

@@ -13,7 +13,7 @@
         role="status"
         aria-live="polite"
         :class="[
-          'fixed z-50 flex items-center gap-3 p-4 rounded-base shadow-lg',
+          'fixed z-50 flex items-center gap-3 p-4 rounded-base shadow-lg border border-base-300 dark:border-base-700',
           positionClasses,
           kindClass,
         ]"
@@ -334,27 +334,30 @@
 
   function pauseTimer() {
     if (!props.autoClose || !autoCloseTimeout) return;
-    
+
     isPaused.value = true;
-    
+
     // Calculate remaining time
     if (startTime.value > 0) {
-      remainingDuration.value = Math.max(0, remainingDuration.value - (Date.now() - startTime.value));
+      remainingDuration.value = Math.max(
+        0,
+        remainingDuration.value - (Date.now() - startTime.value),
+      );
     }
-    
+
     // Clear the current timeout
     if (autoCloseTimeout) {
       clearTimeout(autoCloseTimeout);
       autoCloseTimeout = null;
     }
   }
-  
+
   function resumeTimer() {
     if (!props.autoClose || isPaused.value === false) return;
-    
+
     isPaused.value = false;
     startTime.value = Date.now();
-    
+
     // Set a new timeout with the remaining duration
     autoCloseTimeout = window.setTimeout(() => {
       dismiss();
@@ -366,7 +369,7 @@
     if (autoCloseTimeout) {
       clearTimeout(autoCloseTimeout);
     }
-    
+
     // Reset values
     remainingDuration.value = props.duration;
     startTime.value = Date.now();
@@ -389,6 +392,6 @@
   defineExpose({
     dismiss,
     pauseTimer,
-    resumeTimer
+    resumeTimer,
   });
 </script>

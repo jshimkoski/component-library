@@ -247,11 +247,9 @@
       />
     </section>
 
-    <div class="mt-8">
-      <h2 class="text-xl font-bold mb-4">Component Usage</h2>
-      <pre
-        class="bg-base-100 dark:bg-base-900 p-4 rounded-base overflow-x-auto"
-      ><code>&lt;!-- Basic usage --&gt;
+    <Prose class="mt-8">
+      <h2>Component Usage</h2>
+      <pre><code>&lt;!-- Basic usage --&gt;
 &lt;Snackbar
   v-model="show"
   message="This is a snackbar message"
@@ -293,7 +291,7 @@
   message="This won't auto-close"
   :auto-close="false"
 /&gt;</code></pre>
-    </div>
+    </Prose>
 
     <div class="mt-8">
       <h2 class="text-xl font-bold mb-4">Props</h2>
@@ -316,7 +314,7 @@
           >
             <h3 class="font-medium">Example:</h3>
             <pre
-              class="bg-base-200 dark:bg-base-700 p-2 rounded-base overflow-x-auto"
+              class="bg-base-200 dark:bg-base-700 p-2 rounded-base radius-xl:rounded-xl overflow-x-auto"
             ><code>{{ item.example }}</code></pre>
           </div>
         </template>
@@ -336,7 +334,7 @@
       </Table>
     </div>
 
-    <div class="mt-8">
+    <Prose class="mt-8">
       <h2 class="text-xl font-bold mb-4">Global Snackbar Service</h2>
       <p class="mb-4 text-base-600 dark:text-base-400">
         For convenience, you can use the global snackbar service to show
@@ -348,9 +346,7 @@
           @click="showGlobalSnackbar"
         />
       </div>
-      <pre
-        class="bg-base-100 dark:bg-base-900 p-4 rounded-base overflow-x-auto"
-      ><code>// In your component
+      <pre><code>// In your component
 import { useSnackbar } from '@/composables/useSnackbar'
 
 const snackbar = useSnackbar()
@@ -373,15 +369,15 @@ snackbar.show({
 // Show success message
 snackbar.success('Operation completed successfully')
 
-// Show error message
-snackbar.error('Something went wrong')
+// Show danger message
+snackbar.danger('Something went wrong')
 
 // Show info message
 snackbar.info('Here is some information')
 
 // Show warning message
 snackbar.warning('Be careful with this action')</code></pre>
-    </div>
+    </Prose>
   </div>
 </template>
 
