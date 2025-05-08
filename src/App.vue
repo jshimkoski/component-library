@@ -115,58 +115,80 @@
       to: "/",
     },
     {
-      id: "inputs",
-      label: "Input Components",
-      // No 'to' property, so entire heading is clickable for expand/collapse
+      id: "components",
+      label: "Components",
       children: [
-        { id: "action-component", label: "Action", to: "action-component" },
         {
-          id: "checkbox-group",
-          label: "Checkbox Group",
-          to: "checkboxgroup-component",
+          id: "inputs",
+          label: "Inputs",
+          // No 'to' property, so entire heading is clickable for expand/collapse
+          children: [
+            { id: "action-component", label: "Action", to: "action-component" },
+            {
+              id: "checkbox-group",
+              label: "Checkbox Group",
+              to: "checkboxgroup-component",
+            },
+            {
+              id: "datepicker",
+              label: "Datepicker",
+              to: "datepicker-component",
+            },
+            {
+              id: "radio-group",
+              label: "Radio Group",
+              to: "radiogroup-component",
+            },
+            { id: "select", label: "Select", to: "select-component" },
+            { id: "slider", label: "Slider", to: "slider-component" },
+            { id: "switch", label: "Switch", to: "switch-component" },
+            {
+              id: "text-editor",
+              label: "Text Editor",
+              to: "texteditor-component",
+            },
+            {
+              id: "text-field",
+              label: "Text Field",
+              to: "textfield-component",
+            },
+          ],
         },
-        { id: "datepicker", label: "Datepicker", to: "datepicker-component" },
-        { id: "radio-group", label: "Radio Group", to: "radiogroup-component" },
-        { id: "select", label: "Select", to: "select-component" },
-        { id: "slider", label: "Slider", to: "slider-component" },
-        { id: "switch", label: "Switch", to: "switch-component" },
-        { id: "text-editor", label: "Text Editor", to: "texteditor-component" },
-        { id: "text-field", label: "Text Field", to: "textfield-component" },
-      ],
-    },
-    {
-      id: "display",
-      label: "Display Components",
-      // No 'to' property, so entire heading is clickable for expand/collapse
-      children: [
-        { id: "avatar", label: "Avatar", to: "avatar-component" },
-        { id: "badge", label: "Badge", to: "badge-component" },
-        { id: "card", label: "Card", to: "card-component" },
-        { id: "chip", label: "Chip", to: "chip-component" },
-        { id: "progress", label: "Progress", to: "progress-component" },
-        { id: "prose", label: "Prose", to: "prose-component" },
-        { id: "table", label: "Table", to: "table-component" },
-      ],
-    },
-    {
-      id: "navigation",
-      label: "Navigation Components",
-      // No 'to' property, so entire heading is clickable for expand/collapse
-      children: [
-        { id: "menu", label: "Menu", to: "menu-component" },
-        { id: "tabs", label: "Tabs", to: "tabs-component" },
-        { id: "tree-view", label: "Tree View", to: "tree-view-component" },
-      ],
-    },
-    {
-      id: "overlay",
-      label: "Overlay Components",
-      // No 'to' property, so entire heading is clickable for expand/collapse
-      children: [
-        { id: "dialog", label: "Dialog", to: "dialog-component" },
-        { id: "sheet", label: "Sheet", to: "sheet-component" },
-        { id: "snackbar", label: "Snackbar", to: "snackbar-component" },
-        { id: "tooltip", label: "Tooltip", to: "tooltip-component" },
+        {
+          id: "display",
+          label: "Display",
+          // No 'to' property, so entire heading is clickable for expand/collapse
+          children: [
+            { id: "avatar", label: "Avatar", to: "avatar-component" },
+            { id: "badge", label: "Badge", to: "badge-component" },
+            { id: "card", label: "Card", to: "card-component" },
+            { id: "chip", label: "Chip", to: "chip-component" },
+            { id: "progress", label: "Progress", to: "progress-component" },
+            { id: "prose", label: "Prose", to: "prose-component" },
+            { id: "table", label: "Table", to: "table-component" },
+          ],
+        },
+        {
+          id: "navigation",
+          label: "Navigation",
+          // No 'to' property, so entire heading is clickable for expand/collapse
+          children: [
+            { id: "menu", label: "Menu", to: "menu-component" },
+            { id: "tabs", label: "Tabs", to: "tabs-component" },
+            { id: "tree-view", label: "Tree View", to: "tree-view-component" },
+          ],
+        },
+        {
+          id: "overlay",
+          label: "Overlay",
+          // No 'to' property, so entire heading is clickable for expand/collapse
+          children: [
+            { id: "dialog", label: "Dialog", to: "dialog-component" },
+            { id: "sheet", label: "Sheet", to: "sheet-component" },
+            { id: "snackbar", label: "Snackbar", to: "snackbar-component" },
+            { id: "tooltip", label: "Tooltip", to: "tooltip-component" },
+          ],
+        },
       ],
     },
   ];
