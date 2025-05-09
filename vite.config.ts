@@ -33,6 +33,7 @@ export default defineConfig({
     TailwindCSS(),
     AutoImport({
       imports: ["vue", "vue-router", "@vueuse/core"],
+      dirs: ["src/composables", "src/types"],
       vueTemplate: true,
       vueDirectives: true,
       viteOptimizeDeps: true,

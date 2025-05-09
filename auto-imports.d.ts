@@ -6,9 +6,6 @@
 // biome-ignore lint: disable
 export {}
 declare global {
-  const -: typeof import('0')['-']
-  const /: typeof import('0')['/']
-  const @: typeof import('0')['@']
   const EffectScope: typeof import('vue')['EffectScope']
   const Icon: typeof import('@iconify/vue')['Icon']
   const a: typeof import('0')['a']
@@ -84,6 +81,7 @@ declare global {
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const provide: typeof import('vue')['provide']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
+  const provideSnackbar: typeof import('./src/composables/useSnackbar')['provideSnackbar']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
   const reactive: typeof import('vue')['reactive']
@@ -250,6 +248,7 @@ declare global {
   const useSessionStorage: typeof import('@vueuse/core')['useSessionStorage']
   const useShare: typeof import('@vueuse/core')['useShare']
   const useSlots: typeof import('vue')['useSlots']
+  const useSnackbar: typeof import('./src/composables/useSnackbar')['default']
   const useSorted: typeof import('@vueuse/core')['useSorted']
   const useSpeechRecognition: typeof import('@vueuse/core')['useSpeechRecognition']
   const useSpeechSynthesis: typeof import('@vueuse/core')['useSpeechSynthesis']
@@ -314,6 +313,12 @@ declare global {
   // @ts-ignore
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
+  // @ts-ignore
+  export type { SnackbarKind, SnackbarPosition, SnackbarOptions } from './src/composables/useSnackbar'
+  import('./src/composables/useSnackbar')
+  // @ts-ignore
+  export type { Kind, Size, ActionType, ActionVariant, DateValue, RangeValue, DatePickerValue, DatePickerMode, TableField, TableProps, TabItem, TreeItem } from './src/types/common.d'
+  import('./src/types/common.d')
 }
 
 // for vue template auto import
@@ -387,6 +392,7 @@ declare module 'vue' {
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
+    readonly provideSnackbar: UnwrapRef<typeof import('./src/composables/useSnackbar')['provideSnackbar']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
@@ -551,6 +557,7 @@ declare module 'vue' {
     readonly useSessionStorage: UnwrapRef<typeof import('@vueuse/core')['useSessionStorage']>
     readonly useShare: UnwrapRef<typeof import('@vueuse/core')['useShare']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useSnackbar: UnwrapRef<typeof import('./src/composables/useSnackbar')['default']>
     readonly useSorted: UnwrapRef<typeof import('@vueuse/core')['useSorted']>
     readonly useSpeechRecognition: UnwrapRef<typeof import('@vueuse/core')['useSpeechRecognition']>
     readonly useSpeechSynthesis: UnwrapRef<typeof import('@vueuse/core')['useSpeechSynthesis']>

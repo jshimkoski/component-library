@@ -35,7 +35,7 @@
           @keydown.up="vertical ? focusPrevTab : null"
           @keydown.home="focusFirstTab"
           @keydown.end="focusLastTab"
-          :ref="(el) => (tabRefs[index] = el)"
+          :ref="(el) => (tabRefs[index] = el as HTMLElement | null)"
         >
           <!-- Tab icon slot with fallback -->
           <slot
@@ -56,7 +56,9 @@
             >
               <component
                 :is="{
-                  render: () => h('div', {}, [iconSlots[tab.tabPanelId]()]),
+                  render: () => tab.tabPanelId !== undefined && iconSlots[tab.tabPanelId]
+                    ? h('div', {}, [iconSlots[tab.tabPanelId]()])
+                    : h('div', {}, ['']),
                 }"
               />
             </span>
@@ -139,7 +141,7 @@
                 :is="{
                   render: () => {
                     // Find the corresponding tabPanel's slot
-                    const slot = tabPanelSlots[tab.tabPanelId];
+                    const slot = tab.tabPanelId !== undefined ? tabPanelSlots[tab.tabPanelId] : undefined;
                     if (slot && typeof slot === 'function') {
                       return h('div', {}, [slot()]);
                     } else if (slot && typeof slot.default === 'function') {
@@ -159,29 +161,6 @@
 </template>
 
 <script setup lang="ts">
-  import { h } from "vue";
-
-  export interface TabItem {
-    label: string;
-    content?: string;
-    badge?: string;
-    badgeKind?:
-      | "primary"
-      | "secondary"
-      | "success"
-      | "info"
-      | "warning"
-      | "danger";
-    icon?: Component | string;
-    disabled?: boolean;
-    slot?: string;
-    component?: Component;
-    props?: Record<string, any>;
-    id?: string | number;
-    meta?: any;
-    tabPanelId?: number; // ID for TabPanel integration
-  }
-
   const props = defineProps({
     // Primary tab configuration
     tabs: {
@@ -411,11 +390,13 @@
     if (props.disabled || allTabs.value[index]?.disabled) return;
 
     // Emit before-change for potential prevention
-    const allowChange = emit("before-change", {
+    let allowChange = true;
+    emit("before-change", {
       from: modelValue.value,
       to: index,
+      preventDefault: () => (allowChange = false),
     });
-    if (allowChange === false) return;
+    if (!allowChange) return;
 
     // Add to rendered set for lazy loading
     if (props.lazy) {

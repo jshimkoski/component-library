@@ -5,5 +5,5 @@
   "objectWrap": "preserve",
   "bracketSameLine": false,
   "singleAttributePerLine": true,
-  "vueIndentScriptAndStyle": true,
+  "vueIndentScriptAndStyle": true
 }

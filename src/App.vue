@@ -68,44 +68,10 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed } from "vue";
-  import { useRouter, useRoute } from "vue-router";
-  import TreeView from "./components/TreeView.vue";
-
   const router = useRouter();
-  const route = useRoute();
+  const route = useRoute(); 
 
-  // Original flat list of components for reference
-  const components = [
-    { to: "action-component", label: "Action" },
-    { to: "avatar-component", label: "Avatar" },
-    { to: "badge-component", label: "Badge" },
-    { to: "card-component", label: "Card" },
-    // // { to: "carousel-component", label: "Carousel" },
-    { to: "checkboxgroup-component", label: "Checkbox Group" },
-    { to: "chip-component", label: "Chip" },
-    { to: "datepicker-component", label: "Datepicker" },
-    { to: "dialog-component", label: "Dialog" },
-    // { to: "divider-component", label: "Divider" },
-    // // // { to: "docslayout-component", label: "Docs Layout" },
-    // // // { to: "list-component", label: "List" },
-    { to: "menu-component", label: "Menu" },
-    // { to: "paginator-component", label: "Paginator" },
-    { to: "progress-component", label: "Progress" },
-    { to: "prose-component", label: "Prose" },
-    { to: "radiogroup-component", label: "Radio Group" },
-    { to: "select-component", label: "Select" },
-    { to: "sheet-component", label: "Sheet" },
-    { to: "slider-component", label: "Slider" },
-    { to: "snackbar-component", label: "Snackbar" },
-    { to: "switch-component", label: "Switch" },
-    { to: "table-component", label: "Table" },
-    { to: "tabs-component", label: "Tabs" },
-    { to: "texteditor-component", label: "Text Editor" },
-    { to: "textfield-component", label: "Text Field" },
-    { to: "tooltip-component", label: "Tooltip" },
-    { to: "tree-view-component", label: "Tree View" },
-  ];
+  provideSnackbar();
 
   // Organized navigation items for TreeView
   const navigationItems = [
@@ -173,6 +139,11 @@
           label: "Navigation",
           // No 'to' property, so entire heading is clickable for expand/collapse
           children: [
+            {
+              id: "navigation",
+              label: "Navigation",
+              to: "navigation-component",
+            },
             { id: "menu", label: "Menu", to: "menu-component" },
             { id: "tabs", label: "Tabs", to: "tabs-component" },
             { id: "tree-view", label: "Tree View", to: "tree-view-component" },
@@ -195,6 +166,7 @@
 
   // Default expanded categories for navigation
   const defaultExpandedKeys = ref([
+    "components",
     "inputs",
     "display",
     "navigation",
@@ -212,7 +184,7 @@
     }
 
     // Find the matching navigation item
-    const findActiveItem = (items) => {
+    const findActiveItem = (items: { id: string; to?: string; children?: any[] }[]): string | null => {
       for (const item of items) {
         // Check if route matches the component path
         if (item.to && "/" + item.to === currentPath) {
@@ -231,7 +203,7 @@
   });
 
   // Handle navigation when tree node is clicked
-  function handleNavigation(node) {
+  function handleNavigation(node: TreeItem) {
     if (node.to) {
       // Check if the path already starts with a slash
       const path = node.to.startsWith("/") ? node.to : "/" + node.to;

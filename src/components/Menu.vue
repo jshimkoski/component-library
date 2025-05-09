@@ -32,22 +32,32 @@
       </Action>
     </template>
     <template #popover>
-      <ul
-        ref="popoverRef"
-        class="p-2"
-        :class="{
-          'w-48': !autoWidth,
-          'w-auto': autoWidth,
-        }"
-        @click="handlePopoverClick"
-      >
+      <div ref="popoverRef">
         <slot
+          name="content"
           :isOpen="open"
           :open="() => (open = true)"
           :close="() => (open = false)"
           :toggle="() => (open = !open)"
-        />
-      </ul>
+        >
+          <ul
+            class="p-2 m-0 list-none isolation-auto"
+            :class="{
+              'w-48': !autoWidth,
+              'w-auto': autoWidth,
+            }"
+            style="z-index: 9999; position: relative;"
+            @click="handlePopoverClick"
+          >
+            <slot
+              :isOpen="open"
+              :open="() => (open = true)"
+              :close="() => (open = false)"
+              :toggle="() => (open = !open)"
+            />
+          </ul>
+        </slot>
+      </div>
     </template>
   </FloatingUi>
 </template>

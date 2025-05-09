@@ -399,8 +399,6 @@
 </template>
 
 <script setup lang="ts">
-  import type { TableField } from "../components/Table.vue";
-
   // Basic example
   const basicFields: TableField[] = [
     { key: "id", label: "ID", sortable: true },

@@ -26,7 +26,6 @@
 
 <script lang="ts" setup>
   import fallbackImg from "../assets/vue.svg";
-  import type { PropType } from "vue";
 
   defineProps({
     src: {

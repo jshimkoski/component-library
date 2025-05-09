@@ -65,7 +65,6 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, watch } from "vue";
   defineOptions({
     inheritAttrs: false,
   });

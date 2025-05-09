@@ -45,9 +45,9 @@
       </Tabs>
     </Card>
     <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
-      <pre
+      <!-- <pre
         class="text-sm overflow-x-auto"
-      ><code>{{ basicTabsCode }}</code></pre>
+      ><code>{{ basicTabsCode }}</code></pre> -->
     </div>
   </div>
 
@@ -94,9 +94,9 @@
       </Tabs>
     </Card>
     <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
-      <pre
+      <!-- <pre
         class="text-sm overflow-x-auto"
-      ><code>{{ declarativeTabsCode }}</code></pre>
+      ><code>{{ declarativeTabsCode }}</code></pre> -->
     </div>
   </div>
 
@@ -139,7 +139,7 @@
       </Tabs>
     </Card>
     <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
-      <pre class="text-sm overflow-x-auto"><code>{{ iconTabsCode }}</code></pre>
+      <!-- <pre class="text-sm overflow-x-auto"><code>{{ iconTabsCode }}</code></pre> -->
     </div>
   </div>
 
@@ -172,9 +172,9 @@
       </Tabs>
     </Card>
     <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
-      <pre
+      <!-- <pre
         class="text-sm overflow-x-auto"
-      ><code>{{ verticalTabsCode }}</code></pre>
+      ><code>{{ verticalTabsCode }}</code></pre> -->
     </div>
   </div>
 
@@ -206,9 +206,9 @@
       </Tabs>
     </Card>
     <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
-      <pre
+      <!-- <pre
         class="text-sm overflow-x-auto"
-      ><code>{{ badgeTabsCode }}</code></pre>
+      ><code>{{ badgeTabsCode }}</code></pre> -->
     </div>
   </div>
 
@@ -240,7 +240,7 @@
       </Tabs>
     </Card>
     <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
-      <pre class="text-sm overflow-x-auto"><code>{{ lazyTabsCode }}</code></pre>
+      <!-- <pre class="text-sm overflow-x-auto"><code>{{ lazyTabsCode }}</code></pre> -->
     </div>
   </div>
 
@@ -267,9 +267,9 @@
       </Tabs>
     </Card>
     <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
-      <pre
+      <!-- <pre
         class="text-sm overflow-x-auto"
-      ><code>{{ customStyledTabsCode }}</code></pre>
+      ><code>{{ customStyledTabsCode }}</code></pre> -->
     </div>
   </div>
 
@@ -299,34 +299,10 @@
       </Tabs>
     </Card>
     <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
-      <pre
+      <!-- <pre
         class="text-sm overflow-x-auto"
-      ><code>{{ disabledTabsCode }}</code></pre>
+      ><code>{{ disabledTabsCode }}</code></pre> -->
     </div>
-  </div>
-  
-  <div class="mt-8 mb-12">
-    <h2 class="text-xl font-semibold mb-4">Debugging Tabs</h2>
-    <Card class="p-6">
-      <div class="space-y-4">
-        <div>
-          <h3 class="text-base font-medium mb-2">Basic Tabs Debug</h3>
-          <TabsDebug :tabs-ref="basicTabsRef" />
-        </div>
-        <div>
-          <h3 class="text-base font-medium mb-2">TabPanel API Debug</h3>
-          <TabsDebug :tabs-ref="tabPanelsRef" />
-        </div>
-        <div>
-          <h3 class="text-base font-medium mb-2">Icon Tabs Debug</h3>
-          <TabsDebug :tabs-ref="iconTabsRef" />
-        </div>
-        <div>
-          <h3 class="text-base font-medium mb-2">Vertical Tabs Debug</h3>
-          <TabsDebug :tabs-ref="verticalTabsRef" />
-        </div>
-      </div>
-    </Card>
   </div>
 
   <Prose>
@@ -483,8 +459,8 @@
   </Prose>
 </template>
 
-<script setup>
-  import { ref } from "vue";
+<script setup lang="ts">
+import type { TabItem } from '../types/common';
 
   // References to the tabs components
   const basicTabsRef = ref(null);
@@ -520,7 +496,7 @@
     { label: "Inbox", badge: "3", badgeKind: "primary" },
     { label: "Sent" },
     { label: "Drafts", badge: "5", badgeKind: "warning" },
-  ];
+  ] as TabItem[];
 
   // Lazy loading tabs
   const activeLazyTab = ref(0);

@@ -148,11 +148,11 @@
           @update:expanded="onChildExpanded"
           @item-click="emitItemClick"
         >
-          <template #icon="slotProps" v-if="$slots.icon">
-            <slot name="icon" :item="slotProps.item" :level="slotProps.level"></slot>
+          <template #icon v-if="$slots.icon" :slot-scope="{ item, level }">
+            <slot name="icon" :item="item" :level="level"></slot>
           </template>
-          <template #default="slotProps" v-if="$slots.default">
-            <slot :item="slotProps.item" :level="slotProps.level"></slot>
+          <template #default="slotScope: SlotScope" v-if="$slots.default">
+            <slot :item="slotScope.item" :level="slotScope.level"></slot>
           </template>
         </TreeViewItem>
       </ul>
@@ -161,14 +161,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import Action from './Action.vue';
-
-interface TreeItem {
-  id: string | number;
-  label: string;
-  children?: TreeItem[];
-  [key: string]: any; // Allow additional properties
+interface SlotScope {
+  item: TreeItem;
+  level: number;
 }
 
 const props = defineProps({
@@ -218,8 +213,8 @@ const hasSpecificAction = computed(() => {
   return props.item.to || props.item.action || props.item.href || props.item.onClick;
 });
 
-function onToggleExpand(event) {
-  if (event) {
+function onToggleExpand(event: MouseEvent) {
+  if (event instanceof MouseEvent) {
     event.stopPropagation(); // Prevent event bubbling
   }
   emit('update:expanded', props.item.id);
@@ -229,18 +224,18 @@ function onChildExpanded(itemId: string | number) {
   emit('update:expanded', itemId);
 }
 
-function onItemClick(event) {
+function onItemClick(event: MouseEvent) {
   if (event) {
     event.stopPropagation(); // Prevent parent items from receiving the click
   }
   emit('item-click', props.item);
 }
 
-function emitItemClick(item) {
+function emitItemClick(item: TreeItem) {
   emit('item-click', item);
 }
 
-function itemClickHandler(event) {
+function itemClickHandler(event: MouseEvent) {
   if (event) {
     event.stopPropagation(); // Prevent event bubbling
   }
@@ -248,7 +243,7 @@ function itemClickHandler(event) {
   if (hasSpecificAction.value) {
     onItemClick(event);
   } else if (hasChildren.value) {
-    onToggleExpand();
+    onToggleExpand(event);
   } else {
     onItemClick(event);
   }

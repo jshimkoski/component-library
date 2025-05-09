@@ -68,8 +68,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
-
 const props = defineProps({
   label: {
     type: String,

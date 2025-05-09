@@ -540,21 +540,21 @@
           <Menu label="Actions">
             <MenuItem
               label="Edit"
-              @click="handleMenuClick('edit')"
+              @click="console.log('edit')"
             />
             <MenuItem
               label="Duplicate"
-              @click="handleMenuClick('duplicate')"
+              @click="console.log('duplicate')"
             />
             <MenuDivider />
             <MenuItem
               label="Archive"
-              @click="handleMenuClick('archive')"
+              @click="console.log('archive')"
             />
             <MenuItem
               label="Delete"
               disabled
-              @click="handleMenuClick('delete')"
+              @click="console.log('delete')"
             />
           </Menu>
         </div>

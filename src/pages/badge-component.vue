@@ -235,12 +235,5 @@
 </template>
 
 <script setup lang="ts">
-  const kinds = [
-    "primary",
-    "secondary",
-    "success",
-    "info",
-    "warning",
-    "danger",
-  ] as Kind[];
+
 </script>

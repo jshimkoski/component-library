@@ -217,15 +217,13 @@
   </Prose>
 </template>
 
-<script setup>
-  import { ref, computed } from "vue";
-
+<script setup lang="ts">
   // Basic slider
   const basicValue = ref(50);
 
   // Price slider with formatter
   const priceValue = ref(500);
-  const formatCurrency = (value) => {
+  const formatCurrency = (value: number) => {
     return `$${value.toFixed(2)}`;
   };
 
@@ -237,7 +235,7 @@
 
   // Temperature slider example
   const temperature = ref(22);
-  const formatTemperature = (value) => {
+  const formatTemperature = (value: number) => {
     return `${value}°C`;
   };
   const temperatureDescription = computed(() => {

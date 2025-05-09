@@ -400,11 +400,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from "vue";
-  import Card from "../components/Card.vue";
-  import TreeView from "../components/TreeView.vue";
-  import useSnackbar from "../composables/useSnackbar";
-
   const snackbar = useSnackbar();
 
   // Basic tree navigation
@@ -557,7 +552,7 @@
     }
   ];
 
-  function onNodeClick(node) {
+  function onNodeClick(node: TreeItem) {
     snackbar.info(`Clicked on: ${node.label}`, {
       duration: 2000,
     });

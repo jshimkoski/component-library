@@ -88,7 +88,7 @@ class SnackbarService {
       message: options.message,
       title: options.title,
       kind: options.kind || "primary",
-      position: options.position || "bottom",
+      position: options.position || "bottom-right",
       duration: options.duration,
       actionLabel: options.actionLabel,
       showIcon: options.showIcon,
@@ -180,6 +180,8 @@ class SnackbarService {
 const globalSnackbarService = new SnackbarService();
 
 // Provider for global service
+// This must be called in the root component (setup context)
+// to ensure the service is available globally
 export function provideSnackbar() {
   provide(SNACKBAR_KEY, globalSnackbarService);
   return globalSnackbarService;

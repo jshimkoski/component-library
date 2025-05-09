@@ -5,7 +5,7 @@
     <!-- Sticky Top Nav -->
     <header
       ref="header"
-      class="sticky top-0 z-30 w-full bg-white/70 dark:bg-base-950/60 backdrop-blur-md border-b border-base-200 dark:border-base-800"
+      class="sticky top-0 z-20 w-full bg-white/70 dark:bg-base-950/60 backdrop-blur-md border-b border-base-200 dark:border-base-800"
     >
       <div
         :class="{ 'max-w-7xl': variant !== 'fullwidth' }"
@@ -33,7 +33,7 @@
       </aside>
 
       <!-- Main Content Area -->
-      <main class="flex-1 px-6 py-10 overflow-clip">
+      <main class="flex-1 px-6 py-10">
         <slot />
       </main>
 

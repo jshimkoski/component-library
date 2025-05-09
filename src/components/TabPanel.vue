@@ -21,10 +21,6 @@
       type: Boolean,
       default: false,
     },
-    lazy: {
-      type: Boolean,
-      default: undefined,
-    },
     badge: {
       type: String,
       default: undefined,
@@ -54,24 +50,10 @@
     () => {},
   );
   const activeTabId = inject<Ref<number>>("activeTabId", ref(-1));
-  const isTabsParentLazy = inject<Ref<boolean | undefined>>(
-    "isTabsParentLazy",
-    ref(undefined),
-  );
 
   const tabId = ref(-1);
   const isRegistered = ref(false);
   const instance = getCurrentInstance();
-
-  // Determine if this tab should be lazy loaded
-  const isLazy = computed(() => {
-    // If explicitly set on panel, use that
-    if (props.lazy !== undefined) {
-      return props.lazy;
-    }
-    // Otherwise fall back to parent tabs setting
-    return isTabsParentLazy.value;
-  });
 
   // If this is the active tab
   const isActive = computed(() => {

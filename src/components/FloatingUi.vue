@@ -12,55 +12,61 @@
       :close="() => (open = false)"
       :toggle="() => (open = !open)"
     />
-    <Transition
-      enter-active-class="transition-opacity duration-200"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-200"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
+    <Teleport to="body">
       <div
         v-if="open"
-        ref="floatingRef"
-        :class="floatingContainerClasses"
-        :style="{
-          zIndex: 50,
-          ...floatingStyles,
-        }"
+        class="fixed inset-0 w-screen h-screen pointer-events-none overflow-hidden z-30"
       >
-        <div :class="floatingClasses">
-          <slot
-            name="popover"
-            :isOpen="open"
-            :open="() => (open = true)"
-            :close="() => (open = false)"
-            :toggle="() => (open = !open)"
+        <Transition
+          enter-active-class="transition-opacity duration-200"
+          enter-from-class="opacity-0"
+          enter-to-class="opacity-100"
+          leave-active-class="transition-opacity duration-200"
+          leave-from-class="opacity-100"
+          leave-to-class="opacity-0"
+        >
+          <div
+            ref="floatingRef"
+            :class="floatingContainerClasses"
+            :style="{
+              pointerEvents: 'auto',
+              ...floatingStyles,
+            }"
           >
-            <p>{{ text }}</p>
-          </slot>
-        </div>
-        <div
-          v-if="!hideArrow"
-          ref="arrowRef"
-          :class="arrowClasses"
-          :style="{
-            position: 'absolute',
-            rotate: '45deg',
-            zIndex: -10,
-            left:
-              middlewareData.arrow?.x != null
-                ? `${middlewareData.arrow.x}px`
-                : '',
-            top:
-              middlewareData.arrow?.y != null
-                ? `${middlewareData.arrow.y}px`
-                : '',
-            [oppositeSide]: `${-arrowLen / 2}px`,
-          }"
-        />
+            <div :class="floatingClasses">
+              <slot
+                name="popover"
+                :isOpen="open"
+                :open="() => (open = true)"
+                :close="() => (open = false)"
+                :toggle="() => (open = !open)"
+              >
+                <p>{{ text }}</p>
+              </slot>
+            </div>
+            <div
+              v-if="!hideArrow"
+              ref="arrowRef"
+              :class="arrowClasses"
+              :style="{
+                position: 'absolute',
+                rotate: '45deg',
+                zIndex: -10,
+                left:
+                  middlewareData.arrow?.x != null
+                    ? `${middlewareData.arrow.x}px`
+                    : '',
+                top:
+                  middlewareData.arrow?.y != null
+                    ? `${middlewareData.arrow.y}px`
+                    : '',
+                [oppositeSide]: `${-arrowLen / 2}px`,
+              }"
+            />
+          </div>
+        </Transition>
       </div>
-    </Transition>
+    </Teleport>
   </div>
 </template>
 

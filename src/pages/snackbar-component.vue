@@ -382,8 +382,6 @@ snackbar.warning('Be careful with this action')</code></pre>
 </template>
 
 <script setup lang="ts">
-  import type { TableField } from "../components/Table.vue";
-
   // State for basic example
   const showBasicSnackbar = ref(false);
 

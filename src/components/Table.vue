@@ -150,7 +150,6 @@
               class="px-4 py-3"
             >
               <button
-                v-if="hasExpandableContent(item)"
                 @click="toggleExpand(item)"
                 class="p-1 rounded-full hover:bg-base-100 dark:hover:bg-base-800"
               >
@@ -328,30 +327,8 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, watch } from "vue";
-
-  export interface TableField {
-    key: string;
-    label: string;
-    sortable?: boolean;
-    type?: "text" | "number" | "date" | "boolean";
-    visible?: boolean;
-    class?: string;
-    // Function to extract the value from an item (useful for nested properties)
-    getValue?: (item: any) => any;
-  }
-
-  export interface TableProps {
-    fields: TableField[];
-    items: any[];
-    selectable?: boolean;
-    expandable?: boolean;
-    sortable?: boolean;
-    idField?: string;
-    modelValue?: any[];
-    loadingItems?: boolean;
-  }
-
+  import type { TableProps } from "../types/common";
+ 
   const props = withDefaults(defineProps<TableProps>(), {
     selectable: false,
     expandable: false,
@@ -415,6 +392,7 @@
 
     return [...props.items].sort((a, b) => {
       const field = props.fields.find((f) => f.key === sortBy.value);
+      if (!sortBy.value) return 0; // Handle null case
       let valueA = getItemValue(a, sortBy.value);
       let valueB = getItemValue(b, sortBy.value);
 
@@ -459,12 +437,6 @@
     }
 
     return item[key];
-  }
-
-  // Check if an item has expandable content
-  function hasExpandableContent(item: any): boolean {
-    // Check if the expandable-content slot is provided or return true by default
-    return true;
   }
 
   // Selection methods

@@ -186,7 +186,7 @@
 &gt;
   &lt;div class="flex justify-between items-center"&gt;
     &lt;span&gt;Installation Progress&lt;/span&gt;
-    &lt;span class="text-primary-600 dark:text-primary-400"&gt;{{ progressValue }}%&lt;/span&gt;
+    &lt;span class="text-primary-600 dark:text-primary-400"&gt;{ { progressValue } }%&lt;/span&gt;
   &lt;/div&gt;
 &lt;/Progress&gt;</code></pre>
       </div>

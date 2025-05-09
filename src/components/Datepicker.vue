@@ -202,14 +202,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, watch, onMounted, nextTick } from "vue";
-  import type { PropType } from "vue";
-
-  type DateValue = Date | null;
-  type RangeValue = [Date | null, Date | null] | null;
-  type DatePickerValue = DateValue | RangeValue;
-  type DatePickerMode = "single" | "range";
-
   defineOptions({
     inheritAttrs: false,
   });

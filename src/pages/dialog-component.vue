@@ -25,7 +25,7 @@
           
           <Dialog
             v-model="basicDialog"
-            :trigger-element="basicDialogTrigger?.$el"
+            :trigger-element="basicDialogTrigger"
             headline="Confirmation"
             text="Are you sure you want to continue with this action?"
             action-label="Confirm"
@@ -192,7 +192,7 @@
           
           <Dialog
             v-model="basicVariantDialog"
-            :trigger-element="basicVariantTrigger?.$el"
+            :trigger-element="basicVariantTrigger"
             variant="basic"
             headline="Basic Dialog"
             action-label="Confirm"
@@ -220,7 +220,7 @@
           
           <Dialog
             v-model="fullscreenDialog"
-            :trigger-element="fullscreenTrigger?.$el"
+            :trigger-element="fullscreenTrigger"
             variant="fullscreen"
             headline="Fullscreen Dialog"
             action-label="Save"
@@ -251,7 +251,7 @@
           
           <Dialog
             v-model="customContentDialog"
-            :trigger-element="customContentTrigger?.$el"
+            :trigger-element="customContentTrigger"
             headline="User Details"
             action-label="Submit"
             action-kind="success"
@@ -343,7 +343,7 @@
           
           <Dialog
             v-model="alertDialog"
-            :trigger-element="alertTrigger?.$el"
+            :trigger-element="alertTrigger"
             headline="Warning"
             text="Your session is about to expire in 30 seconds. Do you want to continue?"
             action-label="Continue Session"
@@ -368,7 +368,7 @@
           
           <Dialog
             v-model="confirmationDialog"
-            :trigger-element="confirmationTrigger?.$el"
+            :trigger-element="confirmationTrigger"
             headline="Confirm Deletion"
             action-label="Delete"
             action-kind="danger"
@@ -395,7 +395,7 @@
           
           <Dialog
             v-model="infoDialog"
-            :trigger-element="infoTrigger?.$el"
+            :trigger-element="infoTrigger"
             headline="Information"
             dismiss-label="Got it"
             @dismiss="infoDialog = false"

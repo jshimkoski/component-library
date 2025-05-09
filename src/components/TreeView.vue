@@ -25,8 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-
 interface TreeItem {
   id: string | number;
   label: string;

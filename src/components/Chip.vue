@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-  export type Type = "button" | "submit" | "reset";
   const props = defineProps({
     label: {
       type: String,
@@ -37,7 +36,7 @@
     disabled: { type: Boolean, default: false },
     active: { type: Boolean, default: false },
     type: {
-      type: String as PropType<Type>,
+      type: String as PropType<ActionType>,
       default: "button",
     },
   });
