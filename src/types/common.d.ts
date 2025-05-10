@@ -61,3 +61,11 @@ export interface TreeItem {
   href?: string;
   onClick?: Function;
 }
+
+export type PaginatorMode = 'buttons' | 'input';
+
+export interface ScrollspySection {
+  id: string;
+  title: string;
+  icon?: Component;
+}

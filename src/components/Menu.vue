@@ -97,10 +97,22 @@
   const triggerElement = useTemplateRef("triggerElement");
   const popoverRef = useTemplateRef("popoverRef");
 
+  const hasDataMenu = (event: MouseEvent) => {
+    let el = event.target as HTMLElement | null;
+    while (el) {
+      if (el.hasAttribute && el.hasAttribute('data-menu')) {
+        return true;
+      }
+      el = el.parentElement;
+    }
+    return false;
+  }
+
   onClickOutside(popoverRef, (event) => {
     if (!open.value) return;
     if (event.target === triggerElement.value?.$el) return;
     if (triggerElement.value?.$el.contains(event.target)) return;
+    if (hasDataMenu(event)) return;
     open.value = false;
   });
 

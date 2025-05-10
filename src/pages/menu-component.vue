@@ -654,8 +654,16 @@
                 variant="nested"
               >
                 <MenuItem label="Twitter" />
-                <MenuItem label="Facebook" />
                 <MenuItem label="LinkedIn" />
+                <MenuDivider />
+                <Menu
+                  label="Meta"
+                  placement="right-start"
+                  variant="nested"
+                >
+                  <MenuItem label="Facebook" />
+                  <MenuItem label="Instagram" />
+                </Menu>
               </Menu>
             </Menu>
           </Menu>
