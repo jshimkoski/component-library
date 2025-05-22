@@ -13,7 +13,7 @@
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex flex-wrap gap-4">
           <div ref="basicDialogTrigger">
             <Action 
@@ -35,7 +35,7 @@
           />
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;div ref="dialogTrigger"&gt;
   &lt;Action 
     @click="dialogOpen = true"
@@ -180,7 +180,7 @@
 
       <h3 class="text-lg font-medium mt-6 mb-3">Basic Dialog</h3>
       <p class="mb-4">The basic variant displays content in a centered modal with a fixed width.</p>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <div ref="basicVariantTrigger">
             <Action 
@@ -208,7 +208,7 @@
 
       <h3 class="text-lg font-medium mt-6 mb-3">Fullscreen Dialog</h3>
       <p class="mb-4">The fullscreen variant takes up the entire screen, ideal for complex content or mobile interfaces.</p>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <div ref="fullscreenTrigger">
             <Action 
@@ -239,7 +239,7 @@
       <h2 class="text-xl font-semibold mb-4">Custom Content</h2>
       <p class="mb-4">Dialogs can contain rich content beyond simple text, such as forms, images, or interactive elements.</p>
       
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <div ref="customContentTrigger">
             <Action 
@@ -283,7 +283,7 @@
           </Dialog>
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;div ref="formDialogTrigger"&gt;
   &lt;Action 
     @click="formDialog = true"
@@ -331,7 +331,7 @@
       <h2 class="text-xl font-semibold mb-4">Contextual Dialog Examples</h2>
       
       <h3 class="text-lg font-medium mt-6 mb-3">Alert Dialog</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <div ref="alertTrigger">
             <Action 
@@ -356,7 +356,7 @@
       </div>
       
       <h3 class="text-lg font-medium mt-6 mb-3">Confirmation Dialog</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <div ref="confirmationTrigger">
             <Action 
@@ -383,7 +383,7 @@
       </div>
       
       <h3 class="text-lg font-medium mt-6 mb-3">Information Dialog</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <div ref="infoTrigger">
             <Action 

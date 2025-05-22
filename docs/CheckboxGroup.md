@@ -6,7 +6,7 @@ The CheckboxGroup component is designed to manage collections of related Checkbo
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <CheckboxGroup
     label="Select your interests"
     :options="[
@@ -73,7 +73,7 @@ The component supports v-model for two-way binding of selected values. The v-mod
 
 ### With Description
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <CheckboxGroup
     label="Notification Preferences"
     description="Choose which notifications you'd like to receive"
@@ -100,7 +100,7 @@ The component supports v-model for two-way binding of selected values. The v-mod
 
 ### Required Group
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <CheckboxGroup
     label="Choose at least one option"
     required
@@ -129,7 +129,7 @@ The component supports v-model for two-way binding of selected values. The v-mod
 
 ### Options with Descriptions
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <CheckboxGroup
     label="Subscription Plans"
     :options="[
@@ -180,7 +180,7 @@ The component supports v-model for two-way binding of selected values. The v-mod
 
 ### Disabled Group
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <CheckboxGroup
     label="This group is disabled"
     disabled
@@ -207,7 +207,7 @@ The component supports v-model for two-way binding of selected values. The v-mod
 
 ### Mixed Disabled States
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <CheckboxGroup
     label="Some options are disabled"
     :options="[
@@ -251,7 +251,7 @@ The component supports v-model for two-way binding of selected values. The v-mod
 
 ### Feature Selection
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <CheckboxGroup
     label="Choose additional features"
     description="Select the features you'd like to add to your package"
@@ -323,7 +323,7 @@ watch(selectedFeatures, (newValues) => {
 
 ### Terms Acceptance
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <form class="space-y-5">
     <TextField label="Email" type="email" />
     <CheckboxGroup

@@ -6,7 +6,7 @@ The TextEditor component provides a multi-line text input field with supporting 
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextEditor
     label="Notes"
     placeholder="Enter your notes here"
@@ -49,7 +49,7 @@ The component supports v-model for two-way binding of the textarea value.
 
 ### With Description
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextEditor
     label="About Me"
     placeholder="Tell us about yourself"
@@ -68,7 +68,7 @@ The component supports v-model for two-way binding of the textarea value.
 
 ### Required Field
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextEditor
     label="Feedback"
     required
@@ -89,7 +89,7 @@ The component supports v-model for two-way binding of the textarea value.
 
 ### Custom Label
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextEditor placeholder="Enter your message">
     <div class="flex items-center">
       <span>Message</span>
@@ -111,7 +111,7 @@ The component supports v-model for two-way binding of the textarea value.
 
 ### Disabled
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextEditor
     label="Comments"
     disabled
@@ -148,7 +148,7 @@ The component supports v-model for two-way binding of the textarea value.
 
 ### Form Integration
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <form class="space-y-4">
     <div>
       <TextField label="Name" required showMarker />
@@ -201,7 +201,7 @@ The component supports v-model for two-way binding of the textarea value.
 
 ### Character Count
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div>
     <TextEditor
       label="Bio"

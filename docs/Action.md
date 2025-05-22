@@ -6,7 +6,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action label="Click me" />
 </div>
 
@@ -47,7 +47,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ### Kinds
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Action kind="primary">Primary</Action>
   <Action kind="secondary">Secondary</Action>
   <Action kind="success">Success</Action>
@@ -67,7 +67,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ### Visual Variants
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Action kind="primary" variant="solid">Solid</Action>
   <Action kind="primary" variant="outline">Outline</Action>
   <Action kind="primary" variant="ghost">Ghost</Action>
@@ -83,7 +83,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ### Sizes
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap items-center gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap items-center gap-2">
   <Action size="xs">Extra Small</Action>
   <Action size="sm">Small</Action>
   <Action size="md">Medium</Action>
@@ -101,7 +101,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ### Square Actions
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap items-center gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap items-center gap-2">
   <Action square size="xs">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 6 6 9-9"/></svg>
   </Action>
@@ -129,7 +129,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ### Disabled
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Action disabled>Disabled Button</Action>
   <Action disabled kind="primary" variant="solid">Disabled Primary</Action>
   <Action disabled kind="danger" variant="outline">Disabled Outline</Action>
@@ -143,7 +143,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ### Active
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Action active>Active Default</Action>
   <Action active activeKind="primary">Active Primary</Action>
   <Action active activeKind="success">Active Success</Action>
@@ -159,7 +159,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ## Link Actions
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Action href="#" target="_blank">Link Button</Action>
   <Action href="#" kind="primary" variant="solid">Primary Link</Action>
   <Action href="#" kind="info" variant="link">Info Link Style</Action>
@@ -194,7 +194,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ### Button Group
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="flex gap-1">
     <Action kind="primary">Save</Action>
     <Action variant="outline">Cancel</Action>
@@ -210,7 +210,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ### Icon with Text
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Action kind="primary">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
     Save
@@ -230,7 +230,7 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ### Form Submit Button
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <form class="flex flex-col gap-4">
     <div>
       <label class="block mb-1">Email</label>

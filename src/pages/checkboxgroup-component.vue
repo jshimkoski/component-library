@@ -14,7 +14,7 @@
       />
     </div>
     
-    <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+    <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
       <CheckboxGroup
         v-model="checkboxgroup"
         :options="checkboxgroupoptions"

@@ -6,7 +6,7 @@ The Prose component provides consistent styling for rich text content. It's desi
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Prose>
     <h2>Getting Started</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.</p>
@@ -56,7 +56,7 @@ The Prose component provides consistent styling for rich text content. It's desi
 
 ### Different Kinds
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-6 md:grid-cols-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-6 md:grid-cols-2">
   <Prose kind="primary">
     <h3>Primary Prose</h3>
     <p>This prose uses the primary color for links and accents. <a href="#">Example link</a>.</p>
@@ -126,7 +126,7 @@ The Prose component provides consistent styling for rich text content. It's desi
 
 ### Article Layout
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Prose>
     <h1>How to Use the Component Library</h1>
     <p class="lead">A comprehensive guide to using our component library effectively in your projects.</p>
@@ -173,7 +173,7 @@ The Prose component provides consistent styling for rich text content. It's desi
 
 ### Documentation with Code Examples
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Prose kind="info">
     <h2>API Documentation</h2>
     

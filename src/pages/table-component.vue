@@ -311,7 +311,7 @@
     <div class="mt-8">
       <h2 class="text-xl font-bold mb-4">Component Usage</h2>
       <pre
-        class="bg-base-100 dark:bg-base-900 p-4 rounded-base overflow-x-auto text-sm"
+        class="bg-base-50 dark:bg-base-900 p-4 rounded-base radius-2xl:rounded-2xl overflow-x-auto text-sm"
       ><code>&lt;!-- Basic usage --&gt;
 &lt;Table :fields="fields" :items="items" /&gt;
 

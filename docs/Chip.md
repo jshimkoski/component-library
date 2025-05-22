@@ -6,7 +6,7 @@ The Chip component displays compact information elements or interactive labels. 
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Chip label="New Feature" />
 </div>
 
@@ -37,7 +37,7 @@ The Chip component displays compact information elements or interactive labels. 
 
 ### Different Kinds
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Chip label="Primary" kind="primary" />
   <Chip label="Secondary" kind="secondary" />
   <Chip label="Success" kind="success" />
@@ -57,7 +57,7 @@ The Chip component displays compact information elements or interactive labels. 
 
 ### Interactive Chips (Button)
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Chip label="Click me" @click="handleClick" />
   <Chip label="Submit" type="submit" kind="success" />
 </div>
@@ -69,7 +69,7 @@ The Chip component displays compact information elements or interactive labels. 
 
 ### Link Chips
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Chip label="Documentation" href="#" />
   <Chip label="External Link" href="#" target="_blank" rel="noopener" kind="info" />
 </div>
@@ -83,7 +83,7 @@ The Chip component displays compact information elements or interactive labels. 
 
 ### Disabled
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Chip label="Disabled" disabled />
   <Chip label="Disabled Link" href="#" disabled kind="secondary" />
 </div>
@@ -95,7 +95,7 @@ The Chip component displays compact information elements or interactive labels. 
 
 ### Active
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Chip label="Active" active />
   <Chip label="Active Warning" active kind="warning" />
 </div>
@@ -130,7 +130,7 @@ The Chip component displays compact information elements or interactive labels. 
 
 ### Category Tags
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="mb-2">Product Categories:</div>
   <div class="flex flex-wrap gap-2">
     <Chip label="Electronics" kind="primary" />
@@ -155,7 +155,7 @@ The Chip component displays compact information elements or interactive labels. 
 
 ### Filter Selection
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="mb-2">Filter by:</div>
   <div class="flex flex-wrap gap-2">
     <Chip label="All" active />
@@ -203,7 +203,7 @@ function setFilter(filter) {
 
 ### Status Indicators
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="flex flex-col gap-3">
     <div class="flex items-center">
       <span class="w-24">Order #1234:</span>

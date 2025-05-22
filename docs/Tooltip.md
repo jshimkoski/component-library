@@ -6,7 +6,7 @@ The Tooltip component provides a way to display additional information when user
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Tooltip text="This is a simple tooltip">
     <button class="px-3 py-1 bg-primary-500 text-white rounded">Hover me</button>
   </Tooltip>
@@ -38,7 +38,7 @@ The Tooltip component provides a way to display additional information when user
 
 ### Rich Tooltip
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Tooltip type="rich" placement="bottom">
     <button class="px-3 py-1 bg-primary-500 text-white rounded">Hover for rich tooltip</button>
     <template #text>
@@ -60,7 +60,7 @@ The Tooltip component provides a way to display additional information when user
 
 ### Different Placements
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex gap-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex gap-4">
   <Tooltip text="Placed on top" placement="top">
     <button class="px-3 py-1 bg-primary-500 text-white rounded">Top</button>
   </Tooltip>
@@ -95,7 +95,7 @@ The Tooltip component provides a way to display additional information when user
 
 ## Programmatic Control
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Tooltip v-model:open="tooltipOpen" text="This tooltip is controlled programmatically">
     <button 
       class="px-3 py-1 bg-primary-500 text-white rounded"
@@ -139,7 +139,7 @@ The Tooltip component provides a way to display additional information when user
 
 ### Tooltip in a Form Context
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="flex items-center gap-2">
     <label for="example-input">Username</label>
     <Tooltip type="rich" placement="right">

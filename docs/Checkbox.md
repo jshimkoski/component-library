@@ -6,7 +6,7 @@ The Checkbox component allows users to select one or more items from a set of op
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Checkbox label="Subscribe to newsletter" />
 </div>
 
@@ -43,7 +43,7 @@ The component supports v-model for two-way binding of the checkbox state.
 
 ### With Description
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Checkbox 
     label="Send me product updates" 
     description="You'll receive occasional emails about product updates and new features"
@@ -60,7 +60,7 @@ The component supports v-model for two-way binding of the checkbox state.
 
 ### Required Checkbox
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Checkbox 
     label="I agree to the terms and conditions" 
     required
@@ -79,7 +79,7 @@ The component supports v-model for two-way binding of the checkbox state.
 
 ### Indeterminate State
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Checkbox 
     label="Select all items" 
     indeterminate
@@ -132,7 +132,7 @@ watch(selectAll, (newValue) => {
 
 ### Custom True/False Values
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Checkbox 
     label="Shipping method"
     true-value="express"
@@ -153,7 +153,7 @@ watch(selectAll, (newValue) => {
 
 ### Disabled
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-col gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-col gap-2">
   <Checkbox 
     label="Disabled unchecked" 
     disabled
@@ -213,7 +213,7 @@ watch(selectAll, (newValue) => {
 
 ### Checkbox Group for Preferences
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="space-y-3">
     <h3 class="font-semibold text-lg mb-2">Notification Preferences</h3>
     <Checkbox label="Email notifications" />
@@ -242,7 +242,7 @@ watch(selectAll, (newValue) => {
 
 ### Form with Required Checkbox
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <form class="space-y-4">
     <div>
       <TextField label="Email" type="email" required showMarker />
@@ -296,7 +296,7 @@ function submitForm() {
 
 ### Custom Label Content
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Checkbox>
     <div>
       I agree to the <a href="#" class="text-primary-600 dark:text-primary-400 underline">Terms of Service</a> and <a href="#" class="text-primary-600 dark:text-primary-400 underline">Privacy Policy</a>

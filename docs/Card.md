@@ -6,7 +6,7 @@ The Card component is a versatile container that displays content in a structure
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Card
     headline="Card Title"
     subhead="Supporting text"
@@ -47,7 +47,7 @@ The Card component is a versatile container that displays content in a structure
 
 ### Visual Variants
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4 md:grid-cols-3">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4 md:grid-cols-3">
   <Card
     variant="outlined"
     headline="Outlined Card"
@@ -93,7 +93,7 @@ The Card component is a versatile container that displays content in a structure
 
 ### Clickable Cards (Link)
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Card
     headline="Clickable Card"
     subhead="Click anywhere to navigate"
@@ -117,7 +117,7 @@ The Card component is a versatile container that displays content in a structure
 
 ### Different Kinds
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4 md:grid-cols-3">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4 md:grid-cols-3">
   <Card
     headline="Primary Action"
     subhead="Call to action"
@@ -175,7 +175,7 @@ The Card component is a versatile container that displays content in a structure
 
 ## Custom Content
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Card
     headline="Custom Content Example"
     subhead="With slot contents"
@@ -245,7 +245,7 @@ The Card component is a versatile container that displays content in a structure
 
 ### Product Card
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Card variant="elevated">
     <img src="https://placeholder.pics/svg/300x200" alt="Product" class="rounded w-full mb-4" />
     <h3 class="text-xl font-bold">Premium Headphones</h3>
@@ -292,7 +292,7 @@ The Card component is a versatile container that displays content in a structure
 
 ### Dashboard Stats Card
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4 md:grid-cols-3">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4 md:grid-cols-3">
   <Card variant="filled">
     <div class="flex justify-between items-start">
       <div>

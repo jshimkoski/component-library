@@ -12,6 +12,7 @@
     placeholder="Select an option..."
     required
     showMarker
+    icon="ic:baseline-bubble-chart"
   />
 </template>
 

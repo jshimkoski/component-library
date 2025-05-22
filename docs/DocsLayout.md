@@ -6,7 +6,7 @@ The DocsLayout component provides a structured layout optimized for documentatio
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="border rounded-lg overflow-hidden h-96 bg-white dark:bg-base-950">
     <DocsLayout>
       <template #header>
@@ -126,7 +126,7 @@ The DocsLayout component provides a structured layout optimized for documentatio
 
 ### Margined Layout (Default)
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="border rounded-lg overflow-hidden h-72 bg-white dark:bg-base-950">
     <DocsLayout>
       <template #header>
@@ -137,7 +137,7 @@ The DocsLayout component provides a structured layout optimized for documentatio
         <div class="text-sm">Left Sidebar</div>
       </template>
       
-      <div class="p-4 bg-base-100 dark:bg-base-900 rounded h-full flex items-center justify-center">
+      <div class="p-4 bg-base-50 dark:bg-base-900 rounded h-full flex items-center justify-center">
         <div class="text-center">
           <div class="font-semibold mb-2">Main Content Area</div>
           <div class="text-sm text-base-500">Maximum width constrained</div>
@@ -173,7 +173,7 @@ The DocsLayout component provides a structured layout optimized for documentatio
 
 ### Full Width Layout
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="border rounded-lg overflow-hidden h-72 bg-white dark:bg-base-950">
     <DocsLayout variant="fullwidth">
       <template #header>
@@ -184,7 +184,7 @@ The DocsLayout component provides a structured layout optimized for documentatio
         <div class="text-sm">Left Sidebar</div>
       </template>
       
-      <div class="p-4 bg-base-100 dark:bg-base-900 rounded h-full flex items-center justify-center">
+      <div class="p-4 bg-base-50 dark:bg-base-900 rounded h-full flex items-center justify-center">
         <div class="text-center">
           <div class="font-semibold mb-2">Main Content Area</div>
           <div class="text-sm text-base-500">Full viewport width</div>
@@ -249,7 +249,7 @@ This progressive disclosure ensures good readability on all devices while showin
 
 ### API Documentation Layout
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="border rounded-lg overflow-hidden h-96 bg-white dark:bg-base-950">
     <DocsLayout>
       <template #header>
@@ -365,17 +365,17 @@ This progressive disclosure ensures good readability on all devices while showin
 
 ### Component Showcase Layout
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="border rounded-lg overflow-hidden h-96 bg-white dark:bg-base-950">
     <DocsLayout variant="fullwidth">
       <template #header>
         <div class="flex items-center justify-between w-full">
           <div class="font-bold text-xl">Component Library</div>
           <div class="flex gap-4">
-            <button class="p-2 rounded-full bg-base-100 dark:bg-base-900">
+            <button class="p-2 rounded-full bg-base-50 dark:bg-base-900">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.7071-.7071M6.34315 6.34315l-.70711-.70711m12.72796.00005-.7071.70711M6.3432 17.6569l-.70711.7071"></path><circle cx="12" cy="12" r="4"></circle></svg>
             </button>
-            <button class="p-2 rounded-full bg-base-100 dark:bg-base-900">
+            <button class="p-2 rounded-full bg-base-50 dark:bg-base-900">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
           </div>
@@ -402,7 +402,7 @@ This progressive disclosure ensures good readability on all devices while showin
         <div class="space-y-6">
           <div>
             <h2 class="text-xl font-semibold mb-4">Basic Cards</h2>
-            <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg">
+            <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg">
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-white dark:bg-base-800 p-4 rounded-lg shadow">
                   <h3 class="font-medium mb-2">Basic Card</h3>

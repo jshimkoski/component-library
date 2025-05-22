@@ -6,7 +6,7 @@ The Snackbar component displays brief messages at the bottom or top of the scree
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action @click="basicSnackbar = true">Show Snackbar</Action>
   <Snackbar 
     v-model="basicSnackbar"
@@ -64,7 +64,7 @@ The component supports v-model for controlling the snackbar's visibility.
 
 ### Different Kinds
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Action @click="primarySnackbar = true">Primary</Action>
   <Snackbar 
     v-model="primarySnackbar"
@@ -139,7 +139,7 @@ const secondarySnackbar = ref(false);
 
 ### Different Positions
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Action @click="topSnackbar = true">Top</Action>
   <Snackbar 
     v-model="topSnackbar"
@@ -207,7 +207,7 @@ const bottomRightSnackbar = ref(false);
 
 ### With Title
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action @click="titledSnackbar = true">Show Snackbar with Title</Action>
   <Snackbar 
     v-model="titledSnackbar"
@@ -235,7 +235,7 @@ const titledSnackbar = ref(false);
 
 ### With Action Button
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action @click="actionSnackbar = true">Show Snackbar with Action</Action>
   <Snackbar 
     v-model="actionSnackbar"
@@ -270,7 +270,7 @@ function handleUndo() {
 
 ### Without Auto-Close
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action @click="persistentSnackbar = true">Show Persistent Snackbar</Action>
   <Snackbar 
     v-model="persistentSnackbar"
@@ -322,7 +322,7 @@ const persistentSnackbar = ref(false);
 
 ### Form Submission Feedback
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <form class="space-y-4" @submit.prevent="showFormSubmitSnackbar">
     <TextField label="Name" required />
     <TextField label="Email" type="email" required />
@@ -367,7 +367,7 @@ function showFormSubmitSnackbar() {
 
 ### Error with Action
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action @click="errorSnackbar = true">Simulate Error</Action>
   <Snackbar 
     v-model="errorSnackbar"

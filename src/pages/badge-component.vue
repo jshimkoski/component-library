@@ -12,14 +12,14 @@
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex items-center gap-4">
           <Badge label="1" />
           <Badge label="New" kind="success" />
           <Badge kind="warning" />
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Badge label="1" /&gt;
 &lt;Badge label="New" kind="success" /&gt;
 &lt;Badge kind="warning" /&gt;</code></pre>
@@ -59,7 +59,7 @@
       <p class="mb-4">The Badge component supports multiple kinds that convey different semantic meanings.</p>
       
       <h3 class="text-lg font-medium mb-3">Dot Badges</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
             <Badge kind="primary" />
@@ -89,7 +89,7 @@
       </div>
 
       <h3 class="text-lg font-medium mt-6 mb-3">Text Badges</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex flex-wrap gap-4 items-center">
           <Badge kind="primary" label="Primary" />
           <Badge kind="secondary" label="Secondary" />
@@ -101,7 +101,7 @@
       </div>
       
       <h3 class="text-lg font-medium mt-6 mb-3">Numeric Badges</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex flex-wrap gap-4 items-center">
           <Badge kind="primary" label="1" />
           <Badge kind="secondary" label="2" />
@@ -112,7 +112,7 @@
         </div>
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;!-- Dot Badges --&gt;
 &lt;Badge kind="primary" /&gt;
 &lt;Badge kind="secondary" /&gt;
@@ -136,7 +136,7 @@
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Positioning Badges</h2>
       <p class="mb-4">Badges can be positioned relative to other elements using CSS positioning.</p>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex flex-wrap gap-8 items-center">
           <div class="relative">
             <Action label="Messages" kind="secondary" />
@@ -154,7 +154,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;div class="relative"&gt;
   &lt;Action label="Messages" kind="secondary" /&gt;
   &lt;Badge class="absolute -top-2 -right-2" label="5" /&gt;
@@ -189,7 +189,7 @@
       <h2 class="text-xl font-semibold mb-4">Examples</h2>
       
       <h3 class="text-lg font-medium mt-6 mb-3">Application Menu with Badges</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex flex-col w-64 gap-2 border border-base-200 dark:border-base-800 rounded-lg p-4">
           <div class="relative flex items-center p-2 rounded hover:bg-base-200 dark:hover:bg-base-800 cursor-pointer">
             <span>Dashboard</span>
@@ -210,7 +210,7 @@
       </div>
       
       <h3 class="text-lg font-medium mt-6 mb-3">Feature Status Badges</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex flex-col gap-3">
           <div class="flex items-center">
             <span class="w-32">User Profiles:</span>

@@ -6,7 +6,7 @@ The RadioGroup component simplifies the management of related Radio components b
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <RadioGroup
     label="Select an option"
     :options="[
@@ -71,7 +71,7 @@ The component supports v-model for two-way binding of the selected value.
 
 ### With Description
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <RadioGroup
     label="Shipping Method"
     description="Choose how you want your order delivered"
@@ -98,7 +98,7 @@ The component supports v-model for two-way binding of the selected value.
 
 ### Required Group
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <RadioGroup
     label="Select a plan"
     required
@@ -129,7 +129,7 @@ The component supports v-model for two-way binding of the selected value.
 
 ### Disabled Group
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <RadioGroup
     label="This group is disabled"
     disabled
@@ -156,7 +156,7 @@ The component supports v-model for two-way binding of the selected value.
 
 ### Mixed Disabled States
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <RadioGroup
     label="Some options are disabled"
     :options="[
@@ -202,7 +202,7 @@ The component supports v-model for two-way binding of the selected value.
 
 ### Payment Method Selection
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <form class="space-y-4">
     <RadioGroup
       label="Payment Method"
@@ -275,7 +275,7 @@ function submitForm() {
 
 ### Subscription Plan Selection
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="space-y-4">
     <RadioGroup
       label="Choose Your Plan"

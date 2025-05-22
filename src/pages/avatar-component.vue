@@ -12,7 +12,7 @@
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex gap-4 items-center mb-6">
           <Avatar
             src="/jason.jpg"
@@ -27,7 +27,7 @@
           />
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Avatar
   src="/path/to/image.jpg"
   alt="User Name"
@@ -86,7 +86,7 @@
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Size Variants</h2>
       <p class="mb-4">The Avatar component supports multiple size variants from extra small (xs) to 8xl.</p>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex flex-wrap gap-4 items-end">
           <div class="flex flex-col items-center gap-2">
             <Avatar src="/jason.jpg" alt="Jason Shimmy" size="xs" />
@@ -123,7 +123,7 @@
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Shape Variants</h2>
       <p class="mb-4">The Avatar component supports two shapes: circle (default) and square.</p>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex flex-wrap gap-8 items-center">
           <div class="flex flex-col items-center gap-2">
             <Avatar src="/jason.jpg" alt="Jason Shimmy" size="xl" shape="circle" />
@@ -140,7 +140,7 @@
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Fallback Behavior</h2>
       <p class="mb-4">When an image fails to load, the Avatar component automatically displays a fallback image.</p>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="flex flex-wrap gap-8 items-center">
           <div class="flex flex-col items-center gap-2">
             <Avatar src="invalid-url.jpg" alt="Fallback Example" size="xl" />

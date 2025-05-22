@@ -21,7 +21,7 @@
         Current value: {{ basicValue }}
       </div>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ basicSliderCode }}</code></pre> -->
@@ -43,7 +43,7 @@
         Selected price: {{ formatCurrency(priceValue) }}
       </div>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ formatterSliderCode }}</code></pre> -->
@@ -66,7 +66,7 @@
         Your rating: {{ ratingValue }} out of 10
       </div>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ ticksSliderCode }}</code></pre> -->
@@ -85,7 +85,7 @@
         disabled
       />
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ disabledSliderCode }}</code></pre> -->
@@ -114,7 +114,7 @@
         </div>
       </div>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ temperatureSliderCode }}</code></pre> -->

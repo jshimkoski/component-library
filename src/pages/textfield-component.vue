@@ -12,16 +12,18 @@
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="max-w-md">
           <TextField
             v-model="basicText"
             label="Full Name"
             placeholder="Enter your full name"
+            icon="ic:baseline-person"
+
           />
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;TextField
   v-model="fullName"
   label="Full Name"
@@ -170,7 +172,7 @@
         />
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;TextField
   v-model="textValue"
   label="Text Input"
@@ -215,7 +217,7 @@
         />
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;TextField
   v-model="requiredValue"
   label="Required Field"
@@ -240,7 +242,7 @@
         />
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;TextField
   v-model="password"
   label="Password"
@@ -269,7 +271,7 @@
         </TextField>
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;TextField
   v-model="searchText"
   label="Search"
@@ -297,7 +299,7 @@
         />
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;TextField
   v-model="disabledValue"
   label="Disabled Input"

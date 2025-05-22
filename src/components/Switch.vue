@@ -20,9 +20,9 @@
         'checked:bg-warning-500 checked:border-warning-500': kind === 'warning',
         'checked:bg-danger-500 checked:border-danger-500': kind === 'danger',
       }"
-      class="appearance-none relative inline-block w-9 h-5 border rounded-full align-bottom m-auto cursor-pointer bg-base-300 dark:bg-base-700 border-base-300 dark:border-base-700 before:shadow-sm transition-all before:transition-all before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0.25 before:w-4 before:h-4 before:bg-white dark:before:bg-base-300 before:rounded-full checked:before:left-4.25 mt-1.5"
+      class="mt-0.75 shrink-0 appearance-none relative inline-block w-9 h-5 border rounded-full align-bottom m-auto cursor-pointer bg-base-300 dark:bg-base-700 border-base-300 dark:border-base-700 before:shadow-sm transition-all before:transition-all before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0.25 before:w-4 before:h-4 before:bg-white dark:before:bg-base-300 before:rounded-full checked:before:left-4.25"
     />
-    <div class="relative">
+    <div class="relative grow">
       <label
         :for="id"
         class="cursor-pointer"

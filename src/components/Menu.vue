@@ -21,11 +21,11 @@
         @click="open = !open"
       >
         <span class="grow text-left">{{ label || "Menu" }}</span>
-        <IconMdiChevronDown
+        <Icon icon="ic:baseline-keyboard-arrow-down"
           v-if="placement.includes('top') || placement.includes('bottom')"
           class="text-lg"
         />
-        <IconMdiChevronRight
+        <Icon icon="ic:baseline-chevron-right"
           v-if="placement.includes('left') || placement.includes('right')"
           class="text-lg"
         />
@@ -63,7 +63,9 @@
 </template>
 
 <script setup lang="ts">
+  import { Icon } from '@iconify/vue'
   import type { Placement } from "@floating-ui/core";
+
   defineOptions({
     inheritAttrs: false,
   });

@@ -6,7 +6,7 @@ The Radio component allows users to select a single option from a set of mutuall
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Radio label="Option 1" name="example" value="option1" />
 </div>
 
@@ -40,7 +40,7 @@ The component supports v-model for two-way binding of the selected value.
 
 ### With Description
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Radio 
     label="Standard Shipping" 
     description="7-10 business days (Free)"
@@ -61,7 +61,7 @@ The component supports v-model for two-way binding of the selected value.
 
 ### Required Radio
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Radio 
     label="I agree to the terms and conditions" 
     required
@@ -86,7 +86,7 @@ The component supports v-model for two-way binding of the selected value.
 
 ### Disabled
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Radio 
     label="Unavailable option" 
     disabled
@@ -127,7 +127,7 @@ The component supports v-model for two-way binding of the selected value.
 
 ### Radio Group for Shipping Options
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="space-y-3">
     <h3 class="font-semibold text-lg mb-2">Select Shipping Method</h3>
     <Radio 
@@ -186,7 +186,7 @@ const shippingMethod = ref('standard');
 
 ### Payment Method Selection
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <form class="space-y-4">
     <div>
       <h3 class="font-semibold text-lg mb-3">Select Payment Method</h3>
@@ -257,7 +257,7 @@ function submitForm() {
 
 ### Custom Label Content
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Radio name="custom-label" value="premium">
     <div>
       <span class="font-bold">Premium Plan</span>

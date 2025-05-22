@@ -6,7 +6,7 @@ The Datepicker component provides a user-friendly interface for selecting dates 
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Datepicker label="Select Date" placeholder="Choose a date" />
 </div>
 
@@ -56,7 +56,7 @@ const selectedDate = ref(null);
 
 ### Single Date Selection
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Datepicker 
     mode="single"
     label="Event Date"
@@ -81,7 +81,7 @@ const eventDate = ref(null);
 
 ### Date Range Selection
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Datepicker 
     mode="range"
     label="Booking Period"
@@ -106,7 +106,7 @@ const bookingRange = ref(null);
 
 ### With Min and Max Date Constraints
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Datepicker 
     label="Schedule Meeting"
     placeholder="Select a date"
@@ -135,7 +135,7 @@ const maxDate = new Date(2023, 11, 31); // December 31, 2023
 
 ### With Description
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Datepicker 
     label="Delivery Date"
     placeholder="Select preferred delivery date"
@@ -162,7 +162,7 @@ const deliveryDate = ref(null);
 
 ### Disabled
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Datepicker 
     label="Unavailable Dates"
     placeholder="This calendar is disabled"
@@ -181,7 +181,7 @@ const deliveryDate = ref(null);
 
 ### Required
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Datepicker 
     label="Required Date"
     placeholder="Please select a date"
@@ -222,7 +222,7 @@ const deliveryDate = ref(null);
 
 ### Appointment Scheduling
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <form class="space-y-4">
     <TextField label="Your Name" required showMarker />
     <TextField label="Email" type="email" required showMarker />
@@ -277,7 +277,7 @@ function submitForm() {
 
 ### Hotel Booking
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="space-y-4">
     <h3 class="text-lg font-semibold">Book Your Stay</h3>
     <Datepicker 

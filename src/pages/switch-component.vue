@@ -12,7 +12,7 @@
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <Switch
             v-model="basicSwitch"
@@ -20,7 +20,7 @@
           />
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Switch
   v-model="enableNotifications"
   label="Enable notifications"
@@ -123,7 +123,7 @@
         <Switch v-model="colorSwitches.danger" label="Danger" kind="danger" />
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Switch v-model="isPrimary" label="Primary" kind="primary" /&gt;
 &lt;Switch v-model="isSecondary" label="Secondary" kind="secondary" /&gt;
 &lt;Switch v-model="isSuccess" label="Success" kind="success" /&gt;
@@ -146,7 +146,7 @@
         />
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Switch
   v-model="darkMode"
   label="Dark Mode"
@@ -170,7 +170,7 @@
         />
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Switch
   v-model="acceptTerms"
   label="Accept Terms and Conditions"
@@ -201,7 +201,7 @@
         />
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Switch
   v-model="disabledValue"
   label="Disabled (Off)"
@@ -233,7 +233,7 @@
         </Switch>
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Switch v-model="customLabel" kind="primary"&gt;
   &lt;span class="flex items-center gap-2"&gt;
     &lt;svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"&gt;

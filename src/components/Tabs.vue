@@ -1,10 +1,10 @@
 <template>
-  <div :class="['tabs-container', { 'tabs-vertical': vertical }]">
+  <div :class="['flex items-start gap-4', { 'flex-col': !vertical }]">
     <!-- Tab headers -->
     <div
       :class="[
         vertical ? 'flex-col' : 'inline-flex',
-        'gap-1 rounded-lg p-1 mb-4 bg-base-100 dark:bg-base-800',
+        'gap-1 rounded-lg p-1 bg-base-100 dark:bg-base-800',
         { [headerClass]: !!headerClass },
       ]"
       role="tablist"
@@ -18,14 +18,14 @@
           :aria-selected="modelValue === index"
           :aria-controls="`tab-panel-${id}-${index}`"
           :id="`tab-${id}-${index}`"
-          class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-colors"
+          class="flex items-center gap-2 w-full whitespace-nowrap cursor-pointer px-4 py-2 text-sm font-medium rounded-md transition-colors"
           :class="[
             modelValue === index
               ? activeTabClass ||
                 'bg-white dark:bg-base-900 text-primary-700 dark:text-primary-300 shadow-sm'
               : inactiveTabClass ||
                 'text-base-700 dark:text-base-300 hover:text-primary-600 dark:hover:text-primary-400',
-            { 'opacity-50 cursor-not-allowed': disabled || tab.disabled },
+            { 'pointer-events-none opacity-50': disabled || tab.disabled },
           ]"
           @click="updateSelectedTab(index)"
           :disabled="disabled || tab.disabled"

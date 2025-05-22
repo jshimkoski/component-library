@@ -1,204 +1,162 @@
 <template>
-  <FloatingUi
-    v-model:open="isOpen"
-    type="rich"
-    placement="bottom-start"
-    ref="floatingContainer"
-  >
-    <!-- Input Trigger -->
-    <div
-      class="grid items-center gap-1"
-      :class="{ 'opacity-50 pointer-events-none': disabled }"
+  <div ref="floatingContainer">
+    <FloatingUi
+      v-model:open="isOpen"
+      type="rich"
+      placement="bottom"
     >
-      <label
-        v-if="label"
-        :for="id"
-        class="cursor-pointer block font-semibold"
-        :class="[
-          required && showMarker
-            ? `after:text-danger-500 after:content-['*'] after:ml-1`
-            : '',
-        ]"
-      >
-        <slot name="label">{{ label }}</slot>
-      </label>
-      <div
-        ref="triggerRef"
-        :id="id"
-        class="flex items-center justify-between w-full px-4 py-2 rounded-base border border-base-300 dark:border-base-700 bg-white dark:bg-base-950 text-base-700 dark:text-base-300 hover:bg-base-50 dark:hover:bg-base-900 cursor-pointer transition-colors"
+      <TextField
+        :model-value="mode === 'range' && Array.isArray(modelValue) ? `${formatDate(modelValue[0])} - ${formatDate(modelValue[1])}` : formatDate(modelValue as Date | null)"
+        :label="label"
+        :description="description"
+        :show-marker="showMarker"
+        :required="required"
+        :disabled="disabled"
+        :placeholder="placeholder"
+        readonly
+        icon="ic:baseline-calendar-today"
         @click="toggleOpen"
-      >
-        <div class="flex-grow truncate">
-          <template v-if="modelValue">
-            <span v-if="mode === 'single'">{{
-              formatDate(modelValue as Date | null)
-            }}</span>
-            <span v-else-if="mode === 'range' && Array.isArray(modelValue)">
-              {{ formatDate(modelValue[0]) }} - {{ formatDate(modelValue[1]) }}
-            </span>
-          </template>
-          <span
-            v-else
-            class="text-base-400 dark:text-base-600"
-          >
-            {{ placeholder }}
-          </span>
-        </div>
-        <svg
-          class="h-5 w-5 text-base-500 ml-2 flex-shrink-0"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-            clip-rule="evenodd"
-          />
-        </svg>
-      </div>
-      <p
-        v-if="description"
-        class="text-sm text-base-600 dark:text-base-400"
-      >
-        {{ description }}
-      </p>
-    </div>
-
-    <!-- Calendar Popover -->
-    <template #popover>
-      <div
-        class="p-4 shadow-md"
-        ref="popoverRef"
-        tabindex="0"
-        @keydown.esc="isOpen = false"
-      >
+      />
+      <!-- Calendar Popover -->
+      <template #popover>
         <div
-          class="flex"
-          :class="{ 'space-x-4': mode === 'range' && showTwoMonths }"
+          class="p-4 shadow-md"
+          ref="popoverRef"
+          tabindex="0"
+          @keydown.esc="isOpen = false"
+          @click.stop
+          @mousedown.stop
         >
-          <!-- First calendar (always shown) -->
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center">
-                <button
-                  type="button"
-                  class="p-1 rounded-full hover:bg-base-100 dark:hover:bg-base-800"
-                  @click="prevMonth"
-                >
-                  <svg
-                    class="h-4 w-4"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+          <div
+            class="flex"
+            :class="{ 'space-x-4': mode === 'range' && showTwoMonths }"
+          >
+            <!-- First calendar (always shown) -->
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                  <Action
+                    variant="ghost"
+                    size="xs"
+                    square
+                    @click.stop.prevent="prevMonth"
                   >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </button>
-                <div class="px-2 text-sm font-medium">
-                  {{ monthNames[currentMonth] }} {{ currentYear }}
+                    <svg
+                      class="h-4 w-4"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </Action>
+                  <div class="px-2 text-sm font-medium">
+                    {{ monthNames[currentMonth] }} {{ currentYear }}
+                  </div>
+                  <Action
+                    variant="ghost"
+                    size="xs"
+                    square
+                    @click.stop.prevent="nextMonth"
+                  >
+                    <svg
+                      class="h-4 w-4"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </Action>
                 </div>
-                <button
-                  type="button"
-                  class="p-1 rounded-full hover:bg-base-100 dark:hover:bg-base-800"
-                  @click="nextMonth"
+              </div>
+
+              <div class="grid grid-cols-7 text-center mb-1">
+                <span
+                  v-for="day in daysOfWeek"
+                  :key="day"
+                  class="text-xs font-medium text-base-500 dark:text-base-400"
                 >
-                  <svg
-                    class="h-4 w-4"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
+                  {{ day }}
+                </span>
+              </div>
+
+              <div class="grid grid-cols-7 gap-px">
+                <button
+                  v-for="(date, index) in calendarDays"
+                  :key="index"
+                  type="button"
+                  class="h-7 w-7 flex items-center justify-center text-xs focus:outline-none rounded-full"
+                  :class="getDateClasses(date)"
+                  :disabled="isDateDisabled(date)"
+                  @click.stop.prevent="handleDateClick(date)"
+                >
+                  {{ date ? date.getDate() : "" }}
                 </button>
               </div>
             </div>
 
-            <div class="grid grid-cols-7 text-center mb-1">
-              <span
-                v-for="day in daysOfWeek"
-                :key="day"
-                class="text-xs font-medium text-base-500 dark:text-base-400"
-              >
-                {{ day }}
-              </span>
-            </div>
+            <!-- Second calendar (only shown in range mode with showTwoMonths=true) -->
+            <div v-if="mode === 'range' && showTwoMonths">
+              <div class="flex items-center justify-between mb-4">
+                <div class="text-sm font-medium pl-2">
+                  {{ monthNames[computedNextMonth] }}
+                  {{ computedNextMonth === 0 ? currentYear + 1 : currentYear }}
+                </div>
+              </div>
 
-            <div class="grid grid-cols-7 gap-px">
-              <button
-                v-for="(date, index) in calendarDays"
-                :key="index"
-                type="button"
-                class="h-7 w-7 flex items-center justify-center text-xs focus:outline-none rounded-full"
-                :class="getDateClasses(date)"
-                :disabled="isDateDisabled(date)"
-                @click="handleDateClick(date)"
-              >
-                {{ date ? date.getDate() : "" }}
-              </button>
-            </div>
-          </div>
+              <div class="grid grid-cols-7 text-center mb-1">
+                <span
+                  v-for="day in daysOfWeek"
+                  :key="day"
+                  class="text-xs font-medium text-base-500 dark:text-base-400"
+                >
+                  {{ day }}
+                </span>
+              </div>
 
-          <!-- Second calendar (only shown in range mode with showTwoMonths=true) -->
-          <div v-if="mode === 'range' && showTwoMonths">
-            <div class="flex items-center justify-between mb-4">
-              <div class="text-sm font-medium pl-2">
-                {{ monthNames[computedNextMonth] }}
-                {{ computedNextMonth === 0 ? currentYear + 1 : currentYear }}
+              <div class="grid grid-cols-7 gap-px">
+                <button
+                  v-for="(date, index) in nextMonthCalendarDays"
+                  :key="index"
+                  type="button"
+                  class="h-7 w-7 flex items-center justify-center text-xs focus:outline-none rounded-full"
+                  :class="getDateClasses(date)"
+                  :disabled="isDateDisabled(date)"
+                  @click.stop.prevent="handleDateClick(date)"
+                >
+                  {{ date ? date.getDate() : "" }}
+                </button>
               </div>
             </div>
+          </div>
 
-            <div class="grid grid-cols-7 text-center mb-1">
-              <span
-                v-for="day in daysOfWeek"
-                :key="day"
-                class="text-xs font-medium text-base-500 dark:text-base-400"
-              >
-                {{ day }}
-              </span>
-            </div>
-
-            <div class="grid grid-cols-7 gap-px">
-              <button
-                v-for="(date, index) in nextMonthCalendarDays"
-                :key="index"
-                type="button"
-                class="h-7 w-7 flex items-center justify-center text-xs focus:outline-none rounded-full"
-                :class="getDateClasses(date)"
-                :disabled="isDateDisabled(date)"
-                @click="handleDateClick(date)"
-              >
-                {{ date ? date.getDate() : "" }}
-              </button>
-            </div>
+          <div class="mt-4 flex justify-end space-x-2">
+            <Action
+              variant="ghost"
+              size="sm"
+              @click.stop.prevent="clearDate"
+            >
+              Clear
+            </Action>
+            <Action
+              kind="primary"
+              size="sm"
+              @click.stop.prevent="isOpen = false"
+            >
+              Done
+            </Action>
           </div>
         </div>
-
-        <div class="mt-4 flex justify-end space-x-2">
-          <button
-            type="button"
-            class="px-3 py-1 text-xs font-medium text-base-700 dark:text-base-300 hover:bg-base-100 dark:hover:bg-base-800 rounded-md"
-            @click="clearDate"
-          >
-            Clear
-          </button>
-          <button
-            type="button"
-            class="px-3 py-1 text-xs font-medium text-white bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-500 rounded-md"
-            @click="isOpen = false"
-          >
-            Done
-          </button>
-        </div>
-      </div>
-    </template>
-  </FloatingUi>
+      </template>
+    </FloatingUi>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -260,11 +218,15 @@
   const triggerRef = ref<HTMLElement | null>(null);
   const popoverRef = ref<HTMLElement | null>(null);
   const floatingContainer = ref<HTMLElement | null>(null);
-  const id = useId();
 
-  // Handle clicks outside
-  onClickOutside(floatingContainer, () => {
-    if (isOpen.value) {
+  // Handle clicks outside but only close when not interacting with calendar
+  onClickOutside(floatingContainer, (event) => {
+    // Only close if we clicked outside both the trigger and the calendar
+    if (
+      isOpen.value &&
+      !popoverRef.value?.contains(event.target as Node) &&
+      !triggerRef.value?.contains(event.target as Node)
+    ) {
       isOpen.value = false;
     }
   });
@@ -283,6 +245,11 @@
       nextTick(() => {
         popoverRef.value?.focus();
       });
+    } else {
+      // Return focus to trigger when calendar closes
+      nextTick(() => {
+        triggerRef.value?.focus();
+      });
     }
   });
 
@@ -292,7 +259,11 @@
   const currentYear = ref(today.getFullYear());
 
   // Toggle calendar visibility
-  function toggleOpen() {
+  function toggleOpen(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
     if (!props.disabled) {
       isOpen.value = !isOpen.value;
     }
@@ -420,7 +391,8 @@
     if (props.mode === "single") {
       // Single date selection
       emit("update:modelValue", new Date(date));
-      isOpen.value = false;
+      // Don't close for single date selection mode - keep open for adjustments
+      // Let user explicitly close with Done or clicking outside
     } else if (props.mode === "range") {
       // Range selection
       const currentRange = Array.isArray(props.modelValue)
@@ -443,10 +415,8 @@
 
       emit("update:modelValue", currentRange);
 
-      // Close the calendar when range is complete
-      if (currentRange[0] && currentRange[1]) {
-        isOpen.value = false;
-      }
+      // For range mode, keep open even when range is complete
+      // User must close with Done button or by clicking outside
     }
   }
 

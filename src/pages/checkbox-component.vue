@@ -17,7 +17,7 @@
       </p>
 
       <h3 class="text-lg font-medium mt-6 mb-3">Basic Usage</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="grid gap-2">
           <Checkbox
             v-model="singleCheckbox"
@@ -25,7 +25,7 @@
           />
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;Checkbox
   v-model="acceptTerms"
   label="Accept terms and conditions"
@@ -33,7 +33,7 @@
       </div>
 
       <h3 class="text-lg font-medium mt-6 mb-3">With Description</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="grid gap-2">
           <Checkbox
             v-model="descCheckbox"
@@ -42,7 +42,7 @@
           />
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;Checkbox
   v-model="subscribe"
   label="Subscribe to newsletter"
@@ -51,7 +51,7 @@
       </div>
 
       <h3 class="text-lg font-medium mt-6 mb-3">Multiple Selection</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="grid gap-2">
           <Checkbox
             v-model="multiSelect"
@@ -71,7 +71,7 @@
         </div>
         <p class="mt-2 text-sm text-base-600 dark:text-base-400">Selected fruits: {{ multiSelect.join(', ') }}</p>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;Checkbox
   v-model="selectedFruits"
   label="Apple"
@@ -90,7 +90,7 @@
       </div>
 
       <h3 class="text-lg font-medium mt-6 mb-3">Checkbox States</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="grid gap-3">
           <Checkbox
             v-model="checkboxStates.normal"
@@ -232,7 +232,7 @@
       </p>
 
       <h3 class="text-lg font-medium mt-6 mb-3">Basic Usage</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <CheckboxGroup
             v-model="groupSelection"
@@ -242,7 +242,7 @@
           <p class="mt-2 text-sm text-base-600 dark:text-base-400">Selected: {{ groupSelection.join(', ') }}</p>
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;CheckboxGroup
   v-model="selectedTechnologies"
   :options="[
@@ -256,7 +256,7 @@
       </div>
 
       <h3 class="text-lg font-medium mt-6 mb-3">With Description and Disabled Options</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <CheckboxGroup
             v-model="advancedSelection"
@@ -266,7 +266,7 @@
           />
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;CheckboxGroup
   v-model="privacySettings"
   :options="[
@@ -280,7 +280,7 @@
       </div>
 
       <h3 class="text-lg font-medium mt-6 mb-3">Required Group</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <CheckboxGroup
             v-model="requiredSelection"
@@ -291,7 +291,7 @@
           />
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;CheckboxGroup
   v-model="termsAccepted"
   :options="[
@@ -377,7 +377,7 @@
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Use Case Example: Form with Checkboxes</h2>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <form class="max-w-md grid gap-4">
           <TextField
             v-model="formExample.email"

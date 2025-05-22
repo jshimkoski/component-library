@@ -60,7 +60,7 @@
                       class="mt-0.5"
                       @click="onDismiss"
                     >
-                      <IconMdiTimes class="h-6 w-6" />
+                      <Icon icon="ic:baseline-close" class="h-6 w-6" />
                       <span class="sr-only">{{ dismissLabel }}</span>
                     </Action>
                     <h2
@@ -114,6 +114,7 @@
 </template>
 
 <script setup lang="ts">
+  import { Icon } from '@iconify/vue'
   import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
 
   defineOptions({

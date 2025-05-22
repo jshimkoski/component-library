@@ -6,7 +6,7 @@ The TextField component provides a standard input field for collecting text-base
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextField label="Username" placeholder="Enter your username" />
 </div>
 
@@ -42,7 +42,7 @@ The component supports v-model for two-way binding of the input value.
 
 ### Different Input Types
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4">
   <TextField label="Text" type="text" placeholder="Standard text input" />
   <TextField label="Email" type="email" placeholder="email@example.com" />
   <TextField label="Password" type="password" placeholder="Enter your password" />
@@ -62,7 +62,7 @@ The component supports v-model for two-way binding of the input value.
 
 ### With Description
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextField 
     label="Password" 
     type="password" 
@@ -83,7 +83,7 @@ The component supports v-model for two-way binding of the input value.
 
 ### Required Field
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextField 
     label="Email" 
     type="email" 
@@ -106,7 +106,7 @@ The component supports v-model for two-way binding of the input value.
 
 ### With Suffix Icon
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextField 
     label="Search" 
     placeholder="Search for items..."
@@ -133,7 +133,7 @@ The component supports v-model for two-way binding of the input value.
 
 ### Disabled
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextField 
     label="Username" 
     placeholder="This field is disabled"
@@ -172,7 +172,7 @@ The component supports v-model for two-way binding of the input value.
 
 ### Login Form
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <form class="space-y-4">
     <TextField 
       label="Email" 
@@ -242,7 +242,7 @@ function submitLogin() {
 
 ### Search Field with Clear Button
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <TextField 
     label="Search Products" 
     placeholder="Type to search..."

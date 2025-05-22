@@ -33,7 +33,7 @@
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <Menu>
             <MenuItem label="Edit" />
@@ -44,7 +44,7 @@
           </Menu>
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Menu&gt;
   &lt;MenuItem label="Edit" /&gt;
   &lt;MenuItem label="Duplicate" /&gt;
@@ -535,7 +535,7 @@
       <h2 class="text-xl font-semibold mb-4">Examples</h2>
 
       <h3 class="text-lg font-medium mt-6 mb-3">Basic Menu with Items</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <Menu label="Actions">
             <MenuItem
@@ -559,7 +559,7 @@
           </Menu>
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;Menu label="Actions"&gt;
   &lt;MenuItem label="Edit" @click="handleEdit" /&gt;
   &lt;MenuItem label="Duplicate" @click="handleDuplicate" /&gt;
@@ -572,7 +572,7 @@
       <h3 class="text-lg font-medium mt-6 mb-3">
         Menu with Header and Custom Content
       </h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <Menu
             label="More Options"
@@ -600,7 +600,7 @@
           </Menu>
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre
           class="text-sm overflow-x-auto"
         ><code>&lt;Menu label="More Options" auto-width&gt;
@@ -625,7 +625,7 @@
       </div>
 
       <h3 class="text-lg font-medium mt-6 mb-3">Nested Menus</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <Menu label="File">
             <MenuItem label="New" />
@@ -669,7 +669,7 @@
           </Menu>
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;Menu label="File"&gt;
   &lt;MenuItem label="New" /&gt;
   &lt;MenuItem label="Open" /&gt;
@@ -705,7 +705,7 @@
       </div>
 
       <h3 class="text-lg font-medium mt-6 mb-3">Menu with Links</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <Menu label="Documentation">
             <MenuItem
@@ -736,7 +736,7 @@
           </Menu>
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre
           class="text-sm overflow-x-auto"
         ><code>&lt;Menu label="Documentation"&gt;

@@ -14,6 +14,9 @@
     </template>
     <template #popover>
       <div
+        ref="popoverRef"
+        @mouseenter="popoverIsHovered = true"
+        @mouseleave="popoverIsHovered = false"
         :class="{
           'p-4': type === 'rich',
           'px-3 py-1': type === 'plain',
@@ -50,12 +53,21 @@
   });
 
   const rootRef = shallowRef();
+  const popoverRef = shallowRef();
 
-  const isHovered = useElementHover(rootRef, {
-    delayLeave: props.type === "rich" ? 150 : 0,
+  const rootIsHovered = useElementHover(rootRef, {
+    delayLeave: props.type === "rich" ? 200 : 0,
   });
 
-  watch(isHovered, (val) => {
+  const popoverIsHovered = useElementHover(popoverRef);
+
+  watch(rootIsHovered, (val) => {
+    if (!popoverIsHovered.value) {
+      open.value = val;
+    }
+  });
+
+  watch(popoverIsHovered, (val) => {
     open.value = val;
   });
 </script>

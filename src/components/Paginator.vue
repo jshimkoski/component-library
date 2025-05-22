@@ -43,9 +43,10 @@
         :disabled="!canGoPrevious || disabled"
         @click="goToFirstPage"
         aria-label="First page"
+        square
       >
         <slot name="first-page-icon">
-          <IconMdiChevronDoubleLeft class="w-5 h-5" />
+          <Icon icon="ic:baseline-keyboard-double-arrow-left" class="w-5 h-5" />
         </slot>
       </Action>
 
@@ -54,9 +55,10 @@
         :disabled="!canGoPrevious || disabled"
         @click="goToPreviousPage"
         aria-label="Previous page"
+        square
       >
         <slot name="previous-page-icon">
-          <IconMdiChevronLeft class="w-5 h-5" />
+          <Icon icon="ic:baseline-chevron-left" class="w-5 h-5" />
         </slot>
       </Action>
 
@@ -96,9 +98,10 @@
         :disabled="!canGoNext || disabled"
         @click="goToNextPage"
         aria-label="Next page"
+        square
       >
         <slot name="next-page-icon">
-          <IconMdiChevronRight class="w-5 h-5" />
+          <Icon icon="ic:baseline-chevron-right" class="w-5 h-5" />
         </slot>
       </Action>
 
@@ -108,9 +111,10 @@
         :disabled="!canGoNext || disabled"
         @click="goToLastPage"
         aria-label="Last page"
+        square
       >
         <slot name="last-page-icon">
-          <IconMdiChevronDoubleRight class="w-5 h-5" />
+          <Icon icon="ic:baseline-keyboard-double-arrow-right" class="w-5 h-5" />
         </slot>
       </Action>
     </div>
@@ -118,6 +122,8 @@
 </template>
 
 <script setup lang="ts">
+  import { Icon } from '@iconify/vue'
+
   const props = defineProps({
     // Basic pagination props
     page: {

@@ -6,7 +6,7 @@ The Sheet component creates a sliding panel that appears from the left or right 
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div>
     <button 
       class="px-4 py-2 bg-primary-500 text-white rounded"
@@ -65,7 +65,7 @@ The component supports v-model for controlling the sheet's visibility.
 
 ### Modal Variant
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div>
     <button 
       class="px-4 py-2 bg-primary-500 text-white rounded"
@@ -101,7 +101,7 @@ const modalSheetOpen = ref(false);
 
 ### Inset Modal Variant
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div>
     <button 
       class="px-4 py-2 bg-primary-500 text-white rounded"
@@ -137,7 +137,7 @@ const insetModalSheetOpen = ref(false);
 
 ### Left Placement
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div>
     <button 
       class="px-4 py-2 bg-primary-500 text-white rounded"
@@ -173,7 +173,7 @@ const leftSheetOpen = ref(false);
 
 ## Using the Footer Slot
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div>
     <button 
       class="px-4 py-2 bg-primary-500 text-white rounded"
@@ -256,7 +256,7 @@ function saveForm(close) {
 
 ## Custom Headline
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div>
     <button 
       class="px-4 py-2 bg-primary-500 text-white rounded"
@@ -328,7 +328,7 @@ const customHeadlineSheetOpen = ref(false);
 
 ### Navigation Menu
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div>
     <button 
       class="px-4 py-2 bg-primary-500 text-white rounded"
@@ -372,7 +372,7 @@ const navSheetOpen = ref(false);
 
 ### Product Detail
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div>
     <button 
       class="px-4 py-2 bg-primary-500 text-white rounded"

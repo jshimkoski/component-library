@@ -13,7 +13,7 @@
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="max-w-md">
           <Card
             headline="Card Headline"
@@ -22,7 +22,7 @@
           />
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Card
   headline="Card Headline"
   subhead="Card Subhead"
@@ -162,7 +162,7 @@
         </div>
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Card
   headline="Outlined Card"
   subhead="Default variant"
@@ -207,7 +207,7 @@
         </Card>
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Card
   headline="Interactive Card"
   subhead="Click anywhere on this card"
@@ -249,7 +249,7 @@
         </Card>
       </div>
 
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
         <pre class="text-sm overflow-x-auto"><code>&lt;Card
   headline="Custom Content"
   subhead="Using default and footer slots"

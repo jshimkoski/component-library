@@ -6,7 +6,7 @@ The Switch component provides a toggleable control that allows users to choose b
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Switch label="Enable notifications" />
 </div>
 
@@ -46,7 +46,7 @@ The component supports v-model for two-way binding of the switch state (true for
 
 ### Different Kinds
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4">
   <Switch kind="primary" label="Primary Switch" />
   <Switch kind="secondary" label="Secondary Switch" />
   <Switch kind="success" label="Success Switch" />
@@ -66,7 +66,7 @@ The component supports v-model for two-way binding of the switch state (true for
 
 ### With Description
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Switch 
     label="Dark Mode" 
     description="Enable dark theme across the application"
@@ -83,7 +83,7 @@ The component supports v-model for two-way binding of the switch state (true for
 
 ### Required Switch
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Switch 
     label="I agree to the terms and conditions" 
     required
@@ -104,7 +104,7 @@ The component supports v-model for two-way binding of the switch state (true for
 
 ### Disabled
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4">
   <Switch 
     label="Disabled off state" 
     disabled
@@ -155,7 +155,7 @@ The component supports v-model for two-way binding of the switch state (true for
 
 ### Feature Toggles
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="space-y-4">
     <h3 class="font-semibold text-lg mb-2">Account Settings</h3>
     <Switch 
@@ -212,7 +212,7 @@ const accountSettings = reactive({
 
 ### Form Integration
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <form class="space-y-4">
     <TextField label="Name" required showMarker />
     <TextField label="Email" type="email" required showMarker />

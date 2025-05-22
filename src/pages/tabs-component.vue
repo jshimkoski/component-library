@@ -16,7 +16,7 @@
         v-model="activeBasicTab"
       >
         <template #tab-content-0>
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">First Tab Content</h3>
             <p>
               This is the content for the first tab. You can put any components
@@ -25,7 +25,7 @@
           </div>
         </template>
         <template #tab-content-1>
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Second Tab Content</h3>
             <p>
               This is the content for the second tab, displayed when the tab is
@@ -34,7 +34,7 @@
           </div>
         </template>
         <template #tab-content-2>
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Third Tab Content</h3>
             <p>
               This is the content for the third tab. Each tab can have
@@ -44,7 +44,7 @@
         </template>
       </Tabs>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ basicTabsCode }}</code></pre> -->
@@ -56,7 +56,7 @@
     <Card class="p-6">
       <Tabs ref="tabPanelsRef" v-model="activeTabPanels">
         <TabPanel label="Account">
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Account Information</h3>
             <p>User account settings and preferences go here.</p>
           </div>
@@ -67,7 +67,7 @@
           badge="New"
           badgeKind="success"
         >
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Privacy Settings</h3>
             <p>Control your privacy settings and permissions.</p>
           </div>
@@ -75,9 +75,9 @@
 
         <TabPanel label="Notifications">
           <template #icon>
-            <IconMdiBell class="w-5 h-5" />
+            <Icon icon="mdi:bell" class="w-5 h-5" />
           </template>
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Notification Preferences</h3>
             <p>Manage how you receive notifications.</p>
           </div>
@@ -87,13 +87,13 @@
           label="Disabled Tab"
           disabled
         >
-          <div class="p-4">
+          <div>
             <p>This content is not accessible because the tab is disabled.</p>
           </div>
         </TabPanel>
       </Tabs>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ declarativeTabsCode }}</code></pre> -->
@@ -109,36 +109,36 @@
         v-model="activeIconTab"
       >
         <template #tab-icon-0>
-          <IconMdiHome class="w-5 h-5" />
+          <Icon icon="mdi:home" class="w-5 h-5" />
         </template>
         <template #tab-icon-1>
-          <IconMdiCog class="w-5 h-5" />
+          <Icon icon="mdi:cog" class="w-5 h-5" />
         </template>
         <template #tab-icon-2>
-          <IconMdiAccount class="w-5 h-5" />
+          <Icon icon="mdi:account" class="w-5 h-5" />
         </template>
 
         <template #tab-content-0>
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Home</h3>
             <p>Welcome to the home tab with icon.</p>
           </div>
         </template>
         <template #tab-content-1>
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Settings</h3>
             <p>Configure your settings here.</p>
           </div>
         </template>
         <template #tab-content-2>
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Profile</h3>
             <p>View and edit your profile information.</p>
           </div>
         </template>
       </Tabs>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre class="text-sm overflow-x-auto"><code>{{ iconTabsCode }}</code></pre> -->
     </div>
   </div>
@@ -152,26 +152,31 @@
         v-model="activeVerticalTab"
       >
         <TabPanel label="Dashboard">
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Dashboard</h3>
             <p>Vertical tabs are great for side navigation patterns.</p>
           </div>
         </TabPanel>
         <TabPanel label="Reports">
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Reports</h3>
+            <p>Report content goes here.</p>
+            <p>Report content goes here.</p>
+            <p>Report content goes here.</p>
+            <p>Report content goes here.</p>
+            <p>Report content goes here.</p>
             <p>Report content goes here.</p>
           </div>
         </TabPanel>
         <TabPanel label="Analytics">
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Analytics</h3>
             <p>View your analytics here.</p>
           </div>
         </TabPanel>
       </Tabs>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ verticalTabsCode }}</code></pre> -->
@@ -186,26 +191,26 @@
         v-model="activeBadgeTab"
       >
         <template #tab-content-0>
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Inbox</h3>
             <p>You have 3 unread messages.</p>
           </div>
         </template>
         <template #tab-content-1>
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Sent</h3>
             <p>Your sent messages will appear here.</p>
           </div>
         </template>
         <template #tab-content-2>
-          <div class="p-4">
+          <div>
             <h3 class="text-lg font-medium mb-2">Drafts</h3>
             <p>You have 5 saved drafts.</p>
           </div>
         </template>
       </Tabs>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ badgeTabsCode }}</code></pre> -->
@@ -220,12 +225,12 @@
         v-model="activeLazyTab"
       >
         <TabPanel label="Fast Tab">
-          <div class="p-4">
+          <div>
             <p>This content is simple and loads quickly.</p>
           </div>
         </TabPanel>
         <TabPanel label="Slow Tab">
-          <div class="p-4">
+          <div>
             <p>
               This tab content would only be loaded when you select this tab.
             </p>
@@ -233,13 +238,13 @@
           </div>
         </TabPanel>
         <TabPanel label="Another Slow Tab">
-          <div class="p-4">
+          <div>
             <p>This tab content is also lazily loaded.</p>
           </div>
         </TabPanel>
       </Tabs>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre class="text-sm overflow-x-auto"><code>{{ lazyTabsCode }}</code></pre> -->
     </div>
   </div>
@@ -250,7 +255,7 @@
       <Tabs
         v-model="activeCustomTab"
         headerClass="bg-base-200 p-2 rounded-xl"
-        contentClass="mt-6 p-4 bg-base-50 rounded-lg shadow-sm"
+        contentClass="p-4 bg-base-50 rounded-lg shadow-sm"
         activeTabClass="bg-primary-100 text-primary-800 font-bold"
         inactiveTabClass="text-base-600 hover:bg-base-100"
       >
@@ -266,7 +271,7 @@
         </TabPanel>
       </Tabs>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ customStyledTabsCode }}</code></pre> -->
@@ -282,23 +287,23 @@
         disabled
       >
         <template #tab-content-0>
-          <div class="p-4">
+          <div>
             <p>This tab content is not accessible because tabs are disabled.</p>
           </div>
         </template>
         <template #tab-content-1>
-          <div class="p-4">
+          <div>
             <p>This tab content is not accessible because tabs are disabled.</p>
           </div>
         </template>
         <template #tab-content-2>
-          <div class="p-4">
+          <div>
             <p>This tab content is not accessible because tabs are disabled.</p>
           </div>
         </template>
       </Tabs>
     </Card>
-    <div class="mt-4 bg-base-100 dark:bg-base-900 p-4 rounded-lg">
+    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
       <!-- <pre
         class="text-sm overflow-x-auto"
       ><code>{{ disabledTabsCode }}</code></pre> -->
@@ -460,8 +465,8 @@
 </template>
 
 <script setup lang="ts">
-import type { TabItem } from '../types/common';
-
+  import { Icon } from '@iconify/vue'
+  
   // References to the tabs components
   const basicTabsRef = ref(null);
   const tabPanelsRef = ref(null);

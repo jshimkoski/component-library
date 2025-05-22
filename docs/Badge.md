@@ -6,7 +6,7 @@ The Badge component is a small visual indicator typically used to highlight stat
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Badge label="New" />
 </div>
 
@@ -25,7 +25,7 @@ The Badge component is a small visual indicator typically used to highlight stat
 
 ### Kinds
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Badge label="Primary" kind="primary" />
   <Badge label="Secondary" kind="secondary" />
   <Badge label="Success" kind="success" />
@@ -45,7 +45,7 @@ The Badge component is a small visual indicator typically used to highlight stat
 
 ### Dot Variant (No Label)
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-4">
   <Badge kind="primary" />
   <Badge kind="secondary" />
   <Badge kind="success" />
@@ -88,7 +88,7 @@ The Badge component is a small visual indicator typically used to highlight stat
 
 ### Notification Badge
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="relative inline-block">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
     <span class="absolute -top-1 -right-1">
@@ -108,7 +108,7 @@ The Badge component is a small visual indicator typically used to highlight stat
 
 ### Status Indicator
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="space-y-2">
     <div class="flex items-center gap-2">
       <Badge kind="success" />
@@ -144,7 +144,7 @@ The Badge component is a small visual indicator typically used to highlight stat
 
 ### Feature Tags
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="flex flex-col gap-2">
     <div class="flex items-center">
       <span class="mr-2">Enhanced Security</span>

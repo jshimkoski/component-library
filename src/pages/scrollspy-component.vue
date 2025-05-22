@@ -24,7 +24,7 @@
         <!-- Scrollspy Navigation -->
         <div class="w-full md:w-64 md:flex-shrink-0">
           <div
-            class="sticky top-20 p-4 bg-base-100 dark:bg-base-900 rounded-lg mb-4"
+            class="sticky top-20 p-4 bg-base-50 dark:bg-base-900 rounded-lg mb-4"
           >
             <h3 class="font-semibold mb-4">Table of Contents</h3>
             <Scrollspy
@@ -281,7 +281,7 @@
         </div>
 
         <!-- Description of how this example works -->
-        <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg">
+        <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg">
           <h3 class="font-semibold mb-4">How This Example Works</h3>
           <p class="mb-3">
             This demo shows a practical implementation of the Scrollspy
@@ -363,7 +363,7 @@
       <h2 class="text-xl font-semibold mb-4">Implementation Examples</h2>
 
       <h3 class="text-lg font-medium mt-6 mb-4">Basic Implementation</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
   &lt;Scrollspy&gt;
     &lt;!-- Content with sections --&gt;
@@ -388,7 +388,7 @@
       </div>
 
       <h3 class="text-lg font-medium mt-6 mb-4">With Custom Icons</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div class="max-w-2xl">
           <Scrollspy
             :sections="customIconSections"
@@ -430,7 +430,7 @@
           </Scrollspy>
         </div>
       </div>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
   &lt;Scrollspy :sections="sections" :auto-detect="false"&gt;
     &lt;template #icon="{ section, active }"&gt;
@@ -471,7 +471,7 @@ const sections = [
       </div>
 
       <h3 class="text-lg font-medium mt-6 mb-4">Documentation Page Layout</h3>
-      <div class="bg-base-100 dark:bg-base-900 p-4 rounded-lg mb-6">
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
         <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
   &lt;div class="flex"&gt;
     &lt;!-- Sticky sidebar with Scrollspy --&gt;

@@ -6,7 +6,7 @@ The Avatar component displays a user or entity's profile image with flexible siz
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Avatar 
     src="https://i.pravatar.cc/300" 
     alt="User Avatar" 
@@ -33,7 +33,7 @@ The Avatar component displays a user or entity's profile image with flexible siz
 
 ### Sizes
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex items-end gap-4 flex-wrap">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex items-end gap-4 flex-wrap">
   <Avatar src="https://i.pravatar.cc/300" size="xs" alt="Extra Small Avatar" />
   <Avatar src="https://i.pravatar.cc/300" size="sm" alt="Small Avatar" />
   <Avatar src="https://i.pravatar.cc/300" size="md" alt="Medium Avatar" />
@@ -55,7 +55,7 @@ The Avatar component displays a user or entity's profile image with flexible siz
 
 ### Shapes
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex gap-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex gap-4">
   <Avatar src="https://i.pravatar.cc/300" shape="circle" alt="Circle Avatar" />
   <Avatar src="https://i.pravatar.cc/300" shape="square" alt="Square Avatar" />
 </div>
@@ -69,7 +69,7 @@ The Avatar component displays a user or entity's profile image with flexible siz
 
 The Avatar component automatically displays a fallback image if the provided image URL fails to load.
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Avatar 
     src="https://invalid-url-that-will-fail.com/image.jpg" 
     alt="Fallback Example" 
@@ -102,7 +102,7 @@ The Avatar component automatically displays a fallback image if the provided ima
 
 ### User Profile Header
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <div class="flex items-center gap-4">
     <Avatar 
       src="https://i.pravatar.cc/300" 
@@ -132,7 +132,7 @@ The Avatar component automatically displays a fallback image if the provided ima
 
 ### User List
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <ul class="space-y-3">
     <li class="flex items-center gap-3">
       <Avatar src="https://i.pravatar.cc/300?u=1" size="sm" alt="User 1" />

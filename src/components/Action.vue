@@ -10,16 +10,25 @@
     :aria-disabled="disabled ? 'true' : undefined"
     :type="tag === 'button' ? type : undefined"
     :class="[variantClasses, sizeClasses, activeClasses]"
-    class="inline-flex items-center gap-1 cursor-pointer font-medium disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none"
+    class="inline-flex items-center gap-2 cursor-pointer font-medium disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none"
     @click="tag === 'button' ? onClick($event) : undefined"
   >
-    <slot :label="label">{{ label }}</slot>
+    <Icon v-if="icon" :icon="icon" />
+    <span
+      :class="{
+        'sr-only': iconOnly,
+      }"
+    ><slot :label="label">{{ label }}</slot></span>
   </Component>
 </template>
 
 <script setup lang="ts">
+  import { Icon } from '@iconify/vue'
+
   const props = defineProps({
+    icon: { type: String, default: undefined },
     label: { type: String, default: undefined },
+    iconOnly: { type: Boolean, default: false },
     href: { type: String, default: undefined },
     target: { type: String, default: undefined },
     rel: { type: String, default: undefined },

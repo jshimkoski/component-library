@@ -6,7 +6,7 @@ The Dialog component presents content in a modal overlay, requiring user interac
 
 ## Basic Usage
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action @click="basicDialog = true">Open Basic Dialog</Action>
   <Dialog 
     v-model="basicDialog"
@@ -67,7 +67,7 @@ The component supports v-model for controlling the dialog's visibility.
 
 ### Basic Dialog
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action @click="standardDialog = true">Open Standard Dialog</Action>
   <Dialog 
     v-model="standardDialog"
@@ -99,7 +99,7 @@ const standardDialog = ref(false);
 
 ### Fullscreen Dialog
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action @click="fullscreenDialog = true">Open Fullscreen Dialog</Action>
   <Dialog 
     v-model="fullscreenDialog"
@@ -147,7 +147,7 @@ const fullscreenDialog = ref(false);
 
 ### Different Action Styles
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Action @click="primaryDialog = true">Primary Action</Action>
   <Dialog 
     v-model="primaryDialog"
@@ -251,7 +251,7 @@ const dangerDialog = ref(false);
 
 ### Confirmation Dialog
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action @click="confirmDialog = true" kind="danger">Delete Account</Action>
   <Dialog 
     v-model="confirmDialog"
@@ -305,7 +305,7 @@ function handleDeleteConfirm() {
 
 ### Form Dialog
 
-<div class="bg-base-100 dark:bg-base-900 p-6 rounded-lg mb-4">
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
   <Action @click="formDialog = true">Add New Contact</Action>
   <Dialog 
     v-model="formDialog"

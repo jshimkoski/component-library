@@ -20,11 +20,11 @@
         @click="isMobile = !isMobile"
       >
         <span class="sr-only">{{ isMobile ? "Close menu" : "Open menu" }}</span>
-        <IconMdiMenu
+        <Icon icon="ic:baseline-menu"
           v-if="!isMobile"
           class="h-6 w-6"
         />
-        <IconMdiClose
+        <Icon icon="ic:baseline-close"
           v-else
           class="h-6 w-6"
         />
@@ -52,6 +52,8 @@
 </template>
 
 <script setup lang="ts">
+  import { Icon } from '@iconify/vue'
+
   const props = defineProps({
     variant: {
       type: String as PropType<"primary" | "secondary" | "subtle">,

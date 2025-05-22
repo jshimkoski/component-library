@@ -32,7 +32,8 @@
         ref="checkboxRef"
         :indeterminate="indeterminate"
       />
-      <IconMdiCheckBold
+      <Icon
+        icon="mdi:check-bold"
         class="hidden peer-checked:block h-4 w-4 text-white absolute top-1.5 left-0 z-10 pointer-events-none"
         v-if="!indeterminate"
       />
@@ -65,6 +66,8 @@
 </template>
 
 <script setup lang="ts">
+  import { Icon } from '@iconify/vue'
+
   defineOptions({
     inheritAttrs: false,
   });
