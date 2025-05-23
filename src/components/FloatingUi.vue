@@ -153,20 +153,20 @@
   const floatingContainerClasses = computed(() => {
     switch (props.type) {
       case "rich":
-        return "ring-1 ring-base-300 rounded-base radius-2xl:rounded-2xl shadow-md dark:shadow-white/5 dark:ring-base-700";
+        return "ring-1 ring-base-300 rounded-base radius-lg:rounded-lg shadow-md dark:shadow-white/5 dark:ring-base-700";
       case "plain":
       default:
-        return "pointer-events-none ring-1 ring-base-700 rounded-base radius-2xl:rounded-2xl shadow-md dark:shadow-white/5";
+        return "pointer-events-none ring-1 ring-base-700 rounded-base radius-lg:rounded-lg shadow-md dark:shadow-white/5";
     }
   });
 
   const floatingClasses = computed(() => {
     switch (props.type) {
       case "rich":
-        return "rounded-base radius-2xl:rounded-2xl bg-base-50 text-black w-max dark:bg-base-900 dark:text-white";
+        return "rounded-base radius-lg:rounded-lg bg-base-50 text-black w-max dark:bg-base-900 dark:text-white";
       case "plain":
       default:
-        return "rounded-base radius-2xl:rounded-2xl bg-black text-white text-sm w-max";
+        return "rounded-base radius-lg:rounded-lg bg-black text-white text-sm w-max";
     }
   });
 

@@ -6,7 +6,11 @@
       placement="bottom"
     >
       <TextField
-        :model-value="mode === 'range' && Array.isArray(modelValue) ? `${formatDate(modelValue[0])} - ${formatDate(modelValue[1])}` : formatDate(modelValue as Date | null)"
+        :model-value="
+          mode === 'range' && Array.isArray(modelValue)
+            ? `${formatDate(modelValue[0])} - ${formatDate(modelValue[1])}`
+            : formatDate(modelValue as Date | null)
+        "
         :label="label"
         :description="description"
         :show-marker="showMarker"
@@ -33,48 +37,46 @@
           >
             <!-- First calendar (always shown) -->
             <div>
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center">
-                  <Action
-                    variant="ghost"
-                    size="xs"
-                    square
-                    @click.stop.prevent="prevMonth"
+              <div class="flex items-center justify-between w-full mb-4">
+                <Action
+                  variant="ghost"
+                  size="xs"
+                  square
+                  @click.stop.prevent="prevMonth"
+                >
+                  <svg
+                    class="h-4 w-4"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
                   >
-                    <svg
-                      class="h-4 w-4"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </Action>
-                  <div class="px-2 text-sm font-medium">
-                    {{ monthNames[currentMonth] }} {{ currentYear }}
-                  </div>
-                  <Action
-                    variant="ghost"
-                    size="xs"
-                    square
-                    @click.stop.prevent="nextMonth"
-                  >
-                    <svg
-                      class="h-4 w-4"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </Action>
+                    <path
+                      fill-rule="evenodd"
+                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </Action>
+                <div class="px-2 text-sm font-medium">
+                  {{ monthNames[currentMonth] }} {{ currentYear }}
                 </div>
+                <Action
+                  variant="ghost"
+                  size="xs"
+                  square
+                  @click.stop.prevent="nextMonth"
+                >
+                  <svg
+                    class="h-4 w-4"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </Action>
               </div>
 
               <div class="grid grid-cols-7 text-center mb-1">
@@ -92,7 +94,7 @@
                   v-for="(date, index) in calendarDays"
                   :key="index"
                   type="button"
-                  class="h-7 w-7 flex items-center justify-center text-xs focus:outline-none rounded-full"
+                  class="cursor-pointer h-7 w-7 flex items-center justify-center text-xs focus:outline-none rounded-full"
                   :class="getDateClasses(date)"
                   :disabled="isDateDisabled(date)"
                   @click.stop.prevent="handleDateClick(date)"
@@ -104,8 +106,8 @@
 
             <!-- Second calendar (only shown in range mode with showTwoMonths=true) -->
             <div v-if="mode === 'range' && showTwoMonths">
-              <div class="flex items-center justify-between mb-4">
-                <div class="text-sm font-medium pl-2">
+              <div class="flex items-center justify-between w-full mb-4">
+                <div class="mx-auto text-sm font-medium pl-2">
                   {{ monthNames[computedNextMonth] }}
                   {{ computedNextMonth === 0 ? currentYear + 1 : currentYear }}
                 </div>
@@ -126,7 +128,7 @@
                   v-for="(date, index) in nextMonthCalendarDays"
                   :key="index"
                   type="button"
-                  class="h-7 w-7 flex items-center justify-center text-xs focus:outline-none rounded-full"
+                  class="cursor-pointer h-7 w-7 flex items-center justify-center text-xs focus:outline-none rounded-full"
                   :class="getDateClasses(date)"
                   :disabled="isDateDisabled(date)"
                   @click.stop.prevent="handleDateClick(date)"

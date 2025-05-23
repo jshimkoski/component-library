@@ -13,17 +13,31 @@
     class="inline-flex items-center gap-2 cursor-pointer font-medium disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none"
     @click="tag === 'button' ? onClick($event) : undefined"
   >
-    <Icon v-if="icon" :icon="icon" />
-    <span
-      :class="{
-        'sr-only': iconOnly,
-      }"
-    ><slot :label="label">{{ label }}</slot></span>
+    <template v-if="iconOnly">
+      <Icon
+        v-if="icon"
+        :icon="icon"
+        class="text-2xl"
+      />
+      <span
+        :class="{
+          'sr-only': iconOnly,
+        }"
+        ><slot :label="label">{{ label }}</slot></span
+      >
+    </template>
+    <template v-else>
+      <Icon
+        v-if="icon"
+        :icon="icon"
+      />
+      <slot :label="label">{{ label }}</slot>
+    </template>
   </Component>
 </template>
 
 <script setup lang="ts">
-  import { Icon } from '@iconify/vue'
+  import { Icon } from "@iconify/vue";
 
   const props = defineProps({
     icon: { type: String, default: undefined },

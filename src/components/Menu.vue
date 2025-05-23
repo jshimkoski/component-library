@@ -6,30 +6,33 @@
     :class="{
       'w-full': variant === 'nested',
     }"
+    hide-arrow
   >
     <template #default>
-      <Action
+      <Component
+        :is="variant === 'nested' ? MenuItem : Action"
         data-menu="true"
         ref="triggerElement"
+        :data-menu-nested="variant === 'nested' ? 'true' : undefined"
         :disabled="disabled"
         :active="open"
         :aria-expanded="open ? 'true' : 'false'"
         :aria-haspopup="true"
-        :class="{
-          'w-full': variant === 'nested',
-        }"
         @click="open = !open"
       >
         <span class="grow text-left">{{ label || "Menu" }}</span>
-        <Icon icon="ic:baseline-keyboard-arrow-down"
-          v-if="placement.includes('top') || placement.includes('bottom')"
-          class="text-lg"
+        <Icon
+          :icon="
+            placement.includes('left') || placement.includes('right')
+              ? 'ic:baseline-arrow-right'
+              : 'ic:baseline-arrow-drop-down'
+          "
+          :class="{
+            'absolute -right-2 top-1/2 -translate-1/2': variant === 'nested',
+          }"
+          class="text-2xl"
         />
-        <Icon icon="ic:baseline-chevron-right"
-          v-if="placement.includes('left') || placement.includes('right')"
-          class="text-lg"
-        />
-      </Action>
+      </Component>
     </template>
     <template #popover>
       <div ref="popoverRef">
@@ -40,13 +43,13 @@
           :close="() => (open = false)"
           :toggle="() => (open = !open)"
         >
-          <ul
-            class="p-2 m-0 list-none isolation-auto"
+          <div
+            class="py-2 m-0 list-none isolation-auto"
             :class="{
               'w-48': !autoWidth,
               'w-auto': autoWidth,
             }"
-            style="z-index: 9999; position: relative;"
+            style="z-index: 9999; position: relative"
             @click="handlePopoverClick"
           >
             <slot
@@ -55,7 +58,7 @@
               :close="() => (open = false)"
               :toggle="() => (open = !open)"
             />
-          </ul>
+          </div>
         </slot>
       </div>
     </template>
@@ -63,12 +66,15 @@
 </template>
 
 <script setup lang="ts">
-  import { Icon } from '@iconify/vue'
+  import Action from "./Action.vue";
+  import MenuItem from "./MenuItem.vue";
+  import { Icon } from "@iconify/vue";
   import type { Placement } from "@floating-ui/core";
 
   defineOptions({
     inheritAttrs: false,
   });
+
   defineProps({
     variant: {
       type: String as PropType<"standard" | "nested">,
@@ -102,13 +108,13 @@
   const hasDataMenu = (event: MouseEvent) => {
     let el = event.target as HTMLElement | null;
     while (el) {
-      if (el.hasAttribute && el.hasAttribute('data-menu')) {
+      if (el.hasAttribute && el.hasAttribute("data-menu")) {
         return true;
       }
       el = el.parentElement;
     }
     return false;
-  }
+  };
 
   onClickOutside(popoverRef, (event) => {
     if (!open.value) return;

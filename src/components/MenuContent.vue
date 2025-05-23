@@ -1,7 +1,7 @@
 <template>
-  <li class="px-4">
+  <div class="px-4">
     <slot />
-  </li>
+  </div>
 </template>
 
 <script setup lang="ts"></script>

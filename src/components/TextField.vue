@@ -39,10 +39,20 @@
           ${$slots.suffix ? 'pr-10' : ''}
         `"
       />
-      <div v-if="icon" class="absolute inset-y-0 left-0 flex items-center pl-4">
-        <Icon v-if="icon" :icon="icon" class="mt-0.25" />
+      <div
+        v-if="icon"
+        class="absolute inset-y-0 left-0 flex items-center pl-4"
+      >
+        <Icon
+          v-if="icon"
+          :icon="icon"
+          class="text-xl mt-0.25"
+        />
       </div>
-      <div v-if="$slots.suffix" class="absolute inset-y-0 right-0 flex items-center pr-3">
+      <div
+        v-if="$slots.suffix"
+        class="absolute inset-y-0 right-0 flex items-center pr-3"
+      >
         <slot name="suffix"></slot>
       </div>
     </div>
@@ -56,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Icon } from '@iconify/vue'
+  import { Icon } from "@iconify/vue";
 
   defineOptions({
     inheritAttrs: false,

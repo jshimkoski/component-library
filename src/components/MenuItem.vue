@@ -1,20 +1,19 @@
 <template>
-  <li>
-    <Component
-      :is="tag"
-      :href="tag === 'a' ? href : undefined"
-      :target="tag === 'a' ? target : undefined"
-      :rel="tag === 'a' ? rel : undefined"
-      :disabled="tag === 'button' ? disabled : undefined"
-      :data-disabled="disabled || undefined"
-      :aria-disabled="disabled ? 'true' : undefined"
-      :type="tag === 'button' ? type : undefined"
-      class="block w-full text-left px-4 py-2 rounded-base radius-xl:rounded-xl hover:bg-base-100 dark:hover:bg-base-800 cursor-pointer disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none [&[data-active='true']]:bg-base-200"
-      @click="tag === 'button' ? onClick($event) : undefined"
-    >
-      <slot>{{ label }}</slot>
-    </Component>
-  </li>
+  <Component
+    :is="tag"
+    :href="tag === 'a' ? href : undefined"
+    :target="tag === 'a' ? target : undefined"
+    :rel="tag === 'a' ? rel : undefined"
+    :disabled="tag === 'button' ? disabled : undefined"
+    :data-active="active || undefined"
+    :data-disabled="disabled || undefined"
+    :aria-disabled="disabled ? 'true' : undefined"
+    :type="tag === 'button' ? type : undefined"
+    class="flex items-center gap-2 w-full text-left px-4 py-2 hover:bg-base-100 dark:hover:bg-base-800 cursor-pointer disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none [&[data-active='true']]:bg-base-100 dark:[&[data-active='true']]:bg-base-800"
+    @click="tag === 'button' ? onClick($event) : undefined"
+  >
+    <slot>{{ label }}</slot>
+  </Component>
 </template>
 
 <script setup lang="ts">

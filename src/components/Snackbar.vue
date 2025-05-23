@@ -13,7 +13,7 @@
         role="status"
         aria-live="polite"
         :class="[
-          'fixed z-50 flex items-center gap-3 p-4 rounded-base shadow-lg border border-base-300 dark:border-base-700',
+          'fixed z-50 flex items-center gap-3 px-4 py-2 rounded-base radius-xl:rounded-xl shadow-lg border',
           positionClasses,
           kindClass,
         ]"
@@ -28,74 +28,39 @@
           class="flex-shrink-0"
         >
           <!-- Success Icon -->
-          <svg
+          <Icon
             v-if="kind === 'success'"
+            icon="ic:baseline-check-circle"
             class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          />
 
           <!-- Info Icon -->
-          <svg
+          <Icon
             v-else-if="kind === 'info'"
+            icon="ic:baseline-info"
             class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          />
 
           <!-- Warning Icon -->
-          <svg
+          <Icon
             v-else-if="kind === 'warning'"
+            icon="ic:baseline-warning"
             class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.981l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          />
 
           <!-- Danger/Error Icon -->
-          <svg
+          <Icon
             v-else-if="kind === 'danger'"
+            icon="ic:baseline-dangerous"
             class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          />
 
           <!-- Default/Primary Icon -->
-          <svg
+          <Icon
             v-else
+            icon="ic:baseline-info"
             class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          />
         </div>
 
         <!-- Content -->
@@ -127,26 +92,19 @@
         <!-- Close Button -->
         <div
           v-if="dismissible"
-          class="flex-shrink-0"
+          class="flex-shrink-0 mt-1.5"
         >
           <button
             type="button"
-            class="inline-flex rounded-base p-1 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            class="rounded-base focus:outline-none focus:ring-2 focus:ring-offset-2"
             :class="closeButtonClass"
             @click="dismiss"
           >
             <span class="sr-only">Dismiss</span>
-            <svg
-              class="h-4 w-4"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            <Icon
+              icon="ic:baseline-close"
+              class="h-6 w-6"
+            />
           </button>
         </div>
       </div>
@@ -155,6 +113,8 @@
 </template>
 
 <script setup lang="ts">
+  import { Icon } from "@iconify/vue";
+
   const props = defineProps({
     // Content
     message: {
@@ -246,18 +206,18 @@
   const kindClass = computed(() => {
     switch (props.kind) {
       case "success":
-        return "bg-success-50 text-success-800 dark:bg-success-900 dark:text-success-200";
+        return "bg-success-700 text-success-50 dark:bg-success-900 dark:text-success-100 border-success-700";
       case "info":
-        return "bg-info-50 text-info-800 dark:bg-info-900 dark:text-info-200";
+        return "bg-info-700 text-info-50 dark:bg-info-900 dark:text-info-100 border-info-700";
       case "warning":
-        return "bg-warning-50 text-warning-800 dark:bg-warning-900 dark:text-warning-200";
+        return "bg-warning-700 text-warning-50 dark:bg-warning-900 dark:text-warning-100 border-warning-700";
       case "danger":
-        return "bg-danger-50 text-danger-800 dark:bg-danger-900 dark:text-danger-200";
+        return "bg-danger-700 text-danger-50 dark:bg-danger-900 dark:text-danger-100 border-danger-700";
       case "secondary":
-        return "bg-secondary-50 text-secondary-800 dark:bg-secondary-900 dark:text-secondary-200";
+        return "bg-secondary-700 text-secondary-50 dark:bg-secondary-900 dark:text-secondary-100 border-secondary-700";
       case "primary":
       default:
-        return "bg-primary-50 text-primary-800 dark:bg-primary-900 dark:text-primary-200";
+        return "bg-primary-700 text-primary-50 dark:bg-primary-900 dark:text-primary-100 border-primary-700";
     }
   });
 
