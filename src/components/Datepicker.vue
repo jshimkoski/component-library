@@ -18,7 +18,7 @@
         :disabled="disabled"
         :placeholder="placeholder"
         readonly
-        icon="ic:baseline-calendar-today"
+        icon="ic:baseline-calendar-month"
         @click="toggleOpen"
       />
       <!-- Calendar Popover -->

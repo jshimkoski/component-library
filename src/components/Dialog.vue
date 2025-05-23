@@ -60,7 +60,10 @@
                       class="mt-0.5"
                       @click="onDismiss"
                     >
-                      <Icon icon="ic:baseline-close" class="h-6 w-6" />
+                      <Icon
+                        icon="ic:baseline-close"
+                        class="h-6 w-6"
+                      />
                       <span class="sr-only">{{ dismissLabel }}</span>
                     </Action>
                     <h2
@@ -114,7 +117,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Icon } from '@iconify/vue'
+  import { Icon } from "@iconify/vue";
   import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
 
   defineOptions({
@@ -203,7 +206,7 @@
 
   onKeyStroke("Escape", (event: Event) => {
     if (!showDialog.value) return;
-    event.stopImmediatePropagation();
+    event.preventDefault();
     onDismiss(event);
   });
 </script>

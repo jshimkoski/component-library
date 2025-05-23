@@ -82,7 +82,10 @@
                       square
                       @click="show = false"
                     >
-                      <Icon icon="ic:baseline-close" class="h-6 w-6" />
+                      <Icon
+                        icon="ic:baseline-close"
+                        class="h-6 w-6"
+                      />
                     </Action>
                   </div>
                 </div>
@@ -115,7 +118,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Icon } from '@iconify/vue'
+  import { Icon } from "@iconify/vue";
   import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
 
   const props = defineProps({
@@ -176,7 +179,7 @@
 
   onKeyStroke("Escape", (event) => {
     if (!show.value) return;
-    event.stopImmediatePropagation();
+    event.preventDefault();
     show.value = false;
   });
 </script>

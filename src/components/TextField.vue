@@ -41,7 +41,7 @@
       />
       <div
         v-if="icon"
-        class="absolute inset-y-0 left-0 flex items-center pl-4"
+        class="absolute inset-y-0 left-0 flex items-center pl-3"
       >
         <Icon
           v-if="icon"
