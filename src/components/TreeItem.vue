@@ -68,7 +68,14 @@
     </button>
 
     <!-- Children -->
-    <transition name="expand">
+    <Transition
+      enter-active-class="transition-all duration-300 overflow-hidden"
+      leave-active-class="transition-all duration-300 overflow-hidden"
+      enter-from-class="max-h-0 opacity-0"
+      enter-to-class="max-h-[1000px] opacity-100"
+      leave-from-class="max-h-[1000px] opacity-100"
+      leave-to-class="max-h-0 opacity-0"
+    >
       <ul v-if="hasChildren && isExpanded">
         <TreeItem
           v-for="(child, index) in item.children"
@@ -92,7 +99,7 @@
           </template>
         </TreeItem>
       </ul>
-    </transition>
+    </Transition>
   </li>
 </template>
 
@@ -188,20 +195,3 @@
     }
   }
 </script>
-
-<style>
-  /* Expand/collapse animation */
-  .expand-enter-active,
-  .expand-leave-active {
-    transition: all 0.3s ease;
-    max-height: 1000px;
-    overflow: hidden;
-    opacity: 1;
-  }
-
-  .expand-enter-from,
-  .expand-leave-to {
-    max-height: 0;
-    opacity: 0;
-  }
-</style>
