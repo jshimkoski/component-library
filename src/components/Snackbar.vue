@@ -82,7 +82,7 @@
           class="flex-shrink-0"
         >
           <button
-            class="text-sm font-medium underline focus:outline-none"
+            class="cursor-pointer text-sm font-medium underline focus:outline-none"
             @click="onAction"
           >
             {{ actionLabel }}
@@ -96,7 +96,7 @@
         >
           <button
             type="button"
-            class="rounded-base focus:outline-none focus:ring-2 focus:ring-offset-2"
+            class="cursor-pointer rounded-base focus:outline-none focus:ring-2 focus:ring-offset-2"
             :class="closeButtonClass"
             @click="dismiss"
           >
@@ -131,7 +131,7 @@
       type: String as PropType<
         "primary" | "success" | "info" | "warning" | "danger" | "secondary"
       >,
-      default: "primary",
+      default: "secondary",
     },
     position: {
       type: String as PropType<
