@@ -62,7 +62,7 @@ declare module 'vue' {
     TextEditor: typeof import('./src/components/TextEditor.vue')['default']
     TextField: typeof import('./src/components/TextField.vue')['default']
     Tooltip: typeof import('./src/components/Tooltip.vue')['default']
-    TreeView: typeof import('./src/components/TreeView.vue')['default']
-    TreeViewItem: typeof import('./src/components/TreeViewItem.vue')['default']
+    Tree: typeof import('./src/components/Tree.vue')['default']
+    TreeItem: typeof import('./src/components/TreeItem.vue')['default']
   }
 }

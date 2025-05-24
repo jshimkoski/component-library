@@ -1,10 +1,10 @@
-# TreeView
+# Tree
 
-A hierarchical tree component for displaying nested navigation items with expandable/collapsible sections. The TreeView component is ideal for representing file systems, site navigation, categories, or any data that has a nested structure. For parent items without specific actions, the entire heading acts as an expand/collapse toggle for better usability.
+A hierarchical tree component for displaying nested navigation items with expandable/collapsible sections. The Tree component is ideal for representing file systems, site navigation, categories, or any data that has a nested structure. For parent items without specific actions, the entire heading acts as an expand/collapse toggle for better usability.
 
 ## Overview
 
-The TreeView component offers a flexible way to display hierarchical data in a tree structure. It supports:
+The Tree component offers a flexible way to display hierarchical data in a tree structure. It supports:
 - Nested navigation items with expand/collapse functionality
 - Custom icons or no icons
 - Positioning of expand/collapse controls on either left or right side
@@ -16,11 +16,11 @@ The TreeView component offers a flexible way to display hierarchical data in a t
 
 ```vue
 <template>
-  <TreeView :items="items" @node-click="handleNodeClick" />
+  <Tree :items="items" @node-click="handleNodeClick" />
 </template>
 
 <script setup>
-import { TreeView } from 'your-component-library';
+import { Tree } from 'your-component-library';
 
 const items = [
   {
@@ -81,7 +81,7 @@ function handleNodeClick(node) {
 You can customize the icons displayed for each node using the `icon` slot:
 
 ```vue
-<TreeView :items="items">
+<Tree :items="items">
   <template #icon="{ item }">
     <div class="w-5 h-5 flex items-center justify-center">
       <svg v-if="item.type === 'folder'" class="w-4 h-4" viewBox="0 0 24 24">
@@ -92,7 +92,7 @@ You can customize the icons displayed for each node using the `icon` slot:
       </svg>
     </div>
   </template>
-</TreeView>
+</Tree>
 ```
 
 ### Without Icons
@@ -100,7 +100,7 @@ You can customize the icons displayed for each node using the `icon` slot:
 If you prefer a more minimal look or want to save horizontal space, you can disable the default icons:
 
 ```vue
-<TreeView :items="items" :show-icons="false" />
+<Tree :items="items" :show-icons="false" />
 ```
 
 ### Right Controls
@@ -108,7 +108,7 @@ If you prefer a more minimal look or want to save horizontal space, you can disa
 You can position the expand/collapse controls on the right side of each node:
 
 ```vue
-<TreeView :items="items" controls-position="right" />
+<Tree :items="items" controls-position="right" />
 ```
 
 ### Default Expanded Nodes
@@ -116,7 +116,7 @@ You can position the expand/collapse controls on the right side of each node:
 You can specify which nodes should be expanded by default using their IDs:
 
 ```vue
-<TreeView :items="items" :default-expanded-keys="['docs', 'components']" />
+<Tree :items="items" :default-expanded-keys="['docs', 'components']" />
 ```
 
 ### Expand All Nodes
@@ -124,7 +124,7 @@ You can specify which nodes should be expanded by default using their IDs:
 To expand all nodes by default:
 
 ```vue
-<TreeView :items="items" :default-expand-all="true" />
+<Tree :items="items" :default-expand-all="true" />
 ```
 
 ## Best Practices
@@ -146,7 +146,7 @@ To expand all nodes by default:
 
 ## Data Structure
 
-The TreeView component expects the data to be in the following format:
+The Tree component expects the data to be in the following format:
 
 ```js
 const items = [
@@ -173,14 +173,14 @@ const items = [
 
 ## Implementation Example
 
-Here's an example of a file system navigator implemented with TreeView:
+Here's an example of a file system navigator implemented with Tree:
 
 ```vue
 <template>
   <div class="file-explorer p-4 border rounded-lg">
     <h3 class="text-lg font-medium mb-4">Project Files</h3>
-    <TreeView 
-      :items="fileItems" 
+    <Tree
+      :items="fileItems"
       @node-click="onFileClick"
       @node-expanded="onFolderOpen"
     />
@@ -188,7 +188,7 @@ Here's an example of a file system navigator implemented with TreeView:
 </template>
 
 <script setup>
-import { TreeView } from 'your-component-library';
+import { Tree } from 'your-component-library';
 import { ref } from 'vue';
 
 const fileItems = ref([
@@ -203,13 +203,13 @@ const fileItems = ref([
         type: "folder",
         children: [
           {
-            id: "TreeView.vue",
-            label: "TreeView.vue",
+            id: "Tree.vue",
+            label: "Tree.vue",
             type: "file"
           },
           {
-            id: "TreeViewItem.vue",
-            label: "TreeViewItem.vue",
+            id: "TreeItem.vue",
+            label: "TreeItem.vue",
             type: "file"
           }
         ]

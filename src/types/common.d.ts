@@ -1,4 +1,10 @@
-export type Kind = "primary" | "secondary" | "success" | "info" | "warning" | "danger";
+export type Kind =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "info"
+  | "warning"
+  | "danger";
 export type Size = "xs" | "sm" | "md" | "lg" | "xl";
 
 export type ActionType = "button" | "submit" | "reset";
@@ -55,14 +61,18 @@ export interface TabItem {
 export interface TreeItem {
   id: string | number;
   label: string;
+  icon?: string;
+  iconOpen?: string;
+  iconClose?: string;
   children?: TreeItem[];
   to?: string;
   action?: Function;
   href?: string;
   onClick?: Function;
+  [key: string]: any; // Allow additional properties
 }
 
-export type PaginatorMode = 'buttons' | 'input';
+export type PaginatorMode = "buttons" | "input";
 
 export interface ScrollspySection {
   id: string;

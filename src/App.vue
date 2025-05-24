@@ -27,9 +27,9 @@
         >
       </div>
       <nav>
-        <TreeView
+        <Tree
           :items="navigationItems"
-          :show-icons="false"
+          controls-position="right"
           :active-item-id="activeItemId"
           :default-expanded-keys="defaultExpandedKeys"
           @node-click="handleNavigation"
@@ -69,11 +69,11 @@
 
 <script setup lang="ts">
   const router = useRouter();
-  const route = useRoute(); 
+  const route = useRoute();
 
   provideSnackbar();
 
-  // Organized navigation items for TreeView
+  // Organized navigation items for Tree
   const navigationItems = [
     {
       id: "home",
@@ -140,15 +140,10 @@
           label: "Navigation",
           // No 'to' property, so entire heading is clickable for expand/collapse
           children: [
-            {
-              id: "navigation",
-              label: "Navigation",
-              to: "navigation-component",
-            },
             { id: "menu", label: "Menu", to: "menu-component" },
             { id: "scrollspy", label: "Scrollspy", to: "scrollspy-component" },
             { id: "tabs", label: "Tabs", to: "tabs-component" },
-            { id: "tree-view", label: "Tree View", to: "tree-view-component" },
+            { id: "tree", label: "Tree", to: "tree-component" },
           ],
         },
         {
@@ -186,7 +181,9 @@
     }
 
     // Find the matching navigation item
-    const findActiveItem = (items: { id: string; to?: string; children?: any[] }[]): string | null => {
+    const findActiveItem = (
+      items: { id: string; to?: string; children?: any[] }[],
+    ): string | null => {
       for (const item of items) {
         // Check if route matches the component path
         if (item.to && "/" + item.to === currentPath) {

@@ -52,7 +52,7 @@
     >
       <div
         :class="{ 'max-w-7xl': variant !== 'fullwidth' }"
-        class="py-6 mx-auto"
+        class="py-12 text-sm mx-auto"
       >
         <slot name="footer" />
       </div>

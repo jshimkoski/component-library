@@ -29,7 +29,6 @@ declare module 'vue-router/auto-routes' {
     '/datepicker-component': RouteRecordInfo<'/datepicker-component', '/datepicker-component', Record<never, never>, Record<never, never>>,
     '/dialog-component': RouteRecordInfo<'/dialog-component', '/dialog-component', Record<never, never>, Record<never, never>>,
     '/menu-component': RouteRecordInfo<'/menu-component', '/menu-component', Record<never, never>, Record<never, never>>,
-    '/navigation-component': RouteRecordInfo<'/navigation-component', '/navigation-component', Record<never, never>, Record<never, never>>,
     '/paginator-component': RouteRecordInfo<'/paginator-component', '/paginator-component', Record<never, never>, Record<never, never>>,
     '/progress-component': RouteRecordInfo<'/progress-component', '/progress-component', Record<never, never>, Record<never, never>>,
     '/prose-component': RouteRecordInfo<'/prose-component', '/prose-component', Record<never, never>, Record<never, never>>,
@@ -46,6 +45,6 @@ declare module 'vue-router/auto-routes' {
     '/texteditor-component': RouteRecordInfo<'/texteditor-component', '/texteditor-component', Record<never, never>, Record<never, never>>,
     '/textfield-component': RouteRecordInfo<'/textfield-component', '/textfield-component', Record<never, never>, Record<never, never>>,
     '/tooltip-component': RouteRecordInfo<'/tooltip-component', '/tooltip-component', Record<never, never>, Record<never, never>>,
-    '/tree-view-component': RouteRecordInfo<'/tree-view-component', '/tree-view-component', Record<never, never>, Record<never, never>>,
+    '/tree-component': RouteRecordInfo<'/tree-component', '/tree-component', Record<never, never>, Record<never, never>>,
   }
 }
