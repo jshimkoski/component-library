@@ -11,7 +11,7 @@
         'tree-item-content',
         'flex items-center gap-1 w-full cursor-pointer py-1.5 text-sm rounded-base hover:bg-base-50 dark:hover:bg-base-900 transition',
         'text-base-700 dark:text-base-300 hover:text-black dark:hover:text-white',
-        '[&[data-active]]:text-primary-700 dark:[&[data-active]]:text-primary-300 [&[data-active]]:hover:text-primary-800 dark:[&[data-active]]:hover:text-primary-200',
+        '[&[data-active]]:text-primary-600 dark:[&[data-active]]:text-primary-400 [&[data-active]]:hover:text-primary-700 dark:[&[data-active]]:hover:text-primary-300',
         '[&[data-expanded]]:text-black [&[data-expanded]]:dark:text-white',
         '[&[data-has-children]]:font-semibold [&[data-active]]:font-semibold',
       ]"
