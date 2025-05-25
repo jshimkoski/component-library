@@ -55,7 +55,16 @@
   const emit = defineEmits(["click"]);
 
   const onClick = (event: MouseEvent) => {
-    event.preventDefault();
+    // For anchor tags, only prevent default if it's not a real navigation
+    if (tag.value === "a" && !props.href) {
+      event.preventDefault();
+    }
+    // For button tags, always prevent default
+    if (tag.value === "button") {
+      event.preventDefault();
+    }
+
+    // Always stop event propagation to prevent menu toggle
     event.stopImmediatePropagation();
     emit("click", event);
   };
