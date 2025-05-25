@@ -10,7 +10,7 @@
     :aria-disabled="disabled ? 'true' : undefined"
     :type="tag === 'button' ? type : undefined"
     class="flex items-center gap-2 w-full text-left px-4 py-2 hover:bg-base-100 dark:hover:bg-base-800 cursor-pointer disabled:opacity-50 disabled:pointer-events-none [&[data-disabled]]:opacity-50 [&[data-disabled]]:pointer-events-none [&[data-active='true']]:bg-base-100 dark:[&[data-active='true']]:bg-base-800"
-    @click="tag === 'button' ? onClick($event) : undefined"
+    @mousedown="tag === 'button' ? onClick($event) : undefined"
   >
     <slot>{{ label }}</slot>
   </Component>
@@ -55,6 +55,8 @@
   const emit = defineEmits(["click"]);
 
   const onClick = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
     emit("click", event);
   };
 </script>

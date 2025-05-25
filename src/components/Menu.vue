@@ -104,14 +104,17 @@
   });
 
   // Inject parent menu ID if this is a nested menu
-  const injectedParentMenuId = inject<string | undefined>('parentMenuId', undefined);
+  const injectedParentMenuId = inject<string | undefined>(
+    "parentMenuId",
+    undefined,
+  );
   const effectiveParentMenuId = props.parentMenuId || injectedParentMenuId;
 
   // Use the menu composable with proper parent tracking
   const { menuId, open, cleanup } = useMenu(effectiveParentMenuId);
 
   // Provide the menu ID to child components
-  provide('parentMenuId', menuId);
+  provide("parentMenuId", menuId);
 
   // Cleanup when component is unmounted
   onUnmounted(() => {

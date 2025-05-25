@@ -685,6 +685,52 @@
               </Menu>
             </Menu>
           </Menu>
+          <Menu label="Edit">
+            <MenuItem label="New" />
+            <MenuItem label="Open" />
+            <MenuDivider />
+            <Menu
+              label="Export As"
+              placement="right-start"
+              variant="nested"
+            >
+              <MenuItem label="PDF" />
+              <MenuItem label="Excel" />
+              <MenuItem label="CSV" />
+              <MenuItem label="Image" />
+            </Menu>
+            <Menu
+              label="Share"
+              placement="right-start"
+              variant="nested"
+            >
+              <MenuItem label="Email" />
+              <MenuItem label="Link" />
+              <Menu
+                label="Social Media"
+                placement="right-start"
+                variant="nested"
+              >
+                <MenuItem label="Twitter" />
+                <MenuItem label="LinkedIn" />
+                <MenuDivider />
+                <Menu
+                  label="Meta"
+                  placement="right-start"
+                  variant="nested"
+                >
+                  <MenuItem
+                    label="Facebook"
+                    @click="handleClick('facebook')"
+                  />
+                  <MenuItem
+                    label="Instagram"
+                    href="https://example.com"
+                  />
+                </Menu>
+              </Menu>
+            </Menu>
+          </Menu>
         </div>
       </div>
       <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
