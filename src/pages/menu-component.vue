@@ -645,8 +645,7 @@
             <MenuDivider />
             <Menu
               label="Export As"
-              placement="right-start"
-              variant="nested"
+              nested
             >
               <MenuItem label="PDF" />
               <MenuItem label="Excel" />
@@ -655,23 +654,20 @@
             </Menu>
             <Menu
               label="Share"
-              placement="right-start"
-              variant="nested"
+              nested
             >
               <MenuItem label="Email" />
               <MenuItem label="Link" />
               <Menu
                 label="Social Media"
-                placement="right-start"
-                variant="nested"
+                nested
               >
                 <MenuItem label="Twitter" />
                 <MenuItem label="LinkedIn" />
                 <MenuDivider />
                 <Menu
                   label="Meta"
-                  placement="right-start"
-                  variant="nested"
+                  nested
                 >
                   <MenuItem
                     label="Facebook"
@@ -691,8 +687,7 @@
             <MenuDivider />
             <Menu
               label="Export As"
-              placement="right-start"
-              variant="nested"
+              nested
             >
               <MenuItem label="PDF" />
               <MenuItem label="Excel" />
@@ -701,23 +696,20 @@
             </Menu>
             <Menu
               label="Share"
-              placement="right-start"
-              variant="nested"
+              nested
             >
               <MenuItem label="Email" />
               <MenuItem label="Link" />
               <Menu
                 label="Social Media"
-                placement="right-start"
-                variant="nested"
+                nested
               >
                 <MenuItem label="Twitter" />
                 <MenuItem label="LinkedIn" />
                 <MenuDivider />
                 <Menu
                   label="Meta"
-                  placement="right-start"
-                  variant="nested"
+                  nested
                 >
                   <MenuItem
                     label="Facebook"
@@ -740,8 +732,7 @@
   &lt;MenuDivider /&gt;
   &lt;Menu
     label="Export As"
-    placement="right-start"
-    variant="nested"
+    nested
   &gt;
     &lt;MenuItem label="PDF" /&gt;
     &lt;MenuItem label="Excel" /&gt;
@@ -750,15 +741,13 @@
   &lt;/Menu&gt;
   &lt;Menu
     label="Share"
-    placement="right-start"
-    variant="nested"
+    nested
   &gt;
     &lt;MenuItem label="Email" /&gt;
     &lt;MenuItem label="Link" /&gt;
     &lt;Menu
       label="Social Media"
-      placement="right-start"
-      variant="nested"
+      nested
     &gt;
       &lt;MenuItem label="Twitter" /&gt;
       &lt;MenuItem label="Facebook" /&gt;

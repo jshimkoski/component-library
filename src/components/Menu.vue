@@ -1,19 +1,19 @@
 <template>
   <FloatingUi
     v-model:open="open"
-    :placement="placement"
+    :placement="nested ? 'right-start' : placement"
     type="rich"
     :class="{
-      'w-full': variant === 'nested',
+      'w-full': nested,
     }"
     hide-arrow
   >
     <template #default>
       <Component
-        :is="variant === 'nested' ? MenuItem : Action"
+        :is="nested ? MenuItem : Action"
         data-menu="true"
         ref="triggerElement"
-        :data-menu-nested="variant === 'nested' ? 'true' : undefined"
+        :data-menu-nested="nested ? 'true' : undefined"
         :disabled="disabled"
         :active="open"
         :aria-expanded="open ? 'true' : 'false'"
@@ -23,12 +23,12 @@
         <span class="grow text-left">{{ label || "Menu" }}</span>
         <Icon
           :icon="
-            placement.includes('left') || placement.includes('right')
+            nested || placement.includes('left') || placement.includes('right')
               ? 'ic:baseline-arrow-right'
               : 'ic:baseline-arrow-drop-down'
           "
           :class="{
-            'absolute -right-2 top-1/2 -translate-1/2': variant === 'nested',
+            'absolute -right-2 top-1/2 -translate-1/2': nested,
           }"
           class="text-2xl"
         />
@@ -77,9 +77,9 @@
   });
 
   const props = defineProps({
-    variant: {
-      type: String as PropType<"standard" | "nested">,
-      default: "standard",
+    nested: {
+      type: Boolean,
+      default: false,
     },
     label: {
       type: String,
