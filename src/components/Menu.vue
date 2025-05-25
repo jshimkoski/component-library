@@ -70,12 +70,13 @@
   import MenuItem from "./MenuItem.vue";
   import { Icon } from "@iconify/vue";
   import type { Placement } from "@floating-ui/core";
+  import { useMenu, closeAllMenus } from "../composables/useMenu";
 
   defineOptions({
     inheritAttrs: false,
   });
 
-  defineProps({
+  const props = defineProps({
     variant: {
       type: String as PropType<"standard" | "nested">,
       default: "standard",
@@ -96,10 +97,25 @@
       type: Boolean,
       default: false,
     },
+    parentMenuId: {
+      type: String,
+      default: undefined,
+    },
   });
 
-  const open = defineModel("open", {
-    type: Boolean,
+  // Inject parent menu ID if this is a nested menu
+  const injectedParentMenuId = inject<string | undefined>('parentMenuId', undefined);
+  const effectiveParentMenuId = props.parentMenuId || injectedParentMenuId;
+
+  // Use the menu composable with proper parent tracking
+  const { menuId, open, cleanup } = useMenu(effectiveParentMenuId);
+
+  // Provide the menu ID to child components
+  provide('parentMenuId', menuId);
+
+  // Cleanup when component is unmounted
+  onUnmounted(() => {
+    cleanup();
   });
 
   const triggerElement = useTemplateRef("triggerElement");
@@ -127,7 +143,7 @@
   onKeyStroke("Escape", (event) => {
     if (!open.value) return;
     event.preventDefault();
-    open.value = false;
+    closeAllMenus();
   });
 
   const handlePopoverClick = (event: Event) => {

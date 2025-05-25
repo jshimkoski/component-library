@@ -36,11 +36,23 @@
       <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <div>
           <Menu>
-            <MenuItem label="Edit" />
-            <MenuItem label="Duplicate" />
+            <MenuItem
+              label="Edit"
+              @click="handleClick('edit')"
+            />
+            <MenuItem
+              label="Duplicate"
+              @click="handleClick('duplicate')"
+            />
             <MenuDivider />
-            <MenuItem label="Archive" />
-            <MenuItem label="Delete" />
+            <MenuItem
+              label="Archive"
+              @click="handleClick('archive')"
+            />
+            <MenuItem
+              label="Delete"
+              @click="handleClick('delete')"
+            />
           </Menu>
         </div>
       </div>
@@ -661,8 +673,14 @@
                   placement="right-start"
                   variant="nested"
                 >
-                  <MenuItem label="Facebook" />
-                  <MenuItem label="Instagram" />
+                  <MenuItem
+                    label="Facebook"
+                    @click="handleClick('facebook')"
+                  />
+                  <MenuItem
+                    label="Instagram"
+                    href="https://example.com"
+                  />
                 </Menu>
               </Menu>
             </Menu>
@@ -770,3 +788,9 @@
     </section>
   </div>
 </template>
+
+<script setup lang="ts">
+  const handleClick = (action: string) => {
+    console.log(`Action clicked: ${action}`);
+  };
+</script>
