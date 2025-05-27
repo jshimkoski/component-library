@@ -56,9 +56,10 @@
             >
               <component
                 :is="{
-                  render: () => tab.tabPanelId !== undefined && iconSlots[tab.tabPanelId]
-                    ? h('div', {}, [iconSlots[tab.tabPanelId]()])
-                    : h('div', {}, ['']),
+                  render: () =>
+                    tab.tabPanelId !== undefined && iconSlots[tab.tabPanelId]
+                      ? h('div', {}, [iconSlots[tab.tabPanelId]()])
+                      : h('div', {}, ['']),
                 }"
               />
             </span>
@@ -141,7 +142,10 @@
                 :is="{
                   render: () => {
                     // Find the corresponding tabPanel's slot
-                    const slot = tab.tabPanelId !== undefined ? tabPanelSlots[tab.tabPanelId] : undefined;
+                    const slot =
+                      tab.tabPanelId !== undefined
+                        ? tabPanelSlots[tab.tabPanelId]
+                        : undefined;
                     if (slot && typeof slot === 'function') {
                       return h('div', {}, [slot()]);
                     } else if (slot && typeof slot.default === 'function') {

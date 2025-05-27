@@ -48,6 +48,7 @@ declare module 'vue' {
     Prose: typeof import('./src/components/Prose.vue')['default']
     Radio: typeof import('./src/components/Radio.vue')['default']
     RadioGroup: typeof import('./src/components/RadioGroup.vue')['default']
+    RichTextEditor: typeof import('./src/components/RichTextEditor.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Scrollspy: typeof import('./src/components/Scrollspy.vue')['default']
