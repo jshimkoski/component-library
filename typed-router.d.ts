@@ -34,6 +34,7 @@ declare module 'vue-router/auto-routes' {
     '/prose-component': RouteRecordInfo<'/prose-component', '/prose-component', Record<never, never>, Record<never, never>>,
     '/radio-component': RouteRecordInfo<'/radio-component', '/radio-component', Record<never, never>, Record<never, never>>,
     '/radiogroup-component': RouteRecordInfo<'/radiogroup-component', '/radiogroup-component', Record<never, never>, Record<never, never>>,
+    '/richtexteditor-component': RouteRecordInfo<'/richtexteditor-component', '/richtexteditor-component', Record<never, never>, Record<never, never>>,
     '/scrollspy-component': RouteRecordInfo<'/scrollspy-component', '/scrollspy-component', Record<never, never>, Record<never, never>>,
     '/select-component': RouteRecordInfo<'/select-component', '/select-component', Record<never, never>, Record<never, never>>,
     '/sheet-component': RouteRecordInfo<'/sheet-component', '/sheet-component', Record<never, never>, Record<never, never>>,

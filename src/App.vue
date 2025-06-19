@@ -37,7 +37,6 @@
       </nav>
     </template>
     <template #default>
-      <RichTextEditor v-model="htmlContent" />
       <RouterView />
     </template>
     <template #right-bar>
@@ -69,10 +68,6 @@
 </template>
 
 <script setup lang="ts">
-  import RichTextEditor from "./components/RichTextEditor.vue";
-
-  const htmlContent = ref("");
-
   const router = useRouter();
   const route = useRoute();
 
@@ -109,6 +104,11 @@
               id: "radio-group",
               label: "Radio Group",
               to: "radiogroup-component",
+            },
+            {
+              id: "rich-text-editor",
+              label: "Rich Text Editor",
+              to: "richtexteditor-component",
             },
             { id: "select", label: "Select", to: "select-component" },
             { id: "slider", label: "Slider", to: "slider-component" },

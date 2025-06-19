@@ -1,31 +1,30 @@
 <template>
   <div>
-    <!-- Block type selector -->
-    <label>
-      Block type:
-      <select
+    <div class="flex gap-4 items-center mb-4">
+      <!-- Block type selector -->
+      <Select
         v-model="nextBlockType"
-        style="margin-bottom: 8px"
-      >
-        <option value="p">Paragraph</option>
-        <option value="h1">Heading 1</option>
-        <option value="h2">Heading 2</option>
-        <option value="h3">Heading 3</option>
-        <option value="pre">Preformatted</option>
-      </select>
-    </label>
+        :options="[
+          { label: 'Paragraph', value: 'p' },
+          { label: 'Heading 1', value: 'h1' },
+          { label: 'Heading 2', value: 'h2' },
+          { label: 'Heading 3', value: 'h3' },
+          { label: 'Preformatted', value: 'pre' },
+        ]"
+      />
 
-    <!-- Inline formatting buttons -->
-    <div style="margin-bottom: 8px">
-      <button
-        v-for="t in inlineTypes"
-        :key="t"
-        @mousedown="applyInlineFormat(t, $event)"
-        type="button"
-        :title="`Format as ${t}`"
-      >
-        {{ t }}
-      </button>
+      <!-- Inline formatting buttons -->
+      <div class="flex items-center">
+        <Action
+          v-for="t in inlineTypes"
+          :key="t"
+          @mousedown="applyInlineFormat(t, $event)"
+          type="button"
+          :title="`Format as ${t}`"
+        >
+          {{ t }}
+        </Action>
+      </div>
     </div>
 
     <!-- Editor -->
@@ -189,6 +188,73 @@
     (window as any).testRichTextEditor = testInlineElementBehavior;
   }
 
+  /**
+   * Merges consecutive inline elements of the same type into a single element.
+   * This keeps the DOM clean and prevents unnecessary fragmentation.
+   */
+  function mergeConsecutiveInlineElements() {
+    if (!editor.value) return;
+    const inlineTags = ["b", "i", "em", "strong", "span"];
+    // For each block element
+    const blocks = editor.value.querySelectorAll("p, h1, h2, h3, pre");
+    blocks.forEach((block) => {
+      // 1. Merge consecutive inline elements of the same type
+      inlineTags.forEach((tag) => {
+        let node = block.firstChild;
+        while (node) {
+          // Find run of consecutive same-tag elements
+          if (
+            node.nodeType === 1 &&
+            (node as HTMLElement).tagName.toLowerCase() === tag
+          ) {
+            let current = node as HTMLElement;
+            let next = current.nextSibling;
+            while (
+              next &&
+              next.nodeType === 1 &&
+              (next as HTMLElement).tagName.toLowerCase() === tag
+            ) {
+              // Merge next into current
+              while (next.firstChild) {
+                current.appendChild(next.firstChild);
+              }
+              const toRemove = next;
+              next = next.nextSibling;
+              toRemove.parentNode?.removeChild(toRemove);
+            }
+            node = current.nextSibling;
+          } else {
+            node = node.nextSibling;
+          }
+        }
+      });
+
+      // 2. Recursively merge consecutive text nodes at all levels
+      function mergeTextNodesRecursive(element: Node) {
+        let node = element.firstChild;
+        while (node) {
+          if (node.nodeType === 3) {
+            let current = node;
+            let next = current.nextSibling;
+            while (next && next.nodeType === 3) {
+              current.textContent += next.textContent ?? "";
+              const toRemove = next;
+              next = next.nextSibling;
+              toRemove.parentNode?.removeChild(toRemove);
+            }
+            node = current.nextSibling;
+          } else if (node.nodeType === 1) {
+            mergeTextNodesRecursive(node);
+            node = node.nextSibling;
+          } else {
+            node = node.nextSibling;
+          }
+        }
+      }
+      mergeTextNodesRecursive(block);
+    });
+  }
+
   function getCurrentBlock(): HTMLElement | null {
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0) return null;
@@ -227,20 +293,103 @@
       if (e.key === "b") {
         e.preventDefault();
         applyInlineFormat("b", e);
+        mergeConsecutiveInlineElements();
         return;
       } else if (e.key === "i") {
         e.preventDefault();
         applyInlineFormat("i", e);
+        mergeConsecutiveInlineElements();
         return;
       } else if (e.key === "u") {
         e.preventDefault();
         applyInlineFormat("em", e);
+        mergeConsecutiveInlineElements();
         return;
       }
     }
 
     if (e.key === "Enter") {
       e.preventDefault();
+      const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0) return;
+      const range = selection.getRangeAt(0);
+
+      // Check if inside an inline element
+      let container = range.startContainer;
+      let inlineParent: HTMLElement | null = null;
+      let offsetInParent = 0;
+
+      if (container.nodeType === 3) {
+        const parentInfo = findInlineParent(container, "");
+        inlineParent = parentInfo.element;
+        offsetInParent = parentInfo.offset;
+      }
+
+      if (inlineParent) {
+        // Split the inline element at the caret
+        const tagName = inlineParent.tagName.toLowerCase();
+        const { before, after } = splitInlineElement(
+          inlineParent,
+          offsetInParent,
+        );
+
+        // Create new block and inline element
+        const newBlock = document.createElement("p");
+        const newInline = document.createElement(tagName);
+
+        // If there's content after the caret, move it to the new inline element
+        if (after && after.textContent && after.textContent.length > 0) {
+          newInline.textContent = after.textContent;
+        } else {
+          newInline.innerHTML = "<br>";
+        }
+        newBlock.appendChild(newInline);
+
+        // Remove content after caret from current inline
+        if (before && before.textContent && before.textContent.length > 0) {
+          inlineParent.textContent = before.textContent;
+        } else {
+          // If nothing before, insert <br> to keep block visible
+          inlineParent.innerHTML = "<br>";
+        }
+
+        // Find the block parent to insert after
+        let blockParent = inlineParent.parentElement;
+        while (
+          blockParent &&
+          !["p", "h1", "h2", "h3", "pre"].includes(
+            blockParent.tagName.toLowerCase(),
+          )
+        ) {
+          blockParent = blockParent.parentElement;
+        }
+        if (blockParent) {
+          blockParent.insertAdjacentElement("afterend", newBlock);
+        } else {
+          // fallback: insert after inlineParent
+          inlineParent.insertAdjacentElement("afterend", newBlock);
+        }
+
+        // Place caret at start of new inline element
+        setTimeout(() => {
+          const sel = window.getSelection();
+          if (sel && newInline.firstChild) {
+            const r = document.createRange();
+            if (newInline.firstChild.nodeType === 3) {
+              r.setStart(newInline.firstChild, 0);
+            } else {
+              r.setStart(newInline, 0);
+            }
+            r.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(r);
+          }
+          mergeConsecutiveInlineElements();
+        }, 0);
+        return;
+      }
+
+      // Default: split block as before
       const currentBlock = getCurrentBlock();
       if (!currentBlock) return;
 
@@ -249,6 +398,7 @@
 
       currentBlock.insertAdjacentElement("afterend", newBlock);
       setCaret(newBlock, "start");
+      mergeConsecutiveInlineElements();
     } else if (e.key === "ArrowUp") {
       const currentBlock = getCurrentBlock();
       if (!currentBlock) return;
@@ -291,6 +441,11 @@
           setCaret(nextBlock, "start");
         }
       }
+    } else if (e.key === "Backspace" || e.key === "Delete") {
+      // After block merge, merge inline siblings
+      setTimeout(() => {
+        mergeConsecutiveInlineElements();
+      }, 0);
     }
   }
 
@@ -452,6 +607,7 @@
 
       selection.removeAllRanges();
       selection.addRange(range);
+      mergeConsecutiveInlineElements();
     } else {
       // Handle text selection - split any inline elements that contain the selection
       const startContainer = range.startContainer;
@@ -506,6 +662,7 @@
           range.collapse(true);
           selection.removeAllRanges();
           selection.addRange(range);
+          mergeConsecutiveInlineElements();
           return;
         }
       }
@@ -520,6 +677,7 @@
       range.collapse(true);
       selection.removeAllRanges();
       selection.addRange(range);
+      mergeConsecutiveInlineElements();
     }
   }
 
@@ -541,6 +699,7 @@
       ensureNoTextNodes();
       removeAttributes();
       removeZeroWidthSpacesAfterTyping();
+      mergeConsecutiveInlineElements();
       modelValue.value = editor.value.innerHTML;
     }
   }
