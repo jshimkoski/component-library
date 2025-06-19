@@ -1,11 +1,10 @@
 <template>
   <div>
-    <!-- Block type selector applies to focused block -->
+    <!-- Block type selector -->
     <label>
       Block type:
       <select
-        v-if="elements[focusedBlockIdx]"
-        v-model="elements[focusedBlockIdx].type"
+        v-model="nextBlockType"
         style="margin-bottom: 8px"
       >
         <option value="p">Paragraph</option>
@@ -21,602 +20,762 @@
       <button
         v-for="t in inlineTypes"
         :key="t"
-        @click="appendInlineElement(t)"
+        @mousedown="applyInlineFormat(t, $event)"
         type="button"
+        :title="`Format as ${t}`"
       >
         {{ t }}
       </button>
     </div>
 
-    <!-- The rich text editor area -->
-    <div
-      class="w-full min-h-24 p-4 rounded-base radius-2xl:rounded-2xl border border-base-300 dark:border-base-700 bg-white dark:bg-base-950 text-base-700 dark:text-base-300 hover:bg-base-50 dark:hover:bg-base-900 focus:bg-white dark:focus:bg-base-950 focus:border-primary-500 focus:outline-2 focus:-outline-offset-2 focus:outline-primary-500 dark:focus:outline-primary-400 transition-colors resize-none"
-    >
-      <template
-        v-for="(block, blockIdx) in elements"
-        :key="block.id"
+    <!-- Editor -->
+    <Prose>
+      <div
+        ref="editor"
+        contenteditable="true"
+        spellcheck="false"
+        :class="`
+          w-full min-h-24 p-4
+          rounded-base
+          radius-2xl:rounded-2xl
+          border border-base-300 dark:border-base-700
+          bg-white dark:bg-base-950
+          text-base-700 dark:text-base-300
+          hover:bg-base-50 dark:hover:bg-base-900
+          focus:bg-white dark:focus:bg-base-950
+          focus:border-primary-500
+          focus:outline-2 focus:-outline-offset-2 focus:outline-primary-500 dark:focus:outline-primary-400
+          transition-colors
+          resize-none
+        `"
+        @keydown="onKeydown"
+        @input="onInput"
       >
-        <component
-          :is="block.type"
-          class="cursor-text flex flex-wrap"
-          @click="onBlockClick(blockIdx, $event)"
-        >
-          <template
-            v-for="(child, childIdx) in block.children"
-            :key="child.id"
-          >
-            <component
-              :is="child.type"
-              contenteditable
-              spellcheck="false"
-              :ref="setChildRef(blockIdx, childIdx)"
-              :tabindex="0"
-              :placeholder="'Type here...'"
-              style="
-                outline: none;
-                min-width: 1ch;
-                min-height: 1em;
-                margin-right: 2px;
-                display: inline-block;
-              "
-              @focus="setFocus(blockIdx, childIdx)"
-              @keydown.enter.prevent="handleEnter(blockIdx, childIdx, $event)"
-              @keydown.up.prevent="focusPrev(blockIdx, childIdx)"
-              @keydown.down.prevent="focusNext(blockIdx, childIdx)"
-              @keydown.backspace="handleBackspace(blockIdx, childIdx, $event)"
-              @keydown.delete="handleDelete(blockIdx, childIdx, $event)"
-              @keydown.left="handleLeftArrow(blockIdx, childIdx, $event)"
-              @keydown.right="handleRightArrow(blockIdx, childIdx, $event)"
-              @input="updateContent($event, blockIdx, childIdx)"
-            />
-          </template>
-        </component>
-      </template>
-    </div>
+        <p><br /></p>
+      </div>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { ref, onMounted, watch } from "vue";
+  import Prose from "./Prose.vue";
+
+  const modelValue = defineModel({
+    type: String,
+    default: "",
+  });
+
   type InlineType = "span" | "b" | "i" | "em" | "strong";
   type BlockType = "p" | "h1" | "h2" | "h3" | "pre";
 
-  interface InlineChild {
-    id: string;
-    type: InlineType;
-    content: string;
-  }
-
-  interface BlockElement {
-    id: string;
-    type: BlockType;
-    children: InlineChild[];
-  }
-
-  function uuid(): string {
-    return crypto.randomUUID();
-  }
-
-  function createChild(content = "", type: InlineType = "span"): InlineChild {
-    return { id: uuid(), type, content };
-  }
-
-  function createBlock(
-    type: BlockType = "p",
-    children: InlineChild[] = [createChild()],
-  ): BlockElement {
-    return { id: uuid(), type, children };
-  }
-
   const inlineTypes: InlineType[] = ["span", "b", "i", "em", "strong"];
-  const elements = ref<BlockElement[]>([createBlock()]);
+  const nextBlockType = ref<BlockType>("p");
+  const editor = ref<HTMLDivElement | null>(null);
 
-  const childRefs: Ref<Array<Array<HTMLElement | null>>> = ref([]);
+  // Test function to verify inline element behavior
+  function testInlineElementBehavior() {
+    console.log("Testing inline element behavior:");
+    console.log("=".repeat(50));
+    console.log("EXPECTED BEHAVIORS:");
+    console.log(
+      "1. Ctrl+B inside <b>bold</b> → creates <span> instead of nested <b>",
+    );
+    console.log(
+      "2. Ctrl+I inside <i>italic</i> → creates <span> instead of nested <i>",
+    );
+    console.log(
+      "3. Ctrl+B inside <i>italic</i> → creates <b> normally (different types)",
+    );
+    console.log("4. No nesting of same element types is allowed");
+    console.log("=".repeat(50));
 
-  function setChildRef(blockIdx: number, childIdx: number) {
-    return (el: HTMLElement | null) => {
-      if (!childRefs.value[blockIdx]) childRefs.value[blockIdx] = [];
-      childRefs.value[blockIdx][childIdx] = el;
+    // Test 1: Pressing Ctrl+B inside a <b> element should create a <span>
+    const testContent = editor.value;
+    if (testContent) {
+      testContent.innerHTML = "<p>This is <b>bold text</b> content.</p>";
+
+      // Simulate cursor position inside the bold element
+      const boldElement = testContent.querySelector("b");
+      if (boldElement && boldElement.firstChild) {
+        const range = document.createRange();
+        range.setStart(boldElement.firstChild, 2); // Position at "ld"
+        range.collapse(true);
+
+        const selection = window.getSelection();
+        if (selection) {
+          selection.removeAllRanges();
+          selection.addRange(range);
+
+          // Test our findInlineParent function
+          const parentInfo = findInlineParent(boldElement.firstChild, "b");
+          console.log(
+            "Test 1 - Found parent:",
+            parentInfo.element?.tagName,
+            "at offset:",
+            parentInfo.offset,
+          );
+
+          // Should find the bold element and return span when applying same format
+          const shouldUseSpan =
+            parentInfo.element?.tagName.toLowerCase() === "b";
+          console.log("Test 1 - Should use span instead of b:", shouldUseSpan);
+          console.log("Test 1 - Expected: true (prevents <b> nesting)");
+        }
+      }
+
+      // Test 2: Complex nested scenario - Ctrl+B inside <i><b>text</b></i>
+      testContent.innerHTML =
+        "<p>This is <i>italic <b>bold and italic</b> text</i>.</p>";
+      const nestedBold = testContent.querySelector("i b");
+      if (nestedBold && nestedBold.firstChild) {
+        const range2 = document.createRange();
+        range2.setStart(nestedBold.firstChild, 3); // Position at "d a"
+        range2.collapse(true);
+
+        const selection2 = window.getSelection();
+        if (selection2) {
+          selection2.removeAllRanges();
+          selection2.addRange(range2);
+
+          const parentInfo2 = findInlineParent(nestedBold.firstChild, "b");
+          console.log(
+            "Test 2 - Found parent in nested structure:",
+            parentInfo2.element?.tagName,
+            "at offset:",
+            parentInfo2.offset,
+          );
+
+          const shouldUseSpan2 =
+            parentInfo2.element?.tagName.toLowerCase() === "b";
+          console.log("Test 2 - Should use span instead of b:", shouldUseSpan2);
+          console.log(
+            "Test 2 - Expected: true (prevents nested <b> even within <i>)",
+          );
+        }
+      }
+
+      // Test 3: Different tag types - Ctrl+I inside <b>text</b> should work normally
+      testContent.innerHTML = "<p>This is <b>bold text</b> content.</p>";
+      const boldForItalic = testContent.querySelector("b");
+      if (boldForItalic && boldForItalic.firstChild) {
+        const range3 = document.createRange();
+        range3.setStart(boldForItalic.firstChild, 2);
+        range3.collapse(true);
+
+        const selection3 = window.getSelection();
+        if (selection3) {
+          selection3.removeAllRanges();
+          selection3.addRange(range3);
+
+          const parentInfo3 = findInlineParent(boldForItalic.firstChild, "i");
+          console.log(
+            "Test 3 - Found parent for italic in bold:",
+            parentInfo3.element?.tagName,
+            "at offset:",
+            parentInfo3.offset,
+          );
+
+          const shouldUseI = parentInfo3.element?.tagName.toLowerCase() !== "i";
+          console.log("Test 3 - Should use i (not span):", shouldUseI);
+          console.log("Test 3 - Expected: true (allows <i> inside <b>)");
+        }
+      }
+    }
+  }
+
+  // Expose test function globally for console access
+  if (typeof window !== "undefined") {
+    (window as any).testRichTextEditor = testInlineElementBehavior;
+  }
+
+  function getCurrentBlock(): HTMLElement | null {
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0) return null;
+
+    let node: Node | null = selection.getRangeAt(0).startContainer;
+    while (node && node !== editor.value) {
+      if (node.nodeType === 1) {
+        const tagName = (node as HTMLElement).tagName.toLowerCase();
+        if (["p", "h1", "h2", "h3", "pre"].includes(tagName)) {
+          return node as HTMLElement;
+        }
+      }
+      node = node.parentNode;
+    }
+    return null;
+  }
+
+  function setCaret(element: HTMLElement, position: "start" | "end") {
+    const range = document.createRange();
+    const selection = window.getSelection();
+
+    if (position === "start") {
+      range.setStart(element, 0);
+    } else {
+      range.setStart(element, element.childNodes.length);
+    }
+
+    range.collapse(true);
+    selection?.removeAllRanges();
+    selection?.addRange(range);
+  }
+
+  function onKeydown(e: KeyboardEvent) {
+    // Handle keyboard shortcuts for formatting
+    if (e.ctrlKey || e.metaKey) {
+      if (e.key === "b") {
+        e.preventDefault();
+        applyInlineFormat("b", e);
+        return;
+      } else if (e.key === "i") {
+        e.preventDefault();
+        applyInlineFormat("i", e);
+        return;
+      } else if (e.key === "u") {
+        e.preventDefault();
+        applyInlineFormat("em", e);
+        return;
+      }
+    }
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const currentBlock = getCurrentBlock();
+      if (!currentBlock) return;
+
+      const newBlock = document.createElement("p");
+      newBlock.innerHTML = "<br>";
+
+      currentBlock.insertAdjacentElement("afterend", newBlock);
+      setCaret(newBlock, "start");
+    } else if (e.key === "ArrowUp") {
+      const currentBlock = getCurrentBlock();
+      if (!currentBlock) return;
+
+      const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0) return;
+
+      // Check if we're at the start of the block
+      const range = selection.getRangeAt(0);
+      const atStart =
+        range.startOffset === 0 &&
+        (range.startContainer === currentBlock ||
+          range.startContainer === currentBlock.firstChild);
+
+      if (atStart) {
+        e.preventDefault();
+        const prevBlock = currentBlock.previousElementSibling as HTMLElement;
+        if (prevBlock) {
+          setCaret(prevBlock, "end");
+        }
+      }
+    } else if (e.key === "ArrowDown") {
+      const currentBlock = getCurrentBlock();
+      if (!currentBlock) return;
+
+      const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0) return;
+
+      // Check if we're at the end of the block
+      const range = selection.getRangeAt(0);
+      const atEnd =
+        range.startOffset === range.startContainer.textContent?.length ||
+        (range.startContainer === currentBlock &&
+          range.startOffset === currentBlock.childNodes.length);
+
+      if (atEnd) {
+        e.preventDefault();
+        const nextBlock = currentBlock.nextElementSibling as HTMLElement;
+        if (nextBlock) {
+          setCaret(nextBlock, "start");
+        }
+      }
+    }
+  }
+
+  /**
+   * Finds the most appropriate inline parent element for the given node and target tag.
+   *
+   * Priority logic:
+   * 1. First looks for an exact match of the target tag type (prevents nesting)
+   * 2. Falls back to any inline element if no exact match is found
+   * 3. Calculates the text offset within the found parent element
+   *
+   * @param startNode - The text node where the cursor is positioned
+   * @param targetTag - The tag type we want to apply ('b', 'i', 'em', etc.)
+   * @returns Object with the parent element and text offset within it
+   */
+  function findInlineParent(
+    startNode: Node,
+    targetTag: string,
+  ): { element: HTMLElement | null; offset: number } {
+    if (startNode.nodeType !== 3) {
+      return { element: null, offset: 0 };
+    }
+
+    let parent = startNode.parentNode as HTMLElement;
+    let exactMatch: HTMLElement | null = null;
+    let fallbackMatch: HTMLElement | null = null;
+    let textOffset = 0;
+
+    // Calculate text offset from start of text node
+    const range = window.getSelection()?.getRangeAt(0);
+    if (range) {
+      textOffset = range.startOffset;
+    }
+
+    // Traverse up to find inline parents
+    while (parent && parent !== editor.value) {
+      const parentTag = parent.tagName.toLowerCase();
+      if (["span", "b", "i", "em", "strong"].includes(parentTag)) {
+        if (parentTag === targetTag && !exactMatch) {
+          exactMatch = parent;
+          // Calculate offset within this parent's text content
+          const walker = document.createTreeWalker(
+            parent,
+            NodeFilter.SHOW_TEXT,
+            null,
+          );
+
+          let currentOffset = 0;
+          let node;
+          while ((node = walker.nextNode())) {
+            if (node === startNode) {
+              textOffset = currentOffset + textOffset;
+              break;
+            }
+            currentOffset += node.textContent?.length || 0;
+          }
+          break;
+        } else if (!fallbackMatch) {
+          fallbackMatch = parent;
+        }
+      }
+      parent = parent.parentNode as HTMLElement;
+    }
+
+    return {
+      element: exactMatch || fallbackMatch,
+      offset: textOffset,
     };
   }
 
-  const focusedBlockIdx = ref(0);
-  const focusedChildIdx = ref(0);
+  function splitInlineElement(
+    element: HTMLElement,
+    offset: number,
+  ): { before: HTMLElement | null; after: HTMLElement | null } {
+    const tagName = element.tagName.toLowerCase();
+    const textContent = element.textContent || "";
 
-  function setFocus(blockIdx: number, childIdx: number) {
-    focusedBlockIdx.value = blockIdx;
-    focusedChildIdx.value = childIdx;
-  }
+    let before: HTMLElement | null = null;
+    let after: HTMLElement | null = null;
 
-  function moveCaretToEnd(el: HTMLElement | null) {
-    if (!el) return;
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    range.collapse(false);
-    const sel = window.getSelection();
-    if (sel) {
-      sel.removeAllRanges();
-      sel.addRange(range);
+    if (offset > 0) {
+      before = document.createElement(tagName);
+      before.textContent = textContent.substring(0, offset);
     }
-  }
-  function moveCaretToStart(el: HTMLElement | null) {
-    if (!el) return;
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    range.collapse(true);
-    const sel = window.getSelection();
-    if (sel) {
-      sel.removeAllRanges();
-      sel.addRange(range);
+
+    if (offset < textContent.length) {
+      after = document.createElement(tagName);
+      after.textContent = textContent.substring(offset);
     }
+
+    return { before, after };
   }
 
-  function updateContent(event: Event, blockIdx: number, childIdx: number) {
-    const target = event.target as HTMLElement;
-    elements.value[blockIdx].children[childIdx].content = target.innerText;
-  }
-
-  function focusPrev(blockIdx: number, childIdx: number) {
-    if (childIdx > 0) {
-      nextTick(() => {
-        childRefs.value[blockIdx][childIdx - 1]?.focus();
-        moveCaretToEnd(childRefs.value[blockIdx][childIdx - 1]);
-        setFocus(blockIdx, childIdx - 1);
-      });
-    } else if (blockIdx > 0) {
-      const prevBlock = elements.value[blockIdx - 1];
-      const lastChildIdx = prevBlock.children.length - 1;
-      nextTick(() => {
-        childRefs.value[blockIdx - 1][lastChildIdx]?.focus();
-        moveCaretToEnd(childRefs.value[blockIdx - 1][lastChildIdx]);
-        setFocus(blockIdx - 1, lastChildIdx);
-      });
-    }
-  }
-  function focusNext(blockIdx: number, childIdx: number) {
-    const currBlock = elements.value[blockIdx];
-    if (childIdx < currBlock.children.length - 1) {
-      nextTick(() => {
-        childRefs.value[blockIdx][childIdx + 1]?.focus();
-        moveCaretToStart(childRefs.value[blockIdx][childIdx + 1]);
-        setFocus(blockIdx, childIdx + 1);
-      });
-    } else if (blockIdx < elements.value.length - 1) {
-      nextTick(() => {
-        childRefs.value[blockIdx + 1][0]?.focus();
-        moveCaretToStart(childRefs.value[blockIdx + 1][0]);
-        setFocus(blockIdx + 1, 0);
-      });
-    }
-  }
-
-  // ENTER: Create a new block below current, focus its first child
-  function handleEnter(
-    blockIdx: number,
-    childIdx: number,
-    event: KeyboardEvent,
-  ) {
-    event.preventDefault();
-    const el = childRefs.value[blockIdx][childIdx];
+  /**
+   * Applies inline formatting (bold, italic, etc.) to the current selection or cursor position.
+   *
+   * Key anti-nesting behavior:
+   * - If the cursor is inside an inline element of the same type being applied (e.g., pressing Ctrl+B while inside a <b> element),
+   *   it creates a new <span> element instead to prevent nesting
+   * - This ensures clean HTML structure without nested formatting elements of the same type
+   * - When text is selected within an inline element, it splits the element and applies the new format
+   *
+   * @param tag - The HTML tag to apply ('b', 'i', 'em', 'strong', 'span')
+   * @param e - The keyboard event that triggered this action
+   */
+  function applyInlineFormat(tag: InlineType, e: Event) {
+    e.preventDefault();
     const selection = window.getSelection();
-    let before = "",
-      after = "";
-    if (
-      selection &&
-      el &&
-      selection.rangeCount > 0 &&
-      el.contains(selection.getRangeAt(0).startContainer)
-    ) {
-      const range = selection.getRangeAt(0);
-      const caretPos = range.startOffset;
-      const node = range.startContainer;
-      if (node.nodeType === Node.TEXT_NODE) {
-        before = node.textContent?.slice(0, caretPos) ?? "";
-        after = node.textContent?.slice(caretPos) ?? "";
-      } else {
-        before = el.innerText;
-        after = "";
+    if (!selection || selection.rangeCount === 0) return;
+
+    const range = selection.getRangeAt(0);
+    if (range.collapsed) {
+      // Insert empty tag at cursor, splitting inline element if necessary
+      let container = range.startContainer;
+      let inlineParent: HTMLElement | null = null;
+      let offsetInParent = 0;
+
+      // Find if we're inside an inline element
+      if (container.nodeType === 3) {
+        const parentInfo = findInlineParent(container, tag);
+        inlineParent = parentInfo.element;
+        offsetInParent = parentInfo.offset;
       }
-    } else if (el) {
-      before = el.innerText;
-      after = "";
-    }
 
-    elements.value[blockIdx].children[childIdx].content = before;
+      if (inlineParent) {
+        // Check if we're trying to apply the same format as the parent
+        const parentTag = inlineParent.tagName.toLowerCase();
+        const newTag = parentTag === tag ? "span" : tag;
 
-    const afterChildren: InlineChild[] = [];
-    if (after) {
-      afterChildren.push(createChild(after));
-    }
-    for (
-      let i = childIdx + 1;
-      i < elements.value[blockIdx].children.length;
-      i++
-    ) {
-      afterChildren.push({ ...elements.value[blockIdx].children[i] });
-    }
-    elements.value[blockIdx].children.splice(childIdx + 1);
+        // Split the inline element at cursor position
+        const { before, after } = splitInlineElement(
+          inlineParent,
+          offsetInParent,
+        );
 
-    elements.value.splice(
-      blockIdx + 1,
-      0,
-      createBlock(
-        elements.value[blockIdx].type,
-        afterChildren.length ? afterChildren : [createChild()],
-      ),
+        // Create new element with zero-width space for cursor
+        const newElement = document.createElement(newTag);
+        newElement.textContent = "\u200B";
+
+        // Replace original with split parts and new element
+        const fragment = document.createDocumentFragment();
+        if (before) fragment.appendChild(before);
+        fragment.appendChild(newElement);
+        if (after) fragment.appendChild(after);
+
+        inlineParent.replaceWith(fragment);
+
+        // Set cursor after zero-width space
+        range.setStart(newElement.firstChild!, 1);
+        range.collapse(true);
+      } else {
+        // Not inside inline element, just insert
+        const element = document.createElement(tag);
+        element.textContent = "\u200B";
+        range.insertNode(element);
+        range.setStart(element.firstChild!, 1);
+        range.collapse(true);
+      }
+
+      selection.removeAllRanges();
+      selection.addRange(range);
+    } else {
+      // Handle text selection - split any inline elements that contain the selection
+      const startContainer = range.startContainer;
+      const endContainer = range.endContainer;
+      const startOffset = range.startOffset;
+      const endOffset = range.endOffset;
+
+      // Extract selected text
+      const selectedText = range.toString();
+
+      // Handle case where selection is within a single text node inside an inline element
+      if (startContainer === endContainer && startContainer.nodeType === 3) {
+        // Find the most appropriate parent element
+        const parentInfo = findInlineParent(startContainer, tag);
+        const targetParent = parentInfo.element;
+
+        if (targetParent) {
+          // Check if we're trying to apply the same format as the parent
+          const parentTag = targetParent.tagName.toLowerCase();
+          const newTag = parentTag === tag ? "span" : tag;
+
+          // Split the parent inline element
+          const textContent = startContainer.textContent || "";
+          const beforeText = textContent.substring(0, startOffset);
+          const afterText = textContent.substring(endOffset);
+
+          const fragment = document.createDocumentFragment();
+
+          // Add before part if exists
+          if (beforeText) {
+            const beforeElement = document.createElement(parentTag);
+            beforeElement.textContent = beforeText;
+            fragment.appendChild(beforeElement);
+          }
+
+          // Add new formatted element
+          const newElement = document.createElement(newTag);
+          newElement.textContent = selectedText;
+          fragment.appendChild(newElement);
+
+          // Add after part if exists
+          if (afterText) {
+            const afterElement = document.createElement(parentTag);
+            afterElement.textContent = afterText;
+            fragment.appendChild(afterElement);
+          }
+
+          targetParent.replaceWith(fragment);
+
+          // Set cursor after new element
+          range.setStartAfter(newElement);
+          range.collapse(true);
+          selection.removeAllRanges();
+          selection.addRange(range);
+          return;
+        }
+      }
+
+      // Default case - just replace selection with new element
+      range.deleteContents();
+      const element = document.createElement(tag);
+      element.textContent = selectedText;
+      range.insertNode(element);
+
+      range.setStartAfter(element);
+      range.collapse(true);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  }
+
+  function changeBlockType() {
+    const currentBlock = getCurrentBlock();
+    if (!currentBlock) return;
+
+    const newBlock = document.createElement(nextBlockType.value);
+    newBlock.innerHTML = currentBlock.innerHTML;
+
+    currentBlock.replaceWith(newBlock);
+    setCaret(newBlock, "end");
+  }
+
+  function onInput() {
+    if (editor.value) {
+      // Fix browser restoring inline formatting
+      fixBrowserFormattingRestoration();
+      ensureNoTextNodes();
+      removeAttributes();
+      removeZeroWidthSpacesAfterTyping();
+      modelValue.value = editor.value.innerHTML;
+    }
+  }
+
+  function fixBrowserFormattingRestoration() {
+    if (!editor.value) return;
+
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0) return;
+
+    const range = selection.getRangeAt(0);
+    const container = range.startContainer;
+
+    // Check if cursor is inside a nested inline element that shouldn't exist
+    if (container.nodeType === 3) {
+      // Text node
+      let parent = container.parentNode as HTMLElement;
+      let nestedInline = null;
+
+      // Look for nested inline elements
+      while (parent && parent !== editor.value) {
+        if (
+          ["span", "b", "i", "em", "strong"].includes(
+            parent.tagName.toLowerCase(),
+          )
+        ) {
+          const grandParent = parent.parentNode as HTMLElement;
+          if (
+            grandParent &&
+            ["span", "b", "i", "em", "strong"].includes(
+              grandParent.tagName.toLowerCase(),
+            )
+          ) {
+            nestedInline = parent;
+            break;
+          }
+        }
+        parent = parent.parentNode as HTMLElement;
+      }
+
+      // If we found nested inline elements, move content out to sibling
+      if (nestedInline) {
+        const textContent = container.textContent || "";
+        const offset = range.startOffset;
+
+        // Create new span for the text
+        const newSpan = document.createElement("span");
+        newSpan.textContent = textContent;
+
+        // Insert after the nested element
+        nestedInline.parentNode?.insertBefore(
+          newSpan,
+          nestedInline.nextSibling,
+        );
+
+        // Remove the text from nested element
+        container.textContent = "";
+
+        // Move cursor to new span
+        range.setStart(newSpan.firstChild!, offset);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+  }
+
+  function ensureNoTextNodes() {
+    if (!editor.value) return;
+
+    // Check all block elements for direct text nodes
+    const blocks = Array.from(editor.value.children) as HTMLElement[];
+
+    blocks.forEach((block) => {
+      const nodesToWrap: Node[] = [];
+
+      // Find all direct text nodes in the block
+      for (let i = 0; i < block.childNodes.length; i++) {
+        const node = block.childNodes[i];
+        if (node.nodeType === 3 && node.textContent?.trim()) {
+          nodesToWrap.push(node);
+        }
+      }
+
+      // Wrap each text node in a span
+      nodesToWrap.forEach((textNode) => {
+        const span = document.createElement("span");
+        span.textContent = textNode.textContent;
+        block.insertBefore(span, textNode);
+        block.removeChild(textNode);
+      });
+    });
+  }
+
+  function removeAttributes() {
+    if (!editor.value) return;
+
+    // Remove attributes from all block and inline elements
+    const walker = document.createTreeWalker(
+      editor.value,
+      NodeFilter.SHOW_ELEMENT,
+      null,
     );
 
-    nextTick(() => {
-      childRefs.value[blockIdx + 1]?.[0]?.focus();
-      setFocus(blockIdx + 1, 0);
-      moveCaretToStart(childRefs.value[blockIdx + 1]?.[0] ?? null);
-      if (after) {
-        childRefs.value[blockIdx + 1][0]!.innerText = after;
+    const elements: HTMLElement[] = [];
+    let node;
+    while ((node = walker.nextNode())) {
+      const element = node as HTMLElement;
+      const tagName = element.tagName.toLowerCase();
+
+      // Check if it's a block or inline element we care about
+      if (
+        [
+          "p",
+          "h1",
+          "h2",
+          "h3",
+          "pre",
+          "span",
+          "b",
+          "i",
+          "em",
+          "strong",
+        ].includes(tagName)
+      ) {
+        elements.push(element);
+      }
+    }
+
+    // Remove all attributes from these elements
+    elements.forEach((element) => {
+      const attributes = Array.from(element.attributes);
+      attributes.forEach((attr) => {
+        element.removeAttribute(attr.name);
+      });
+    });
+  }
+
+  function removeZeroWidthSpacesAfterTyping() {
+    if (!editor.value) return;
+
+    const selection = window.getSelection();
+    const currentRange =
+      selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+
+    const walker = document.createTreeWalker(
+      editor.value,
+      NodeFilter.SHOW_TEXT,
+      null,
+    );
+
+    const textNodes: Text[] = [];
+    let node;
+    while ((node = walker.nextNode())) {
+      textNodes.push(node as Text);
+    }
+
+    textNodes.forEach((textNode) => {
+      const content = textNode.textContent || "";
+
+      // Remove zero-width spaces if there's real content mixed with them
+      if (content.includes("\u200B") && content.length > 1) {
+        const isCursorHere =
+          currentRange && currentRange.startContainer === textNode;
+        const newContent = content.replace(/\u200B/g, "");
+
+        if (isCursorHere && currentRange) {
+          // Adjust cursor position after removing zero-width spaces
+          const oldOffset = currentRange.startOffset;
+          const beforeCursor = content.substring(0, oldOffset);
+          const zeroWidthCount = (beforeCursor.match(/\u200B/g) || []).length;
+          const newOffset = Math.max(0, oldOffset - zeroWidthCount);
+
+          textNode.textContent = newContent;
+
+          // Restore cursor position
+          currentRange.setStart(textNode, newOffset);
+          currentRange.collapse(true);
+          selection?.removeAllRanges();
+          selection?.addRange(currentRange);
+        } else {
+          textNode.textContent = newContent;
+        }
       }
     });
   }
 
-  // Backspace: merge or delete child/block
-  function handleBackspace(
-    blockIdx: number,
-    childIdx: number,
-    event: KeyboardEvent,
-  ) {
-    const el = childRefs.value[blockIdx][childIdx];
-    const selection = window.getSelection();
-    const isAtStart =
-      selection &&
-      selection.anchorOffset === 0 &&
-      selection.anchorNode === el?.firstChild;
+  // Watch for block type changes
+  watch(nextBlockType, () => {
+    changeBlockType();
+  });
 
-    // If empty, remove child (unless only one child in only one block)
-    if (
-      el &&
-      el.innerText === "" &&
-      (elements.value[blockIdx].children.length > 1 ||
-        elements.value.length > 1)
-    ) {
-      event.preventDefault();
-      elements.value[blockIdx].children.splice(childIdx, 1);
-      // If block has no children, remove block
-      if (elements.value[blockIdx].children.length === 0) {
-        elements.value.splice(blockIdx, 1);
-        nextTick(() => {
-          const prevBlockIdx = Math.max(0, blockIdx - 1);
-          const prevChildIdx = elements.value[prevBlockIdx].children.length - 1;
-          childRefs.value[prevBlockIdx][prevChildIdx]?.focus();
-          setFocus(prevBlockIdx, prevChildIdx);
-          moveCaretToEnd(childRefs.value[prevBlockIdx][prevChildIdx]);
-        });
-      } else {
-        nextTick(() => {
-          const prevIdx = Math.max(0, childIdx - 1);
-          childRefs.value[blockIdx][prevIdx]?.focus();
-          setFocus(blockIdx, prevIdx);
-          moveCaretToEnd(childRefs.value[blockIdx][prevIdx]);
-        });
-      }
-      return;
+  onMounted(() => {
+    if (modelValue.value && editor.value) {
+      editor.value.innerHTML = modelValue.value;
+      ensureNoTextNodes();
+    }
+  });
+
+  watch(modelValue, (val) => {
+    if (editor.value && val !== editor.value.innerHTML) {
+      editor.value.innerHTML = val || "<p><br></p>";
+      // Ensure no text nodes exist
+      ensureNoTextNodes();
+      // Only do aggressive cleanup when setting content programmatically
+      finalCleanupZeroWidthSpaces();
+    }
+  });
+
+  function finalCleanupZeroWidthSpaces() {
+    if (!editor.value) return;
+
+    const walker = document.createTreeWalker(
+      editor.value,
+      NodeFilter.SHOW_TEXT,
+      null,
+    );
+
+    const textNodes: Text[] = [];
+    let node;
+    while ((node = walker.nextNode())) {
+      textNodes.push(node as Text);
     }
 
-    // If caret at start and not first child, merge with previous child
-    if (isAtStart && childIdx > 0) {
-      event.preventDefault();
-      const prev = elements.value[blockIdx].children[childIdx - 1];
-      const curr = elements.value[blockIdx].children[childIdx];
-      prev.content += curr.content;
-      elements.value[blockIdx].children.splice(childIdx, 1);
-      nextTick(() => {
-        childRefs.value[blockIdx][childIdx - 1]!.innerText = prev.content;
-        childRefs.value[blockIdx][childIdx - 1]?.focus();
-        setFocus(blockIdx, childIdx - 1);
-        moveCaretToEnd(childRefs.value[blockIdx][childIdx - 1]);
-      });
-      return;
-    }
-
-    // If caret at start and first child, merge with previous block's last child
-    if (isAtStart && childIdx === 0 && blockIdx > 0) {
-      event.preventDefault();
-      const prevBlock = elements.value[blockIdx - 1];
-      const prevChild = prevBlock.children[prevBlock.children.length - 1];
-      const curr = elements.value[blockIdx].children[childIdx];
-      prevChild.content += curr.content;
-      elements.value[blockIdx].children.splice(childIdx, 1);
-      // If block is empty, remove it
-      if (elements.value[blockIdx].children.length === 0) {
-        elements.value.splice(blockIdx, 1);
-        nextTick(() => {
-          childRefs.value[blockIdx - 1][
-            prevBlock.children.length - 1
-          ]!.innerText = prevChild.content;
-          childRefs.value[blockIdx - 1][prevBlock.children.length - 1]?.focus();
-          setFocus(blockIdx - 1, prevBlock.children.length - 1);
-          moveCaretToEnd(
-            childRefs.value[blockIdx - 1][prevBlock.children.length - 1],
-          );
-        });
-      } else {
-        nextTick(() => {
-          childRefs.value[blockIdx - 1][
-            prevBlock.children.length - 1
-          ]!.innerText = prevChild.content;
-          childRefs.value[blockIdx - 1][prevBlock.children.length - 1]?.focus();
-          setFocus(blockIdx - 1, prevBlock.children.length - 1);
-          moveCaretToEnd(
-            childRefs.value[blockIdx - 1][prevBlock.children.length - 1],
-          );
-        });
-      }
-      return;
-    }
-  }
-
-  // Delete: merge with next child/block, or with previous if at start
-  function handleDelete(
-    blockIdx: number,
-    childIdx: number,
-    event: KeyboardEvent,
-  ) {
-    const el = childRefs.value[blockIdx][childIdx];
-    const selection = window.getSelection();
-
-    // If caret at start, merge with previous sibling (NEW BEHAVIOR)
-    const isAtStart =
-      selection &&
-      selection.anchorOffset === 0 &&
-      selection.anchorNode === el?.firstChild;
-
-    if (isAtStart) {
-      // Same as Backspace at start
-      if (childIdx > 0) {
-        event.preventDefault();
-        const prev = elements.value[blockIdx].children[childIdx - 1];
-        const curr = elements.value[blockIdx].children[childIdx];
-        prev.content += curr.content;
-        elements.value[blockIdx].children.splice(childIdx, 1);
-        nextTick(() => {
-          childRefs.value[blockIdx][childIdx - 1]!.innerText = prev.content;
-          childRefs.value[blockIdx][childIdx - 1]?.focus();
-          setFocus(blockIdx, childIdx - 1);
-          moveCaretToEnd(childRefs.value[blockIdx][childIdx - 1]);
-        });
-        return;
-      }
-      // If at start of first child, merge with previous block's last child
-      if (childIdx === 0 && blockIdx > 0) {
-        event.preventDefault();
-        const prevBlock = elements.value[blockIdx - 1];
-        const prevChild = prevBlock.children[prevBlock.children.length - 1];
-        const curr = elements.value[blockIdx].children[childIdx];
-        prevChild.content += curr.content;
-        elements.value[blockIdx].children.splice(childIdx, 1);
-        if (elements.value[blockIdx].children.length === 0) {
-          elements.value.splice(blockIdx, 1);
-          nextTick(() => {
-            childRefs.value[blockIdx - 1][
-              prevBlock.children.length - 1
-            ]!.innerText = prevChild.content;
-            childRefs.value[blockIdx - 1][
-              prevBlock.children.length - 1
-            ]?.focus();
-            setFocus(blockIdx - 1, prevBlock.children.length - 1);
-            moveCaretToEnd(
-              childRefs.value[blockIdx - 1][prevBlock.children.length - 1],
-            );
-          });
+    textNodes.forEach((textNode) => {
+      const content = textNode.textContent || "";
+      if (content.includes("\u200B")) {
+        if (content.length === 1) {
+          // Remove standalone zero-width spaces
+          textNode.textContent = "";
         } else {
-          nextTick(() => {
-            childRefs.value[blockIdx - 1][
-              prevBlock.children.length - 1
-            ]!.innerText = prevChild.content;
-            childRefs.value[blockIdx - 1][
-              prevBlock.children.length - 1
-            ]?.focus();
-            setFocus(blockIdx - 1, prevBlock.children.length - 1);
-            moveCaretToEnd(
-              childRefs.value[blockIdx - 1][prevBlock.children.length - 1],
-            );
-          });
+          // Remove zero-width spaces mixed with content
+          textNode.textContent = content.replace(/\u200B/g, "");
         }
-        return;
-      }
-    }
-
-    // --- Existing delete-at-end logic ---
-    const isAtEnd = (() => {
-      if (!selection || !el?.firstChild) return false;
-      if (selection.anchorNode !== el.lastChild) return false;
-      return selection.anchorOffset === el.innerText.length;
-    })();
-
-    // If empty, remove child (unless only one child in only one block)
-    if (
-      el &&
-      el.innerText === "" &&
-      (elements.value[blockIdx].children.length > 1 ||
-        elements.value.length > 1)
-    ) {
-      event.preventDefault();
-      elements.value[blockIdx].children.splice(childIdx, 1);
-      if (elements.value[blockIdx].children.length === 0) {
-        elements.value.splice(blockIdx, 1);
-        nextTick(() => {
-          const nextBlockIdx = Math.min(elements.value.length - 1, blockIdx);
-          const nextChildIdx = 0;
-          childRefs.value[nextBlockIdx][nextChildIdx]?.focus();
-          setFocus(nextBlockIdx, nextChildIdx);
-          moveCaretToStart(childRefs.value[nextBlockIdx][nextChildIdx]);
-        });
-      } else {
-        nextTick(() => {
-          const nextIdx = Math.min(
-            childIdx,
-            elements.value[blockIdx].children.length - 1,
-          );
-          childRefs.value[blockIdx][nextIdx]?.focus();
-          setFocus(blockIdx, nextIdx);
-          moveCaretToStart(childRefs.value[blockIdx][nextIdx]);
-        });
-      }
-      return;
-    }
-
-    // If caret at end and not last child, merge with next child
-    if (isAtEnd && childIdx < elements.value[blockIdx].children.length - 1) {
-      event.preventDefault();
-      const curr = elements.value[blockIdx].children[childIdx];
-      const next = elements.value[blockIdx].children[childIdx + 1];
-      curr.content += next.content;
-      elements.value[blockIdx].children.splice(childIdx + 1, 1);
-      nextTick(() => {
-        childRefs.value[blockIdx][childIdx]!.innerText = curr.content;
-        childRefs.value[blockIdx][childIdx]?.focus();
-        setFocus(blockIdx, childIdx);
-        moveCaretToEnd(childRefs.value[blockIdx][childIdx]);
-      });
-      return;
-    }
-
-    // If caret at end and last child, merge with next block's first child
-    if (
-      isAtEnd &&
-      childIdx === elements.value[blockIdx].children.length - 1 &&
-      blockIdx < elements.value.length - 1
-    ) {
-      event.preventDefault();
-      const curr = elements.value[blockIdx].children[childIdx];
-      const nextBlock = elements.value[blockIdx + 1];
-      const nextChild = nextBlock.children[0];
-      curr.content += nextChild.content;
-      nextBlock.children.splice(0, 1);
-      if (nextBlock.children.length === 0) {
-        elements.value.splice(blockIdx + 1, 1);
-      }
-      nextTick(() => {
-        childRefs.value[blockIdx][childIdx]!.innerText = curr.content;
-        childRefs.value[blockIdx][childIdx]?.focus();
-        setFocus(blockIdx, childIdx);
-        moveCaretToEnd(childRefs.value[blockIdx][childIdx]);
-      });
-      return;
-    }
-  }
-
-  function handleLeftArrow(
-    blockIdx: number,
-    childIdx: number,
-    event: KeyboardEvent,
-  ) {
-    if (event.shiftKey) return; // Don't override selection
-    const el = childRefs.value[blockIdx][childIdx];
-    const selection = window.getSelection();
-    const isAtStart =
-      selection &&
-      selection.anchorOffset === 0 &&
-      selection.anchorNode === el?.firstChild;
-
-    if (isAtStart) {
-      if (childIdx > 0) {
-        // Move to end of previous inline
-        event.preventDefault();
-        const prevEl = childRefs.value[blockIdx][childIdx - 1];
-        nextTick(() => {
-          prevEl?.focus();
-          setFocus(blockIdx, childIdx - 1);
-          moveCaretToEnd(prevEl);
-        });
-      } else if (blockIdx > 0) {
-        // Move to end of previous block's last inline
-        event.preventDefault();
-        const prevBlock = elements.value[blockIdx - 1];
-        const lastChildIdx = prevBlock.children.length - 1;
-        const prevEl = childRefs.value[blockIdx - 1][lastChildIdx];
-        nextTick(() => {
-          prevEl?.focus();
-          setFocus(blockIdx - 1, lastChildIdx);
-          moveCaretToEnd(prevEl);
-        });
-      }
-    }
-  }
-
-  function handleRightArrow(
-    blockIdx: number,
-    childIdx: number,
-    event: KeyboardEvent,
-  ) {
-    if (event.shiftKey) return; // Don't override selection
-    const el = childRefs.value[blockIdx][childIdx];
-    const selection = window.getSelection();
-    const isAtEnd =
-      selection &&
-      el &&
-      selection.anchorNode === el.lastChild &&
-      selection.anchorOffset === el.innerText.length;
-
-    const currBlock = elements.value[blockIdx];
-    if (isAtEnd) {
-      if (childIdx < currBlock.children.length - 1) {
-        // Move to start of next inline
-        event.preventDefault();
-        const nextEl = childRefs.value[blockIdx][childIdx + 1];
-        nextTick(() => {
-          nextEl?.focus();
-          setFocus(blockIdx, childIdx + 1);
-          moveCaretToStart(nextEl);
-        });
-      } else if (blockIdx < elements.value.length - 1) {
-        // Move to start of next block's first inline
-        event.preventDefault();
-        const nextEl = childRefs.value[blockIdx + 1][0];
-        nextTick(() => {
-          nextEl?.focus();
-          setFocus(blockIdx + 1, 0);
-          moveCaretToStart(nextEl);
-        });
-      }
-    }
-  }
-
-  // Append a new inline element after the current one
-  function appendInlineElement(newType: InlineType) {
-    const blockIdx = focusedBlockIdx.value;
-    const childIdx = focusedChildIdx.value;
-    if (elements.value[blockIdx]) {
-      const newChild = createChild("", newType);
-      elements.value[blockIdx].children.splice(childIdx + 1, 0, newChild);
-      nextTick(() => {
-        childRefs.value[blockIdx][childIdx + 1]?.focus();
-        setFocus(blockIdx, childIdx + 1);
-        moveCaretToStart(childRefs.value[blockIdx][childIdx + 1]);
-      });
-    }
-  }
-
-  function onBlockClick(blockIdx: number, event: MouseEvent) {
-    // If the click is on the block itself, not on a child
-    // (If you want to always focus last child on any click, remove this check)
-    if (event.target !== event.currentTarget) return;
-
-    const block = elements.value[blockIdx];
-    if (!block || block.children.length === 0) return;
-    const lastIdx = block.children.length - 1;
-    nextTick(() => {
-      const el = childRefs.value[blockIdx][lastIdx];
-      if (el) {
-        el.focus();
-        setFocus(blockIdx, lastIdx);
-        moveCaretToEnd(el);
       }
     });
   }
 </script>
-
-<style scoped>
-  [contenteditable]:focus {
-    border-color: #409eff;
-  }
-  button {
-    margin-right: 4px;
-  }
-</style>
