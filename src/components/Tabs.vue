@@ -43,9 +43,15 @@
             :tab="tab"
             :index="index"
           >
+            <!-- Render Iconify icon if tab.icon is a string, else use component -->
+            <Icon
+              v-if="typeof tab.icon === 'string' && tab.icon"
+              :icon="tab.icon"
+              class="w-5 h-5"
+            />
             <component
+              v-else-if="tab.icon"
               :is="tab.icon"
-              v-if="tab.icon"
               class="w-5 h-5"
             />
             <!-- Icon slot from TabPanel -->
@@ -165,6 +171,8 @@
 </template>
 
 <script setup lang="ts">
+  import { Icon } from "@iconify/vue";
+
   const props = defineProps({
     // Primary tab configuration
     tabs: {
