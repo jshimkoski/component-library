@@ -480,7 +480,7 @@
 
     // Disabled dates
     if (isDateDisabled(date)) {
-      classes.push("opacity-50 cursor-not-allowed");
+      classes.push("opacity-50 pointer-events-none cursor-not-allowed");
     }
 
     return classes.join(" ");

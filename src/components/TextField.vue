@@ -16,7 +16,8 @@
     </label>
     <div class="relative">
       <input
-        v-model="model"
+        :value="model"
+        @input="onInput"
         v-bind="$attrs"
         :id="id"
         :type="type"
@@ -113,6 +114,12 @@
   const model = defineModel({
     type: String,
   });
+
+  function onInput(e: Event) {
+    // Always emit a string
+    const value = (e.target as HTMLInputElement).value;
+    model.value = value;
+  }
 
   const id = useId();
 </script>

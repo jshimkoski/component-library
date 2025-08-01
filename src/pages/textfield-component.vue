@@ -19,7 +19,6 @@
             label="Full Name"
             placeholder="Enter your full name"
             icon="ic:baseline-person"
-
           />
         </div>
       </div>
@@ -28,6 +27,7 @@
   v-model="fullName"
   label="Full Name"
   placeholder="Enter your full name"
+  icon="ic:baseline-person"
 /&gt;</code></pre>
       </div>
     </section>
