@@ -1,6 +1,6 @@
 <template>
   <div class="progress-container">
-    <div class="mb-2 flex items-center justify-between">
+    <div class="flex items-center justify-between">
       <label
         v-if="label"
         :for="id"
@@ -53,7 +53,7 @@
     label: { type: String, default: undefined },
     description: { type: String, default: undefined },
     max: { type: Number, default: 100 },
-    showValue: { type: Boolean, default: true },
+    showValue: { type: Boolean, default: false },
     kind: {
       type: String,
       default: 'primary',

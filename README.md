@@ -22,29 +22,77 @@ This component library provides a set of highly customizable, accessible, and re
 - Node.js 16.x or higher
 - npm 8.x or higher
 
-### Installation
 
+## Getting Started (Development)
+
+### Prerequisites
+
+- Node.js 16.x or higher
+- npm 8.x or higher
+The documentation for each component follows a consistent structure:
+### Installation (for local development)
+1. **Overview** - Description and purpose
 ```bash
 npm install
 npm run dev
 ```
-
+6. **Variants/Options** - Different component configurations
 This will start the development server with the component documentation and examples.
 
-## Component Documentation
+---
 
-All components in this library are thoroughly documented with examples, props, events, and best practices. 
+## Usage in Other Projects
 
-The documentation for each component follows a consistent structure:
+You can use this library in your own Vue 3 projects after building it:
 
-1. **Overview** - Description and purpose
-2. **Basic Usage** - Simple implementation examples
-3. **Props** - Available properties and customization options
-4. **Events** - Event handling (if applicable)
-5. **Slots** - Slot options (if applicable) 
-6. **Variants/Options** - Different component configurations
+### 1. Install the library (after publishing or via local path)
+
+```bash
+# If published to npm:
 7. **States** - Component states (active, disabled, etc.)
+# Or, for local development:
 8. **Best Practices** - Usage guidelines and recommendations
+```
+
+### 2. Import the library and styles
+
+**Global registration (main.ts):**
+
+```ts
+import { createApp } from 'vue';
+import App from './App.vue';
+import '@jshimkoski/component-library/dist/style.css';
+import * as ComponentLibrary from '@jshimkoski/component-library';
+
+const app = createApp(App);
+
+// Register all components globally
+Object.entries(ComponentLibrary).forEach(([name, component]) => {
+  app.component(name, component);
+});
+
+app.mount('#app');
+```
+
+**Or import individual components:**
+
+```ts
+import { Card, Button, Dialog } from '@jshimkoski/component-library';
+import '@jshimkoski/component-library/dist/style.css';
+
+// Use <Card />, <Button />, <Dialog /> in your templates
+```
+
+### 3. Type Declarations
+
+TypeScript type declarations are included automatically. If you use TypeScript, you will get full type support and autocompletion for all components and their props:
+
+```ts
+import { Card } from '@jshimkoski/component-library';
+// Card will have full prop types and event typings
+```
+
+---
 9. **Examples** - Real-world usage examples
 
 ### Documentation Standards
@@ -53,36 +101,42 @@ For contributors looking to document components, please follow our [Documentatio
 
 ## Available Components
 
-The library includes the following components:
+Below is a full list of all components included in this library, with a brief description of each:
 
-- Action - Interactive buttons and links
-- Avatar - User profile images
-- Badge - Notification indicators
-- Card - Content containers
-- Carousel - Image and content sliders
-- Checkbox/CheckboxGroup - Selection controls
-- Chip - Compact elements for attributes
-- Datepicker - Date selection
-- Dialog - Modal interfaces
-- List/ListItem - Data listing components
-- Menu - Dropdown interfaces
-- Progress - Loading and progress indicators
-- Radio/RadioGroup - Selection controls
-- Select - Dropdown selection
-- Sheet - Sliding panels
-- Slider - Range inputs
-- Snackbar - Toast notifications
-- Switch - Toggle controls
-- Table - Data tables
-- Tabs - Content organization
-- TextEditor - Rich text editing
-- TextField - Text input
-- Tooltip - Contextual information
-
-## Contributing
-
-Contributions are welcome! Please see our [Contributing Guidelines](CONTRIBUTING.md) for more information.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+- **Action** - General-purpose interactive button or link.
+- **Avatar** - User profile image or initials, with optional status.
+- **Badge** - Small indicator for status, notifications, or counts.
+- **Card** - Flexible content container with header, body, and footer slots.
+- **Carousel** - Image/content slider with navigation controls.
+- **Checkbox** - Single checkbox input for boolean values.
+- **CheckboxGroup** - Group of checkboxes for multi-select options.
+- **Chip** - Compact element for tags, filters, or actions.
+- **Datepicker** - Input for selecting dates from a calendar UI.
+- **Dialog** - Modal dialog for alerts, confirmations, or custom content.
+- **DocsLayout** - Layout wrapper for documentation pages.
+- **FloatingUi** - Utility for floating elements (tooltips, popovers, etc.).
+- **Menu** - Dropdown or context menu container.
+- **MenuContent** - Content area for menu items.
+- **MenuDivider** - Divider line for separating menu sections.
+- **MenuHeader** - Header/title for menu sections.
+- **MenuItem** - Selectable item within a menu.
+- **Paginator** - Pagination controls for navigating data sets.
+- **Progress** - Linear progress bar for loading or completion status.
+- **Prose** - Styled container for rich text content.
+- **Radio** - Single radio button for exclusive selection.
+- **RadioGroup** - Group of radio buttons for single-choice selection.
+- **RichTextEditor** - WYSIWYG editor for formatted text input.
+- **Scrollspy** - Navigation aid that highlights sections as you scroll.
+- **Select** - Dropdown select input for single or multiple options.
+- **Sheet** - Sliding panel for side-drawers or overlays.
+- **Slider** - Range slider for numeric input.
+- **Snackbar** - Temporary toast notification for feedback messages.
+- **Switch** - Toggle switch for boolean values.
+- **TabPanel** - Content panel for use within Tabs.
+- **Table** - Table for displaying tabular data.
+- **Tabs** - Tabbed navigation and content switching.
+- **TextEditor** - Simple text editor input.
+- **TextField** - Standard text input field.
+- **Tooltip** - Hover/focus popup for contextual information.
+- **Tree** - Hierarchical tree view for nested data.
+- **TreeItem** - Single item/node within a Tree component.

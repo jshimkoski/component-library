@@ -133,6 +133,7 @@
             { id: "avatar", label: "Avatar", to: "avatar-component" },
             { id: "badge", label: "Badge", to: "badge-component" },
             { id: "card", label: "Card", to: "card-component" },
+            { id: "carousel", label: "Carousel", to: "carousel-component" },
             { id: "chip", label: "Chip", to: "chip-component" },
             { id: "paginator", label: "Paginator", to: "paginator-component" },
             { id: "progress", label: "Progress", to: "progress-component" },
