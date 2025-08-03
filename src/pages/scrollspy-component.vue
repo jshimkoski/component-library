@@ -836,8 +836,16 @@ const sections = [
   };
 
   const customIconSections = [
-    { id: "home-section", title: "Home", icon: 'mdi:home' },
-    { id: "settings-section", title: "Settings", icon: 'mdi:cog' },
-    { id: "about-section", title: "About", icon: 'mdi:bell' },
+    { id: "home-section", title: "Home", icon: "material-symbols:home" },
+    {
+      id: "settings-section",
+      title: "Settings",
+      icon: "material-symbols:settings",
+    },
+    {
+      id: "about-section",
+      title: "About",
+      icon: "material-symbols:notifications",
+    },
   ];
 </script>

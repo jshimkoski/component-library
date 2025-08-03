@@ -30,35 +30,35 @@
           <!-- Success Icon -->
           <Icon
             v-if="kind === 'success'"
-            icon="ic:baseline-check-circle"
+            icon="material-symbols:check-circle"
             class="h-5 w-5"
           />
 
           <!-- Info Icon -->
           <Icon
             v-else-if="kind === 'info'"
-            icon="ic:baseline-info"
+            icon="material-symbols:info"
             class="h-5 w-5"
           />
 
           <!-- Warning Icon -->
           <Icon
             v-else-if="kind === 'warning'"
-            icon="ic:baseline-warning"
+            icon="material-symbols:warning"
             class="h-5 w-5"
           />
 
           <!-- Danger/Error Icon -->
           <Icon
             v-else-if="kind === 'danger'"
-            icon="ic:baseline-dangerous"
+            icon="material-symbols:dangerous"
             class="h-5 w-5"
           />
 
           <!-- Default/Primary Icon -->
           <Icon
             v-else
-            icon="ic:baseline-info"
+            icon="material-symbols:info"
             class="h-5 w-5"
           />
         </div>
@@ -102,7 +102,7 @@
           >
             <span class="sr-only">Dismiss</span>
             <Icon
-              icon="ic:baseline-close"
+              icon="material-symbols:close"
               class="h-6 w-6"
             />
           </button>

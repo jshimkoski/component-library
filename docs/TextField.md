@@ -112,7 +112,7 @@ The component supports v-model for two-way binding of the input value.
     placeholder="Search for items..."
   >
     <template #suffix>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-base-500"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      <Icon icon="material-symbols:search" width="16" height="16" class="text-base-500" />
     </template>
   </TextField>
 </div>
@@ -124,7 +124,7 @@ The component supports v-model for two-way binding of the input value.
   placeholder="Search for items..."
 >
   <template #suffix>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-base-500"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+    <Icon icon="material-symbols:search" width="16" height="16" class="text-base-500" />
   </template>
 </TextField>
 ```
@@ -249,7 +249,7 @@ function submitLogin() {
   >
     <template #suffix>
       <button class="text-base-500 hover:text-base-700 dark:hover:text-base-300">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <Icon icon="material-symbols:close" width="16" height="16" />
       </button>
     </template>
   </TextField>
@@ -276,7 +276,7 @@ function clearSearch() {
         class="text-base-500 hover:text-base-700 dark:hover:text-base-300"
         @click="clearSearch"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <Icon icon="material-symbols:close" width="16" height="16" />
       </button>
     </template>
   </TextField>

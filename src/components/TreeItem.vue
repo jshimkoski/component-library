@@ -29,8 +29,12 @@
           <Icon
             :icon="
               isExpanded
-                ? item.iconOpen || item.icon || 'ic:outline-folder-open'
-                : item.iconClose || item.icon || 'ic:outline-folder'
+                ? item.iconOpen ||
+                  item.icon ||
+                  'material-symbols:folder-open-outline'
+                : item.iconClose ||
+                  item.icon ||
+                  'material-symbols:folder-outline'
             "
             class="shrink-0 w-4 h-4 transition-transform"
           />
@@ -40,7 +44,7 @@
           class="tree-file-icon shrink-0 flex items-center justify-center"
         >
           <Icon
-            :icon="item.icon || 'ic:outline-insert-drive-file'"
+            :icon="item.icon || 'material-symbols:insert-drive-file'"
             class="shrink-0 w-4 h-4 transition-transform"
           />
         </div>
@@ -60,7 +64,7 @@
         class="shrink-0 ml-auto"
       >
         <Icon
-          icon="ic:baseline-keyboard-arrow-up"
+          icon="material-symbols:keyboard-arrow-up"
           class="w-5 h-5 transition-transform"
           :class="{ 'rotate-180': isExpanded }"
         />
@@ -88,15 +92,10 @@
           @update:expanded="onChildExpanded"
           @item-click="emitItemClick"
         >
-          <template
-            #default="slotScope: SlotScope"
-            v-if="$slots.default"
-          >
-            <slot
-              :item="slotScope.item"
-              :level="slotScope.level"
-            ></slot>
-          </template>
+          <slot
+            :item="item"
+            :level="level + 1"
+          />
         </TreeItem>
       </ul>
     </Transition>
@@ -105,11 +104,6 @@
 
 <script setup lang="ts">
   import { Icon } from "@iconify/vue";
-
-  interface SlotScope {
-    item: TreeItem;
-    level: number;
-  }
 
   const props = defineProps({
     item: {

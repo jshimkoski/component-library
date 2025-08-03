@@ -19,7 +19,7 @@
           <Action
             kind="primary"
             label="Submit"
-            icon="ic:baseline-check"
+            icon="material-symbols:check"
           />
           <Action
             kind="secondary"

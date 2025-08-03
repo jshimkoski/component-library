@@ -1,9 +1,7 @@
 <template>
-  <img
-    :src="src"
-    :alt="alt"
+  <div
     :class="{
-      'object-cover ring-base-300 dark:ring-base-700': true,
+      'flex items-center justify-center ring-base-300 dark:ring-base-700 bg-base-100 dark:bg-base-800': true,
       'w-4 h-4 ring-1': size === 'xs',
       'w-8 h-8 ring-1': size === 'sm',
       'w-12 h-12 ring-2': size === 'md',
@@ -20,12 +18,44 @@
       'rounded-none': shape === 'square',
     }"
     v-bind="$attrs"
-    @error="handleError"
-  />
+  >
+    <img
+      v-if="!showFallback"
+      :src="src"
+      :alt="alt"
+      class="w-full h-full object-cover"
+      :class="{
+        'rounded-full': shape === 'circle',
+        'rounded-none': shape === 'square',
+      }"
+      @error="handleError"
+    />
+    <Icon
+      v-else
+      icon="material-symbols:person"
+      :class="{
+        'w-3 h-3': size === 'xs',
+        'w-5 h-5': size === 'sm',
+        'w-8 h-8': size === 'md',
+        'w-10 h-10': size === 'lg',
+        'w-12 h-12': size === 'xl',
+        'w-16 h-16': size === '2xl',
+        'w-20 h-20': size === '3xl',
+        'w-24 h-24': size === '4xl',
+        'w-28 h-28': size === '5xl',
+        'w-32 h-32': size === '6xl',
+        'w-36 h-36': size === '7xl',
+        'w-40 h-40': size === '8xl',
+      }"
+      class="text-base-500 dark:text-base-400"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
-  import fallbackImg from "../assets/vue.svg";
+  import { Icon } from "@iconify/vue";
+
+  const showFallback = ref(false);
 
   defineProps({
     src: {
@@ -59,8 +89,7 @@
     },
   });
 
-  const handleError = (event: Event) => {
-    if (!event.target) return;
-    (event.target as HTMLImageElement).src = fallbackImg;
+  const handleError = () => {
+    showFallback.value = true;
   };
 </script>

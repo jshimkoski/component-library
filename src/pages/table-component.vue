@@ -27,7 +27,7 @@
       </Table>
       <div
         v-if="selectedUsers.length > 0"
-        class="mt-4 p-4 bg-base-50 dark:bg-base-900 rounded-base"
+        class="mt-4 p-4 bg-base-50 dark:bg-base-900 rounded-base radius-2xl:rounded-2xl"
       >
         <h3 class="font-medium mb-2">Selected Users:</h3>
         <ul class="ml-4 list-disc space-y-1">
@@ -55,18 +55,17 @@
           <span class="font-medium">{{ formatCurrency(value) }}</span>
         </template>
         <template #cell-stock="{ value }">
-          <span
-            :class="[
-              'px-2 py-1 rounded-full text-xs font-medium',
+          <Chip
+            :kind="
               value > 50
-                ? 'bg-success-100 text-success-800 dark:bg-success-900 dark:text-success-200'
+                ? 'success'
                 : value > 10
-                  ? 'bg-warning-100 text-warning-800 dark:bg-warning-900 dark:text-warning-200'
-                  : 'bg-danger-100 text-danger-800 dark:bg-danger-900 dark:text-danger-200',
-            ]"
-          >
-            {{ value }} in stock
-          </span>
+                  ? 'warning'
+                  : 'danger'
+            "
+            variant="subtle"
+            :label="`${value.toString()} in stock`"
+          />
         </template>
       </Table>
     </section>
@@ -131,7 +130,7 @@
       <Table
         v-model="selectedEmployees"
         :fields="employeeFields"
-        :items="employees"
+        :items="paginatedEmployees"
         selectable
         expandable
         :loading-items="loading"
@@ -145,38 +144,24 @@
           </button>
         </template>
         <template #cell-status="{ value }">
-          <span
-            :class="[
-              'inline-flex items-center px-2 py-1 rounded-full text-xs font-medium',
+          <Chip
+            :kind="
               value === 'Active'
-                ? 'bg-success-100 text-success-800 dark:bg-success-900 dark:text-success-200'
+                ? 'success'
                 : value === 'On Leave'
-                  ? 'bg-warning-100 text-warning-800 dark:bg-warning-900 dark:text-warning-200'
-                  : 'bg-danger-100 text-danger-800 dark:bg-danger-900 dark:text-danger-200',
-            ]"
-          >
-            <span
-              class="w-1.5 h-1.5 rounded-full mr-1"
-              :class="[
-                value === 'Active'
-                  ? 'bg-success-500'
-                  : value === 'On Leave'
-                    ? 'bg-warning-500'
-                    : 'bg-danger-500',
-              ]"
-            ></span>
-            {{ value }}
-          </span>
+                  ? 'warning'
+                  : 'danger'"
+            :label="value"
+          />
         </template>
         <template #cell-skills="{ value }">
           <div class="flex flex-wrap gap-1">
-            <span
+            <Chip
               v-for="skill in value"
               :key="skill"
-              class="px-2 py-0.5 text-xs bg-base-100 dark:bg-base-800 rounded-full"
-            >
-              {{ skill }}
-            </span>
+              kind="secondary"
+              variant="subtle"
+            >{{ skill }}</Chip>
           </div>
         </template>
         <template #row-actions="{ item }">
@@ -281,29 +266,12 @@
           </div>
         </template>
         <template #pagination>
-          <div class="flex justify-between items-center">
-            <span class="text-sm text-base-500 dark:text-base-400"
-              >Showing 1-{{ employees.length }} of
-              {{ employees.length }} items</span
-            >
-            <div class="flex space-x-1">
-              <button
-                class="px-3 py-1 text-sm bg-white dark:bg-base-800 border border-base-300 dark:border-base-700 rounded-base"
-              >
-                Previous
-              </button>
-              <button
-                class="px-3 py-1 text-sm bg-primary-500 text-white rounded-base"
-              >
-                1
-              </button>
-              <button
-                class="px-3 py-1 text-sm bg-white dark:bg-base-800 border border-base-300 dark:border-base-700 rounded-base"
-              >
-                Next
-              </button>
-            </div>
-          </div>
+          <Paginator
+            v-model:page="currentPage"
+            :total-items="employees.length"
+            :items-per-page="pageSize"
+            :available-page-sizes="[5, 10, 25, 50]"
+          />
         </template>
       </Table>
     </section>
@@ -656,7 +624,16 @@
       salary: 72000,
       performance: 6.4,
     },
+
   ];
+
+  // Pagination state for employees table
+  const currentPage = ref(1);
+  const pageSize = ref(10);
+  const paginatedEmployees = computed(() => {
+    const start = (currentPage.value - 1) * pageSize.value;
+    return employees.slice(start, start + pageSize.value);
+  });
 
   const selectedEmployees = ref<typeof employees>([]);
   const loading = ref(false);

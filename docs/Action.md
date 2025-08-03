@@ -103,25 +103,25 @@ The Action component is a versatile interactive element that can be rendered as 
 
 <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap items-center gap-2">
   <Action square size="xs">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 6 6 9-9"/></svg>
+    <Icon icon="material-symbols:check" width="16" height="16" />
   </Action>
   <Action square size="sm">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 6 6 9-9"/></svg>
+    <Icon icon="material-symbols:check" width="16" height="16" />
   </Action>
   <Action square size="md">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 6 6 9-9"/></svg>
+    <Icon icon="material-symbols:check" width="20" height="20" />
   </Action>
   <Action square size="lg">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 6 6 9-9"/></svg>
+    <Icon icon="material-symbols:check" width="24" height="24" />
   </Action>
   <Action square size="xl">
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 6 6 9-9"/></svg>
+    <Icon icon="material-symbols:check" width="32" height="32" />
   </Action>
 </div>
 
 ```vue
 <Action square size="md">
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 6 6 9-9"/></svg>
+  <Icon icon="material-symbols:check" width="20" height="20" />
 </Action>
 ```
 
@@ -212,18 +212,18 @@ The Action component is a versatile interactive element that can be rendered as 
 
 <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
   <Action kind="primary">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+    <Icon icon="material-symbols:save" width="16" height="16" class="mr-1" />
     Save
   </Action>
   <Action kind="danger" variant="outline">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+    <Icon icon="material-symbols:delete" width="16" height="16" class="mr-1" />
     Delete
   </Action>
 </div>
 
 ```vue
 <Action kind="primary">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+  <Icon icon="material-symbols:save" width="16" height="16" class="mr-1" />
   Save
 </Action>
 ```

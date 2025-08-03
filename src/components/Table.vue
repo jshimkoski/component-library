@@ -61,51 +61,21 @@
                 v-if="field.sortable"
                 class="text-base-400"
               >
-                <svg
+                <Icon
                   v-if="sortBy === field.key && sortDir === 'asc'"
+                  icon="material-symbols:arrow-upward"
                   class="w-4 h-4"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M4.5 10.5L8 7l3.5 3.5"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    fill="none"
-                  />
-                </svg>
-                <svg
+                />
+                <Icon
                   v-else-if="sortBy === field.key && sortDir === 'desc'"
+                  icon="material-symbols:arrow-downward"
                   class="w-4 h-4"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M4.5 6L8 9.5 11.5 6"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    fill="none"
-                  />
-                </svg>
-                <svg
+                />
+                <Icon
                   v-else
+                  icon="material-symbols:unfold-more"
                   class="w-4 h-4 text-base-300 dark:text-base-700"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M4.5 6L8 9.5 11.5 6M4.5 10.5L8 7l3.5 3.5"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    fill="none"
-                  />
-                </svg>
+                />
               </span>
             </div>
           </th>
@@ -153,22 +123,13 @@
                 @click="toggleExpand(item)"
                 class="p-1 rounded-full hover:bg-base-100 dark:hover:bg-base-800"
               >
-                <svg
+                <Icon
+                  icon="material-symbols:keyboard-arrow-down"
                   class="w-4 h-4 transition-transform"
                   :class="{
                     'rotate-180': expandedRows.includes(getItemId(item)),
                   }"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                >
-                  <path
-                    d="M4.5 6L8 9.5 11.5 6"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+                />
               </button>
             </td>
 
@@ -194,26 +155,16 @@
                   formatDate(getItemValue(item, field.key))
                 }}</span>
                 <span v-else-if="field.type === 'boolean'">
-                  <svg
+                  <Icon
                     v-if="getItemValue(item, field.key)"
+                    icon="material-symbols:check-circle"
                     class="w-4 h-4 text-success-500"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z"
-                    />
-                  </svg>
-                  <svg
+                  />
+                  <Icon
                     v-else
+                    icon="material-symbols:cancel"
                     class="w-4 h-4 text-base-400"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M4.293 4.293a1 1 0 011.414 0L8 6.586l2.293-2.293a1 1 0 111.414 1.414L9.414 8l2.293 2.293a1 1 0 01-1.414 1.414L8 9.414l-2.293 2.293a1 1 0 01-1.414-1.414L6.586 8 4.293 5.707a1 1 0 010-1.414z"
-                    />
-                  </svg>
+                  />
                 </span>
                 <span v-else>{{ getItemValue(item, field.key) }}</span>
               </slot>
@@ -262,19 +213,10 @@
           >
             <slot name="empty-state">
               <div class="flex flex-col items-center justify-center py-6">
-                <svg
+                <Icon
+                  icon="material-symbols:table-rows-narrow"
                   class="w-10 h-10 mb-2 text-base-300 dark:text-base-700"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                  />
-                </svg>
+                />
                 <p>No items to display</p>
               </div>
             </slot>
@@ -289,25 +231,10 @@
           >
             <slot name="loading-state">
               <div class="flex justify-center items-center py-6">
-                <svg
+                <Icon
+                  icon="material-symbols:progress-activity"
                   class="animate-spin h-6 w-6 text-primary-500"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"
-                    fill="none"
-                  ></circle>
-                  <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
+                />
                 <span class="ml-2">Loading...</span>
               </div>
             </slot>
@@ -327,8 +254,9 @@
 </template>
 
 <script setup lang="ts">
+  import { Icon } from "@iconify/vue";
   import type { TableProps } from "../types/common";
- 
+
   const props = withDefaults(defineProps<TableProps>(), {
     selectable: false,
     expandable: false,

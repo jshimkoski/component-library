@@ -10,6 +10,8 @@ export type Size = "xs" | "sm" | "md" | "lg" | "xl";
 export type ActionType = "button" | "submit" | "reset";
 export type ActionVariant = "solid" | "outline" | "ghost" | "link";
 
+export type ChipVariant = "solid" | "subtle";
+
 export type DateValue = Date | null;
 export type RangeValue = [Date | null, Date | null] | null;
 export type DatePickerValue = DateValue | RangeValue;

@@ -46,7 +46,10 @@
         square
       >
         <slot name="first-page-icon">
-          <Icon icon="ic:baseline-keyboard-double-arrow-left" class="w-5 h-5" />
+          <Icon
+            icon="material-symbols:keyboard-double-arrow-left"
+            class="w-5 h-5"
+          />
         </slot>
       </Action>
 
@@ -58,7 +61,10 @@
         square
       >
         <slot name="previous-page-icon">
-          <Icon icon="ic:baseline-chevron-left" class="w-5 h-5" />
+          <Icon
+            icon="material-symbols:chevron-left"
+            class="w-5 h-5"
+          />
         </slot>
       </Action>
 
@@ -101,7 +107,10 @@
         square
       >
         <slot name="next-page-icon">
-          <Icon icon="ic:baseline-chevron-right" class="w-5 h-5" />
+          <Icon
+            icon="material-symbols:chevron-right"
+            class="w-5 h-5"
+          />
         </slot>
       </Action>
 
@@ -114,7 +123,10 @@
         square
       >
         <slot name="last-page-icon">
-          <Icon icon="ic:baseline-keyboard-double-arrow-right" class="w-5 h-5" />
+          <Icon
+            icon="material-symbols:keyboard-double-arrow-right"
+            class="w-5 h-5"
+          />
         </slot>
       </Action>
     </div>
@@ -122,7 +134,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Icon } from '@iconify/vue'
+  import { Icon } from "@iconify/vue";
 
   const props = defineProps({
     // Basic pagination props
@@ -218,17 +230,25 @@
 
   // Computed properties
   const totalPages = computed(() => {
-    return Math.max(1, Math.ceil(props.totalItems / (pageSize.value ?? props.itemsPerPage)));
+    return Math.max(
+      1,
+      Math.ceil(props.totalItems / (pageSize.value ?? props.itemsPerPage)),
+    );
   });
 
   const startItem = computed(() => {
     return props.totalItems === 0
       ? 0
-      : ((internalPage.value ?? 1) - 1) * (pageSize.value ?? props.itemsPerPage) + 1;
+      : ((internalPage.value ?? 1) - 1) *
+          (pageSize.value ?? props.itemsPerPage) +
+          1;
   });
 
   const endItem = computed(() => {
-    return Math.min((internalPage.value ?? 1) * (pageSize.value ?? props.itemsPerPage), props.totalItems);
+    return Math.min(
+      (internalPage.value ?? 1) * (pageSize.value ?? props.itemsPerPage),
+      props.totalItems,
+    );
   });
 
   const computedItemRangeText = computed(() => {
@@ -239,7 +259,9 @@
   });
 
   const canGoPrevious = computed(() => (internalPage.value ?? 1) > 1);
-  const canGoNext = computed(() => (internalPage.value ?? 1) < totalPages.value);
+  const canGoNext = computed(
+    () => (internalPage.value ?? 1) < totalPages.value,
+  );
 
   // Calculate visible page numbers for button mode
   const visiblePageNumbers = computed(() => {
@@ -331,7 +353,8 @@
   watch(pageSize, (newSize, oldSize) => {
     if (newSize !== oldSize) {
       // Recalculate current page to keep approximate scroll position
-      const currentItemIndex = ((internalPage.value ?? 1) - 1) * (oldSize ?? 1) + 1;
+      const currentItemIndex =
+        ((internalPage.value ?? 1) - 1) * (oldSize ?? 1) + 1;
       const newPage = Math.floor((currentItemIndex - 1) / (newSize ?? 1)) + 1;
       goToPage(Math.min(newPage, Math.ceil(props.totalItems / (newSize ?? 1))));
     }

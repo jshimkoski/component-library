@@ -325,7 +325,7 @@ const dynamicTabs = [
           </button>
         </div>
         <button class="text-primary-600">
-          <Icon icon="mdi:plus" />
+          <Icon icon="material-symbols:add" />
         </button>
       </div>
     </template>

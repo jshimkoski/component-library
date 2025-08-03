@@ -54,7 +54,10 @@
   <div class="mt-8 mb-12">
     <h2 class="text-xl font-semibold mb-4">Declarative API with TabPanel</h2>
     <Card class="p-6">
-      <Tabs ref="tabPanelsRef" v-model="activeTabPanels">
+      <Tabs
+        ref="tabPanelsRef"
+        v-model="activeTabPanels"
+      >
         <TabPanel label="Account">
           <div>
             <h3 class="text-lg font-medium mb-2">Account Information</h3>
@@ -75,7 +78,10 @@
 
         <TabPanel label="Notifications">
           <template #icon>
-            <Icon icon="mdi:bell" class="w-5 h-5" />
+            <Icon
+              icon="material-symbols:notifications"
+              class="w-5 h-5"
+            />
           </template>
           <div>
             <h3 class="text-lg font-medium mb-2">Notification Preferences</h3>
@@ -109,13 +115,22 @@
         v-model="activeIconTab"
       >
         <template #tab-icon-0>
-          <Icon icon="mdi:home" class="w-5 h-5" />
+          <Icon
+            icon="material-symbols:home"
+            class="w-5 h-5"
+          />
         </template>
         <template #tab-icon-1>
-          <Icon icon="mdi:cog" class="w-5 h-5" />
+          <Icon
+            icon="material-symbols:settings"
+            class="w-5 h-5"
+          />
         </template>
         <template #tab-icon-2>
-          <Icon icon="mdi:account" class="w-5 h-5" />
+          <Icon
+            icon="material-symbols:person"
+            class="w-5 h-5"
+          />
         </template>
 
         <template #tab-content-0>
@@ -465,14 +480,14 @@
 </template>
 
 <script setup lang="ts">
-  import { Icon } from '@iconify/vue'
-  
+  import { Icon } from "@iconify/vue";
+
   // References to the tabs components
   const basicTabsRef = ref(null);
   const tabPanelsRef = ref(null);
   const iconTabsRef = ref(null);
   const verticalTabsRef = ref(null);
-  
+
   // Basic tabs example
   const activeBasicTab = ref(0);
   const basicTabs = [

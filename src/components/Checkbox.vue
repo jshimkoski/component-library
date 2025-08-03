@@ -33,9 +33,8 @@
         :indeterminate="indeterminate"
       />
       <Icon
-        icon="mdi:check-bold"
+        icon="material-symbols:check"
         class="hidden peer-checked:block h-4 w-4 text-white absolute top-1.5 left-0 z-10 pointer-events-none"
-        v-if="!indeterminate"
       />
       <div
         v-if="indeterminate"

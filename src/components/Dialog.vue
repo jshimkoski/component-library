@@ -61,7 +61,7 @@
                       @click="onDismiss"
                     >
                       <Icon
-                        icon="ic:baseline-close"
+                        icon="material-symbols:close"
                         class="h-6 w-6"
                       />
                       <span class="sr-only">{{ dismissLabel }}</span>

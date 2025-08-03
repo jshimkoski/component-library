@@ -323,7 +323,7 @@ declare global {
   export type { SnackbarKind, SnackbarPosition, SnackbarOptions } from './src/composables/useSnackbar'
   import('./src/composables/useSnackbar')
   // @ts-ignore
-  export type { Kind, Size, ActionType, ActionVariant, DateValue, RangeValue, DatePickerValue, DatePickerMode, TableField, TableProps, TabItem, TreeItem, PaginatorMode, ScrollspySection } from './src/types/common.d'
+  export type { Kind, Size, ActionType, ActionVariant, ChipVariant, DateValue, RangeValue, DatePickerValue, DatePickerMode, TableField, TableProps, TabItem, TreeItem, PaginatorMode, ScrollspySection } from './src/types/common.d'
   import('./src/types/common.d')
 }
 

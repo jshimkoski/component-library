@@ -253,11 +253,11 @@ The Card component is a versatile container that displays content in a structure
     <p class="mt-4 text-lg font-semibold">$129.99</p>
     <div class="flex items-center mt-2">
       <div class="flex">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-warning-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-warning-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-warning-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-warning-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-base-300"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        <Icon icon="material-symbols:star" width="16" height="16" class="text-warning-500" />
+        <Icon icon="material-symbols:star" width="16" height="16" class="text-warning-500" />
+        <Icon icon="material-symbols:star" width="16" height="16" class="text-warning-500" />
+        <Icon icon="material-symbols:star" width="16" height="16" class="text-warning-500" />
+        <Icon icon="material-symbols:star" width="16" height="16" class="text-base-300" />
       </div>
       <span class="text-sm text-base-500 ml-2">4.0 (128 reviews)</span>
     </div>
@@ -277,7 +277,7 @@ The Card component is a versatile container that displays content in a structure
   <p class="mt-4 text-lg font-semibold">$129.99</p>
   <div class="flex items-center mt-2">
     <div class="flex">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-warning-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+      <Icon icon="material-symbols:star" width="16" height="16" class="text-warning-500" />
       <!-- Repeat for all stars -->
     </div>
     <span class="text-sm text-base-500 ml-2">4.0 (128 reviews)</span>
@@ -299,12 +299,12 @@ The Card component is a versatile container that displays content in a structure
         <p class="text-base-500 dark:text-base-400 text-sm">Total Revenue</p>
         <p class="text-2xl font-bold mt-1">$24,345</p>
         <p class="text-success-600 dark:text-success-400 text-sm flex items-center mt-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><polyline points="18 15 12 9 6 15"></polyline></svg>
+          <Icon icon="material-symbols:trending-up" width="16" height="16" class="mr-1" />
           12% increase
         </p>
       </div>
       <div class="p-3 bg-primary-100 dark:bg-primary-900 rounded-full">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-600 dark:text-primary-400"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        <Icon icon="material-symbols:attach-money" width="24" height="24" class="text-primary-600 dark:text-primary-400" />
       </div>
     </div>
   </Card>
@@ -317,12 +317,12 @@ The Card component is a versatile container that displays content in a structure
       <p class="text-base-500 dark:text-base-400 text-sm">Total Revenue</p>
       <p class="text-2xl font-bold mt-1">$24,345</p>
       <p class="text-success-600 dark:text-success-400 text-sm flex items-center mt-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        <Icon icon="material-symbols:trending-up" width="16" height="16" class="mr-1" />
         12% increase
       </p>
     </div>
     <div class="p-3 bg-primary-100 dark:bg-primary-900 rounded-full">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-600 dark:text-primary-400"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      <Icon icon="material-symbols:attach-money" width="24" height="24" class="text-primary-600 dark:text-primary-400" />
     </div>
   </div>
 </Card>

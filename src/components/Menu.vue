@@ -24,8 +24,8 @@
         <Icon
           :icon="
             nested || placement.includes('left') || placement.includes('right')
-              ? 'ic:baseline-arrow-right'
-              : 'ic:baseline-arrow-drop-down'
+              ? 'material-symbols:arrow-right'
+              : 'material-symbols:arrow-drop-down'
           "
           :class="{
             'absolute -right-2 top-1/2 -translate-1/2': nested,
