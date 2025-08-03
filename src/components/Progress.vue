@@ -1,6 +1,11 @@
 <template>
   <div class="progress-container">
-    <div class="flex items-center justify-between">
+    <div
+      class="flex items-center justify-between"
+      :class="{
+        'mb-2': label || showValue,
+      }"
+    >
       <label
         v-if="label"
         :for="id"
@@ -19,12 +24,19 @@
     <div class="relative flex items-center">
       <!-- Track background -->
       <div
-        class="h-1.5 w-full rounded-full bg-base-200 dark:bg-base-700"
+        class="w-full rounded-base bg-base-200 dark:bg-base-700"
+        :class="{
+          'h-0.5': props.size === 'xs',
+          'h-1': props.size === 'sm',
+          'h-2': props.size === 'md',
+          'h-4': props.size === 'lg',
+          'h-8': props.size === 'xl',
+        }"
       ></div>
 
       <!-- Filled track -->
       <div
-        class="absolute h-1.5 rounded-full transition-all duration-300"
+        class="absolute rounded-base transition-all duration-300"
         :class="[
           {
             'bg-primary-500 dark:bg-primary-400': props.kind === 'primary',
@@ -33,8 +45,12 @@
             'bg-info-500 dark:bg-info-400': props.kind === 'info',
             'bg-warning-500 dark:bg-warning-400': props.kind === 'warning',
             'bg-danger-500 dark:bg-danger-400': props.kind === 'danger',
-          },
-          'rounded-full'
+            'h-0.5': props.size === 'xs',
+            'h-1': props.size === 'sm',
+            'h-2': props.size === 'md',
+            'h-4': props.size === 'lg',
+            'h-8': props.size === 'xl',
+          }
         ]"
         :style="{ width: percentWidth }"
       ></div>
@@ -58,6 +74,11 @@
       type: String,
       default: 'primary',
       validator: (v: string) => ['primary', 'secondary', 'success', 'info', 'warning', 'danger'].includes(v),
+    },
+    size: {
+      type: String,
+      default: 'md',
+      validator: (v: string) => ['xs', 'sm', 'md', 'lg', 'xl'].includes(v),
     },
   });
 

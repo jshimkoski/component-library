@@ -12,7 +12,11 @@
 
     <!-- Progress bar at top of carousel -->
     <div v-if="autoPlay && showProgress" class="absolute top-0 left-0 w-full z-10">
-      <Progress :model-value="progress" :max="interval" />
+      <Progress
+        :model-value="progress"
+        :max="interval"
+        size="xs"
+      />
     </div>
 
     <!-- Slides (cross-dissolve fade) -->

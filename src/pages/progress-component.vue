@@ -3,6 +3,30 @@
     <h1 class="text-3xl font-bold mb-6">Progress Component</h1>
 
     <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Sizes</h2>
+      <p class="mb-4">The <code>size</code> prop controls the height of the progress bar. Available options: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>.</p>
+      <div class="grid gap-6 max-w-md mb-4">
+        <div>
+          <h3 class="text-base font-medium mb-2">Extra Small (<code>xs</code>)</h3>
+          <Progress v-model="sizeProgress" :max="100" label="Extra Small" size="xs" />
+        </div>
+        <div>
+          <h3 class="text-base font-medium mb-2">Small (<code>sm</code>)</h3>
+          <Progress v-model="sizeProgress" :max="100" label="Small" size="sm" />
+        </div>
+        <div>
+          <h3 class="text-base font-medium mb-2">Medium (<code>md</code>)</h3>
+          <Progress v-model="sizeProgress" :max="100" label="Medium" size="md" />
+        </div>
+        <div>
+          <h3 class="text-base font-medium mb-2">Large (<code>lg</code>)</h3>
+          <Progress v-model="sizeProgress" :max="100" label="Large" size="lg" />
+        </div>
+        <div>
+          <h3 class="text-base font-medium mb-2">Extra Large (<code>xl</code>)</h3>
+          <Progress v-model="sizeProgress" :max="100" label="Extra Large" size="xl" />
+        </div>
+      </div>
       <h2 class="text-xl font-semibold mb-4">Overview</h2>
       <p class="mb-4">
         The Progress component displays a visual indication of progress toward the completion of a task or process.
@@ -269,6 +293,7 @@
 <script setup lang="ts">
   // Sample data for examples
   const basicProgress = ref(65);
+  const sizeProgress = ref(60);
   
   const progressStates = reactive({
     start: 10,
