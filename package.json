@@ -3,7 +3,7 @@
   "description": "A reusable Vue 3 component library built with Vite.",
   "version": "0.0.0",
   "type": "module",
-  "author": "Jason Shimkoski <jshimkoski@example.com>",
+  "author": "Jason Shimkoski <jshimkoski@me.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
     "component-library",
     "vite",
     "ui",
+    "tailwindcss",
     "typescript"
   ],
   "files": [
@@ -30,7 +31,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/component-library.es.js",
       "require": "./dist/component-library.umd.cjs"
-    }
+    },
+    "./style.css": "./src/css/index.css"
   },
   "scripts": {
     "dev": "vite",
@@ -41,18 +43,20 @@
   "dependencies": {
     "vue": "^3.5.13"
   },
+  "peerDependencies": {
+    "tailwindcss": "^4.1.3",
+    "@tailwindcss/vite": "^4.1.11",
+    "@iconify/json": "^2.2.365",
+    "@iconify/vue": "^5.0.0"
+  },
   "devDependencies": {
     "@floating-ui/vue": "^1.1.8",
-    "@iconify/json": "^2.2.365",
-    "@iconify/vue": "^5.0.0",
-    "@tailwindcss/vite": "^4.1.11",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vue/tsconfig": "^0.7.0",
     "@vueuse/components": "^13.6.0",
     "@vueuse/core": "^13.0.0",
     "@vueuse/integrations": "^13.6.0",
     "focus-trap": "^7.6.5",
-    "tailwindcss": "^4.1.3",
     "typescript": "^5.9.2",
     "unplugin-auto-import": "^19.3.0",
     "unplugin-icons": "^22.2.0",
