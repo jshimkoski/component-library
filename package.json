@@ -24,7 +24,11 @@
   "files": [
     "dist",
     "src/components",
-    "src/css"
+    "src/css",
+    "components.d.ts"
+  ],
+  "sideEffects": [
+    "./src/css/index.css"
   ],
   "main": "dist/component-library.umd.cjs",
   "module": "dist/component-library.es.js",
@@ -47,7 +51,7 @@
     "vue": "^3.5.13"
   },
   "peerDependencies": {
-    "@iconify/json": "^2.2.365",
+    "@iconify/json": "^2.2.366",
     "@iconify/vue": "^5.0.0",
     "@tailwindcss/vite": "^4.1.11",
     "tailwindcss": "^4.1.3"

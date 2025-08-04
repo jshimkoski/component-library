@@ -77,7 +77,26 @@ app.mount('#app');
 **Or in Nuxt:**
 
 ```ts
-import '@jasonshimmy/components/style.css';
+// nuxt.config.ts
+import tailwindcss from "@tailwindcss/vite";
+export default defineNuxtConfig({
+  css: ['./app/assets/css/main.css'],
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
+});
+```
+
+```css
+/* app/assets/css/main.css */
+@import "tailwindcss";
+@import '@jasonshimmy/components/style.css';
+@source "../../../node_modules/@jasonshimmy/components";
+```
+
+```ts
 import * as ComponentLibrary from '@jasonshimmy/components';
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -107,11 +126,26 @@ import { Card } from '@jasonshimmy/components';
 ```
 
 ---
-9. **Examples** - Real-world usage examples
 
-### Documentation Standards
+## TypeScript Global Component Types (for Volar/Vetur)
 
-For contributors looking to document components, please follow our [Documentation Standards](./docs/COMPONENT_DOCUMENTATION_TEMPLATE.md).
+To enable template autocompletion for all components in your project, reference the provided `components.d.ts` in your `tsconfig.json`:
+
+```jsonc
+// tsconfig.json
+{
+  // ...existing config...
+  "include": [
+    "node_modules/@jasonshimmy/components.d.ts",
+    "./**/*.ts",
+    "./**/*.vue"
+  ]
+}
+```
+
+This will make all components from `@jasonshimmy/components` available globally in your templates with full type support.
+
+---
 
 ## Available Components
 
