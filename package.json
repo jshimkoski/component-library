@@ -10,6 +10,9 @@
     "url": "git+https://github.com/jshimkoski/component-library.git"
   },
   "homepage": "https://github.com/jshimkoski/component-library#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "vue",
     "component-library",
