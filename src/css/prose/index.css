@@ -1,3 +1,32 @@
+@custom-variant prose-headings (h1, h2, h3, h4, h5, h6);
+@custom-variant prose-lead ([class~="lead"]);
+@custom-variant prose-h1 (h1);
+@custom-variant prose-h2 (h2);
+@custom-variant prose-h3 (h3);
+@custom-variant prose-h4 (h4);
+@custom-variant prose-p (p);
+@custom-variant prose-a (a);
+@custom-variant prose-blockquote (blockquote);
+@custom-variant prose-figure (figure);
+@custom-variant prose-figcaption (figcaption);
+@custom-variant prose-strong (strong);
+@custom-variant prose-em (em);
+@custom-variant prose-kbd (kbd);
+@custom-variant prose-code (code);
+@custom-variant prose-pre (pre);
+@custom-variant prose-ol (ol);
+@custom-variant prose-ul (ul);
+@custom-variant prose-li (li);
+@custom-variant prose-table (table);
+@custom-variant prose-thead (thead);
+@custom-variant prose-tr (tr);
+@custom-variant prose-th (th);
+@custom-variant prose-td (td);
+@custom-variant prose-img (img);
+@custom-variant prose-svg (svg);
+@custom-variant prose-video (video);
+@custom-variant prose-hr (hr);
+
 @layer components {
   :where(.prose):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     max-width: 65ch;

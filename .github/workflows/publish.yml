@@ -1,0 +1,86 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Determine version bump from commit
+        id: bump
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          if [[ "$COMMIT_MSG" == *"feat!:"* ]]; then
+            echo "major" > .bump
+          elif [[ "$COMMIT_MSG" == feat:* ]]; then
+            echo "minor" > .bump
+          elif [[ "$COMMIT_MSG" == fix:* ]]; then
+            echo "patch" > .bump
+          else
+            echo "patch" > .bump
+          fi
+
+      - name: Bump version
+        id: version
+        run: |
+          BUMP_TYPE=$(cat .bump)
+          BRANCH=${GITHUB_REF##*/}
+          PRE=""
+          if [[ "$BRANCH" == "develop" ]]; then
+            PRE="--preid=beta"
+          fi
+          NEW_VERSION=$(npm version "$BUMP_TYPE" $PRE -m "release: %s [skip ci]")
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          git push --follow-tags
+
+      - name: Generate changelog
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0)
+          echo "## Changelog for $(date +'%Y-%m-%d')" > CHANGELOG.md
+
+          echo "" >> CHANGELOG.md
+          echo "### Features" >> CHANGELOG.md
+          git log ${LAST_TAG}..HEAD --pretty=format:"- %s" | grep "^feat:" >> CHANGELOG.md || echo "No new features" >> CHANGELOG.md
+
+          echo "" >> CHANGELOG.md
+          echo "### Fixes" >> CHANGELOG.md
+          git log ${LAST_TAG}..HEAD --pretty=format:"- %s" | grep "^fix:" >> CHANGELOG.md || echo "No fixes" >> CHANGELOG.md
+
+          echo "" >> CHANGELOG.md
+          echo "### Breaking Changes" >> CHANGELOG.md
+          git log ${LAST_TAG}..HEAD --pretty=format:"- %s" | grep "BREAKING CHANGE:" >> CHANGELOG.md || echo "No breaking changes" >> CHANGELOG.md
+
+      - name: Commit changelog
+        run: |
+          git add CHANGELOG.md
+          git commit -m "docs: update changelog [skip ci]" || echo "No changes to commit"
+          git push
+
+      - name: Publish to npm
+        run: |
+          BRANCH=${GITHUB_REF##*/}
+          if [[ "$BRANCH" == "develop" ]]; then
+            npm publish --tag beta
+          else
+            npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

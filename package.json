@@ -1,5 +1,5 @@
 {
-  "name": "@jshimkoski/component-library",
+  "name": "@jasonshimmy/components",
   "description": "A reusable Vue 3 component library built with Vite.",
   "version": "0.0.0",
   "type": "module",
@@ -44,10 +44,10 @@
     "vue": "^3.5.13"
   },
   "peerDependencies": {
-    "tailwindcss": "^4.1.3",
-    "@tailwindcss/vite": "^4.1.11",
     "@iconify/json": "^2.2.365",
-    "@iconify/vue": "^5.0.0"
+    "@iconify/vue": "^5.0.0",
+    "@tailwindcss/vite": "^4.1.11",
+    "tailwindcss": "^4.1.3"
   },
   "devDependencies": {
     "@floating-ui/vue": "^1.1.8",
