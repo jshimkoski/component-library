@@ -39,7 +39,8 @@
       "import": "./dist/component-library.es.js",
       "require": "./dist/component-library.umd.cjs"
     },
-    "./style.css": "./src/css/index.css"
+    "./style.css": "./src/css/index.css",
+    "./globals": "./components.d.ts"
   },
   "scripts": {
     "dev": "vite",
