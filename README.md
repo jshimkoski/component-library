@@ -26,7 +26,6 @@ This component library provides a set of highly customizable, accessible, and re
 - Node.js 16.x or higher
 - npm 8.x or higher
 
-
 ## Getting Started (Development)
 
 ### Prerequisites
