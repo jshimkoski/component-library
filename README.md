@@ -48,13 +48,10 @@ This will start the development server with the component documentation and exam
 
 You can use this library in your own Vue 3 projects after building it:
 
-### 1. Install the library (after publishing or via local path)
+### 1. Install the library
 
 ```bash
-# If published to npm:
-7. **States** - Component states (active, disabled, etc.)
-# Or, for local development:
-8. **Best Practices** - Usage guidelines and recommendations
+npm install @jasonshimmy/components
 ```
 
 ### 2. Import the library and styles
@@ -64,8 +61,8 @@ You can use this library in your own Vue 3 projects after building it:
 ```ts
 import { createApp } from 'vue';
 import App from './App.vue';
-import '@jshimkoski/component-library/dist/style.css';
-import * as ComponentLibrary from '@jshimkoski/component-library';
+import '@jasonshimmy/components/style.css';
+import * as ComponentLibrary from '@jasonshimmy/components';
 
 const app = createApp(App);
 
@@ -77,11 +74,25 @@ Object.entries(ComponentLibrary).forEach(([name, component]) => {
 app.mount('#app');
 ```
 
+**Or in Nuxt:**
+
+```ts
+import '@jasonshimmy/components/style.css';
+import * as ComponentLibrary from '@jasonshimmy/components';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  // Register all components globally
+  Object.entries(ComponentLibrary).forEach(([name, component]) => {
+    nuxtApp.vueApp.component(name, component);
+  });
+})
+```
+
 **Or import individual components:**
 
 ```ts
-import { Card, Button, Dialog } from '@jshimkoski/component-library';
-import '@jshimkoski/component-library/dist/style.css';
+import { Card, Button, Dialog } from '@jasonshimmy/components';
+import '@jasonshimmy/components/style.css';
 
 // Use <Card />, <Button />, <Dialog /> in your templates
 ```
@@ -91,7 +102,7 @@ import '@jshimkoski/component-library/dist/style.css';
 TypeScript type declarations are included automatically. If you use TypeScript, you will get full type support and autocompletion for all components and their props:
 
 ```ts
-import { Card } from '@jshimkoski/component-library';
+import { Card } from '@jasonshimmy/components';
 // Card will have full prop types and event typings
 ```
 
