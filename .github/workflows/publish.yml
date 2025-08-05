@@ -47,56 +47,52 @@ jobs:
 
       - name: Generate changelog
         run: |
-          # Try to get the latest tag; fall back to initial commit if none
+          set +e  # Disable exit-on-error
+
+          echo "🔧 Starting changelog generation"
+          echo "Current HEAD: $(git rev-parse HEAD)"
+          echo "Available tags:"
+          git tag || echo "No tags found"
+
+          # Try to get last tag; if none, use root commit
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          echo "Last tag: $LAST_TAG"
 
-          # Create changelog header
-          echo "## Changelog for $(date +'%Y-%m-%d')" > CHANGELOG.md
-          echo "" >> CHANGELOG.md
-
-          # Define commit range
           if [ -n "$LAST_TAG" ]; then
             RANGE="$LAST_TAG..HEAD"
           else
-            RANGE="$(git rev-list --max-parents=0 HEAD)..HEAD"
+            ROOT_COMMIT=$(git rev-list --max-parents=0 HEAD)
+            RANGE="$ROOT_COMMIT..HEAD"
           fi
+          echo "Using commit range: $RANGE"
 
-          # Gather categorized commits
-          FEATURE_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^feat(\(.+\))?:")
-          FIX_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^fix(\(.+\))?:")
-          BREAKING_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep "BREAKING CHANGE:")
+          # Initialize changelog
+          echo "## Changelog for $(date +'%Y-%m-%d')" > CHANGELOG.md
 
-          # Write features
+          # Features
+          echo "" >> CHANGELOG.md
           echo "### Features" >> CHANGELOG.md
-          if [ -n "$FEATURE_COMMITS" ]; then
-            echo "$FEATURE_COMMITS" >> CHANGELOG.md
-          else
-            echo "No new features" >> CHANGELOG.md
-          fi
+          FEATURE_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^feat(\(.+\))?:") || true
+          [ -n "$FEATURE_COMMITS" ] && echo "$FEATURE_COMMITS" >> CHANGELOG.md || echo "No new features" >> CHANGELOG.md
 
+          # Fixes
           echo "" >> CHANGELOG.md
-
-          # Write fixes
           echo "### Fixes" >> CHANGELOG.md
-          if [ -n "$FIX_COMMITS" ]; then
-            echo "$FIX_COMMITS" >> CHANGELOG.md
-          else
-            echo "No fixes" >> CHANGELOG.md
-          fi
+          FIX_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^fix(\(.+\))?:") || true
+          [ -n "$FIX_COMMITS" ] && echo "$FIX_COMMITS" >> CHANGELOG.md || echo "No fixes" >> CHANGELOG.md
 
+          # Breaking Changes
           echo "" >> CHANGELOG.md
-
-          # Write breaking changes
           echo "### Breaking Changes" >> CHANGELOG.md
-          if [ -n "$BREAKING_COMMITS" ]; then
-            echo "$BREAKING_COMMITS" >> CHANGELOG.md
-          else
-            echo "No breaking changes" >> CHANGELOG.md
-          fi
+          BREAKING_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep "BREAKING CHANGE:") || true
+          [ -n "$BREAKING_COMMITS" ] && echo "$BREAKING_COMMITS" >> CHANGELOG.md || echo "No breaking changes" >> CHANGELOG.md
 
-          # Preview changelog for debugging
-          echo "Generated CHANGELOG:"
+          echo ""
+          echo "✅ CHANGELOG.md generated:"
           cat CHANGELOG.md
+
+          exit 0  # Always exit successfully
+
 
 
       - name: Commit changelog
