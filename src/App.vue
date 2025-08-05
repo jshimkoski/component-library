@@ -2,7 +2,7 @@
   <DocsLayout>
     <template #header>
       <div class="flex items-center space-x-3">
-        <span class="font-medium text-xl">AJS Design System</span>
+        <span class="font-medium text-xl">Jason Shimmy Components</span>
       </div>
       <nav class="hidden md:flex gap-2">
         <RouterLink
