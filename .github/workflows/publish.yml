@@ -70,7 +70,12 @@ jobs:
           fi
           
           # Generate commit log since last tag (excluding merge commits and version bumps)
-          COMMITS=$(git log "$PREV_TAG..HEAD" --pretty=format:"- %s (%h)" --no-merges | grep -v "release:")
+          COMMITS=$(git log "$PREV_TAG..HEAD" --pretty=format:"- %s (%h)" --no-merges | grep -v "release:" || true)
+          
+          # Handle case where no commits are found
+          if [ -z "$COMMITS" ]; then
+            COMMITS="- No changes since last release"
+          fi
           
           # Store commits for later use
           echo "$COMMITS" > commits.txt
@@ -123,8 +128,12 @@ jobs:
           "
           
           # Insert new entry at the top of changelog (after header)
-          sed -i.bak "4i\\
-          $TEMP_CHANGELOG" CHANGELOG.md && rm CHANGELOG.md.bak
+          # Create a temporary file to avoid sed portability issues
+          {
+            head -3 CHANGELOG.md
+            echo "$TEMP_CHANGELOG"
+            tail -n +4 CHANGELOG.md
+          } > CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md
           
           # Commit and push changelog
           git add CHANGELOG.md
@@ -133,6 +142,9 @@ jobs:
           
           # Save release notes for GitHub release
           echo "$RELEASE_NOTES" > release_notes.md
+          
+          # Create GitHub release using built-in GitHub CLI or curl without jq dependency
+          ESCAPED_BODY=$(echo "$RELEASE_NOTES" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
           
           # Create GitHub release
           if [[ "$BRANCH" == "develop" ]]; then
@@ -144,7 +156,7 @@ jobs:
               -d "{
                 \"tag_name\": \"$VERSION\",
                 \"name\": \"$VERSION (Beta)\",
-                \"body\": $(cat release_notes.md | jq -Rs .),
+                \"body\": \"$ESCAPED_BODY\",
                 \"prerelease\": true
               }"
           else
@@ -156,7 +168,7 @@ jobs:
               -d "{
                 \"tag_name\": \"$VERSION\",
                 \"name\": \"$VERSION\",
-                \"body\": $(cat release_notes.md | jq -Rs .),
+                \"body\": \"$ESCAPED_BODY\",
                 \"prerelease\": false
               }"
           fi
