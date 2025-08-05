@@ -1,4 +1,4 @@
-# Component Library
+# @jasonshimmy/components
 
 A comprehensive collection of Vue 3 components built with TypeScript and Vite, designed for modern web applications.
 
