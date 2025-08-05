@@ -64,13 +64,20 @@ jobs:
           BUMP_TYPE=$(cat .bump)
           
           # Get the previous tag to determine what commits to include
-          PREV_TAG=$(git tag --sort=-version:refname | head -n1)
+          # We need to get the tag BEFORE the current one, since we're about to create a new tag
+          PREV_TAG=$(git tag --sort=-version:refname | head -n2 | tail -n1)
           if [ -z "$PREV_TAG" ]; then
             PREV_TAG=$(git rev-list --max-parents=0 HEAD)
           fi
           
+          echo "Debug: Previous tag is: $PREV_TAG"
+          echo "Debug: Current HEAD is: $(git rev-parse HEAD)"
+          echo "Debug: Checking commits between $PREV_TAG and HEAD"
+          
           # Generate commit log since last tag (excluding merge commits and version bumps)
           COMMITS=$(git log "$PREV_TAG..HEAD" --pretty=format:"- %s (%h)" --no-merges | grep -v "release:" || true)
+          
+          echo "Debug: Found commits: $COMMITS"
           
           # Handle case where no commits are found
           if [ -z "$COMMITS" ]; then
