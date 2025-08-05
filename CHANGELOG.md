@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [v0.0.16-beta.7] - 2025-08-05
+
+- fix: export composables docs: clean up README.md docs: Clean up documentation for components docs: Add documentation for composables (7a045b0)
+- fix: update header title to "Jason Shimmy Components" (1c4bee9)
+
+
 ## [v0.0.16-beta.6] - 2025-08-05
 
 - fix: update header title to "Jason Shimmy Components" (1c4bee9)
