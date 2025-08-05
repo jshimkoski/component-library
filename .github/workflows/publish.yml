@@ -57,6 +57,24 @@ jobs:
             echo "patch" > .bump
           fi
 
+      - name: Generate release notes and changelog
+        id: changelog
+        run: |
+          BRANCH=${GITHUB_REF##*/}
+          BUMP_TYPE=$(cat .bump)
+          
+          # Get the previous tag to determine what commits to include
+          PREV_TAG=$(git tag --sort=-version:refname | head -n1)
+          if [ -z "$PREV_TAG" ]; then
+            PREV_TAG=$(git rev-list --max-parents=0 HEAD)
+          fi
+          
+          # Generate commit log since last tag (excluding merge commits and version bumps)
+          COMMITS=$(git log "$PREV_TAG..HEAD" --pretty=format:"- %s (%h)" --no-merges | grep -v "release:")
+          
+          # Store commits for later use
+          echo "$COMMITS" > commits.txt
+
       - name: Bump version
         id: version
         run: |
@@ -70,6 +88,78 @@ jobs:
           fi
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
           git push --follow-tags
+
+      - name: Create release and update changelog
+        run: |
+          BRANCH=${GITHUB_REF##*/}
+          VERSION="${{ steps.version.outputs.version }}"
+          COMMITS=$(cat commits.txt)
+          
+          # Get the previous tag for comparison link
+          PREV_TAG=$(git tag --sort=-version:refname | grep -v "$VERSION" | head -n1)
+          
+          # Create release notes
+          RELEASE_NOTES="## Release $VERSION
+          
+          ### Changes
+          $COMMITS
+          
+          **Full Changelog**: https://github.com/${{ github.repository }}/compare/$PREV_TAG...$VERSION"
+          
+          # Update or create CHANGELOG.md
+          DATE=$(date +"%Y-%m-%d")
+          if [ ! -f CHANGELOG.md ]; then
+            echo "# Changelog" > CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            echo "All notable changes to this project will be documented in this file." >> CHANGELOG.md
+            echo "" >> CHANGELOG.md
+          fi
+          
+          # Prepare new changelog entry
+          TEMP_CHANGELOG="## [$VERSION] - $DATE
+          
+          $COMMITS
+          
+          "
+          
+          # Insert new entry at the top of changelog (after header)
+          sed -i.bak "4i\\
+          $TEMP_CHANGELOG" CHANGELOG.md && rm CHANGELOG.md.bak
+          
+          # Commit and push changelog
+          git add CHANGELOG.md
+          git commit -m "chore: update changelog for $VERSION [skip ci]" || true
+          git push || true
+          
+          # Save release notes for GitHub release
+          echo "$RELEASE_NOTES" > release_notes.md
+          
+          # Create GitHub release
+          if [[ "$BRANCH" == "develop" ]]; then
+            # Beta release
+            curl -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/${{ github.repository }}/releases \
+              -d "{
+                \"tag_name\": \"$VERSION\",
+                \"name\": \"$VERSION (Beta)\",
+                \"body\": $(cat release_notes.md | jq -Rs .),
+                \"prerelease\": true
+              }"
+          else
+            # Production release
+            curl -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/${{ github.repository }}/releases \
+              -d "{
+                \"tag_name\": \"$VERSION\",
+                \"name\": \"$VERSION\",
+                \"body\": $(cat release_notes.md | jq -Rs .),
+                \"prerelease\": false
+              }"
+          fi
 
       - name: Publish to npm
         run: |
