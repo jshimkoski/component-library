@@ -4,7 +4,7 @@ A comprehensive collection of Vue 3 components built with TypeScript and Vite, d
 
 ## Usage with Tailwind CSS
 
-See [USAGE_WITH_TAILWIND.md](./USAGE_WITH_TAILWIND.md) for best practices on integrating this library with Tailwind CSS in your project.
+See [USAGE_WITH_TAILWIND.md](./docs/USAGE_WITH_TAILWIND.md) for best practices on integrating this library with Tailwind CSS in your project.
 
 ## Overview
 
@@ -46,8 +46,6 @@ npm run dev
 
 This will start the development server with the component documentation and examples.
 
----
-
 ## Usage in Other Projects
 
 You can use this library in your own Vue 3 projects after building it:
@@ -62,10 +60,20 @@ npm install @jasonshimmy/components
 
 **Global registration (main.ts):**
 
+```css
+/* src/assets/css/main.css */
+
+@import "tailwindcss";
+@import '@jasonshimmy/components/style.css';
+@source "../../../node_modules/@jasonshimmy/components";
+```
+
 ```ts
+/* src/main.ts */
+
 import { createApp } from 'vue';
 import App from './App.vue';
-import '@jasonshimmy/components/style.css';
+import '../assets/css/main.css';
 import * as ComponentLibrary from '@jasonshimmy/components';
 
 const app = createApp(App);
@@ -131,7 +139,7 @@ import '@jasonshimmy/components/style.css';
 // Use <Card />, <Button />, <Dialog /> in your templates
 ```
 
-### 3. Type Declarations
+## 3. Type Declarations
 
 TypeScript type declarations are included automatically. If you use TypeScript, you will get full type support and autocompletion for all components and their props:
 
@@ -140,9 +148,7 @@ import { Card } from '@jasonshimmy/components';
 // Card will have full prop types and event typings
 ```
 
----
-
-## TypeScript Global Component Types (for Volar/Vetur)
+### TypeScript Global Component Types (for Volar/Vetur)
 
 To enable template autocompletion for all components in your project, update your `tsconfig.json`:
 
@@ -157,8 +163,6 @@ To enable template autocompletion for all components in your project, update you
 ```
 
 This will make all components from `@jasonshimmy/components` available globally in your templates with full type support.
-
----
 
 ## Available Components
 
