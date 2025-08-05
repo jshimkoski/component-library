@@ -48,7 +48,7 @@ jobs:
       - name: Generate changelog
         run: |
           # Ensure we have full history and tags
-          git fetch --tags --prune --unshallow || true
+          git fetch --tags --prune || true
 
           # Try to get the latest tag; fall back to initial commit if none
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
