@@ -47,37 +47,60 @@ jobs:
 
       - name: Generate changelog
         run: |
-          # Ensure full history is available
-          git fetch --tags --unshallow || true
+          # Ensure we have full history and tags
+          git fetch --tags --prune --unshallow || true
 
-          # Safely get last tag (fallback to empty string if none)
+          # Try to get the latest tag; fall back to initial commit if none
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
 
+          # Create changelog header
           echo "## Changelog for $(date +'%Y-%m-%d')" > CHANGELOG.md
-
           echo "" >> CHANGELOG.md
+
+          # Define commit range
+          if [ -n "$LAST_TAG" ]; then
+            RANGE="$LAST_TAG..HEAD"
+          else
+            RANGE="$(git rev-list --max-parents=0 HEAD)..HEAD"
+          fi
+
+          # Gather categorized commits
+          FEATURE_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^feat(\(.+\))?:")
+          FIX_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^fix(\(.+\))?:")
+          BREAKING_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep "BREAKING CHANGE:")
+
+          # Write features
           echo "### Features" >> CHANGELOG.md
-          if [ -n "$LAST_TAG" ]; then
-            git log $LAST_TAG..HEAD --pretty=format:"- %s" | grep "^feat:" >> CHANGELOG.md || echo "No new features" >> CHANGELOG.md
+          if [ -n "$FEATURE_COMMITS" ]; then
+            echo "$FEATURE_COMMITS" >> CHANGELOG.md
           else
-            git log --pretty=format:"- %s" | grep "^feat:" >> CHANGELOG.md || echo "No new features" >> CHANGELOG.md
+            echo "No new features" >> CHANGELOG.md
           fi
 
           echo "" >> CHANGELOG.md
+
+          # Write fixes
           echo "### Fixes" >> CHANGELOG.md
-          if [ -n "$LAST_TAG" ]; then
-            git log $LAST_TAG..HEAD --pretty=format:"- %s" | grep "^fix:" >> CHANGELOG.md || echo "No fixes" >> CHANGELOG.md
+          if [ -n "$FIX_COMMITS" ]; then
+            echo "$FIX_COMMITS" >> CHANGELOG.md
           else
-            git log --pretty=format:"- %s" | grep "^fix:" >> CHANGELOG.md || echo "No fixes" >> CHANGELOG.md
+            echo "No fixes" >> CHANGELOG.md
           fi
 
           echo "" >> CHANGELOG.md
+
+          # Write breaking changes
           echo "### Breaking Changes" >> CHANGELOG.md
-          if [ -n "$LAST_TAG" ]; then
-            git log $LAST_TAG..HEAD --pretty=format:"- %s" | grep "BREAKING CHANGE:" >> CHANGELOG.md || echo "No breaking changes" >> CHANGELOG.md
+          if [ -n "$BREAKING_COMMITS" ]; then
+            echo "$BREAKING_COMMITS" >> CHANGELOG.md
           else
-            git log --pretty=format:"- %s" | grep "BREAKING CHANGE:" >> CHANGELOG.md || echo "No breaking changes" >> CHANGELOG.md
+            echo "No breaking changes" >> CHANGELOG.md
           fi
+
+          # Preview changelog for debugging
+          echo "Generated CHANGELOG:"
+          cat CHANGELOG.md
+
 
       - name: Commit changelog
         run: |
@@ -89,7 +112,7 @@ jobs:
         id: bump
         run: |
           COMMIT_MSG=$(git log -1 --pretty=%B)
-          if [[ "$COMMIT_MSG" == *"feat!:"* ]]; then
+          if [[ "$COMMIT_MSG" == *"BREAKING CHANGE:"* ]]; then
             echo "major" > .bump
           elif [[ "$COMMIT_MSG" == feat:* ]]; then
             echo "minor" > .bump
