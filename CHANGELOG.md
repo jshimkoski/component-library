@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [v0.0.16-beta.6] - 2025-08-05
+
+- fix: update header title to "Jason Shimmy Components" (1c4bee9)
+- docs: update Tailwind CSS usage documentation and relocate to docs folder (defe01b)
+
+
 ## [v0.0.16-beta.5] - 2025-08-05
 
 - docs: update Tailwind CSS usage documentation and relocate to docs folder (defe01b)
