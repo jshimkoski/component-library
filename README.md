@@ -6,6 +6,8 @@ A comprehensive collection of Vue 3 components built with TypeScript and Vite, d
 
 See [USAGE_WITH_TAILWIND.md](./USAGE_WITH_TAILWIND.md) for best practices on integrating this library with Tailwind CSS in your project.
 
+See [CHANGELOG.md](./CHANGELOG.md) for a detailed list of changes and updates.
+
 ## Overview
 
 This component library provides a set of highly customizable, accessible, and reusable Vue 3 components. Built with TypeScript and Vite, it offers excellent developer experience and runtime performance.

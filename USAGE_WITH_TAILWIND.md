@@ -26,4 +26,4 @@ Refer to the library documentation for any required theme extensions.
 
 ---
 
-For more details, see the [Tailwind CSS v4 Installation Guide](https://tailwindcss.com/docs/installation) and the library's documentation.
+For more details, see the [Tailwind CSS Installation Guide](https://tailwindcss.com/docs/installation) and the library's documentation.

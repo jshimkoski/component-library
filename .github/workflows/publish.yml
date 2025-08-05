@@ -62,11 +62,12 @@ jobs:
         run: |
           BUMP_TYPE=$(cat .bump)
           BRANCH=${GITHUB_REF##*/}
-          PRE=""
+          # Ensure version includes -beta for develop
           if [[ "$BRANCH" == "develop" ]]; then
-            PRE="--preid=beta"
+            NEW_VERSION=$(npm version "pre$BUMP_TYPE" --preid=beta -m "release: %s [skip ci]")
+          else
+            NEW_VERSION=$(npm version "$BUMP_TYPE" -m "release: %s [skip ci]")
           fi
-          NEW_VERSION=$(npm version "$BUMP_TYPE" $PRE -m "release: %s [skip ci]")
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
           git push --follow-tags
 
