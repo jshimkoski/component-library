@@ -1,7 +1,7 @@
 {
   "name": "@jasonshimmy/components",
   "description": "A reusable Vue 3 component library built with Vite.",
-  "version": "0.0.14-beta.0",
+  "version": "0.0.15-beta.0",
   "type": "module",
   "author": "Jason Shimkoski <jshimkoski@me.com>",
   "license": "MIT",
