@@ -1,4 +1,4 @@
-## Changelog for 2025-08-04
+## Changelog for 2025-08-05
 
 ### Features
 No new features
