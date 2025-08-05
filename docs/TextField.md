@@ -18,6 +18,7 @@ The TextField component provides a standard input field for collecting text-base
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
+| `icon` | String | `undefined` | Icon name from Iconify to display inside the input field. |
 | `label` | String | `undefined` | The label text displayed above the input field. |
 | `description` | String | `undefined` | Additional descriptive text displayed below the input field. |
 | `type` | `"text" \| "number" \| "tel" \| "url" \| "email" \| "password"` | `"text"` | The type of input field. |

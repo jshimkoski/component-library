@@ -1,4 +1,4 @@
-# Using @jshimkoski/component-library with Tailwind CSS
+# Using @jasonshimmy/components with Tailwind CSS
 
 To use this component library with Tailwind CSS in your project, follow these steps:
 
@@ -18,8 +18,8 @@ If the library uses custom colors, radii, or prose styles, update your entry CSS
 
 ```css
 @import "tailwindcss";
-@import "@jshimkoski/component-library/style.css";
-@source "../node_modules/@jshimkoski/component-library";
+@import "@jasonshimmy/components/style.css";
+@source "../node_modules/@jasonshimmy/components";
 ```
 
 Refer to the library documentation for any required theme extensions.

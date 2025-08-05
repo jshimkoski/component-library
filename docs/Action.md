@@ -18,7 +18,9 @@ The Action component is a versatile interactive element that can be rendered as 
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
+| `icon` | String | `undefined` | Icon name from Iconify to display in the action. |
 | `label` | String | `undefined` | Text content for the action. |
+| `iconOnly` | Boolean | `false` | When true, visually hides the label but keeps it accessible for screen readers. |
 | `href` | String | `undefined` | URL for anchor tag. When provided, renders as `<a>` instead of `<button>`. |
 | `target` | String | `undefined` | Target attribute for anchor tag (e.g., "_blank"). |
 | `rel` | String | `undefined` | Rel attribute for anchor tag. |

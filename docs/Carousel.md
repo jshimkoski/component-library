@@ -1,24 +1,60 @@
-# Carousel Component
+# Carousel
 
-A Material Design-compliant carousel for Vue 3, supporting swiping, keyboard navigation, looping, auto-play, custom slides, and accessibility. Follows the conventions of other components in this library.
+## Overview
+
+The Carousel component is a Material Design-compliant slideshow for Vue 3 that displays a series of content items in a rotating fashion. It supports swiping, keyboard navigation, looping, auto-play, custom slides, and accessibility features. The component is ideal for showcasing images, testimonials, or any content that benefits from a sliding presentation.
+
+## Basic Usage
+
+<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+  <Carousel 
+    v-model="currentSlide"
+    :items="slides" 
+    :auto-play="true"
+    :interval="4000"
+  />
+</div>
+
+```vue
+<template>
+  <Carousel 
+    v-model="currentSlide"
+    :items="slides" 
+    :auto-play="true"
+    :interval="4000"
+  />
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const currentSlide = ref(0);
+const slides = [
+  { src: '/image1.jpg', alt: 'First slide' },
+  { src: '/image2.jpg', alt: 'Second slide' },
+  { src: '/image3.jpg', alt: 'Third slide' }
+];
+</script>
+```
 
 ## Props
 
 | Prop             | Type                                | Default      | Description                                                      |
 |------------------|-------------------------------------|--------------|------------------------------------------------------------------|
-| items            | Array<any>                          | []           | Array of slide data objects.                                     |
-| modelValue       | Number                              | 0            | The index of the currently active slide (v-model support).       |
-| loop             | Boolean                             | true         | Whether to loop from last to first slide and vice versa.         |
-| autoPlay         | Boolean                             | false        | Whether to auto-advance slides.                                  |
-| interval         | Number                              | 5000         | Auto-play interval in ms.                                        |
-| showArrows       | Boolean                             | true         | Show previous/next navigation arrows.                            |
-| showIndicators   | Boolean                             | true         | Show slide indicators (dots).                                    |
-| containerClass   | String                              | ''           | Additional classes for the root container.                       |
-| ariaLabel        | String                              | 'carousel'   | ARIA label for accessibility.                                    |
-| prevLabel        | String                              | 'Previous slide' | ARIA label for previous arrow.                              |
-| nextLabel        | String                              | 'Next slide' | ARIA label for next arrow.                                   |
-| indicatorLabel   | Function(idx: number): string       | See code     | Function to generate ARIA label for indicators.                  |
-| itemKey          | Function(item, idx): string \| number | See code     | Function to generate unique key for each slide.                  |
+| `items`          | Array<any>                          | []           | Array of slide data objects.                                     |
+| `modelValue`     | Number                              | 0            | The index of the currently active slide (v-model support).       |
+| `loop`           | Boolean                             | true         | Whether to loop from last to first slide and vice versa.         |
+| `autoPlay`       | Boolean                             | false        | Whether to auto-advance slides.                                  |
+| `showProgress`   | Boolean                             | false        | Whether to show progress bar during auto-play.                   |
+| `interval`       | Number                              | 5000         | Auto-play interval in ms.                                        |
+| `showArrows`     | Boolean                             | true         | Show previous/next navigation arrows.                            |
+| `showIndicators` | Boolean                             | true         | Show slide indicators (dots).                                    |
+| `containerClass` | String                              | ''           | Additional classes for the root container.                       |
+| `ariaLabel`      | String                              | 'carousel'   | ARIA label for accessibility.                                    |
+| `prevLabel`      | String                              | 'Previous slide' | ARIA label for previous arrow.                              |
+| `nextLabel`      | String                              | 'Next slide' | ARIA label for next arrow.                                   |
+| `indicatorLabel` | Function(idx: number): string       | See code     | Function to generate ARIA label for indicators.                  |
+| `itemKey`        | Function(item, idx): string \| number | See code     | Function to generate unique key for each slide.                  |
 
 ## Events
 

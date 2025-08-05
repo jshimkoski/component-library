@@ -39,3 +39,11 @@ export { default as TextField } from './components/TextField.vue';
 export { default as Tooltip } from './components/Tooltip.vue';
 export { default as Tree } from './components/Tree.vue';
 export { default as TreeItem } from './components/TreeItem.vue';
+
+// Export composables
+export { useMenu, closeAllMenus, getOpenMenus } from './composables/useMenu';
+export { useSnackbar, provideSnackbar } from './composables/useSnackbar';
+
+// Export composable types
+export type { MenuState } from './composables/useMenu';
+export type { SnackbarOptions, SnackbarKind, SnackbarPosition } from './composables/useSnackbar';

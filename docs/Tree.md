@@ -56,8 +56,8 @@ function handleNodeClick(node) {
 | `items` | `Array` | `[]` | Array of tree items. Each item should have an `id`, `label` and optional `children` array. |
 | `defaultExpandAll` | `Boolean` | `false` | Whether to expand all tree nodes by default. |
 | `defaultExpandedKeys` | `Array` | `[]` | Array of item IDs that should be expanded by default. |
-| `showIcons` | `Boolean` | `true` | Whether to display file/folder icons next to items. |
-| `controlsPosition` | `String` | `'left'` | Position of expand/collapse controls. Can be `'left'` or `'right'`. |
+| `hideIcons` | `Boolean` | `false` | Whether to hide file/folder icons next to items. |
+| `activeItemId` | `String \| Number \| null` | `null` | ID of the currently active/selected tree item. |
 
 ## Events
 

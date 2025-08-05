@@ -20,6 +20,7 @@ The Chip component displays compact information elements or interactive labels. 
 |------|------|---------|-------------|
 | `label` | String | `undefined` | Text content displayed in the chip. |
 | `kind` | `"primary" \| "secondary" \| "success" \| "info" \| "warning" \| "danger"` | `"primary"` | Color theme of the chip. |
+| `variant` | `"solid" \| "subtle"` | `"solid"` | Visual style variant of the chip. |
 | `href` | String | `undefined` | URL for the chip when used as a link. |
 | `target` | String | `undefined` | Target attribute for the link (e.g., "_blank"). |
 | `rel` | String | `undefined` | Rel attribute for the link. |
