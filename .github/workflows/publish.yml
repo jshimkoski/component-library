@@ -47,8 +47,10 @@ jobs:
 
       - name: Generate changelog
         run: |
-          # Ensure we have full history and tags
-          git fetch --tags --prune || true
+          # Safely attempt to fetch tags, and suppress exit code
+          {
+            git fetch --tags --prune
+          } || echo "Warning: failed to fetch tags"
 
           # Try to get the latest tag; fall back to initial commit if none
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
