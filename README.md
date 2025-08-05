@@ -26,20 +26,24 @@ This component library provides a set of highly customizable, accessible, and re
 - Node.js 16.x or higher
 - npm 8.x or higher
 
-## Getting Started (Development)
+### Development
 
-### Prerequisites
+#### Prerequisites
 
 - Node.js 16.x or higher
 - npm 8.x or higher
+
 The documentation for each component follows a consistent structure:
-### Installation (for local development)
+
+#### Installation (for local development)
+
 1. **Overview** - Description and purpose
+
 ```bash
 npm install
 npm run dev
 ```
-6. **Variants/Options** - Different component configurations
+
 This will start the development server with the component documentation and examples.
 
 ---
@@ -77,7 +81,8 @@ app.mount('#app');
 **Or in Nuxt:**
 
 ```ts
-// nuxt.config.ts
+/* nuxt.config.ts */
+
 import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   css: ['./app/assets/css/main.css'],
@@ -86,17 +91,27 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        types: ['@jasonshimmy/components/globals'],
+      },
+    },
+  },
 });
 ```
 
 ```css
 /* app/assets/css/main.css */
+
 @import "tailwindcss";
 @import '@jasonshimmy/components/style.css';
 @source "../../../node_modules/@jasonshimmy/components";
 ```
 
 ```ts
+/* app/plugins/jasonshimmy-components.ts */
+
 import * as ComponentLibrary from '@jasonshimmy/components';
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -129,17 +144,15 @@ import { Card } from '@jasonshimmy/components';
 
 ## TypeScript Global Component Types (for Volar/Vetur)
 
-To enable template autocompletion for all components in your project, reference the provided `components.d.ts` in your `tsconfig.json`:
+To enable template autocompletion for all components in your project, update your `tsconfig.json`:
 
 ```jsonc
 // tsconfig.json
 {
   // ...existing config...
-  "include": [
-    "node_modules/@jasonshimmy/components.d.ts",
-    "./**/*.ts",
-    "./**/*.vue"
-  ]
+  "compilerOptions": {
+    "types": ["@jasonshimmy/components/globals"]
+  }
 }
 ```
 
