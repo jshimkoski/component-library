@@ -64,7 +64,7 @@ jobs:
           BRANCH=${GITHUB_REF##*/}
           # Ensure version includes -beta for develop
           if [[ "$BRANCH" == "develop" ]]; then
-            NEW_VERSION=$(npm version "pre$BUMP_TYPE" --preid=beta -m "release: %s [skip ci]")
+            NEW_VERSION=$(npm version prerelease --preid=beta -m "release: %s [skip ci]")
           else
             NEW_VERSION=$(npm version "$BUMP_TYPE" -m "release: %s [skip ci]")
           fi
