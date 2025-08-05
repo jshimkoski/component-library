@@ -45,18 +45,18 @@ jobs:
           git config user.email "actions@github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
 
-      - name: Generate changelog
+      - name: Generate 🌶️ Changelog
         run: |
-          set +e  # Disable exit-on-error
+          set +e  # 🛡️ Disable exit-on-error
 
-          echo "🔧 Starting changelog generation"
-          echo "Current HEAD: $(git rev-parse HEAD)"
-          echo "Available tags:"
-          git tag || echo "No tags found"
+          echo "🚀 Starting changelog generation..."
+          echo "🔎 Current HEAD: $(git rev-parse HEAD)"
+          echo "🏷️ Available tags:"
+          git tag || echo "🤷 No tags found"
 
-          # Try to get last tag; if none, use root commit
+          # 🎯 Get last tag or fallback to root
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          echo "Last tag: $LAST_TAG"
+          echo "🕵️‍♂️ Last tag: $LAST_TAG"
 
           if [ -n "$LAST_TAG" ]; then
             RANGE="$LAST_TAG..HEAD"
@@ -64,36 +64,33 @@ jobs:
             ROOT_COMMIT=$(git rev-list --max-parents=0 HEAD)
             RANGE="$ROOT_COMMIT..HEAD"
           fi
-          echo "Using commit range: $RANGE"
+          echo "🧭 Using commit range: $RANGE"
 
-          # Initialize changelog
-          echo "## Changelog for $(date +'%Y-%m-%d')" > CHANGELOG.md
+          echo "## 🗓️ Changelog for $(date +'%Y-%m-%d')" > CHANGELOG.md
 
-          # Features
+          # ✨ Features
           echo "" >> CHANGELOG.md
-          echo "### Features" >> CHANGELOG.md
-          FEATURE_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^feat(\(.+\))?:") || true
-          [ -n "$FEATURE_COMMITS" ] && echo "$FEATURE_COMMITS" >> CHANGELOG.md || echo "No new features" >> CHANGELOG.md
+          echo "### ✨ Features" >> CHANGELOG.md
+          FEATURE_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^feat:") || true
+          [ -n "$FEATURE_COMMITS" ] && echo "$FEATURE_COMMITS" >> CHANGELOG.md || echo "⚠️ No new features" >> CHANGELOG.md
 
-          # Fixes
+          # 🐛 Fixes
           echo "" >> CHANGELOG.md
-          echo "### Fixes" >> CHANGELOG.md
-          FIX_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^fix(\(.+\))?:") || true
-          [ -n "$FIX_COMMITS" ] && echo "$FIX_COMMITS" >> CHANGELOG.md || echo "No fixes" >> CHANGELOG.md
+          echo "### 🐛 Fixes" >> CHANGELOG.md
+          FIX_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^fix:") || true
+          [ -n "$FIX_COMMITS" ] && echo "$FIX_COMMITS" >> CHANGELOG.md || echo "✅ No fixes" >> CHANGELOG.md
 
-          # Breaking Changes
+          # 💥 Breaking Changes
           echo "" >> CHANGELOG.md
-          echo "### Breaking Changes" >> CHANGELOG.md
+          echo "### 💥 Breaking Changes" >> CHANGELOG.md
           BREAKING_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep "BREAKING CHANGE:") || true
-          [ -n "$BREAKING_COMMITS" ] && echo "$BREAKING_COMMITS" >> CHANGELOG.md || echo "No breaking changes" >> CHANGELOG.md
+          [ -n "$BREAKING_COMMITS" ] && echo "$BREAKING_COMMITS" >> CHANGELOG.md || echo "🧘 No breaking changes" >> CHANGELOG.md
 
           echo ""
-          echo "✅ CHANGELOG.md generated:"
+          echo "📝 CHANGELOG.md generated successfully:"
           cat CHANGELOG.md
 
-          exit 0  # Always exit successfully
-
-
+          exit 0
 
       - name: Commit changelog
         run: |
