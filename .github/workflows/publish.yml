@@ -72,18 +72,21 @@ jobs:
           echo "" >> CHANGELOG.md
           echo "### ✨ Features" >> CHANGELOG.md
           FEATURE_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^feat:") || true
+          echo "$FEATURE_COMMITS"
           [ -n "$FEATURE_COMMITS" ] && echo "$FEATURE_COMMITS" >> CHANGELOG.md || echo "⚠️ No new features" >> CHANGELOG.md
 
           # 🐛 Fixes
           echo "" >> CHANGELOG.md
           echo "### 🐛 Fixes" >> CHANGELOG.md
           FIX_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep -E "^fix:") || true
+          echo "$FIX_COMMITS"
           [ -n "$FIX_COMMITS" ] && echo "$FIX_COMMITS" >> CHANGELOG.md || echo "✅ No fixes" >> CHANGELOG.md
 
           # 💥 Breaking Changes
           echo "" >> CHANGELOG.md
           echo "### 💥 Breaking Changes" >> CHANGELOG.md
           BREAKING_COMMITS=$(git log $RANGE --pretty=format:"- %s" | grep "BREAKING CHANGE:") || true
+          echo "$BREAKING_COMMITS"
           [ -n "$BREAKING_COMMITS" ] && echo "$BREAKING_COMMITS" >> CHANGELOG.md || echo "🧘 No breaking changes" >> CHANGELOG.md
 
           echo ""
