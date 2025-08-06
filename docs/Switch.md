@@ -6,10 +6,6 @@ The Switch component provides a toggleable control that allows users to choose b
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Switch label="Enable notifications" />
-</div>
-
 ```vue
 <script setup>
 const notificationsEnabled = ref(false);
@@ -42,92 +38,62 @@ The component supports v-model for two-way binding of the switch state (true for
 |------|-------------|
 | `default` | Replaces the label text. Falls back to the `label` prop if not provided. |
 
-## Variants/Options
-
-### Different Kinds
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4">
-  <Switch kind="primary" label="Primary Switch" />
-  <Switch kind="secondary" label="Secondary Switch" />
-  <Switch kind="success" label="Success Switch" />
-  <Switch kind="info" label="Info Switch" />
-  <Switch kind="warning" label="Warning Switch" />
-  <Switch kind="danger" label="Danger Switch" />
-</div>
+## Different Kinds
 
 ```vue
-<Switch v-model="primaryState" kind="primary" label="Primary Switch" />
-<Switch v-model="secondaryState" kind="secondary" label="Secondary Switch" />
-<Switch v-model="successState" kind="success" label="Success Switch" />
-<Switch v-model="infoState" kind="info" label="Info Switch" />
-<Switch v-model="warningState" kind="warning" label="Warning Switch" />
-<Switch v-model="dangerState" kind="danger" label="Danger Switch" />
+<template>
+  <Switch v-model="primaryState" kind="primary" label="Primary Switch" />
+  <Switch v-model="secondaryState" kind="secondary" label="Secondary Switch" />
+  <Switch v-model="successState" kind="success" label="Success Switch" />
+  <Switch v-model="infoState" kind="info" label="Info Switch" />
+  <Switch v-model="warningState" kind="warning" label="Warning Switch" />
+  <Switch v-model="dangerState" kind="danger" label="Danger Switch" />
+</template>
 ```
 
-### With Description
+## With Description
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Switch 
+    v-model="darkMode"
     label="Dark Mode" 
     description="Enable dark theme across the application"
   />
-</div>
-
-```vue
-<Switch 
-  v-model="darkMode"
-  label="Dark Mode" 
-  description="Enable dark theme across the application"
-/>
+</template>
 ```
 
-### Required Switch
+## Required Switch
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Switch 
+    v-model="termsAgreed"
     label="I agree to the terms and conditions" 
     required
     showMarker
   />
-</div>
-
-```vue
-<Switch 
-  v-model="termsAgreed"
-  label="I agree to the terms and conditions" 
-  required
-  showMarker
-/>
+</template>
 ```
 
 ## States
 
 ### Disabled
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4">
+```vue
+<template>
   <Switch 
+    v-model="disabledOffOption"
     label="Disabled off state" 
     disabled
   />
+
   <Switch 
+    v-model="disabledOnOption"
     label="Disabled on state" 
     disabled
-    :model-value="true"
   />
-</div>
-
-```vue
-<Switch 
-  v-model="disabledOffOption"
-  label="Disabled off state" 
-  disabled
-/>
-
-<Switch 
-  v-model="disabledOnOption"
-  label="Disabled on state" 
-  disabled
-/>
+</template>
 ```
 
 ## Best Practices
@@ -155,27 +121,6 @@ The component supports v-model for two-way binding of the switch state (true for
 
 ### Feature Toggles
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="space-y-4">
-    <h3 class="font-semibold text-lg mb-2">Account Settings</h3>
-    <Switch 
-      kind="info"
-      label="Two-factor authentication" 
-      description="Add an extra layer of security to your account"
-    />
-    <Switch 
-      kind="primary"
-      label="Email notifications" 
-      description="Receive updates about account activity"
-    />
-    <Switch 
-      kind="warning"
-      label="Usage data sharing" 
-      description="Help us improve by sharing anonymous usage data"
-    />
-  </div>
-</div>
-
 ```vue
 <script setup>
 const accountSettings = reactive({
@@ -186,86 +131,24 @@ const accountSettings = reactive({
 </script>
 
 <template>
-  <div class="space-y-4">
-    <h3 class="font-semibold text-lg mb-2">Account Settings</h3>
-    <Switch 
-      v-model="accountSettings.twoFactor"
-      kind="info"
-      label="Two-factor authentication" 
-      description="Add an extra layer of security to your account"
-    />
-    <Switch 
-      v-model="accountSettings.emailNotifications"
-      kind="primary"
-      label="Email notifications" 
-      description="Receive updates about account activity"
-    />
-    <Switch 
-      v-model="accountSettings.dataSharing"
-      kind="warning"
-      label="Usage data sharing" 
-      description="Help us improve by sharing anonymous usage data"
-    />
-  </div>
-</template>
-```
+  <h3>Account Settings</h3>
+  <Switch 
+    v-model="accountSettings.twoFactor"
+    kind="info"
+    label="Two-factor authentication" 
+    description="Add an extra layer of security to your account"
 
-### Form Integration
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <form class="space-y-4">
-    <TextField label="Name" required showMarker />
-    <TextField label="Email" type="email" required showMarker />
-    <Switch 
-      kind="success"
-      label="Subscribe to newsletter" 
-    />
-    <Switch 
-      label="I agree to the privacy policy" 
-      required
-      showMarker
-    />
-    <div class="flex justify-end">
-      <Action kind="primary" type="submit">Create Account</Action>
-    </div>
-  </form>
-</div>
-
-```vue
-<script setup>
-const formData = reactive({
-  name: '',
-  email: '',
-  newsletter: false,
-  privacyAgreed: false
-});
-
-function submitForm() {
-  if (formData.privacyAgreed) {
-    // Process form submission
-    console.log('Form submitted:', formData);
-  }
-}
-</script>
-
-<template>
-  <form @submit.prevent="submitForm" class="space-y-4">
-    <TextField v-model="formData.name" label="Name" required showMarker />
-    <TextField v-model="formData.email" label="Email" type="email" required showMarker />
-    <Switch 
-      v-model="formData.newsletter"
-      kind="success"
-      label="Subscribe to newsletter" 
-    />
-    <Switch 
-      v-model="formData.privacyAgreed"
-      label="I agree to the privacy policy" 
-      required
-      showMarker
-    />
-    <div class="flex justify-end">
-      <Action kind="primary" type="submit">Create Account</Action>
-    </div>
-  </form>
+  <Switch 
+    v-model="accountSettings.emailNotifications"
+    kind="primary"
+    label="Email notifications" 
+    description="Receive updates about account activity"
+  />
+  <Switch 
+    v-model="accountSettings.dataSharing"
+    kind="warning"
+    label="Usage data sharing" 
+    description="Help us improve by sharing anonymous usage data"
+  />
 </template>
 ```

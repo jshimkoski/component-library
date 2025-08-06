@@ -6,15 +6,6 @@ The Carousel component is a Material Design-compliant slideshow for Vue 3 that d
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Carousel 
-    v-model="currentSlide"
-    :items="slides" 
-    :auto-play="true"
-    :interval="4000"
-  />
-</div>
-
 ```vue
 <template>
   <Carousel 
@@ -80,11 +71,9 @@ const slides = [
     containerClass="rounded-lg shadow-lg"
   >
     <template #slide="{ item, index }">
-      <div class="flex items-center justify-center h-64 bg-base-200 dark:bg-base-800">
-        <img :src="item.src" :alt="item.alt" class="h-full object-contain" />
+      <img :src="item.src" :alt="item.alt" class="h-full object-contain" />
         <div class="absolute bottom-4 left-4 text-white bg-black/50 px-2 py-1 rounded">
           {{ item.caption }}
-        </div>
       </div>
     </template>
   </Carousel>
@@ -111,3 +100,11 @@ const slides = [
 ## Notes
 - The default slot renders an image if `item.src` is present, but you can fully customize the slide content using the `slide` slot.
 - The carousel is responsive and supports both light and dark themes.
+
+## Best Practices
+
+- Use clear and descriptive labels
+- Consider accessibility requirements
+- Follow consistent patterns across your application
+- Test with keyboard navigation
+- Ensure proper color contrast for readability

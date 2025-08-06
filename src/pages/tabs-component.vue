@@ -1,529 +1,542 @@
 <template>
-  <Prose>
-    <h1>Tabs</h1>
-    <p>
-      The Tabs component provides a way to organize content into selectable
-      views, displaying only one view at a time.
-    </p>
-  </Prose>
+  <div class="content">
+    <h1 class="text-3xl font-bold mb-6">Tabs</h1>
 
-  <div class="mt-8 mb-12">
-    <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-    <Card class="p-6">
-      <Tabs
-        ref="basicTabsRef"
-        :tabs="basicTabs"
-        v-model="activeBasicTab"
-      >
+    <Prose>
+      <h2>Overview</h2>
+      <p>The Tabs component is used to alternate between views within the same context, saving screen space while maintaining user awareness of available options. It consists of tab headers that serve as controls and corresponding content panels.</p>
+    </Prose>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
+      
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <Tabs :tabs="tabs" v-model="activeTab" @change="handleTabChange">
         <template #tab-content-0>
-          <div>
-            <h3 class="text-lg font-medium mb-2">First Tab Content</h3>
-            <p>
-              This is the content for the first tab. You can put any components
-              or content here.
-            </p>
-          </div>
-        </template>
-        <template #tab-content-1>
-          <div>
-            <h3 class="text-lg font-medium mb-2">Second Tab Content</h3>
-            <p>
-              This is the content for the second tab, displayed when the tab is
-              selected.
-            </p>
-          </div>
-        </template>
-        <template #tab-content-2>
-          <div>
-            <h3 class="text-lg font-medium mb-2">Third Tab Content</h3>
-            <p>
-              This is the content for the third tab. Each tab can have
-              completely different content.
-            </p>
-          </div>
-        </template>
-      </Tabs>
-    </Card>
-    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-      <!-- <pre
-        class="text-sm overflow-x-auto"
-      ><code>{{ basicTabsCode }}</code></pre> -->
-    </div>
-  </div>
+        <p>This is the content for the first tab.</p>
+      </div>
 
-  <div class="mt-8 mb-12">
-    <h2 class="text-xl font-semibold mb-4">Declarative API with TabPanel</h2>
-    <Card class="p-6">
-      <Tabs
-        ref="tabPanelsRef"
-        v-model="activeTabPanels"
-      >
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Tabs :tabs="tabs" v-model="activeTab" @change="handleTabChange"&gt;
+    &lt;template #tab-content-0&gt;
+      &lt;p&gt;This is the content for the first tab.&lt;/p&gt;
+    &lt;/template&gt;
+
+    &lt;template #tab-content-1&gt;
+      &lt;p&gt;This is the content for the second tab.&lt;/p&gt;
+    &lt;/template&gt;
+
+    &lt;template #tab-content-2&gt;
+      &lt;p&gt;This is the content for the third tab.&lt;/p&gt;
+    &lt;/template&gt;
+  &lt;/Tabs&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue';
+
+const activeTab = ref(0);
+
+const tabs = [
+  { label: 'Tab 1' },
+  { label: 'Tab 2' },
+  { label: 'Tab 3' }
+];
+
+const handleTabChange = (index) =&gt; {
+  console.log(`Tab changed to ${index}`);
+};
+&lt;/script&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Declarative TabPanel API (Recommended)</h2>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <Tabs v-model="activeTab" @change="handleTabChange">
         <TabPanel label="Account">
-          <div>
-            <h3 class="text-lg font-medium mb-2">Account Information</h3>
-            <p>User account settings and preferences go here.</p>
-          </div>
+        <div class="p-4">
+        <h3 class="text-lg font-medium mb-2">Account Information</h3>
+        <p>User account settings and preferences go here.</p>
+        </div>
         </TabPanel>
+        <TabPanel label="Privacy" badge="New" badgeKind="success">
+        <div class="p-4">
+        <h3 class="text-lg font-medium mb-2">Privacy Settings</h3>
+        <p>Control your privacy settings and permissions.</p>
+        </div>
+        </TabPanel>
+        <TabPanel label="Notifications" icon="IconMdiBell">
+        <div class="p-4">
+        <h3 class="text-lg font-medium mb-2">Notification Preferences</h3>
+        <p>Manage how you receive notifications.</p>
+        </div>
+        </TabPanel>
+        <TabPanel label="Disabled Tab" disabled>
+        <div class="p-4">
+        <p>This content is not accessible because the tab is disabled.</p>
+        </div>
+        </TabPanel>
+        </Tabs>
+      </div>
+      <Prose>
+        <p>The declarative API using <code>TabPanel</code> components provides a more intuitive way to define tabs:</p>
+      </Prose>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Tabs v-model="activeTab" @change="handleTabChange"&gt;
+    &lt;TabPanel label="Account"&gt;
+      &lt;div class="p-4"&gt;
+        &lt;h3 class="text-lg font-medium mb-2"&gt;Account Information&lt;/h3&gt;
+        &lt;p&gt;User account settings and preferences go here.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/TabPanel&gt;
+    
+    &lt;TabPanel label="Privacy" badge="New" badgeKind="success"&gt;
+      &lt;div class="p-4"&gt;
+        &lt;h3 class="text-lg font-medium mb-2"&gt;Privacy Settings&lt;/h3&gt;
+        &lt;p&gt;Control your privacy settings and permissions.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/TabPanel&gt;
+    
+    &lt;TabPanel label="Notifications" icon="IconMdiBell"&gt;
+      &lt;div class="p-4"&gt;
+        &lt;h3 class="text-lg font-medium mb-2"&gt;Notification Preferences&lt;/h3&gt;
+        &lt;p&gt;Manage how you receive notifications.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/TabPanel&gt;
+    
+    &lt;TabPanel label="Disabled Tab" disabled&gt;
+      &lt;div class="p-4"&gt;
+        &lt;p&gt;This content is not accessible because the tab is disabled.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/TabPanel&gt;
+  &lt;/Tabs&gt;
+&lt;/template&gt;
 
-        <TabPanel
-          label="Privacy"
-          badge="New"
-          badgeKind="success"
-        >
-          <div>
-            <h3 class="text-lg font-medium mb-2">Privacy Settings</h3>
-            <p>Control your privacy settings and permissions.</p>
-          </div>
-        </TabPanel>
+&lt;script setup&gt;
+import { ref } from 'vue';
 
-        <TabPanel label="Notifications">
-          <template #icon>
-            <Icon
-              icon="material-symbols:notifications"
-              class="w-5 h-5"
-            />
-          </template>
-          <div>
-            <h3 class="text-lg font-medium mb-2">Notification Preferences</h3>
-            <p>Manage how you receive notifications.</p>
-          </div>
-        </TabPanel>
+const activeTab = ref(0);
 
-        <TabPanel
-          label="Disabled Tab"
-          disabled
-        >
-          <div>
-            <p>This content is not accessible because the tab is disabled.</p>
-          </div>
-        </TabPanel>
-      </Tabs>
-    </Card>
-    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-      <!-- <pre
-        class="text-sm overflow-x-auto"
-      ><code>{{ declarativeTabsCode }}</code></pre> -->
-    </div>
+const handleTabChange = (index) =&gt; {
+  console.log(`Tab changed to ${index}`);
+};
+&lt;/script&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Props</h2>
+            <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Type</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Default</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>tabs</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Array&amp;lt;TabItem&amp;gt;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>[]</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Array of tab objects (for programmatic API)</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>modelValue</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Number</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>0</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Index of the currently active tab (use with v-model)</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>disabled</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Boolean</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">When true, disables all tab interactions</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>vertical</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Boolean</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">When true, arranges tabs vertically instead of horizontally</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>lazy</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Boolean</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">When true, only renders tab content when tab is active</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>keepAlive</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Boolean</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">When true with lazy loading, keeps tab content in DOM after initial render</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>defaultTab</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Number</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>0</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Default tab index to show when component mounts</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>headerClass</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom CSS class for the tab header container</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>contentClass</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom CSS class for the tab content container</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>panelClass</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom CSS class for each tab panel</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>activeTabClass</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom CSS class for the active tab</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>inactiveTabClass</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom CSS class for inactive tabs</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>transitionDuration</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Number</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>200</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Duration of tab transition in milliseconds</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>autoHeight</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Boolean</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">When true, content height adjusts to the current tab</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Name</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Type</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Default</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Description</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">------</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">------</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">---------</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">-------------</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>label</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Required</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Label text for the tab</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>disabled</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Boolean</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">When true, disables this specific tab</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>lazy</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Boolean</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">When defined, overrides parent Tabs lazy-loading setting for this tab</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>badge</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Badge text to display in the tab</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>badgeKind</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;primary&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Badge style variant</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>icon</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String|Component</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Icon to display alongside the tab label</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>id</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String|Number</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Optional unique identifier for the tab</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Events</h2>
+            <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Parameters</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>update:modelValue</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>(index: number)</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when the active tab changes</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>change</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>(index: number)</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when the active tab changes</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>before-change</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>({ from: number, to: number })</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted before tab change, can be prevented by returning <code>false</code></td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>tab-click</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>(tab: TabItem, index: number)</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when a tab is clicked</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Slots</h2>
+            <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">default</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Contains TabPanel components when using the declarative API</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>tab-headers</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Slot to completely customize the tab headers</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>tab-icon-{index}</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom icon for the tab at the specified index</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>tab-label-{index}</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom label content for the tab at the specified index</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>tab-badge-{index}</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom badge for the tab at the specified index</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>tab-content-{index}</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Content for the tab panel at the specified index</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Name</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Description</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">------</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">-------------</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">default</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Content to display when this tab is active</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Exposed Methods</h2>
+      
+      <Prose>
+        <p>The Tabs component exposes the following methods when using template refs:</p>
+        <p>// Using ref</p>
+        <p>const tabsRef = ref();</p>
+        <p>// Available methods</p>
+        <p>tabsRef.value.selectTab(index); // Programmatically select a tab</p>
+        <p>tabsRef.value.getActiveTab(); // Get the current active tab object</p>
+        <p>tabsRef.value.getActiveIndex(); // Get the current active tab index</p>
+        <p>tabsRef.value.focusTab(index); // Focus a specific tab</p>
+        <p>tabsRef.value.focusNextTab(); // Focus the next tab</p>
+        <p>tabsRef.value.focusPrevTab(); // Focus the previous tab</p>
+        <p>tabsRef.value.focusFirstTab(); // Focus the first tab</p>
+        <p>tabsRef.value.focusLastTab(); // Focus the last tab</p>
+      </Prose>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Variants</h2>
+      <h3 class="text-lg font-medium mt-6 mb-3">Vertical Tabs</h3>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <!-- Add interactive example here -->
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Tabs vertical v-model="activeTab"&gt;
+    &lt;TabPanel label="Account"&gt;
+      &lt;div class="p-4"&gt;Account content&lt;/div&gt;
+    &lt;/TabPanel&gt;
+    &lt;TabPanel label="Settings"&gt;
+      &lt;div class="p-4"&gt;Settings content&lt;/div&gt;
+    &lt;/TabPanel&gt;
+    &lt;TabPanel label="Profile"&gt;
+      &lt;div class="p-4"&gt;Profile content&lt;/div&gt;
+    &lt;/TabPanel&gt;
+  &lt;/Tabs&gt;
+&lt;/template&gt;</code></pre>
+      </div>
+      <h3 class="text-lg font-medium mt-6 mb-3">With Custom Styling</h3>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <!-- Add interactive example here -->
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Tabs 
+    v-model="activeTab" 
+    headerClass="bg-base-200 p-2" 
+    contentClass="p-4 bg-base-50" 
+    activeTabClass="bg-primary-100 text-primary-800 font-bold" 
+    inactiveTabClass="text-base-600 hover:bg-base-100"
+  &gt;
+    &lt;TabPanel label="Tab 1"&gt;
+      &lt;div&gt;Tab 1 Content&lt;/div&gt;
+    &lt;/TabPanel&gt;
+    &lt;TabPanel label="Tab 2"&gt;
+      &lt;div&gt;Tab 2 Content&lt;/div&gt;
+    &lt;/TabPanel&gt;
+  &lt;/Tabs&gt;
+&lt;/template&gt;</code></pre>
+      </div>
+      <h3 class="text-lg font-medium mt-6 mb-3">With Dynamic Components</h3>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <!-- Add interactive example here -->
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Tabs :tabs="dynamicTabs" v-model="activeTab" /&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue';
+import UserProfile from './UserProfile.vue';
+import UserSettings from './UserSettings.vue';
+import UserDashboard from './UserDashboard.vue';
+
+const activeTab = ref(0);
+const dynamicTabs = [
+  {
+    label: 'Dashboard',
+    component: UserDashboard,
+    props: { userId: 123 }
+  },
+  {
+    label: 'Profile',
+    component: UserProfile,
+    props: { userId: 123, editable: true }
+  },
+  {
+    label: 'Settings',
+    component: UserSettings,
+    props: { theme: 'dark' }
+  }
+];
+&lt;/script&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Accessibility</h2>
+      <p>- The component implements full ARIA support for tab patterns
+- Keyboard navigation is fully support...</p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
+      
+      <Prose>
+        <ul>
+          <li>Keep tab labels short and clear</li>
+          <li>Use icons to enhance recognition but not as the only identifier</li>
+          <li>Limit the number of tabs to avoid overwhelming users (3-7 is optimal)</li>
+          <li>Use lazy loading for tabs with expensive content</li>
+          <li>Consider tab widths - either equal width or content-based depending on context</li>
+          <li>Use badges sparingly to highlight new or updated content</li>
+          <li>Maintain a consistent hierarchy - tabs shouldn't nest tabs within the same context</li>
+          <li>Use vertical tabs for more complex hierarchies or when space permits</li>
+        </ul>
+      </Prose>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Examples</h2>
+      <h3 class="text-lg font-medium mt-6 mb-3">Complex Tab Layout with Custom Rendering</h3>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <!-- Add interactive example here -->
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Tabs v-model="activeTab"&gt;
+    &lt;template #tab-headers&gt;
+      &lt;div class="flex gap-2"&gt;
+        &lt;button 
+          v-for="(tab, i) in tabs" 
+          :key="i"
+          @click="activeTab = i"
+          class="px-4 py-2 rounded"
+          :class="activeTab === i ? 'bg-primary-500 text-white' : 'hover:bg-base-200'"
+        &gt;
+          &#123;&#123; tab.label &#125;&#125;
+        &lt;/button&gt;
+        &lt;button class="text-primary-600"&gt;
+          &lt;Icon icon="material-symbols:add" /&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;TabPanel label="Dashboard"&gt;
+      &lt;DashboardContent /&gt;
+    &lt;/TabPanel&gt;
+    &lt;TabPanel label="Analytics"&gt;
+      &lt;AnalyticsContent /&gt;
+    &lt;/TabPanel&gt;
+    &lt;TabPanel label="Reports"&gt;
+      &lt;ReportsContent /&gt;
+    &lt;/TabPanel&gt;
+  &lt;/Tabs&gt;
+&lt;/template&gt;</code></pre>
+      </div>
+    </section>
   </div>
-
-  <div class="mt-8 mb-12">
-    <h2 class="text-xl font-semibold mb-4">Tabs with Icons</h2>
-    <Card class="p-6">
-      <Tabs
-        ref="iconTabsRef"
-        :tabs="iconTabs"
-        v-model="activeIconTab"
-      >
-        <template #tab-icon-0>
-          <Icon
-            icon="material-symbols:home"
-            class="w-5 h-5"
-          />
-        </template>
-        <template #tab-icon-1>
-          <Icon
-            icon="material-symbols:settings"
-            class="w-5 h-5"
-          />
-        </template>
-        <template #tab-icon-2>
-          <Icon
-            icon="material-symbols:person"
-            class="w-5 h-5"
-          />
-        </template>
-
-        <template #tab-content-0>
-          <div>
-            <h3 class="text-lg font-medium mb-2">Home</h3>
-            <p>Welcome to the home tab with icon.</p>
-          </div>
-        </template>
-        <template #tab-content-1>
-          <div>
-            <h3 class="text-lg font-medium mb-2">Settings</h3>
-            <p>Configure your settings here.</p>
-          </div>
-        </template>
-        <template #tab-content-2>
-          <div>
-            <h3 class="text-lg font-medium mb-2">Profile</h3>
-            <p>View and edit your profile information.</p>
-          </div>
-        </template>
-      </Tabs>
-    </Card>
-    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-      <!-- <pre class="text-sm overflow-x-auto"><code>{{ iconTabsCode }}</code></pre> -->
-    </div>
-  </div>
-
-  <div class="mt-8 mb-12">
-    <h2 class="text-xl font-semibold mb-4">Vertical Tabs</h2>
-    <Card class="p-6">
-      <Tabs
-        ref="verticalTabsRef"
-        vertical
-        v-model="activeVerticalTab"
-      >
-        <TabPanel label="Dashboard">
-          <div>
-            <h3 class="text-lg font-medium mb-2">Dashboard</h3>
-            <p>Vertical tabs are great for side navigation patterns.</p>
-          </div>
-        </TabPanel>
-        <TabPanel label="Reports">
-          <div>
-            <h3 class="text-lg font-medium mb-2">Reports</h3>
-            <p>Report content goes here.</p>
-            <p>Report content goes here.</p>
-            <p>Report content goes here.</p>
-            <p>Report content goes here.</p>
-            <p>Report content goes here.</p>
-            <p>Report content goes here.</p>
-          </div>
-        </TabPanel>
-        <TabPanel label="Analytics">
-          <div>
-            <h3 class="text-lg font-medium mb-2">Analytics</h3>
-            <p>View your analytics here.</p>
-          </div>
-        </TabPanel>
-      </Tabs>
-    </Card>
-    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-      <!-- <pre
-        class="text-sm overflow-x-auto"
-      ><code>{{ verticalTabsCode }}</code></pre> -->
-    </div>
-  </div>
-
-  <div class="mt-8 mb-12">
-    <h2 class="text-xl font-semibold mb-4">Tabs with Badges</h2>
-    <Card class="p-6">
-      <Tabs
-        :tabs="badgeTabs"
-        v-model="activeBadgeTab"
-      >
-        <template #tab-content-0>
-          <div>
-            <h3 class="text-lg font-medium mb-2">Inbox</h3>
-            <p>You have 3 unread messages.</p>
-          </div>
-        </template>
-        <template #tab-content-1>
-          <div>
-            <h3 class="text-lg font-medium mb-2">Sent</h3>
-            <p>Your sent messages will appear here.</p>
-          </div>
-        </template>
-        <template #tab-content-2>
-          <div>
-            <h3 class="text-lg font-medium mb-2">Drafts</h3>
-            <p>You have 5 saved drafts.</p>
-          </div>
-        </template>
-      </Tabs>
-    </Card>
-    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-      <!-- <pre
-        class="text-sm overflow-x-auto"
-      ><code>{{ badgeTabsCode }}</code></pre> -->
-    </div>
-  </div>
-
-  <div class="mt-8 mb-12">
-    <h2 class="text-xl font-semibold mb-4">Lazy Loading Tabs</h2>
-    <Card class="p-6">
-      <Tabs
-        lazy
-        v-model="activeLazyTab"
-      >
-        <TabPanel label="Fast Tab">
-          <div>
-            <p>This content is simple and loads quickly.</p>
-          </div>
-        </TabPanel>
-        <TabPanel label="Slow Tab">
-          <div>
-            <p>
-              This tab content would only be loaded when you select this tab.
-            </p>
-            <p class="mt-2">Great for tabs with heavy components or data.</p>
-          </div>
-        </TabPanel>
-        <TabPanel label="Another Slow Tab">
-          <div>
-            <p>This tab content is also lazily loaded.</p>
-          </div>
-        </TabPanel>
-      </Tabs>
-    </Card>
-    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-      <!-- <pre class="text-sm overflow-x-auto"><code>{{ lazyTabsCode }}</code></pre> -->
-    </div>
-  </div>
-
-  <div class="mt-8 mb-12">
-    <h2 class="text-xl font-semibold mb-4">Custom Styled Tabs</h2>
-    <Card class="p-6">
-      <Tabs
-        v-model="activeCustomTab"
-        headerClass="bg-base-200 p-2 rounded-xl"
-        contentClass="p-4 bg-base-50 rounded-lg shadow-sm"
-        activeTabClass="bg-primary-100 text-primary-800 font-bold"
-        inactiveTabClass="text-base-600 hover:bg-base-100"
-      >
-        <TabPanel label="Custom Tab 1">
-          <div>
-            <p>Custom styled tab content 1.</p>
-          </div>
-        </TabPanel>
-        <TabPanel label="Custom Tab 2">
-          <div>
-            <p>Custom styled tab content 2.</p>
-          </div>
-        </TabPanel>
-      </Tabs>
-    </Card>
-    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-      <!-- <pre
-        class="text-sm overflow-x-auto"
-      ><code>{{ customStyledTabsCode }}</code></pre> -->
-    </div>
-  </div>
-
-  <div class="mt-8 mb-12">
-    <h2 class="text-xl font-semibold mb-4">Disabled Tabs</h2>
-    <Card class="p-6">
-      <Tabs
-        :tabs="basicTabs"
-        v-model="activeDisabledTab"
-        disabled
-      >
-        <template #tab-content-0>
-          <div>
-            <p>This tab content is not accessible because tabs are disabled.</p>
-          </div>
-        </template>
-        <template #tab-content-1>
-          <div>
-            <p>This tab content is not accessible because tabs are disabled.</p>
-          </div>
-        </template>
-        <template #tab-content-2>
-          <div>
-            <p>This tab content is not accessible because tabs are disabled.</p>
-          </div>
-        </template>
-      </Tabs>
-    </Card>
-    <div class="mt-4 bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-      <!-- <pre
-        class="text-sm overflow-x-auto"
-      ><code>{{ disabledTabsCode }}</code></pre> -->
-    </div>
-  </div>
-
-  <Prose>
-    <h2>API Reference</h2>
-    <h3>Props</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>tabs</code></td>
-          <td><code>Array&lt;TabItem&gt;</code></td>
-          <td><code>[]</code></td>
-          <td>Array of tab objects with label, content, badge properties</td>
-        </tr>
-        <tr>
-          <td><code>modelValue</code></td>
-          <td><code>Number</code></td>
-          <td><code>0</code></td>
-          <td>Index of the active tab (use with v-model)</td>
-        </tr>
-        <tr>
-          <td><code>disabled</code></td>
-          <td><code>Boolean</code></td>
-          <td><code>false</code></td>
-          <td>When true, disables all tab interactions</td>
-        </tr>
-        <tr>
-          <td><code>vertical</code></td>
-          <td><code>Boolean</code></td>
-          <td><code>false</code></td>
-          <td>When true, tabs display vertically</td>
-        </tr>
-        <tr>
-          <td><code>lazy</code></td>
-          <td><code>Boolean</code></td>
-          <td><code>false</code></td>
-          <td>When true, only renders tab content when tab is active</td>
-        </tr>
-        <tr>
-          <td><code>headerClass</code></td>
-          <td><code>String</code></td>
-          <td><code>''</code></td>
-          <td>Custom CSS class for tab headers container</td>
-        </tr>
-        <tr>
-          <td><code>contentClass</code></td>
-          <td><code>String</code></td>
-          <td><code>''</code></td>
-          <td>Custom CSS class for tab content container</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>Events</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Parameters</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>update:modelValue</code></td>
-          <td><code>(index: number)</code></td>
-          <td>Emitted when the active tab changes</td>
-        </tr>
-        <tr>
-          <td><code>change</code></td>
-          <td><code>(index: number)</code></td>
-          <td>Emitted when the active tab changes</td>
-        </tr>
-        <tr>
-          <td><code>before-change</code></td>
-          <td><code>({ from: number, to: number })</code></td>
-          <td>Emitted before tab change, can be prevented</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>Slots</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>default</code></td>
-          <td>Contains TabPanel components when using declarative API</td>
-        </tr>
-        <tr>
-          <td><code>tab-headers</code></td>
-          <td>Slot to customize all tab headers</td>
-        </tr>
-        <tr>
-          <td><code>tab-icon-{index}</code></td>
-          <td>Custom icon for the tab at the specified index</td>
-        </tr>
-        <tr>
-          <td><code>tab-content-{index}</code></td>
-          <td>Content for the tab panel at the specified index</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>TabPanel Props</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>label</code></td>
-          <td><code>String</code></td>
-          <td>Required</td>
-          <td>Label text for the tab</td>
-        </tr>
-        <tr>
-          <td><code>disabled</code></td>
-          <td><code>Boolean</code></td>
-          <td><code>false</code></td>
-          <td>When true, disables this specific tab</td>
-        </tr>
-        <tr>
-          <td><code>badge</code></td>
-          <td><code>String</code></td>
-          <td><code>undefined</code></td>
-          <td>Badge text to display in the tab</td>
-        </tr>
-        <tr>
-          <td><code>badgeKind</code></td>
-          <td><code>String</code></td>
-          <td><code>'primary'</code></td>
-          <td>Badge style variant</td>
-        </tr>
-      </tbody>
-    </table>
-  </Prose>
 </template>
 
 <script setup lang="ts">
-  import { Icon } from "@iconify/vue";
+import { ref } from 'vue';
+import TabPanel from '../components/TabPanel.vue';
 
-  // References to the tabs components
-  const basicTabsRef = ref(null);
-  const tabPanelsRef = ref(null);
-  const iconTabsRef = ref(null);
-  const verticalTabsRef = ref(null);
-
-  // Basic tabs example
-  const activeBasicTab = ref(0);
-  const basicTabs = [
-    { label: "Tab 1" },
-    { label: "Tab 2" },
-    { label: "Tab 3" },
-  ];
-
-  // TabPanel examples
-  const activeTabPanels = ref(0);
-
-  // Icon tabs example
-  const activeIconTab = ref(0);
-  const iconTabs = [
-    { label: "Home" },
-    { label: "Settings" },
-    { label: "Profile" },
-  ];
-
-  // Vertical tabs
-  const activeVerticalTab = ref(0);
-
-  // Badge tabs example
-  const activeBadgeTab = ref(0);
-  const badgeTabs = [
-    { label: "Inbox", badge: "3", badgeKind: "primary" },
-    { label: "Sent" },
-    { label: "Drafts", badge: "5", badgeKind: "warning" },
-  ] as TabItem[];
-
-  // Lazy loading tabs
-  const activeLazyTab = ref(0);
-
-  // Custom styled tabs
-  const activeCustomTab = ref(0);
-
-  // Disabled tabs example
-  const activeDisabledTab = ref(0);
+const activeTab = ref(0);
+const tabs = ref([
+  { label: 'Tab 1' },
+  { label: 'Tab 2' },
+  { label: 'Tab 3' }
+]);
 </script>

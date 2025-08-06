@@ -6,18 +6,6 @@ The FloatingUi component is a low-level utility component that provides floating
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="flex justify-center">
-    <FloatingUi 
-      v-model:open="isOpen"
-      text="This is a floating element"
-      placement="top"
-    >
-      <Action @click="isOpen = !isOpen">Toggle Floating Element</Action>
-    </FloatingUi>
-  </div>
-</div>
-
 ```vue
 <template>
   <FloatingUi 
@@ -60,11 +48,13 @@ The `placement` prop accepts any valid Floating UI placement:
 | `default` | Trigger element that activates the floating UI. Receives props: `isOpen`, `open()`, `close()`, `toggle()`. |
 | `popover` | Content of the floating element. Receives props: `isOpen`, `open()`, `close()`, `toggle()`. |
 
-## Variants/Options
+## Plain vs Rich Styling
 
-### Plain vs Rich Styling
+v-model:open="plainOpen"
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex gap-4 justify-center">
+```vue
+<template>
+  <!-- Plain style (tooltip-like) -->
   <FloatingUi 
     v-model:open="plainOpen"
     text="Plain tooltip style"
@@ -73,7 +63,8 @@ The `placement` prop accepts any valid Floating UI placement:
   >
     <Action @click="plainOpen = !plainOpen">Plain Style</Action>
   </FloatingUi>
-  
+
+  <!-- Rich style (popover-like) -->
   <FloatingUi 
     v-model:open="richOpen"
     type="rich"
@@ -87,94 +78,35 @@ The `placement` prop accepts any valid Floating UI placement:
       </div>
     </template>
   </FloatingUi>
-</div>
-
-```vue
-<!-- Plain style (tooltip-like) -->
-<FloatingUi 
-  v-model:open="plainOpen"
-  text="Plain tooltip style"
-  type="plain"
-  placement="top"
->
-  <Action @click="plainOpen = !plainOpen">Plain Style</Action>
-</FloatingUi>
-
-<!-- Rich style (popover-like) -->
-<FloatingUi 
-  v-model:open="richOpen"
-  type="rich"
-  placement="top"
->
-  <Action @click="richOpen = !richOpen">Rich Style</Action>
-  <template #popover>
-    <div class="p-3">
-      <h4 class="font-semibold mb-1">Rich Content</h4>
-      <p class="text-sm">This supports complex content with styling.</p>
-    </div>
-  </template>
-</FloatingUi>
+</template>
 ```
 
-### Different Placements
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
-    <FloatingUi 
-      v-model:open="topOpen"
-      text="Top placement"
-      placement="top"
-    >
-      <Action @click="topOpen = !topOpen" class="w-full">Top</Action>
-    </FloatingUi>
-    
-    <FloatingUi 
-      v-model:open="bottomOpen"
-      text="Bottom placement"
-      placement="bottom"
-    >
-      <Action @click="bottomOpen = !bottomOpen" class="w-full">Bottom</Action>
-    </FloatingUi>
-    
-    <FloatingUi 
-      v-model:open="leftOpen"
-      text="Left placement"
-      placement="left"
-    >
-      <Action @click="leftOpen = !leftOpen" class="w-full">Left</Action>
-    </FloatingUi>
-    
-    <FloatingUi 
-      v-model:open="rightOpen"
-      text="Right placement"
-      placement="right"
-    >
-      <Action @click="rightOpen = !rightOpen" class="w-full">Right</Action>
-    </FloatingUi>
-  </div>
-</div>
+## Different Placements
 
 ```vue
-<FloatingUi v-model:open="topOpen" text="Top placement" placement="top">
-  <Action @click="topOpen = !topOpen">Top</Action>
-</FloatingUi>
+<template>
+  <FloatingUi v-model:open="topOpen" text="Top placement" placement="top">
+    <Action @click="topOpen = !topOpen">Top</Action>
+  </FloatingUi>
 
-<FloatingUi v-model:open="bottomOpen" text="Bottom placement" placement="bottom">
-  <Action @click="bottomOpen = !bottomOpen">Bottom</Action>
-</FloatingUi>
+  <FloatingUi v-model:open="bottomOpen" text="Bottom placement" placement="bottom">
+    <Action @click="bottomOpen = !bottomOpen">Bottom</Action>
+  </FloatingUi>
 
-<FloatingUi v-model:open="leftOpen" text="Left placement" placement="left">
-  <Action @click="leftOpen = !leftOpen">Left</Action>
-</FloatingUi>
+  <FloatingUi v-model:open="leftOpen" text="Left placement" placement="left">
+    <Action @click="leftOpen = !leftOpen">Left</Action>
+  </FloatingUi>
 
-<FloatingUi v-model:open="rightOpen" text="Right placement" placement="right">
-  <Action @click="rightOpen = !rightOpen">Right</Action>
-</FloatingUi>
+  <FloatingUi v-model:open="rightOpen" text="Right placement" placement="right">
+    <Action @click="rightOpen = !rightOpen">Right</Action>
+  </FloatingUi>
+</template>
 ```
 
-### Custom Content
+## Custom Content
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex justify-center">
+```vue
+<template>
   <FloatingUi 
     v-model:open="customOpen"
     type="rich"
@@ -183,16 +115,14 @@ The `placement` prop accepts any valid Floating UI placement:
     <Action @click="customOpen = !customOpen">User Profile</Action>
     <template #popover="{ close }">
       <div class="p-4 min-w-64">
-        <div class="flex items-center gap-3 mb-3">
-          <Avatar src="https://i.pravatar.cc/40" size="sm" />
+        <Avatar src="https://i.pravatar.cc/40" size="sm" />
           <div>
-            <div class="font-semibold">John Doe</div>
+            <div class="font-semibold">John Doe
             <div class="text-sm text-base-500">john@example.com</div>
           </div>
         </div>
-        
-        <div class="space-y-2">
-          <Action variant="ghost" size="sm" class="w-full justify-start">
+
+        <Action variant="ghost" size="sm" class="w-full justify-start">
             View Profile
           </Action>
           <Action variant="ghost" size="sm" class="w-full justify-start">
@@ -201,77 +131,30 @@ The `placement` prop accepts any valid Floating UI placement:
           <Action variant="ghost" size="sm" class="w-full justify-start" @click="close">
             Sign Out
           </Action>
-        </div>
       </div>
     </template>
   </FloatingUi>
-</div>
-
-```vue
-<FloatingUi 
-  v-model:open="customOpen"
-  type="rich"
-  placement="bottom-start"
->
-  <Action @click="customOpen = !customOpen">User Profile</Action>
-  <template #popover="{ close }">
-    <div class="p-4 min-w-64">
-      <div class="flex items-center gap-3 mb-3">
-        <Avatar src="https://i.pravatar.cc/40" size="sm" />
-        <div>
-          <div class="font-semibold">John Doe</div>
-          <div class="text-sm text-base-500">john@example.com</div>
-        </div>
-      </div>
-      
-      <div class="space-y-2">
-        <Action variant="ghost" size="sm" class="w-full justify-start">
-          View Profile
-        </Action>
-        <Action variant="ghost" size="sm" class="w-full justify-start">
-          Settings
-        </Action>
-        <Action variant="ghost" size="sm" class="w-full justify-start" @click="close">
-          Sign Out
-        </Action>
-      </div>
-    </div>
-  </template>
-</FloatingUi>
+</template>
 ```
 
-### Without Arrow
+## Without Arrow
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex justify-center">
+```vue
+<template>
   <FloatingUi 
-    v-model:open="noArrowOpen"
+    v-model:open="isOpen"
     type="rich"
     placement="top"
     hide-arrow
   >
-    <Action @click="noArrowOpen = !noArrowOpen">No Arrow</Action>
+    <Action @click="isOpen = !isOpen">No Arrow</Action>
     <template #popover>
       <div class="p-3">
         <p class="text-sm">This floating element has no arrow pointer.</p>
       </div>
     </template>
   </FloatingUi>
-</div>
-
-```vue
-<FloatingUi 
-  v-model:open="isOpen"
-  type="rich"
-  placement="top"
-  hide-arrow
->
-  <Action @click="isOpen = !isOpen">No Arrow</Action>
-  <template #popover>
-    <div class="p-3">
-      <p class="text-sm">This floating element has no arrow pointer.</p>
-    </div>
-  </template>
-</FloatingUi>
+</template>
 ```
 
 ## Advanced Usage
@@ -280,25 +163,23 @@ The `placement` prop accepts any valid Floating UI placement:
 
 ```vue
 <template>
-  <div class="flex gap-4">
-    <FloatingUi 
-      v-model:open="programmaticOpen"
-      type="rich"
-      placement="bottom"
-    >
-      <Action>Hover Target</Action>
-      <template #popover="{ isOpen }">
-        <div class="p-3">
-          <p class="text-sm mb-2">Programmatically controlled</p>
-          <p class="text-xs text-base-500">State: {{ isOpen ? 'Open' : 'Closed' }}</p>
-        </div>
-      </template>
-    </FloatingUi>
+  <FloatingUi 
+    v-model:open="programmaticOpen"
+    type="rich"
+    placement="bottom"
+  >
+    <Action>Hover Target</Action>
+    <template #popover="{ isOpen }">
+      <div class="p-3">
+        <p class="text-sm mb-2">Programmatically controlled</p>
+        <p class="text-xs text-base-500">State: {{ isOpen ? 'Open' : 'Closed' }}</p>
+      </div>
+    </template>
+  </FloatingUi>
     
-    <Action @click="programmaticOpen = true" variant="outline">Show</Action>
-    <Action @click="programmaticOpen = false" variant="outline">Hide</Action>
-    <Action @click="programmaticOpen = !programmaticOpen" variant="outline">Toggle</Action>
-  </div>
+  <Action @click="programmaticOpen = true" variant="outline">Show</Action>
+  <Action @click="programmaticOpen = false" variant="outline">Hide</Action>
+  <Action @click="programmaticOpen = !programmaticOpen" variant="outline">Toggle</Action>
 </template>
 
 <script setup>
@@ -321,30 +202,24 @@ const programmaticOpen = ref(false);
       <form @submit.prevent="handleSubmit" class="p-4 min-w-80">
         <h3 class="font-semibold mb-3">Add New Item</h3>
         
-        <div class="space-y-3">
-          <TextField 
-            v-model="formData.title"
-            label="Title"
-            required
-          />
-          
-          <TextField 
-            v-model="formData.description"
-            label="Description"
-            rows="3"
-          />
-          
-          <Select 
-            v-model="formData.category"
-            label="Category"
-            :options="categoryOptions"
-          />
-        </div>
-        
-        <div class="flex gap-2 justify-end mt-4">
-          <Action @click="close" variant="outline" size="sm">Cancel</Action>
-          <Action type="submit" kind="primary" size="sm">Add Item</Action>
-        </div>
+        <TextField 
+          v-model="formData.title"
+          label="Title"
+          required
+        />
+        <TextField 
+          v-model="formData.description"
+          label="Description"
+          rows="3"
+        />
+        <Select 
+          v-model="formData.category"
+          label="Category"
+          :options="categoryOptions"
+        />
+
+        <Action @click="close" variant="outline" size="sm">Cancel</Action>
+        <Action type="submit" kind="primary" size="sm">Add Item</Action>
       </form>
     </template>
   </FloatingUi>
@@ -385,7 +260,7 @@ function handleSubmit() {
 
 ```vue
 <template>
-  <div class="flex gap-4 items-center">
+  <div>
     <span>Hover over these elements for information:</span>
     
     <FloatingUi 
@@ -415,6 +290,7 @@ function handleSubmit() {
     </FloatingUi>
   </div>
 </template>
+<script setup>
 ```
 
 ### Context Menu Implementation

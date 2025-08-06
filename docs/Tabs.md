@@ -14,9 +14,11 @@ The Tabs component is used to alternate between views within the same context, s
     <template #tab-content-0>
       <p>This is the content for the first tab.</p>
     </template>
+
     <template #tab-content-1>
       <p>This is the content for the second tab.</p>
     </template>
+
     <template #tab-content-2>
       <p>This is the content for the third tab.</p>
     </template>
@@ -260,27 +262,6 @@ const dynamicTabs = [
 </script>
 ```
 
-### Lazy Loading Tab Content
-
-```vue
-<template>
-  <Tabs lazy v-model="activeTab">
-    <TabPanel label="Dashboard">
-      <!-- Only rendered when active -->
-      <ExpensiveComponent />
-    </TabPanel>
-    <TabPanel label="Reports">
-      <!-- Only rendered when active -->
-      <DataTable :rows="hugeDataset" />
-    </TabPanel>
-    <TabPanel label="Analytics">
-      <!-- Only rendered when active -->
-      <ChartComponent />
-    </TabPanel>
-  </Tabs>
-</template>
-```
-
 ## Accessibility
 
 - The component implements full ARIA support for tab patterns
@@ -312,24 +293,21 @@ const dynamicTabs = [
 <template>
   <Tabs v-model="activeTab">
     <template #tab-headers>
-      <div class="flex justify-between items-center w-full bg-base-100 p-2 rounded-lg">
-        <div class="flex gap-2">
-          <button 
-            v-for="(tab, i) in tabs" 
-            :key="i"
-            @click="activeTab = i"
-            class="px-4 py-2 rounded"
-            :class="activeTab === i ? 'bg-primary-500 text-white' : 'hover:bg-base-200'"
-          >
-            {{ tab.label }}
-          </button>
-        </div>
+      <div class="flex gap-2">
+        <button 
+          v-for="(tab, i) in tabs" 
+          :key="i"
+          @click="activeTab = i"
+          class="px-4 py-2 rounded"
+          :class="activeTab === i ? 'bg-primary-500 text-white' : 'hover:bg-base-200'"
+        >
+          {{ tab.label }}
+        </button>
         <button class="text-primary-600">
           <Icon icon="material-symbols:add" />
         </button>
       </div>
     </template>
-    
     <TabPanel label="Dashboard">
       <DashboardContent />
     </TabPanel>
@@ -341,32 +319,4 @@ const dynamicTabs = [
     </TabPanel>
   </Tabs>
 </template>
-```
-
-### Animated Tabs with Tab Transitions
-
-```vue
-<template>
-  <Tabs 
-    v-model="activeTab" 
-    :transitionDuration="300"
-    autoHeight
-  >
-    <TabPanel label="Short Content">
-      <div class="h-20">Short content</div>
-    </TabPanel>
-    <TabPanel label="Tall Content">
-      <div class="h-80">Tall content</div>
-    </TabPanel>
-    <TabPanel label="Medium Content">
-      <div class="h-40">Medium content</div>
-    </TabPanel>
-  </Tabs>
-</template>
-
-<style scoped>
-.tab-content {
-  transition: height 0.3s ease;
-}
-</style>
 ```

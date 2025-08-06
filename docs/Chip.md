@@ -6,12 +6,10 @@ The Chip component displays compact information elements or interactive labels. 
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Chip label="New Feature" />
-</div>
-
 ```vue
-<Chip label="New Feature" />
+<template>
+  <Chip label="New Feature" />
+</template>
 ```
 
 ## Props
@@ -34,76 +32,55 @@ The Chip component displays compact information elements or interactive labels. 
 |------|------------|-------------|
 | `click` | `(event: MouseEvent)` | Emitted when the chip is clicked. |
 
-## Variants/Options
+## Different Kinds
 
-### Different Kinds
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+```vue
+<template>
   <Chip label="Primary" kind="primary" />
   <Chip label="Secondary" kind="secondary" />
   <Chip label="Success" kind="success" />
   <Chip label="Info" kind="info" />
   <Chip label="Warning" kind="warning" />
   <Chip label="Danger" kind="danger" />
-</div>
-
-```vue
-<Chip label="Primary" kind="primary" />
-<Chip label="Secondary" kind="secondary" />
-<Chip label="Success" kind="success" />
-<Chip label="Info" kind="info" />
-<Chip label="Warning" kind="warning" />
-<Chip label="Danger" kind="danger" />
+</template>
 ```
 
-### Interactive Chips (Button)
+## Interactive Chips (Button)
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+```vue
+<template>
   <Chip label="Click me" @click="handleClick" />
   <Chip label="Submit" type="submit" kind="success" />
-</div>
-
-```vue
-<Chip label="Click me" @click="handleClick" />
-<Chip label="Submit" type="submit" kind="success" />
+</template>
 ```
 
-### Link Chips
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
-  <Chip label="Documentation" href="#" />
-  <Chip label="External Link" href="#" target="_blank" rel="noopener" kind="info" />
-</div>
+## Link Chips
 
 ```vue
-<Chip label="Documentation" href="#" />
-<Chip label="External Link" href="#" target="_blank" rel="noopener" kind="info" />
+<template>
+  <Chip label="Documentation" href="#" />
+  <Chip label="External Link" href="#" target="_blank" rel="noopener" kind="info" />
+</template>
 ```
 
 ## States
 
 ### Disabled
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+```vue
+<template>
   <Chip label="Disabled" disabled />
   <Chip label="Disabled Link" href="#" disabled kind="secondary" />
-</div>
-
-```vue
-<Chip label="Disabled" disabled />
-<Chip label="Disabled Link" href="#" disabled kind="secondary" />
+</template>
 ```
 
 ### Active
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+```vue
+<template>
   <Chip label="Active" active />
   <Chip label="Active Warning" active kind="warning" />
-</div>
-
-```vue
-<Chip label="Active" active />
-<Chip label="Active Warning" active kind="warning" />
+</template>
 ```
 
 ## Best Practices
@@ -131,40 +108,19 @@ The Chip component displays compact information elements or interactive labels. 
 
 ### Category Tags
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="mb-2">Product Categories:</div>
-  <div class="flex flex-wrap gap-2">
-    <Chip label="Electronics" kind="primary" />
-    <Chip label="Clothing" kind="secondary" />
-    <Chip label="Books" kind="info" />
-    <Chip label="Home & Garden" kind="success" />
-    <Chip label="Toys" kind="warning" />
-  </div>
-</div>
-
 ```vue
-<div class="mb-2">Product Categories:</div>
-<div class="flex flex-wrap gap-2">
+<template>
+  <div class="mb-2">Product Categories:</div>
   <Chip 
     v-for="category in categories" 
     :key="category.id"
     :label="category.name"
     :kind="category.kind"
   />
-</div>
+</template>
 ```
 
 ### Filter Selection
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="mb-2">Filter by:</div>
-  <div class="flex flex-wrap gap-2">
-    <Chip label="All" active />
-    <Chip label="Recent" />
-    <Chip label="Popular" />
-    <Chip label="Trending" />
-  </div>
-</div>
 
 ```vue
 <script setup>
@@ -177,58 +133,42 @@ function setFilter(filter) {
 
 <template>
   <div class="mb-2">Filter by:</div>
-  <div class="flex flex-wrap gap-2">
-    <Chip 
-      label="All" 
-      :active="activeFilter === 'all'"
-      @click="setFilter('all')"
-    />
-    <Chip 
-      label="Recent" 
-      :active="activeFilter === 'recent'"
-      @click="setFilter('recent')"
-    />
-    <Chip 
-      label="Popular" 
-      :active="activeFilter === 'popular'"
-      @click="setFilter('popular')"
-    />
-    <Chip 
-      label="Trending" 
-      :active="activeFilter === 'trending'"
-      @click="setFilter('trending')"
-    />
-  </div>
+  <Chip 
+    label="All" 
+    :active="activeFilter === 'all'"
+    @click="setFilter('all')"
+  />
+
+  <Chip 
+    label="Recent" 
+    :active="activeFilter === 'recent'"
+    @click="setFilter('recent')"
+  />
+
+  <Chip 
+    label="Popular" 
+    :active="activeFilter === 'popular'"
+    @click="setFilter('popular')"
+  />
+
+  <Chip 
+    label="Trending" 
+    :active="activeFilter === 'trending'"
+    @click="setFilter('trending')"
+  />
 </template>
 ```
 
 ### Status Indicators
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="flex flex-col gap-3">
-    <div class="flex items-center">
-      <span class="w-24">Order #1234:</span>
-      <Chip label="Shipped" kind="success" />
-    </div>
-    <div class="flex items-center">
-      <span class="w-24">Order #5678:</span>
-      <Chip label="Processing" kind="warning" />
-    </div>
-    <div class="flex items-center">
-      <span class="w-24">Order #9012:</span>
-      <Chip label="Cancelled" kind="danger" />
-    </div>
-  </div>
-</div>
-
 ```vue
-<div class="flex flex-col gap-3">
+<template>
   <div v-for="order in orders" :key="order.id" class="flex items-center">
-    <span class="w-24">Order #{{ order.id }}:</span>
-    <Chip 
-      :label="order.status" 
-      :kind="getStatusKind(order.status)" 
-    />
+      Order #{{ order.id }}:
+      <Chip 
+        :label="order.status" 
+        :kind="getStatusKind(order.status)" 
+      />
   </div>
-</div>
+</template>
 ```

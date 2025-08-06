@@ -8,10 +8,6 @@ The TreeItem component represents individual nodes within a Tree component. It h
 
 TreeItem is typically used within a Tree component and is not commonly used in isolation:
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Tree :items="basicTreeItems" />
-</div>
-
 ```vue
 <template>
   <Tree :items="treeItems" />
@@ -78,13 +74,7 @@ TreeItem events are handled through the parent Tree component:
 | `update:expanded` | `(itemId: string \| number)` | Emitted when tree item expand/collapse state changes. |
 | `item-click` | `(item: TreeItem)` | Emitted when tree item is clicked. |
 
-## Variants/Options
-
-### File System Tree
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Tree :items="fileSystemItems" />
-</div>
+## File System Tree
 
 ```vue
 <template>
@@ -137,11 +127,7 @@ const fileSystemItems = [
 </script>
 ```
 
-### Navigation Tree
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Tree :items="navigationItems" />
-</div>
+## Navigation Tree
 
 ```vue
 <template>
@@ -205,11 +191,7 @@ function handleNavigation(item) {
 </script>
 ```
 
-### Interactive Tree with Actions
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Tree :items="actionItems" />
-</div>
+## Interactive Tree with Actions
 
 ```vue
 <template>
@@ -299,9 +281,9 @@ function viewArchived(id) {
 TreeItem can be customized through slots in the parent Tree component:
 
 ```vue
-<Tree :items="customItems">
-  <template #default="{ item, level }">
-    <div class="flex items-center gap-2 py-1">
+<template>
+  <Tree :items="customItems">
+    <template #default="{ item, level }">
       <div 
         v-if="item.status" 
         class="w-2 h-2 rounded-full"
@@ -310,37 +292,37 @@ TreeItem can be customized through slots in the parent Tree component:
           'bg-warning-500': item.status === 'in-progress',
           'bg-base-300': item.status === 'pending'
         }"
+      >
+
+        <Icon v-if="item.icon" :icon="item.icon" class="text-sm" />
+
+        {{ item.label }}
+
+        <Badge 
+          v-if="item.count" 
+          :label="item.count" 
+          size="xs" 
+          kind="secondary" 
+        />
+        <Menu v-if="item.id !== 'root'" auto-width>
+          <MenuItem label="Edit" @click="editItem(item)" />
+          <MenuItem label="Delete" @click="deleteItem(item)" />
+        </Menu>
+      </div>
+    </template>
+
+    <template #icon="{ item, level }">
+      <div 
+        class="w-4 h-4 rounded-full mr-2"
+        :class="{
+          'bg-blue-500': item.type === 'folder',
+          'bg-green-500': item.type === 'file',
+          'bg-red-500': item.type === 'error'
+        }"
       ></div>
-      
-      <Icon v-if="item.icon" :icon="item.icon" class="text-sm" />
-      
-      <span class="flex-1">{{ item.label }}</span>
-      
-      <Badge 
-        v-if="item.count" 
-        :label="item.count" 
-        size="xs" 
-        kind="secondary" 
-      />
-      
-      <Menu v-if="item.id !== 'root'" auto-width>
-        <MenuItem label="Edit" @click="editItem(item)" />
-        <MenuItem label="Delete" @click="deleteItem(item)" />
-      </Menu>
-    </div>
-  </template>
-  
-  <template #icon="{ item, level }">
-    <div 
-      class="w-4 h-4 rounded-full mr-2"
-      :class="{
-        'bg-blue-500': item.type === 'folder',
-        'bg-green-500': item.type === 'file',
-        'bg-red-500': item.type === 'error'
-      }"
-    ></div>
-  </template>
-</Tree>
+    </template>
+  </Tree>
+</template>
 ```
 
 ## Best Practices
@@ -358,129 +340,33 @@ TreeItem can be customized through slots in the parent Tree component:
 
 ## Examples
 
-### Organizational Structure
-
-```vue
-<template>
-  <Tree :items="orgStructure" @item-click="viewEmployee">
-    <template #default="{ item }">
-      <div class="flex items-center gap-3 py-2">
-        <Avatar 
-          v-if="item.avatar" 
-          :src="item.avatar" 
-          size="xs" 
-        />
-        <Icon 
-          v-else-if="item.icon" 
-          :icon="item.icon" 
-          class="text-lg"
-        />
-        
-        <div class="flex-1">
-          <div class="font-medium">{{ item.label }}</div>
-          <div v-if="item.title" class="text-xs text-base-500">
-            {{ item.title }}
-          </div>
-        </div>
-        
-        <Badge 
-          v-if="item.department" 
-          :label="item.department" 
-          size="xs" 
-          kind="secondary"
-        />
-      </div>
-    </template>
-  </Tree>
-</template>
-
-<script setup>
-const orgStructure = [
-  {
-    id: 'ceo',
-    label: 'Sarah Johnson',
-    title: 'Chief Executive Officer',
-    avatar: '/avatars/sarah.jpg',
-    department: 'Executive',
-    children: [
-      {
-        id: 'cto',
-        label: 'Michael Chen',
-        title: 'Chief Technology Officer',
-        avatar: '/avatars/michael.jpg',
-        department: 'Technology',
-        children: [
-          {
-            id: 'dev-team',
-            label: 'Development Team',
-            icon: 'material-symbols:code',
-            children: [
-              { 
-                id: 'dev1', 
-                label: 'Alex Rodriguez', 
-                title: 'Senior Developer',
-                avatar: '/avatars/alex.jpg'
-              },
-              { 
-                id: 'dev2', 
-                label: 'Emma Wilson', 
-                title: 'Frontend Developer',
-                avatar: '/avatars/emma.jpg'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        id: 'cmo',
-        label: 'Lisa Park',
-        title: 'Chief Marketing Officer',
-        avatar: '/avatars/lisa.jpg',
-        department: 'Marketing',
-        children: [
-          { 
-            id: 'marketing1', 
-            label: 'David Kim', 
-            title: 'Marketing Specialist',
-            avatar: '/avatars/david.jpg'
-          }
-        ]
-      }
-    ]
-  }
-];
-</script>
-```
-
 ### Documentation Structure
 
 ```vue
 <template>
   <Tree :items="docsStructure" @item-click="navigateToDoc">
     <template #default="{ item }">
-      <div class="flex items-center gap-2 py-1">
-        <Icon 
-          :icon="getDocIcon(item)" 
-          class="text-sm"
-          :class="getDocIconColor(item)"
+      <Icon 
+        :icon="getDocIcon(item)" 
+        class="text-sm"
+        :class="getDocIconColor(item)"
+
+      {{ item.label }}
+      
+      <div class="flex items-center gap-1">
+        <Badge 
+          v-if="item.isNew" 
+          label="New" 
+          size="xs" 
+          kind="success"
         />
-        
-        <span class="flex-1">{{ item.label }}</span>
-        
-        <div class="flex items-center gap-1">
-          <Badge 
-            v-if="item.isNew" 
-            label="New" 
-            size="xs" 
-            kind="success"
-          />
-          <Badge 
-            v-if="item.difficulty" 
-            :label="item.difficulty" 
-            size="xs" 
-            :kind="getDifficultyKind(item.difficulty)"
-          />
-        </div>
+
+        <Badge 
+          v-if="item.difficulty" 
+          :label="item.difficulty" 
+          size="xs" 
+          :kind="getDifficultyKind(item.difficulty)"
+        />
       </div>
     </template>
   </Tree>

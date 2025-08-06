@@ -6,7 +6,8 @@ The Menu component is a versatile dropdown menu system that provides a flexible 
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Menu label="Actions">
     <MenuItem label="Edit" />
     <MenuItem label="Duplicate" />
@@ -14,16 +15,7 @@ The Menu component is a versatile dropdown menu system that provides a flexible 
     <MenuItem label="Archive" />
     <MenuItem label="Delete" />
   </Menu>
-</div>
-
-```vue
-<Menu label="Actions">
-  <MenuItem label="Edit" />
-  <MenuItem label="Duplicate" />
-  <MenuDivider />
-  <MenuItem label="Archive" />
-  <MenuItem label="Delete" />
-</Menu>
+</template>
 ```
 
 ## Props
@@ -48,11 +40,10 @@ The Menu component doesn't emit custom events directly, but MenuItem components 
 | `default` | Content of the menu. Typically contains MenuItem, MenuHeader, MenuContent, and MenuDivider components. |
 | `content` | Alternative slot for custom menu content with access to menu state props: `isOpen`, `open`, `close`, `toggle`. |
 
-## Variants/Options
+## Nested Menus
 
-### Nested Menus
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Menu label="File">
     <MenuItem label="New" />
     <MenuItem label="Open" />
@@ -63,114 +54,64 @@ The Menu component doesn't emit custom events directly, but MenuItem components 
       <MenuItem label="CSV" />
     </Menu>
   </Menu>
-</div>
-
-```vue
-<Menu label="File">
-  <MenuItem label="New" />
-  <MenuItem label="Open" />
-  <MenuDivider />
-  <Menu label="Export As" nested>
-    <MenuItem label="PDF" />
-    <MenuItem label="Excel" />
-    <MenuItem label="CSV" />
-  </Menu>
-</Menu>
+</template>
 ```
 
-### Menu with Custom Content
+## Menu with Custom Content
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Menu label="User Account" auto-width>
     <MenuHeader label="Account" />
     <MenuContent>
-      <div class="flex items-center gap-2 py-2">
-        <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
-          <span class="text-primary-600 font-medium">JD</span>
-        </div>
-        <div>
-          <div class="font-medium">John Doe</div>
-          <div class="text-xs text-base-500">john.doe@example.com</div>
-        </div>
+      <Avatar src="https://i.pravatar.cc/32" size="sm" alt="John Doe" />
+      <div>
+        <div>John Doe</div>
+        <div>john.doe@example.com</div>
       </div>
     </MenuContent>
     <MenuDivider />
     <MenuItem label="Profile Settings" />
     <MenuItem label="Log Out" />
   </Menu>
-</div>
-
-```vue
-<Menu label="User Account" auto-width>
-  <MenuHeader label="Account" />
-  <MenuContent>
-    <div class="flex items-center gap-2 py-2">
-      <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
-        <span class="text-primary-600 font-medium">JD</span>
-      </div>
-      <div>
-        <div class="font-medium">John Doe</div>
-        <div class="text-xs text-base-500">john.doe@example.com</div>
-      </div>
-    </div>
-  </MenuContent>
-  <MenuDivider />
-  <MenuItem label="Profile Settings" />
-  <MenuItem label="Log Out" />
-</Menu>
+</template>
 ```
 
-### Menu Placement Options
+## Menu Placement Options
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex gap-4 flex-wrap">
+</Menu>
+
+```vue
+<template>
+  <!-- Different placement options -->
   <Menu label="Top Start" placement="top-start">
     <MenuItem label="Item 1" />
     <MenuItem label="Item 2" />
   </Menu>
+
   <Menu label="Bottom End" placement="bottom-end">
     <MenuItem label="Item 1" />
     <MenuItem label="Item 2" />
   </Menu>
+
   <Menu label="Right Start" placement="right-start">
     <MenuItem label="Item 1" />
     <MenuItem label="Item 2" />
   </Menu>
-</div>
-
-```vue
-<!-- Different placement options -->
-<Menu label="Top Start" placement="top-start">
-  <MenuItem label="Item 1" />
-  <MenuItem label="Item 2" />
-</Menu>
-
-<Menu label="Bottom End" placement="bottom-end">
-  <MenuItem label="Item 1" />
-  <MenuItem label="Item 2" />
-</Menu>
-
-<Menu label="Right Start" placement="right-start">
-  <MenuItem label="Item 1" />
-  <MenuItem label="Item 2" />
-</Menu>
+</template>
 ```
 
 ## States
 
 ### Disabled Menu
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Menu label="Disabled Menu" disabled>
     <MenuItem label="Item 1" />
     <MenuItem label="Item 2" />
   </Menu>
-</div>
-
-```vue
-<Menu label="Disabled Menu" disabled>
-  <MenuItem label="Item 1" />
-  <MenuItem label="Item 2" />
-</Menu>
+</template>
 ```
 
 ## Best Practices
@@ -220,26 +161,28 @@ function showContextMenu(event) {
 ### Complex Nested Menu Structure
 
 ```vue
-<Menu label="Tools">
-  <MenuItem label="Text Editor" />
-  <MenuItem label="Code Editor" />
-  <MenuDivider />
-  
-  <Menu label="Development" nested>
-    <MenuItem label="Build Project" />
-    <MenuItem label="Run Tests" />
+<template>
+  <Menu label="Tools">
+    <MenuItem label="Text Editor" />
+    <MenuItem label="Code Editor" />
     <MenuDivider />
-    
-    <Menu label="Deploy" nested>
-      <MenuItem label="Staging" />
-      <MenuItem label="Production" />
+
+    <Menu label="Development" nested>
+      <MenuItem label="Build Project" />
+      <MenuItem label="Run Tests" />
+      <MenuDivider />
+
+      <Menu label="Deploy" nested>
+        <MenuItem label="Staging" />
+        <MenuItem label="Production" />
+      </Menu>
+    </Menu>
+
+    <Menu label="Database" nested>
+      <MenuItem label="View Data" />
+      <MenuItem label="Run Query" />
+      <MenuItem label="Export Data" />
     </Menu>
   </Menu>
-  
-  <Menu label="Database" nested>
-    <MenuItem label="View Data" />
-    <MenuItem label="Run Query" />
-    <MenuItem label="Export Data" />
-  </Menu>
-</Menu>
+</template>
 ```

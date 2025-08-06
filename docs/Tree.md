@@ -81,18 +81,20 @@ function handleNodeClick(node) {
 You can customize the icons displayed for each node using the `icon` slot:
 
 ```vue
-<Tree :items="items">
-  <template #icon="{ item }">
-    <div class="w-5 h-5 flex items-center justify-center">
-      <svg v-if="item.type === 'folder'" class="w-4 h-4" viewBox="0 0 24 24">
-        <!-- Custom folder icon SVG path -->
-      </svg>
-      <svg v-else-if="item.type === 'file'" class="w-4 h-4" viewBox="0 0 24 24">
-        <!-- Custom file icon SVG path -->
-      </svg>
-    </div>
-  </template>
-</Tree>
+<template>
+  <Tree :items="items">
+    <template #icon="{ item }">
+      <div class="w-5 h-5 flex items-center justify-center">
+        <svg v-if="item.type === 'folder'" class="w-4 h-4" viewBox="0 0 24 24">
+          <!-- Custom folder icon SVG path -->
+        </svg>
+        <svg v-else-if="item.type === 'file'" class="w-4 h-4" viewBox="0 0 24 24">
+          <!-- Custom file icon SVG path -->
+        </svg>
+      </div>
+    </template>
+  </Tree>
+</template>
 ```
 
 ### Without Icons
@@ -100,7 +102,9 @@ You can customize the icons displayed for each node using the `icon` slot:
 If you prefer a more minimal look or want to save horizontal space, you can disable the default icons:
 
 ```vue
-<Tree :items="items" :show-icons="false" />
+<template>
+  <Tree :items="items" :show-icons="false" />
+</template>
 ```
 
 ### Right Controls
@@ -108,7 +112,9 @@ If you prefer a more minimal look or want to save horizontal space, you can disa
 You can position the expand/collapse controls on the right side of each node:
 
 ```vue
-<Tree :items="items" controls-position="right" />
+<template>
+  <Tree :items="items" controls-position="right" />
+</template>
 ```
 
 ### Default Expanded Nodes
@@ -116,7 +122,9 @@ You can position the expand/collapse controls on the right side of each node:
 You can specify which nodes should be expanded by default using their IDs:
 
 ```vue
-<Tree :items="items" :default-expanded-keys="['docs', 'components']" />
+<template>
+  <Tree :items="items" :default-expanded-keys="['docs', 'components']" />
+</template>
 ```
 
 ### Expand All Nodes
@@ -124,7 +132,9 @@ You can specify which nodes should be expanded by default using their IDs:
 To expand all nodes by default:
 
 ```vue
-<Tree :items="items" :default-expand-all="true" />
+<template>
+  <Tree :items="items" :default-expand-all="true" />
+</template>
 ```
 
 ## Best Practices

@@ -1,586 +1,279 @@
 <template>
-  <div class="space-y-8">
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">Basic Usage</h2>
-      <p class="text-base-600 dark:text-base-400">
-        Snackbars provide brief messages about app processes at the bottom or
-        top of the screen.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <Action
-          label="Show Basic Snackbar"
-          kind="primary"
-          @click="showBasicSnackbar = true"
-        />
+  <div class="content">
+    <h1 class="text-3xl font-bold mb-6">Snackbar</h1>
+
+    <Prose>
+      <h2>Overview</h2>
+      <p>The Snackbar component displays brief messages at the bottom or top of the screen. It's commonly used for providing feedback about an operation, such as confirming an action was completed, alerting users to a condition, or providing a brief message with an optional action.</p>
+    </Prose>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
+      
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <Action @click="basicSnackbar = true">Show Snackbar</Action>
         <Snackbar
-          v-model="showBasicSnackbar"
-          message="This is a basic snackbar message"
+        v-model="basicSnackbar"
+        message="This is a basic snackbar message"
         />
+      </div>
+
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
+        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+const basicSnackbar = ref(false);
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;Action @click="basicSnackbar = true"&gt;Show Snackbar&lt;/Action&gt;
+  &lt;Snackbar 
+    v-model="basicSnackbar"
+    message="This is a basic snackbar message"
+  /&gt;
+&lt;/template&gt;</code></pre>
       </div>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">Kinds</h2>
-      <p class="text-base-600 dark:text-base-400">
-        Snackbars come in different kinds to represent different types of
-        information.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <Action
-          label="Primary"
-          kind="primary"
-          @click="showSnackbar('primary')"
-        />
-        <Action
-          label="Success"
-          kind="success"
-          @click="showSnackbar('success')"
-        />
-        <Action
-          label="Info"
-          kind="info"
-          @click="showSnackbar('info')"
-        />
-        <Action
-          label="Warning"
-          kind="warning"
-          @click="showSnackbar('warning')"
-        />
-        <Action
-          label="Danger"
-          kind="danger"
-          @click="showSnackbar('danger')"
-        />
-        <Action
-          label="Secondary"
-          kind="secondary"
-          @click="showSnackbar('secondary')"
-        />
-      </div>
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Props</h2>
+            <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Type</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Default</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>message</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">The main text content of the snackbar.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>title</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Optional title text to display above the main message.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>kind</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot; | &amp;quot;success&amp;quot; | &amp;quot;info&amp;quot; | &amp;quot;warning&amp;quot; | &amp;quot;danger&amp;quot; | &amp;quot;secondary&amp;quot;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">The style variant of the snackbar.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>position</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;top&amp;quot; | &amp;quot;bottom&amp;quot; | &amp;quot;top-left&amp;quot; | &amp;quot;top-right&amp;quot; | &amp;quot;bottom-left&amp;quot; | &amp;quot;bottom-right&amp;quot;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;bottom-right&amp;quot;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Position of the snackbar on the screen.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>showIcon</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>true</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether to display the status icon.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>dismissible</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>true</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether the snackbar can be manually closed by the user.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>autoClose</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>true</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether the snackbar should automatically close after a certain duration.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>duration</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Number</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>5000</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Time in milliseconds before the snackbar automatically closes (when autoClose is true).</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>actionLabel</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Text for an optional action button.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-      <Snackbar
-        v-model="showPrimarySnackbar"
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Events</h2>
+            <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Parameters</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>action</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">None</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when the action button is clicked.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>dismiss</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">None</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when the snackbar is dismissed (either manually or automatically).</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>close</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">None</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when the snackbar is closed automatically due to the duration timeout.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">v-model</h2>
+      
+      <Prose>
+        <p>The component supports v-model for controlling the snackbar's visibility.</p>
+      </Prose>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Slots</h2>
+            <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>default</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Main content of the snackbar. Falls back to the <code>message</code> prop if not provided.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Different Kinds</h2>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <Action @click="primarySnackbar = true">Primary</Action>
+        <Snackbar
+        v-model="primarySnackbar"
         kind="primary"
         message="This is a primary snackbar"
-      />
-      <Snackbar
-        v-model="showSuccessSnackbar"
+        />
+        <Action @click="successSnackbar = true">Success</Action>
+        <Snackbar
+        v-model="successSnackbar"
         kind="success"
         message="Operation completed successfully"
-      />
-      <Snackbar
-        v-model="showInfoSnackbar"
-        kind="info"
-        message="Here's some information for you"
-      />
-      <Snackbar
-        v-model="showWarningSnackbar"
-        kind="warning"
-        message="Warning: This action has consequences"
-      />
-      <Snackbar
-        v-model="showDangerSnackbar"
-        kind="danger"
-        message="Error! Something went wrong"
-      />
-      <Snackbar
-        v-model="showSecondarySnackbar"
-        kind="secondary"
-        message="This is a secondary message"
-      />
-    </section>
-
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">Positions</h2>
-      <p class="text-base-600 dark:text-base-400">
-        Snackbars can be positioned at different locations on the screen.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <Action
-          label="Bottom (Default)"
-          @click="showPositionSnackbar('bottom')"
-        />
-        <Action
-          label="Top"
-          @click="showPositionSnackbar('top')"
-        />
-        <Action
-          label="Top Left"
-          @click="showPositionSnackbar('top-left')"
-        />
-        <Action
-          label="Top Right"
-          @click="showPositionSnackbar('top-right')"
-        />
-        <Action
-          label="Bottom Left"
-          @click="showPositionSnackbar('bottom-left')"
-        />
-        <Action
-          label="Bottom Right"
-          @click="showPositionSnackbar('bottom-right')"
         />
       </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+const primarySnackbar = ref(false);
+const successSnackbar = ref(false);
+const infoSnackbar = ref(false);
+const warningSnackbar = ref(false);
+const dangerSnackbar = ref(false);
+const secondarySnackbar = ref(false);
+&lt;/script&gt;
 
-      <Snackbar
-        v-if="positionSnackbar === 'bottom'"
-        v-model="showPositionedSnackbar"
-        position="bottom"
-        message="This snackbar appears at the bottom"
-      />
-      <Snackbar
-        v-if="positionSnackbar === 'top'"
-        v-model="showPositionedSnackbar"
-        position="top"
-        message="This snackbar appears at the top"
-      />
-      <Snackbar
-        v-if="positionSnackbar === 'top-left'"
-        v-model="showPositionedSnackbar"
-        position="top-left"
-        message="This snackbar appears at the top-left"
-      />
-      <Snackbar
-        v-if="positionSnackbar === 'top-right'"
-        v-model="showPositionedSnackbar"
-        position="top-right"
-        message="This snackbar appears at the top-right"
-      />
-      <Snackbar
-        v-if="positionSnackbar === 'bottom-left'"
-        v-model="showPositionedSnackbar"
-        position="bottom-left"
-        message="This snackbar appears at the bottom-left"
-      />
-      <Snackbar
-        v-if="positionSnackbar === 'bottom-right'"
-        v-model="showPositionedSnackbar"
-        position="bottom-right"
-        message="This snackbar appears at the bottom-right"
-      />
+&lt;template&gt;
+  &lt;Action @click="primarySnackbar = true"&gt;Primary&lt;/Action&gt;
+  &lt;Snackbar 
+    v-model="primarySnackbar"
+    kind="primary"
+    message="This is a primary snackbar"
+  /&gt;
+
+  &lt;Action @click="successSnackbar = true"&gt;Success&lt;/Action&gt;
+  &lt;Snackbar 
+    v-model="successSnackbar"
+    kind="success"
+    message="Operation completed successfully"
+  /&gt;
+&lt;/template&gt;</code></pre>
+      </div>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">With Action</h2>
-      <p class="text-base-600 dark:text-base-400">
-        Snackbars can include an action button to provide a quick action related
-        to the message.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <Action
-          label="Show Snackbar with Action"
-          @click="showActionSnackbar = true"
-        />
-      </div>
-
-      <Snackbar
-        v-model="showActionSnackbar"
-        message="Your file has been deleted"
-        action-label="Undo"
-        @action="handleUndo"
-      />
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
+      
+      <Prose>
+        <ul>
+          <li>Keep snackbar messages concise and clear</li>
+          <li>Use the appropriate <code>kind</code> to reflect the nature of the message:</li>
+          <li><code>success</code>: For successful operations</li>
+          <li><code>info</code>: For neutral informational messages</li>
+          <li><code>warning</code>: For potential issues that need attention</li>
+          <li><code>danger</code>: For errors or critical issues</li>
+          <li><code>primary</code>: For general application messages</li>
+          <li><code>secondary</code>: For less important notifications</li>
+          <li>Position snackbars consistently throughout your application</li>
+          <li>For important messages that shouldn't be missed, consider using <code>:auto-close="false"</code></li>
+          <li>Avoid showing multiple snackbars simultaneously, as it can overwhelm users</li>
+          <li>Include an action button only when there's a clear and immediate action the user might want to take</li>
+        </ul>
+      </Prose>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">With Title</h2>
-      <p class="text-base-600 dark:text-base-400">
-        For more complex messages, you can add a title to your snackbar.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <Action
-          label="Show Snackbar with Title"
-          @click="showTitleSnackbar = true"
-        />
-      </div>
-
-      <Snackbar
-        v-model="showTitleSnackbar"
-        title="Success!"
-        message="Your profile has been updated successfully"
-        kind="success"
-      />
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Accessibility Considerations</h2>
+      
+      <Prose>
+        <ul>
+          <li>Snackbars use <code>role="status"</code> and <code>aria-live="polite"</code> to ensure they're announced by screen readers</li>
+          <li>The component automatically pauses its auto-close timer when hovered or focused, allowing users more time to read</li>
+          <li>Dismissible snackbars have a properly labeled close button</li>
+          <li>The component handles focus management appropriately</li>
+        </ul>
+      </Prose>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">Auto-close Duration</h2>
-      <p class="text-base-600 dark:text-base-400">
-        You can customize how long a snackbar stays visible before auto-closing.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <Action
-          label="Quick (2s)"
-          @click="showDurationSnackbar(2000)"
-        />
-        <Action
-          label="Default (5s)"
-          @click="showDurationSnackbar(5000)"
-        />
-        <Action
-          label="Long (10s)"
-          @click="showDurationSnackbar(10000)"
-        />
-        <Action
-          label="No Auto-close"
-          @click="showPersistentSnackbar"
-        />
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Examples</h2>
+      <h3 class="text-lg font-medium mt-6 mb-3">Form Submission Feedback</h3>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <!-- Add interactive example here -->
       </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+const formSubmitSnackbar = ref(false);
 
-      <Snackbar
-        v-model="showQuickSnackbar"
-        message="This will close in 2 seconds"
-        :duration="2000"
-      />
-      <Snackbar
-        v-model="showDefaultDurationSnackbar"
-        message="This will close in 5 seconds (default)"
-        :duration="5000"
-      />
-      <Snackbar
-        v-model="showLongSnackbar"
-        message="This will close in 10 seconds"
-        :duration="10000"
-      />
-      <Snackbar
-        v-model="showNoAutoCloseSnackbar"
-        message="This won't close automatically"
-        :auto-close="false"
-      />
+function showFormSubmitSnackbar() {
+  // Form validation and submission logic would go here
+  formSubmitSnackbar.value = true;
+}
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;form class="space-y-4" @submit.prevent="showFormSubmitSnackbar"&gt;
+    &lt;TextField v-model="name" label="Name" required /&gt;
+    &lt;TextField v-model="email" label="Email" type="email" required /&gt;
+    &lt;Action kind="primary" type="submit"&gt;Submit Form&lt;/Action&gt;
+  &lt;/form&gt;
+  &lt;Snackbar 
+    v-model="formSubmitSnackbar"
+    title="Form Submitted"
+    message="Thank you for your submission!"
+    kind="success"
+  /&gt;
+&lt;/template&gt;</code></pre>
+      </div>
     </section>
-
-    <Prose class="mt-8">
-      <h2>Component Usage</h2>
-      <pre><code>&lt;!-- Basic usage --&gt;
-&lt;Snackbar
-  v-model="show"
-  message="This is a snackbar message"
-/&gt;
-
-&lt;!-- With different kind --&gt;
-&lt;Snackbar
-  v-model="show"
-  kind="success"
-  message="Operation completed successfully"
-/&gt;
-
-&lt;!-- With title and custom position --&gt;
-&lt;Snackbar
-  v-model="show"
-  title="Error"
-  message="Failed to save changes"
-  kind="danger"
-  position="top-right"
-/&gt;
-
-&lt;!-- With action button --&gt;
-&lt;Snackbar
-  v-model="show"
-  message="Item deleted"
-  action-label="Undo"
-  @action="handleUndo"
-/&gt;
-
-&lt;!-- Custom duration or persistent --&gt;
-&lt;Snackbar
-  v-model="show"
-  message="This stays for 10 seconds"
-  :duration="10000"
-/&gt;
-
-&lt;Snackbar
-  v-model="show"
-  message="This won't auto-close"
-  :auto-close="false"
-/&gt;</code></pre>
-    </Prose>
-
-    <div class="mt-8">
-      <h2 class="text-xl font-bold mb-4">Props</h2>
-      <Table
-        :fields="propFields"
-        :items="propItems"
-        sortable
-        expandable
-      >
-        <template #cell-name="{ value }">
-          <code>{{ value }}</code>
-        </template>
-        <template #cell-type="{ value }">
-          <span class="font-mono text-sm">{{ value }}</span>
-        </template>
-        <template #expanded-content="{ item }">
-          <div
-            class="p-4 space-y-3"
-            v-if="item.example"
-          >
-            <h3 class="font-medium">Example:</h3>
-            <pre
-              class="bg-base-200 dark:bg-base-700 p-2 rounded-base radius-xl:rounded-xl overflow-x-auto"
-            ><code>{{ item.example }}</code></pre>
-          </div>
-        </template>
-      </Table>
-    </div>
-
-    <div class="mt-8">
-      <h2 class="text-xl font-bold mb-4">Events</h2>
-      <Table
-        :fields="eventFields"
-        :items="eventItems"
-        sortable
-      >
-        <template #cell-name="{ value }">
-          <code>{{ value }}</code>
-        </template>
-      </Table>
-    </div>
-
-    <Prose class="mt-8">
-      <h2 class="text-xl font-bold mb-4">Global Snackbar Service</h2>
-      <p class="mb-4 text-base-600 dark:text-base-400">
-        For convenience, you can use the global snackbar service to show
-        snackbars from anywhere in your application:
-      </p>
-      <div class="flex flex-wrap gap-4 mb-6">
-        <Action
-          label="Show Global Snackbar"
-          @click="showGlobalSnackbar"
-        />
-      </div>
-      <pre><code>// In your component
-import { useSnackbar } from '@/composables/useSnackbar'
-
-const snackbar = useSnackbar()
-
-// Show a simple message
-snackbar.show('Your message here')
-
-// Show with options
-snackbar.show({
-  message: 'Operation successful',
-  kind: 'success',
-  duration: 3000,
-  position: 'bottom-right',
-  actionLabel: 'View',
-  onAction: () => {
-    // Handle action click
-  }
-})
-
-// Show success message
-snackbar.success('Operation completed successfully')
-
-// Show danger message
-snackbar.danger('Something went wrong')
-
-// Show info message
-snackbar.info('Here is some information')
-
-// Show warning message
-snackbar.warning('Be careful with this action')</code></pre>
-    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-  // State for basic example
-  const showBasicSnackbar = ref(false);
+import { ref } from 'vue';
+import Action from '../components/Action.vue';
 
-  // State for kind examples
-  const showPrimarySnackbar = ref(false);
-  const showSuccessSnackbar = ref(false);
-  const showInfoSnackbar = ref(false);
-  const showWarningSnackbar = ref(false);
-  const showDangerSnackbar = ref(false);
-  const showSecondarySnackbar = ref(false);
-
-  function showSnackbar(kind: string) {
-    switch (kind) {
-      case "primary":
-        showPrimarySnackbar.value = true;
-        break;
-      case "success":
-        showSuccessSnackbar.value = true;
-        break;
-      case "info":
-        showInfoSnackbar.value = true;
-        break;
-      case "warning":
-        showWarningSnackbar.value = true;
-        break;
-      case "danger":
-        showDangerSnackbar.value = true;
-        break;
-      case "secondary":
-        showSecondarySnackbar.value = true;
-        break;
-    }
-  }
-
-  // State for position examples
-  const showPositionedSnackbar = ref(false);
-  const positionSnackbar = ref("bottom");
-
-  function showPositionSnackbar(position: string) {
-    positionSnackbar.value = position;
-    showPositionedSnackbar.value = false;
-
-    // Use nextTick to ensure the snackbar is remounted with new position
-    nextTick(() => {
-      showPositionedSnackbar.value = true;
-    });
-  }
-
-  // State for action example
-  const showActionSnackbar = ref(false);
-
-  function handleUndo() {
-    // Simulating undo action
-    setTimeout(() => {
-      showInfoSnackbar.value = true;
-    }, 500);
-  }
-
-  // State for title example
-  const showTitleSnackbar = ref(false);
-
-  // State for duration examples
-  const showQuickSnackbar = ref(false);
-  const showDefaultDurationSnackbar = ref(false);
-  const showLongSnackbar = ref(false);
-  const showNoAutoCloseSnackbar = ref(false);
-
-  function showDurationSnackbar(duration: number) {
-    if (duration === 2000) {
-      showQuickSnackbar.value = true;
-    } else if (duration === 5000) {
-      showDefaultDurationSnackbar.value = true;
-    } else if (duration === 10000) {
-      showLongSnackbar.value = true;
-    }
-  }
-
-  function showPersistentSnackbar() {
-    showNoAutoCloseSnackbar.value = true;
-  }
-
-  // Global snackbar example
-  function showGlobalSnackbar() {
-    // In a real implementation, this would use the useSnackbar composable
-    showSuccessSnackbar.value = true;
-    setTimeout(() => {
-      showInfoSnackbar.value = true;
-    }, 1000);
-  }
-
-  // Props documentation
-  const propFields: TableField[] = [
-    { key: "name", label: "Prop", sortable: true },
-    { key: "type", label: "Type", sortable: true },
-    { key: "default", label: "Default", sortable: true },
-    { key: "description", label: "Description" },
-  ];
-
-  const propItems = [
-    {
-      name: "message",
-      type: "String",
-      default: "undefined",
-      description: "The message text shown in the snackbar",
-      example: '<Snackbar message="Your message here" />',
-    },
-    {
-      name: "title",
-      type: "String",
-      default: "undefined",
-      description: "Optional title displayed above the message",
-      example: '<Snackbar title="Success" message="Operation completed" />',
-    },
-    {
-      name: "kind",
-      type: "'primary' | 'success' | 'info' | 'warning' | 'danger' | 'secondary'",
-      default: "'primary'",
-      description: "The type of snackbar to display, affects color and icon",
-      example: '<Snackbar kind="success" message="Well done!" />',
-    },
-    {
-      name: "position",
-      type: "'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'",
-      default: "'bottom'",
-      description: "Where the snackbar will appear on screen",
-      example: '<Snackbar position="top-right" message="New notification" />',
-    },
-    {
-      name: "showIcon",
-      type: "Boolean",
-      default: "true",
-      description: "Whether to show the icon based on kind",
-      example: '<Snackbar :showIcon="false" message="No icon here" />',
-    },
-    {
-      name: "dismissible",
-      type: "Boolean",
-      default: "true",
-      description: "Whether to show a close button",
-      example:
-        '<Snackbar :dismissible="false" message="Cannot dismiss this" />',
-    },
-    {
-      name: "autoClose",
-      type: "Boolean",
-      default: "true",
-      description:
-        "Whether the snackbar should close automatically after duration",
-      example:
-        '<Snackbar :autoClose="false" message="Will stay until dismissed" />',
-    },
-    {
-      name: "duration",
-      type: "Number",
-      default: "5000",
-      description:
-        "Time in milliseconds before auto-closing (if autoClose is true)",
-      example: '<Snackbar :duration="10000" message="Stays for 10 seconds" />',
-    },
-    {
-      name: "actionLabel",
-      type: "String",
-      default: "undefined",
-      description:
-        "Label for the action button, displays action button if provided",
-      example:
-        '<Snackbar actionLabel="Undo" message="Item deleted" @action="handleUndo" />',
-    },
-  ];
-
-  // Events documentation
-  const eventFields: TableField[] = [
-    { key: "name", label: "Event", sortable: true },
-    { key: "payload", label: "Payload", sortable: false },
-    { key: "description", label: "Description" },
-  ];
-
-  const eventItems = [
-    {
-      name: "update:modelValue",
-      payload: "Boolean",
-      description: "Emitted when the snackbar visibility changes",
-    },
-    {
-      name: "action",
-      payload: "Event",
-      description: "Emitted when the action button is clicked",
-    },
-    {
-      name: "dismiss",
-      payload: "Event",
-      description:
-        "Emitted when the snackbar is dismissed (via close button or programmatically)",
-    },
-    {
-      name: "close",
-      payload: "void",
-      description:
-        "Emitted when the snackbar automatically closes after the duration",
-    },
-  ];
+const basicSnackbar = ref(false);
 </script>

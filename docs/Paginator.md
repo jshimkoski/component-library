@@ -74,11 +74,13 @@ const handlePageChange = (page) => {
 Displays numbered page buttons for navigation.
 
 ```vue
-<Paginator 
-  :total-items="100" 
-  mode="buttons"
-  :visible-page-button-limit="5"
-/>
+<template>
+  <Paginator 
+    :total-items="100" 
+    mode="buttons"
+    :visible-page-button-limit="5"
+  />
+</template>
 ```
 
 ### Input Mode
@@ -86,29 +88,35 @@ Displays numbered page buttons for navigation.
 Uses a number input field to enter the desired page number.
 
 ```vue
-<Paginator 
-  :total-items="100" 
-  mode="input"
-/>
+<template>
+  <Paginator 
+    :total-items="100" 
+    mode="input"
+  />
+</template>
 ```
 
 ### With First/Last Buttons
 
 ```vue
-<Paginator 
-  :total-items="100" 
-  :show-first-last-buttons="true"
-/>
+<template>
+  <Paginator 
+    :total-items="100" 
+    :show-first-last-buttons="true"
+  />
+</template>
 ```
 
 ### With Page Size Selector
 
 ```vue
-<Paginator 
-  :total-items="100" 
-  :show-page-size-selector="true"
-  :available-page-sizes="[10, 20, 50, 100]"
-/>
+<template>
+  <Paginator 
+    :total-items="100" 
+    :show-page-size-selector="true"
+    :available-page-sizes="[10, 20, 50, 100]"
+  />
+</template>
 ```
 
 ## Best Practices
@@ -131,7 +139,6 @@ Uses a number input field to enter the desired page number.
     :items="displayedItems" 
     :loading-items="loading"
   />
-  
   <Paginator 
     :total-items="totalItems" 
     v-model:page="currentPage" 
@@ -175,29 +182,4 @@ onMounted(() => {
   fetchItems();
 });
 </script>
-```
-
-### Custom Buttons
-
-```vue
-<Paginator 
-  :total-items="100" 
-  :show-first-last-buttons="true"
->
-  <template #first-page-icon>
-    <span class="text-xs">First</span>
-  </template>
-  
-  <template #previous-page-icon>
-    <span class="text-xs">Prev</span>
-  </template>
-  
-  <template #next-page-icon>
-    <span class="text-xs">Next</span>
-  </template>
-  
-  <template #last-page-icon>
-    <span class="text-xs">Last</span>
-  </template>
-</Paginator>
 ```

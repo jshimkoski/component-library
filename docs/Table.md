@@ -6,13 +6,6 @@ The Table component provides a feature-rich data table with support for sorting,
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Table 
-    :fields="basicFields"
-    :items="basicItems"
-  />
-</div>
-
 ```vue
 <template>
   <Table 
@@ -89,18 +82,7 @@ interface TableField {
 | `empty` | Content displayed when no items are provided. |
 | `loading` | Content displayed during loading state. |
 
-## Variants/Options
-
-### Selectable Table
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Table 
-    v-model="selectedItems"
-    :fields="selectableFields"
-    :items="selectableItems"
-    selectable
-  />
-</div>
+## Selectable Table
 
 ```vue
 <template>
@@ -118,12 +100,13 @@ const selected = ref([]);
 </script>
 ```
 
-### Expandable Rows
+## Expandable Rows
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Table 
-    :fields="expandableFields"
-    :items="expandableItems"
+    :fields="fields"
+    :items="items"
     expandable
   >
     <template #expanded-content="{ item }">
@@ -133,29 +116,16 @@ const selected = ref([]);
       </div>
     </template>
   </Table>
-</div>
-
-```vue
-<Table 
-  :fields="fields"
-  :items="items"
-  expandable
->
-  <template #expanded-content="{ item }">
-    <div class="p-4 bg-base-50 dark:bg-base-800">
-      <h4 class="font-semibold mb-2">Additional Details</h4>
-      <p>More information about {{ item.name }}...</p>
-    </div>
-  </template>
-</Table>
+</template>
 ```
 
-### Custom Cell Rendering
+## Custom Cell Rendering
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Table 
-    :fields="customFields"
-    :items="customItems"
+    :fields="fields"
+    :items="items"
   >
     <template #cell-status="{ value }">
       <Badge 
@@ -164,66 +134,23 @@ const selected = ref([]);
         size="sm"
       />
     </template>
-    
     <template #cell-actions="{ item }">
-      <div class="flex gap-2">
-        <Action size="xs" variant="ghost" @click="editItem(item)">Edit</Action>
-        <Action size="xs" variant="ghost" kind="danger" @click="deleteItem(item)">Delete</Action>
-      </div>
-    </template>
-  </Table>
-</div>
-
-```vue
-<Table 
-  :fields="fields"
-  :items="items"
->
-  <template #cell-status="{ value }">
-    <Badge 
-      :label="value" 
-      :kind="value === 'Active' ? 'success' : 'warning'"
-      size="sm"
-    />
-  </template>
-  
-  <template #cell-actions="{ item }">
-    <div class="flex gap-2">
       <Action size="xs" variant="ghost" @click="editItem(item)">Edit</Action>
       <Action size="xs" variant="ghost" kind="danger" @click="deleteItem(item)">Delete</Action>
-    </div>
-  </template>
-</Table>
+    </template>
+  </Table>
+</template>
 ```
 
-### With Controls
+## With Controls
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Table 
-    :fields="controlFields"
+    :fields="fields"
     :items="filteredItems"
   >
     <template #controls>
-      <div class="flex justify-between items-center mb-4">
-        <TextField 
-          v-model="searchTerm"
-          placeholder="Search users..."
-          icon="material-symbols:search"
-          class="max-w-sm"
-        />
-        <Action kind="primary">Add User</Action>
-      </div>
-    </template>
-  </Table>
-</div>
-
-```vue
-<Table 
-  :fields="fields"
-  :items="filteredItems"
->
-  <template #controls>
-    <div class="flex justify-between items-center mb-4">
       <TextField 
         v-model="searchTerm"
         placeholder="Search users..."
@@ -231,65 +158,47 @@ const selected = ref([]);
         class="max-w-sm"
       />
       <Action kind="primary">Add User</Action>
-    </div>
-  </template>
-</Table>
+    </template>
+  </Table>
+</template>
 ```
 
 ## Table Styling Options
 
 ### Striped Rows
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Table 
-    :fields="styleFields"
-    :items="styleItems"
+    :fields="fields"
+    :items="items"
     striped
   />
-</div>
-
-```vue
-<Table 
-  :fields="fields"
-  :items="items"
-  striped
-/>
+</template>
 ```
 
 ### Bordered Table
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Table 
-    :fields="styleFields"
-    :items="styleItems"
+    :fields="fields"
+    :items="items"
     bordered
   />
-</div>
-
-```vue
-<Table 
-  :fields="fields"
-  :items="items"
-  bordered
-/>
+</template>
 ```
 
 ### Compact Table
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Table 
-    :fields="styleFields"
-    :items="styleItems"
+    :fields="fields"
+    :items="items"
     small
   />
-</div>
-
-```vue
-<Table 
-  :fields="fields"
-  :items="items"
-  small
-/>
+</template>
 ```
 
 ## Best Practices
@@ -323,37 +232,32 @@ const selected = ref([]);
       @sort="handleSort"
     >
       <template #controls>
-        <div class="flex justify-between items-center mb-4">
-          <div class="flex gap-4">
-            <TextField 
-              v-model="search"
-              placeholder="Search users..."
-              icon="material-symbols:search"
-            />
-            <Select 
-              v-model="statusFilter"
-              :options="statusOptions"
-              placeholder="Filter by status"
-            />
-          </div>
-          
-          <div class="flex gap-2">
-            <Action 
-              v-if="selectedUsers.length > 0" 
-              @click="bulkAction"
-              variant="outline"
-            >
-              Bulk Edit ({{ selectedUsers.length }})
-            </Action>
-            <Action kind="primary" @click="addUser">Add User</Action>
-          </div>
+        <div class="flex gap-4">
+          <TextField 
+            v-model="search"
+            placeholder="Search users..."
+            icon="material-symbols:search"
+          />
+          <Select 
+            v-model="statusFilter"
+            :options="statusOptions"
+            placeholder="Filter by status"
+          />
+          <Action 
+            v-if="selectedUsers.length > 0" 
+            @click="bulkAction"
+            variant="outline"
+          >
+            Bulk Edit ({{ selectedUsers.length }})
+          </Action>
+          <Action kind="primary" @click="addUser">Add User</Action>
         </div>
       </template>
-      
+
       <template #cell-avatar="{ item }">
         <Avatar :src="item.avatar" :alt="item.name" size="sm" />
       </template>
-      
+
       <template #cell-status="{ value }">
         <Badge 
           :label="value" 
@@ -361,13 +265,11 @@ const selected = ref([]);
           size="sm"
         />
       </template>
-      
+
       <template #cell-lastLogin="{ value }">
-        <span class="text-sm text-base-600 dark:text-base-400">
-          {{ formatDate(value) }}
-        </span>
+        {{ formatDate(value) }}
       </template>
-      
+
       <template #cell-actions="{ item }">
         <Menu label="Actions" auto-width>
           <MenuItem label="View Profile" @click="viewProfile(item)" />
@@ -380,7 +282,7 @@ const selected = ref([]);
           />
         </Menu>
       </template>
-      
+
       <template #expanded-content="{ item }">
         <div class="p-4 bg-base-50 dark:bg-base-800 space-y-2">
           <div><strong>Department:</strong> {{ item.department }}</div>
@@ -389,7 +291,7 @@ const selected = ref([]);
           <div><strong>Notes:</strong> {{ item.notes || 'No notes available' }}</div>
         </div>
       </template>
-      
+
       <template #empty>
         <div class="text-center py-8">
           <p class="text-base-500">No users found matching your criteria.</p>
@@ -438,52 +340,4 @@ function getStatusKind(status) {
   return kindMap[status] || 'secondary';
 }
 </script>
-```
-
-### Data Analytics Table
-
-```vue
-<template>
-  <Table 
-    :fields="analyticsFields"
-    :items="analyticsData"
-    bordered
-    small
-  >
-    <template #controls>
-      <Card>
-        <div class="flex justify-between items-center">
-          <h3 class="text-lg font-semibold">Performance Metrics</h3>
-          <div class="flex gap-2">
-            <Select 
-              v-model="timeRange"
-              :options="timeRangeOptions"
-              class="min-w-32"
-            />
-            <Action variant="outline" @click="exportData">Export</Action>
-          </div>
-        </div>
-      </Card>
-    </template>
-    
-    <template #cell-trend="{ value }">
-      <div class="flex items-center gap-1">
-        <Icon 
-          :icon="value > 0 ? 'material-symbols:trending-up' : 'material-symbols:trending-down'"
-          :class="value > 0 ? 'text-success-500' : 'text-danger-500'"
-        />
-        <span :class="value > 0 ? 'text-success-600' : 'text-danger-600'">
-          {{ Math.abs(value) }}%
-        </span>
-      </div>
-    </template>
-    
-    <template #cell-progress="{ value }">
-      <div class="flex items-center gap-2">
-        <Progress :model-value="value" :max="100" size="xs" class="flex-1" />
-        <span class="text-xs text-base-500 min-w-12">{{ value }}%</span>
-      </div>
-    </template>
-  </Table>
-</template>
 ```

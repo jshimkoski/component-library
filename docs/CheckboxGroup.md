@@ -6,23 +6,7 @@ The CheckboxGroup component is designed to manage collections of related Checkbo
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <CheckboxGroup
-    label="Select your interests"
-    :options="[
-      { value: 'technology', label: 'Technology' },
-      { value: 'sports', label: 'Sports' },
-      { value: 'music', label: 'Music' },
-      { value: 'travel', label: 'Travel' }
-    ]"
-  />
-</div>
-
 ```vue
-<script setup>
-const selectedInterests = ref([]);
-</script>
-
 <template>
   <CheckboxGroup
     v-model="selectedInterests"
@@ -35,6 +19,10 @@ const selectedInterests = ref([]);
     ]"
   />
 </template>
+
+<script setup>
+const selectedInterests = ref([]);
+</script>
 ```
 
 ## Props
@@ -69,12 +57,12 @@ Each object in the options array supports the following properties:
 
 The component supports v-model for two-way binding of selected values. The v-model binds to an array containing the values of the selected checkboxes.
 
-## Variants/Options
+## With Description
 
-### With Description
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <CheckboxGroup
+    v-model="notificationPreferences"
     label="Notification Preferences"
     description="Choose which notifications you'd like to receive"
     :options="[
@@ -83,25 +71,15 @@ The component supports v-model for two-way binding of selected values. The v-mod
       { value: 'sms', label: 'SMS notifications' }
     ]"
   />
-</div>
-
-```vue
-<CheckboxGroup
-  v-model="notificationPreferences"
-  label="Notification Preferences"
-  description="Choose which notifications you'd like to receive"
-  :options="[
-    { value: 'email', label: 'Email notifications' },
-    { value: 'push', label: 'Push notifications' },
-    { value: 'sms', label: 'SMS notifications' }
-  ]"
-/>
+</template>
 ```
 
-### Required Group
+## Required Group
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <CheckboxGroup
+    v-model="selectedOptions"
     label="Choose at least one option"
     required
     showMarker
@@ -111,26 +89,15 @@ The component supports v-model for two-way binding of selected values. The v-mod
       { value: 'option3', label: 'Option 3' }
     ]"
   />
-</div>
-
-```vue
-<CheckboxGroup
-  v-model="selectedOptions"
-  label="Choose at least one option"
-  required
-  showMarker
-  :options="[
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' }
-  ]"
-/>
+</template>
 ```
 
-### Options with Descriptions
+## Options with Descriptions
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <CheckboxGroup
+    v-model="selectedPlans"
     label="Subscription Plans"
     :options="[
       { 
@@ -150,38 +117,17 @@ The component supports v-model for two-way binding of selected values. The v-mod
       }
     ]"
   />
-</div>
-
-```vue
-<CheckboxGroup
-  v-model="selectedPlans"
-  label="Subscription Plans"
-  :options="[
-    { 
-      value: 'basic', 
-      label: 'Basic Plan', 
-      description: 'Essential features for individuals'
-    },
-    { 
-      value: 'pro', 
-      label: 'Pro Plan', 
-      description: 'Advanced features for professionals'
-    },
-    { 
-      value: 'enterprise', 
-      label: 'Enterprise Plan', 
-      description: 'Complete solution for large organizations'
-    }
-  ]"
-/>
+</template>
 ```
 
 ## States
 
 ### Disabled Group
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <CheckboxGroup
+    v-model="disabledOptions"
     label="This group is disabled"
     disabled
     :options="[
@@ -190,25 +136,15 @@ The component supports v-model for two-way binding of selected values. The v-mod
       { value: 'option3', label: 'Option 3' }
     ]"
   />
-</div>
-
-```vue
-<CheckboxGroup
-  v-model="disabledOptions"
-  label="This group is disabled"
-  disabled
-  :options="[
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' }
-  ]"
-/>
+</template>
 ```
 
 ### Mixed Disabled States
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <CheckboxGroup
+    v-model="mixedStateOptions"
     label="Some options are disabled"
     :options="[
       { value: 'option1', label: 'Available Option' },
@@ -216,18 +152,7 @@ The component supports v-model for two-way binding of selected values. The v-mod
       { value: 'option3', label: 'Another Available Option' }
     ]"
   />
-</div>
-
-```vue
-<CheckboxGroup
-  v-model="mixedStateOptions"
-  label="Some options are disabled"
-  :options="[
-    { value: 'option1', label: 'Available Option' },
-    { value: 'option2', label: 'Disabled Option', disabled: true },
-    { value: 'option3', label: 'Another Available Option' }
-  ]"
-/>
+</template>
 ```
 
 ## Best Practices
@@ -251,45 +176,7 @@ The component supports v-model for two-way binding of selected values. The v-mod
 
 ### Feature Selection
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <CheckboxGroup
-    label="Choose additional features"
-    description="Select the features you'd like to add to your package"
-    :options="[
-      { 
-        value: 'backup', 
-        label: 'Automated Backups', 
-        description: 'Daily backups of all your data' 
-      },
-      { 
-        value: 'analytics', 
-        label: 'Advanced Analytics', 
-        description: 'Detailed insights and reporting tools' 
-      },
-      { 
-        value: 'support', 
-        label: 'Priority Support', 
-        description: 'Get help within 1 business hour' 
-      },
-      { 
-        value: 'domains', 
-        label: 'Custom Domains', 
-        description: 'Use your own domain names' 
-      }
-    ]"
-  />
-</div>
-
 ```vue
-<script setup>
-const selectedFeatures = ref([]);
-
-// Watch for changes to calculate total price
-watch(selectedFeatures, (newValues) => {
-  calculateTotalPrice(newValues);
-});
-</script>
-
 <template>
   <CheckboxGroup
     v-model="selectedFeatures"
@@ -319,59 +206,22 @@ watch(selectedFeatures, (newValues) => {
     ]"
   />
 </template>
+
+<script setup>
+const selectedFeatures = ref([]);
+
+// Watch for changes to calculate total price
+watch(selectedFeatures, (newValues) => {
+  calculateTotalPrice(newValues);
+});
+</script>
 ```
 
 ### Terms Acceptance
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <form class="space-y-5">
-    <TextField label="Email" type="email" />
-    <CheckboxGroup
-      label="Terms and Agreements"
-      required
-      showMarker
-      :options="[
-        { 
-          value: 'terms', 
-          label: 'I agree to the Terms of Service',
-          required: true 
-        },
-        { 
-          value: 'privacy', 
-          label: 'I agree to the Privacy Policy',
-          required: true 
-        },
-        { 
-          value: 'marketing', 
-          label: 'I would like to receive marketing emails',
-          required: false
-        }
-      ]"
-    />
-    <div>
-      <Action kind="primary" type="submit">Sign Up</Action>
-    </div>
-  </form>
-</div>
+<form class="space-y-5">
 
 ```vue
-<script setup>
-const agreements = ref([]);
-const email = ref('');
-
-function submitForm() {
-  // Validation: Check if required agreements are accepted
-  const requiredValues = ['terms', 'privacy'];
-  const allRequiredAccepted = requiredValues.every(val => 
-    agreements.value.includes(val)
-  );
-  
-  if (allRequiredAccepted) {
-    // Process form submission
-  }
-}
-</script>
-
 <template>
   <form @submit.prevent="submitForm" class="space-y-5">
     <TextField v-model="email" label="Email" type="email" />
@@ -403,4 +253,21 @@ function submitForm() {
     </div>
   </form>
 </template>
+
+<script setup>
+const agreements = ref([]);
+const email = ref('');
+
+function submitForm() {
+  // Validation: Check if required agreements are accepted
+  const requiredValues = ['terms', 'privacy'];
+  const allRequiredAccepted = requiredValues.every(val => 
+    agreements.value.includes(val)
+  );
+  
+  if (allRequiredAccepted) {
+    // Process form submission
+  }
+}
+</script>
 ```

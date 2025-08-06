@@ -1,36 +1,33 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Switch Component</h1>
+    <h1 class="text-3xl font-bold mb-6">Switch</h1>
 
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Overview</h2>
-      <p class="mb-4">
-        The Switch component provides a toggle control that enables users to quickly turn an option on or off.
-        It's commonly used for binary settings or preferences in forms and configuration interfaces.
-      </p>
-    </section>
+    <Prose>
+      <h2>Overview</h2>
+      <p>The Switch component provides a toggleable control that allows users to choose between two states. It's commonly used for enabling or disabling features, turning settings on or off, or toggling between binary options. The switch visually represents its state, making it easy for users to understand the current selection.</p>
+    </Prose>
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
+      
       <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <div>
-          <Switch
-            v-model="basicSwitch"
-            label="Enable notifications"
-          />
-        </div>
+        <Switch v-model="notificationsEnabled" label="Enable notifications" />
       </div>
+
       <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;Switch
-  v-model="enableNotifications"
-  label="Enable notifications"
-/&gt;</code></pre>
+        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+const notificationsEnabled = ref(false);
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;Switch v-model="notificationsEnabled" label="Enable notifications" /&gt;
+&lt;/template&gt;</code></pre>
       </div>
     </section>
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Props</h2>
-      <table class="w-full text-left border-collapse">
+            <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -41,60 +38,62 @@
         </thead>
         <tbody>
           <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>modelValue</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">false</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Current value of the switch (v-model)</td>
-          </tr>
-          <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>kind</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">"primary"</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Color theme of the switch. Options: primary, secondary, success, info, warning, danger</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot; | &amp;quot;secondary&amp;quot; | &amp;quot;success&amp;quot; | &amp;quot;info&amp;quot; | &amp;quot;warning&amp;quot; | &amp;quot;danger&amp;quot;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">The color theme of the switch when in the on state.</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>label</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">undefined</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Text label for the switch</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Text label associated with the switch.</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>description</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">undefined</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Helper text displayed below the label</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Additional descriptive text displayed below the label.</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>name</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">undefined</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Name attribute for the input field</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Name attribute for the underlying input element.</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>disabled</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">undefined</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether the switch is disabled</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">When true, the switch is disabled and cannot be toggled.</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>required</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">undefined</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether the switch is required in a form</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">When true, marks the switch as required in a form.</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>showMarker</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">undefined</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether to show an asterisk (*) marker for required switches</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">When true and required is true, displays an asterisk (*) next to the label.</td>
           </tr>
         </tbody>
       </table>
     </section>
 
     <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">v-model</h2>
+      
+      <Prose>
+        <p>The component supports v-model for two-way binding of the switch state (true for on, false for off).</p>
+      </Prose>
+    </section>
+
+    <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Slots</h2>
-      <table class="w-full text-left border-collapse">
+            <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -104,230 +103,175 @@
         <tbody>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>default</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom label content. Replaces the <code>label</code> prop when provided</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Replaces the label text. Falls back to the <code>label</code> prop if not provided.</td>
           </tr>
         </tbody>
       </table>
     </section>
 
     <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Color Variants</h2>
-      <p class="mb-4">The Switch component supports different color variants through the <code>kind</code> prop to convey different meanings.</p>
-      
-      <div class="grid gap-4 max-w-md mb-4">
-        <Switch v-model="colorSwitches.primary" label="Primary" kind="primary" />
-        <Switch v-model="colorSwitches.secondary" label="Secondary" kind="secondary" />
-        <Switch v-model="colorSwitches.success" label="Success" kind="success" />
-        <Switch v-model="colorSwitches.info" label="Info" kind="info" />
-        <Switch v-model="colorSwitches.warning" label="Warning" kind="warning" />
-        <Switch v-model="colorSwitches.danger" label="Danger" kind="danger" />
+      <h2 class="text-xl font-semibold mb-4">Different Kinds</h2>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <Switch v-model="primaryState" kind="primary" label="Primary Switch" />
+        <Switch v-model="secondaryState" kind="secondary" label="Secondary Switch" />
+        <Switch v-model="successState" kind="success" label="Success Switch" />
+        <Switch v-model="infoState" kind="info" label="Info Switch" />
+        <Switch v-model="warningState" kind="warning" label="Warning Switch" />
+        <Switch v-model="dangerState" kind="danger" label="Danger Switch" />
       </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;Switch v-model="isPrimary" label="Primary" kind="primary" /&gt;
-&lt;Switch v-model="isSecondary" label="Secondary" kind="secondary" /&gt;
-&lt;Switch v-model="isSuccess" label="Success" kind="success" /&gt;
-&lt;Switch v-model="isInfo" label="Info" kind="info" /&gt;
-&lt;Switch v-model="isWarning" label="Warning" kind="warning" /&gt;
-&lt;Switch v-model="isDanger" label="Danger" kind="danger" /&gt;</code></pre>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Switch v-model="primaryState" kind="primary" label="Primary Switch" /&gt;
+  &lt;Switch v-model="secondaryState" kind="secondary" label="Secondary Switch" /&gt;
+  &lt;Switch v-model="successState" kind="success" label="Success Switch" /&gt;
+  &lt;Switch v-model="infoState" kind="info" label="Info Switch" /&gt;
+  &lt;Switch v-model="warningState" kind="warning" label="Warning Switch" /&gt;
+  &lt;Switch v-model="dangerState" kind="danger" label="Danger Switch" /&gt;
+&lt;/template&gt;</code></pre>
       </div>
     </section>
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">With Description</h2>
-      <p class="mb-4">Add helper text below the switch label to provide additional context or instructions.</p>
-      
-      <div class="max-w-md mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <Switch
-          v-model="withDescription"
-          label="Dark Mode"
-          description="Enable dark mode to reduce eye strain in low-light environments."
-          kind="primary"
+        v-model="darkMode"
+        label="Dark Mode"
+        description="Enable dark theme across the application"
         />
       </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;Switch
-  v-model="darkMode"
-  label="Dark Mode"
-  description="Enable dark mode to reduce eye strain in low-light environments."
-  kind="primary"
-/&gt;</code></pre>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Switch 
+    v-model="darkMode"
+    label="Dark Mode" 
+    description="Enable dark theme across the application"
+  /&gt;
+&lt;/template&gt;</code></pre>
       </div>
     </section>
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Required Switch</h2>
-      <p class="mb-4">Show a required indicator for switches that must be turned on.</p>
-      
-      <div class="max-w-md mb-4">
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
         <Switch
-          v-model="requiredSwitch"
-          label="Accept Terms and Conditions"
-          required
-          showMarker
-          kind="primary"
+        v-model="termsAgreed"
+        label="I agree to the terms and conditions"
+        required
+        showMarker
         />
       </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;Switch
-  v-model="acceptTerms"
-  label="Accept Terms and Conditions"
-  required
-  showMarker
-  kind="primary"
-/&gt;</code></pre>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Switch 
+    v-model="termsAgreed"
+    label="I agree to the terms and conditions" 
+    required
+    showMarker
+  /&gt;
+&lt;/template&gt;</code></pre>
       </div>
     </section>
 
     <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Disabled State</h2>
-      <p class="mb-4">Use the disabled prop to indicate that a switch is not available for interaction.</p>
-      
-      <div class="max-w-md mb-4 grid gap-4">
-        <Switch
-          v-model="disabledOff"
-          label="Disabled (Off)"
-          disabled
-          kind="primary"
-        />
-        
-        <Switch
-          v-model="disabledOn"
-          label="Disabled (On)"
-          disabled
-          kind="primary"
-        />
+      <h2 class="text-xl font-semibold mb-4">States</h2>
+      <h3 class="text-lg font-medium mt-6 mb-3">Disabled</h3>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <!-- Add interactive example here -->
       </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Switch 
+    v-model="disabledOffOption"
+    label="Disabled off state" 
+    disabled
+  /&gt;
 
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;Switch
-  v-model="disabledValue"
-  label="Disabled (Off)"
-  disabled
-  kind="primary"
-/&gt;
-
-&lt;Switch
-  v-model="disabledOnValue"
-  label="Disabled (On)"
-  disabled
-  kind="primary"
-/&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Custom Label Content</h2>
-      <p class="mb-4">Use the default slot to provide custom content for the switch label.</p>
-      
-      <div class="max-w-md mb-4">
-        <Switch v-model="customLabelSwitch" kind="primary">
-          <span class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
-            </svg>
-            <span>Custom label with icon</span>
-          </span>
-        </Switch>
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;Switch v-model="customLabel" kind="primary"&gt;
-  &lt;span class="flex items-center gap-2"&gt;
-    &lt;svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"&gt;
-      &lt;path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" /&gt;
-    &lt;/svg&gt;
-    &lt;span&gt;Custom label with icon&lt;/span&gt;
-  &lt;/span&gt;
-&lt;/Switch&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Form Example</h2>
-      <p class="mb-4">Example of Switch components used in a settings form.</p>
-      
-      <div class="max-w-md p-6 border border-base-200 dark:border-base-800 rounded-lg mb-4">
-        <h3 class="text-lg font-medium mb-4">Notification Settings</h3>
-        <form class="grid gap-4">
-          <Switch
-            v-model="formSettings.emailNotifications"
-            label="Email Notifications"
-            description="Receive updates and alerts via email"
-            kind="primary"
-          />
-          
-          <Switch
-            v-model="formSettings.pushNotifications"
-            label="Push Notifications"
-            description="Receive notifications on your device"
-            kind="primary"
-          />
-          
-          <Switch
-            v-model="formSettings.marketingEmails"
-            label="Marketing Communications"
-            description="Receive promotional offers and news"
-            kind="primary"
-          />
-          
-          <Switch
-            v-model="formSettings.newsletter"
-            label="Weekly Newsletter"
-            description="Get weekly updates on new features"
-            disabled
-            kind="primary"
-          />
-          
-          <div class="mt-4">
-            <Action label="Save Preferences" kind="primary" />
-          </div>
-        </form>
+  &lt;Switch 
+    v-model="disabledOnOption"
+    label="Disabled on state" 
+    disabled
+  /&gt;
+&lt;/template&gt;</code></pre>
       </div>
     </section>
 
     <section class="mb-10">
       <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      <ul class="list-disc pl-5 space-y-2">
-        <li>Use switches for binary choices that take immediate effect</li>
-        <li>Prefer checkboxes over switches for binary choices in forms that require a submit button</li>
-        <li>Use clear, concise labels that describe the effect of enabling the switch</li>
-        <li>Provide descriptions for switches when additional context is needed</li>
-        <li>Choose appropriate colors based on the semantic meaning of the option</li>
-        <li>Group related switches together for a better user experience</li>
-        <li>Consider the default state carefully - only pre-enable switches for settings most users would want</li>
-        <li>Make sure the interactive area is large enough for comfortable use on touch devices</li>
-      </ul>
+      
+      <Prose>
+        <ul>
+          <li>Use clear, concise labels that describe the effect of enabling the switch</li>
+          <li>Use the description prop when additional context or explanation is needed</li>
+          <li>Choose colors that align with the meaning of the action:</li>
+          <li><code>primary</code>: For main features or standard toggles</li>
+          <li><code>success</code>: For enabling positive or beneficial features</li>
+          <li><code>danger</code>: For risky or potentially destructive toggles</li>
+          <li>Other variants as appropriate for your context</li>
+          <li>Position switches consistently in your application</li>
+          <li>Consider the default state carefully (is the feature opt-in or opt-out?)</li>
+          <li>For critical options, consider using the required and showMarker props</li>
+        </ul>
+      </Prose>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Accessibility Considerations</h2>
+      
+      <Prose>
+        <ul>
+          <li>The component uses <code>role="switch"</code> for proper semantic meaning</li>
+          <li>Labels are properly associated with the input for screen readers</li>
+          <li>The component supports keyboard navigation and operation</li>
+          <li>Focus states are clearly visible for keyboard users</li>
+          <li>The disabled state is properly communicated to assistive technologies</li>
+        </ul>
+      </Prose>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Examples</h2>
+      <h3 class="text-lg font-medium mt-6 mb-3">Feature Toggles</h3>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <!-- Add interactive example here -->
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+const accountSettings = reactive({
+  twoFactor: false,
+  emailNotifications: true,
+  dataSharing: false
+});
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;h3&gt;Account Settings&lt;/h3&gt;
+  &lt;Switch 
+    v-model="accountSettings.twoFactor"
+    kind="info"
+    label="Two-factor authentication" 
+    description="Add an extra layer of security to your account"
+
+  &lt;Switch 
+    v-model="accountSettings.emailNotifications"
+    kind="primary"
+    label="Email notifications" 
+    description="Receive updates about account activity"
+  /&gt;
+  &lt;Switch 
+    v-model="accountSettings.dataSharing"
+    kind="warning"
+    label="Usage data sharing" 
+    description="Help us improve by sharing anonymous usage data"
+  /&gt;
+&lt;/template&gt;</code></pre>
+      </div>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
-  // Sample data for examples
-  const basicSwitch = ref(true);
-  
-  const colorSwitches = reactive({
-    primary: true,
-    secondary: true,
-    success: true,
-    info: true,
-    warning: true,
-    danger: true
-  });
-  
-  const withDescription = ref(true);
-  const requiredSwitch = ref(false);
-  const disabledOff = ref(false);
-  const disabledOn = ref(true);
-  const customLabelSwitch = ref(true);
-  
-  // Form example data
-  const formSettings = reactive({
-    emailNotifications: true,
-    pushNotifications: false,
-    marketingEmails: false,
-    newsletter: true
-  });
+import { ref } from 'vue';
+
+const notificationsEnabled = ref(false);
 </script>

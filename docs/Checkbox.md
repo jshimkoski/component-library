@@ -6,12 +6,10 @@ The Checkbox component allows users to select one or more items from a set of op
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Checkbox label="Subscribe to newsletter" />
-</div>
-
 ```vue
-<Checkbox v-model="subscribed" label="Subscribe to newsletter" />
+<template>
+  <Checkbox v-model="subscribed" label="Subscribe to newsletter" />
+</template>
 ```
 
 ## Props
@@ -39,54 +37,53 @@ The component supports v-model for two-way binding of the checkbox state.
 |------|-------------|
 | `default` | Replaces the label text. Falls back to the `label` prop if not provided. |
 
-## Variants/Options
+## With Description
 
-### With Description
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Checkbox 
+    v-model="productUpdates"
     label="Send me product updates" 
     description="You'll receive occasional emails about product updates and new features"
   />
-</div>
-
-```vue
-<Checkbox 
-  v-model="productUpdates"
-  label="Send me product updates" 
-  description="You'll receive occasional emails about product updates and new features"
-/>
+</template>
 ```
 
-### Required Checkbox
+## Required Checkbox
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Checkbox 
+    v-model="termsAgreed"
     label="I agree to the terms and conditions" 
     required
     showMarker
   />
-</div>
-
-```vue
-<Checkbox 
-  v-model="termsAgreed"
-  label="I agree to the terms and conditions" 
-  required
-  showMarker
-/>
+</template>
 ```
 
-### Indeterminate State
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Checkbox 
-    label="Select all items" 
-    indeterminate
-  />
-</div>
+## Indeterminate State
 
 ```vue
+<template>
+  <Checkbox 
+    v-model="selectAll"
+    label="Select all items" 
+    :indeterminate="indeterminate"
+    @change="updateIndeterminateState"
+  />
+
+  <div class="mt-2 ml-6 space-y-1">
+    <Checkbox 
+      v-for="item in items" 
+      :key="item.id"
+      v-model="item.selected"
+      :label="item.name"
+      @change="updateIndeterminateState"
+    />
+  </div>
+</template>
+
 <script setup>
 const selectAll = ref(false);
 const indeterminate = ref(true);
@@ -109,86 +106,46 @@ watch(selectAll, (newValue) => {
   indeterminate.value = false;
 });
 </script>
-
-<template>
-  <Checkbox 
-    v-model="selectAll"
-    label="Select all items" 
-    :indeterminate="indeterminate"
-    @change="updateIndeterminateState"
-  />
-  
-  <div class="mt-2 ml-6 space-y-1">
-    <Checkbox 
-      v-for="item in items" 
-      :key="item.id"
-      v-model="item.selected"
-      :label="item.name"
-      @change="updateIndeterminateState"
-    />
-  </div>
-</template>
 ```
 
-### Custom True/False Values
+## Custom True/False Values
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Checkbox 
-    label="Shipping method"
+    v-model="shippingMethod"
+    label="Express shipping" 
     true-value="express"
     false-value="standard"
   />
-</div>
-
-```vue
-<Checkbox 
-  v-model="shippingMethod"
-  label="Express shipping" 
-  true-value="express"
-  false-value="standard"
-/>
+</template>
 ```
 
 ## States
 
 ### Disabled
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-col gap-2">
+```vue
+<template>
   <Checkbox 
     label="Disabled unchecked" 
     disabled
+    v-model="option1"
   />
+
   <Checkbox 
     label="Disabled checked" 
     disabled
-    :model-value="true"
+    v-model="option2"
   />
+
   <Checkbox 
     label="Disabled indeterminate" 
     disabled
     indeterminate
+    v-model="option3"
   />
-</div>
-
-```vue
-<Checkbox 
-  label="Disabled unchecked" 
-  disabled
-  v-model="option1"
-/>
-
-<Checkbox 
-  label="Disabled checked" 
-  disabled
-  v-model="option2"
-/>
-
-<Checkbox 
-  label="Disabled indeterminate" 
-  disabled
-  indeterminate
-  v-model="option3"
-/>
+</template>
 ```
 
 ## Best Practices
@@ -213,21 +170,8 @@ watch(selectAll, (newValue) => {
 
 ### Checkbox Group for Preferences
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="space-y-3">
-    <h3 class="font-semibold text-lg mb-2">Notification Preferences</h3>
-    <Checkbox label="Email notifications" />
-    <Checkbox label="Push notifications" />
-    <Checkbox label="SMS alerts" />
-    <Checkbox 
-      label="Weekly digest" 
-      description="Receive a summary of all activity once per week"
-    />
-  </div>
-</div>
-
 ```vue
-<div class="space-y-3">
+<template>
   <h3 class="font-semibold text-lg mb-2">Notification Preferences</h3>
   <Checkbox v-model="preferences.email" label="Email notifications" />
   <Checkbox v-model="preferences.push" label="Push notifications" />
@@ -237,43 +181,12 @@ watch(selectAll, (newValue) => {
     label="Weekly digest" 
     description="Receive a summary of all activity once per week"
   />
-</div>
+</template>
 ```
 
 ### Form with Required Checkbox
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <form class="space-y-4">
-    <div>
-      <TextField label="Email" type="email" required showMarker />
-    </div>
-    <div>
-      <Checkbox 
-        label="I agree to the privacy policy" 
-        required
-        showMarker
-      />
-    </div>
-    <div>
-      <Action kind="primary" type="submit">Subscribe</Action>
-    </div>
-  </form>
-</div>
-
 ```vue
-<script setup>
-const formData = reactive({
-  email: '',
-  agreedToPrivacy: false
-});
-
-function submitForm() {
-  if (formData.agreedToPrivacy) {
-    // Process form submission
-  }
-}
-</script>
-
 <template>
   <form @submit.prevent="submitForm" class="space-y-4">
     <div>
@@ -292,22 +205,29 @@ function submitForm() {
     </div>
   </form>
 </template>
+
+<script setup>
+const formData = reactive({
+  email: '',
+  agreedToPrivacy: false
+});
+
+function submitForm() {
+  if (formData.agreedToPrivacy) {
+    // Process form submission
+  }
+}
+</script>
 ```
 
 ### Custom Label Content
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Checkbox>
+```vue
+<template>
+  <Checkbox v-model="agreedToTerms">
     <div>
-      I agree to the <a href="#" class="text-primary-600 dark:text-primary-400 underline">Terms of Service</a> and <a href="#" class="text-primary-600 dark:text-primary-400 underline">Privacy Policy</a>
+      I agree to the <Action href="/terms">Terms of Service</Action> and <Action href="/privacy">Privacy Policy</Action>
     </div>
   </Checkbox>
-</div>
-
-```vue
-<Checkbox v-model="agreedToTerms">
-  <div>
-    I agree to the <a href="/terms" class="text-primary-600 dark:text-primary-400 underline">Terms of Service</a> and <a href="/privacy" class="text-primary-600 dark:text-primary-400 underline">Privacy Policy</a>
-  </div>
-</Checkbox>
+</template>
 ```

@@ -6,16 +6,12 @@ The Tooltip component provides a way to display additional information when user
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Tooltip text="This is a simple tooltip">
-    <button class="px-3 py-1 bg-primary-500 text-white rounded">Hover me</button>
-  </Tooltip>
-</div>
-
 ```vue
-<Tooltip text="This is a simple tooltip">
-  <button>Hover me</button>
-</Tooltip>
+<template>
+  <Tooltip text="This is a simple tooltip">
+    <Action>Hover me</Action>
+  </Tooltip>
+</template>
 ```
 
 ## Props
@@ -34,77 +30,43 @@ The Tooltip component provides a way to display additional information when user
 | `default` | The triggering element that will show the tooltip on hover. Provides access to open state and toggle function. |
 | `text` | Custom content for the tooltip. Falls back to the `text` prop if not provided. |
 
-## Variants/Options
+## Rich Tooltip
 
-### Rich Tooltip
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Tooltip type="rich" placement="bottom">
-    <button class="px-3 py-1 bg-primary-500 text-white rounded">Hover for rich tooltip</button>
+    <Action>Hover for rich tooltip</Action>
     <template #text>
-      <h3 class="font-bold">Custom tooltip</h3>
+      <h3>Custom tooltip</h3>
       <p>This is a rich tooltip with custom content</p>
     </template>
   </Tooltip>
-</div>
-
-```vue
-<Tooltip type="rich" placement="bottom">
-  <button>Hover for rich tooltip</button>
-  <template #text>
-    <h3 class="font-bold">Custom tooltip</h3>
-    <p>This is a rich tooltip with custom content</p>
-  </template>
-</Tooltip>
+</template>
 ```
 
-### Different Placements
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex gap-4">
-  <Tooltip text="Placed on top" placement="top">
-    <button class="px-3 py-1 bg-primary-500 text-white rounded">Top</button>
-  </Tooltip>
-  <Tooltip text="Placed on bottom" placement="bottom">
-    <button class="px-3 py-1 bg-primary-500 text-white rounded">Bottom</button>
-  </Tooltip>
-  <Tooltip text="Placed on left" placement="left">
-    <button class="px-3 py-1 bg-primary-500 text-white rounded">Left</button>
-  </Tooltip>
-  <Tooltip text="Placed on right" placement="right">
-    <button class="px-3 py-1 bg-primary-500 text-white rounded">Right</button>
-  </Tooltip>
-</div>
+## Different Placements
 
 ```vue
-<Tooltip text="Placed on top" placement="top">
-  <button>Top</button>
-</Tooltip>
+<template>
+  <Tooltip text="Placed on top" placement="top">
+    <Action>Top</Action>
+  </Tooltip>
 
-<Tooltip text="Placed on bottom" placement="bottom">
-  <button>Bottom</button>
-</Tooltip>
+  <Tooltip text="Placed on bottom" placement="bottom">
+    <Action>Bottom</Action>
+  </Tooltip>
 
-<Tooltip text="Placed on left" placement="left">
-  <button>Left</button>
-</Tooltip>
+  <Tooltip text="Placed on left" placement="left">
+    <Action>Left</Action>
+  </Tooltip>
 
-<Tooltip text="Placed on right" placement="right">
-  <button>Right</button>
-</Tooltip>
+  <Tooltip text="Placed on right" placement="right">
+    <Action>Right</Action>
+  </Tooltip>
+</template>
 ```
 
 ## Programmatic Control
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Tooltip v-model:open="tooltipOpen" text="This tooltip is controlled programmatically">
-    <button 
-      class="px-3 py-1 bg-primary-500 text-white rounded"
-      @click="tooltipOpen = !tooltipOpen"
-    >
-      Click to toggle tooltip
-    </button>
-  </Tooltip>
-</div>
 
 ```vue
 <script setup>
@@ -113,9 +75,9 @@ The Tooltip component provides a way to display additional information when user
 
 <template>
   <Tooltip v-model:open="tooltipOpen" text="This tooltip is controlled programmatically">
-    <button @click="tooltipOpen = !tooltipOpen">
+    <Action @click="tooltipOpen = !tooltipOpen">
       Click to toggle tooltip
-    </button>
+    </Action>
   </Tooltip>
 </template>
 ```
@@ -139,46 +101,20 @@ The Tooltip component provides a way to display additional information when user
 
 ### Tooltip in a Form Context
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="flex items-center gap-2">
-    <label for="example-input">Username</label>
-    <Tooltip type="rich" placement="right">
-      <button class="rounded-full w-5 h-5 bg-base-200 dark:bg-base-700 flex items-center justify-center">
-        <span class="text-xs">?</span>
-      </button>
-      <template #text>
-        <div>
-          <p>Choose a username that is:</p>
-          <ul class="list-disc pl-5">
-            <li>Between 3-20 characters</li>
-            <li>Contains only letters, numbers, and underscores</li>
-            <li>Not already taken by another user</li>
-          </ul>
-        </div>
-      </template>
-    </Tooltip>
-  </div>
-  <input id="example-input" type="text" class="border rounded px-2 py-1 mt-1 w-full" />
-</div>
-
 ```vue
-<div class="flex items-center gap-2">
-  <label for="example-input">Username</label>
+<template>
+  <label>Username</label>
   <Tooltip type="rich" placement="right">
-    <button class="rounded-full w-5 h-5 bg-base-200 dark:bg-base-700 flex items-center justify-center">
-      <span class="text-xs">?</span>
-    </button>
+    <Action size="sm" variant="ghost">?</Action>
     <template #text>
-      <div>
-        <p>Choose a username that is:</p>
-        <ul class="list-disc pl-5">
-          <li>Between 3-20 characters</li>
-          <li>Contains only letters, numbers, and underscores</li>
-          <li>Not already taken by another user</li>
-        </ul>
-      </div>
+      <p>Choose a username that is:</p>
+      <ul>
+        <li>Between 3-20 characters</li>
+        <li>Contains only letters, numbers, and underscores</li>
+        <li>Not already taken by another user</li>
+      </ul>
     </template>
   </Tooltip>
-</div>
-<input id="example-input" type="text" class="border rounded px-2 py-1 mt-1 w-full" />
+  <TextField />
+</template>
 ```

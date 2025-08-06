@@ -149,6 +149,7 @@ const volume = ref(50);
       :showTicks="true" 
       :steps="15" 
     />
+
     <div class="mt-4 text-sm text-base-500">
       {{ temperatureDescription }}
     </div>

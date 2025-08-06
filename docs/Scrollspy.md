@@ -81,15 +81,17 @@ interface ScrollspySection {
 Uses `data-scrollspy` attributes to automatically detect sections on the page.
 
 ```vue
-<Scrollspy>
-  <div>
-    <section id="introduction" data-scrollspy>
-      <h2 data-scrollspy-title>Introduction</h2>
-      <!-- Content -->
-    </section>
-    <!-- More sections -->
-  </div>
-</Scrollspy>
+<template>
+  <Scrollspy>
+    <div>
+      <section id="introduction" data-scrollspy>
+        <h2 data-scrollspy-title>Introduction</h2>
+        <!-- Content -->
+      </section>
+      <!-- More sections -->
+    </div>
+  </Scrollspy>
+</template>
 ```
 
 ### Manually Defined Sections
@@ -114,7 +116,6 @@ Explicitly define sections via props instead of auto-detection.
       </section>
     </div>
   </Scrollspy>
-</template>
 
 <script setup>
 const sections = [
@@ -137,7 +138,7 @@ const sections = [
         class="w-5 h-5 mr-2"
       />
     </template>
-    
+
     <!-- Content sections -->
   </Scrollspy>
 </template>
@@ -169,41 +170,39 @@ const sections = [
 
 ```vue
 <template>
-  <div class="flex">
-    <!-- Sticky sidebar with Scrollspy -->
-    <Scrollspy 
-      nav-class="sticky top-24 max-h-[calc(100vh-12rem)] overflow-y-auto pr-6 w-64"
-      active-item-class="border-l-2 border-primary-500 text-primary-600 font-medium"
-    >
-      <div class="prose max-w-3xl mx-auto py-8">
-        <h1>Documentation</h1>
-        
-        <section id="getting-started" data-scrollspy>
-          <h2 data-scrollspy-title>Getting Started</h2>
-          <p>This guide will help you get started with our library...</p>
-          <!-- More content -->
-        </section>
-        
-        <section id="installation" data-scrollspy>
-          <h2 data-scrollspy-title>Installation</h2>
-          <p>You can install our library using npm or yarn...</p>
-          <!-- More content -->
-        </section>
-        
-        <section id="configuration" data-scrollspy>
-          <h2 data-scrollspy-title>Configuration</h2>
-          <p>Configure the library to suit your needs...</p>
-          <!-- More content -->
-        </section>
-        
-        <section id="api-reference" data-scrollspy>
-          <h2 data-scrollspy-title>API Reference</h2>
-          <p>Detailed API documentation...</p>
-          <!-- More content -->
-        </section>
-      </div>
-    </Scrollspy>
-  </div>
+  <!-- Sticky sidebar with Scrollspy -->
+  <Scrollspy 
+    nav-class="sticky top-24 max-h-[calc(100vh-12rem)] overflow-y-auto pr-6 w-64"
+    active-item-class="border-l-2 border-primary-500 text-primary-600 font-medium"
+  >
+    <div class="prose max-w-3xl mx-auto py-8">
+      <h1>Documentation</h1>
+      
+      <section id="getting-started" data-scrollspy>
+        <h2 data-scrollspy-title>Getting Started</h2>
+        <p>This guide will help you get started with our library...</p>
+        <!-- More content -->
+      </section>
+      
+      <section id="installation" data-scrollspy>
+        <h2 data-scrollspy-title>Installation</h2>
+        <p>You can install our library using npm or yarn...</p>
+        <!-- More content -->
+      </section>
+      
+      <section id="configuration" data-scrollspy>
+        <h2 data-scrollspy-title>Configuration</h2>
+        <p>Configure the library to suit your needs...</p>
+        <!-- More content -->
+      </section>
+      
+      <section id="api-reference" data-scrollspy>
+        <h2 data-scrollspy-title>API Reference</h2>
+        <p>Detailed API documentation...</p>
+        <!-- More content -->
+      </section>
+    </div>
+  </Scrollspy>
 </template>
 ```
 
@@ -220,13 +219,11 @@ const sections = [
     
     <Scrollspy ref="scrollspy" v-model:active-id="activeSection">
       <!-- Content sections -->
-      <div class="space-y-24">
-        <section v-for="section in sections" :key="section.id" :id="section.id" data-scrollspy>
-          <h2 data-scrollspy-title>{{ section.title }}</h2>
-          <p>Content for {{ section.title }}...</p>
-          <!-- More content with sufficient height to enable scrolling -->
-        </section>
-      </div>
+      <section v-for="section in sections" :key="section.id" :id="section.id" data-scrollspy>
+        <h2 data-scrollspy-title>{{ section.title }}</h2>
+        <p>Content for {{ section.title }}...</p>
+        <!-- More content with sufficient height to enable scrolling -->
+      </section>
     </Scrollspy>
   </div>
 </template>

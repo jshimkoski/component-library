@@ -6,21 +6,15 @@ The TextEditor component provides a multi-line text input field with supporting 
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <TextEditor
+    v-model="notes"
     label="Notes"
     placeholder="Enter your notes here"
     description="These notes will be visible to the team"
   />
-</div>
-
-```vue
-<TextEditor
-  v-model="notes"
-  label="Notes"
-  placeholder="Enter your notes here"
-  description="These notes will be visible to the team"
-/>
+</template>
 ```
 
 ## Props
@@ -45,87 +39,46 @@ The TextEditor component provides a multi-line text input field with supporting 
 
 The component supports v-model for two-way binding of the textarea value.
 
-## Variants/Options
+## With Description
 
-### With Description
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <TextEditor
+    v-model="aboutMe"
     label="About Me"
     placeholder="Tell us about yourself"
     description="This information will appear on your public profile"
   />
-</div>
-
-```vue
-<TextEditor
-  v-model="aboutMe"
-  label="About Me"
-  placeholder="Tell us about yourself"
-  description="This information will appear on your public profile"
-/>
+</template>
 ```
 
-### Required Field
+## Required Field
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <TextEditor
+    v-model="feedback"
     label="Feedback"
     required
     showMarker
     placeholder="Please provide your feedback"
   />
-</div>
-
-```vue
-<TextEditor
-  v-model="feedback"
-  label="Feedback"
-  required
-  showMarker
-  placeholder="Please provide your feedback"
-/>
-```
-
-### Custom Label
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <TextEditor placeholder="Enter your message">
-    <div class="flex items-center">
-      <span>Message</span>
-      <span class="ml-2 text-xs text-green-500">(Optional)</span>
-    </div>
-  </TextEditor>
-</div>
-
-```vue
-<TextEditor v-model="message" placeholder="Enter your message">
-  <div class="flex items-center">
-    <span>Message</span>
-    <span class="ml-2 text-xs text-green-500">(Optional)</span>
-  </div>
-</TextEditor>
+</template>
 ```
 
 ## States
 
 ### Disabled
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <TextEditor
+    v-model="comments"
     label="Comments"
     disabled
     placeholder="Comments are currently disabled"
   />
-</div>
-
-```vue
-<TextEditor
-  v-model="comments"
-  label="Comments"
-  disabled
-  placeholder="Comments are currently disabled"
-/>
+</template>
 ```
 
 ## Best Practices
@@ -148,70 +101,27 @@ The component supports v-model for two-way binding of the textarea value.
 
 ### Form Integration
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <form class="space-y-4">
-    <div>
-      <TextField label="Name" required showMarker />
-    </div>
-    <div>
-      <TextField label="Email" type="email" required showMarker />
-    </div>
-    <div>
-      <TextEditor
-        label="Message"
-        required
-        showMarker
-        placeholder="Please provide details about your inquiry"
-        description="Be as specific as possible to help us assist you better"
-      />
-    </div>
-    <div>
-      <button class="px-4 py-2 bg-primary-500 text-white rounded">Submit</button>
-    </div>
-  </form>
-</div>
-
 ```vue
-<form @submit.prevent="submitForm">
-  <div class="space-y-4">
-    <div>
-      <TextField v-model="name" label="Name" required showMarker />
-    </div>
-    <div>
-      <TextField v-model="email" label="Email" type="email" required showMarker />
-    </div>
-    <div>
-      <TextEditor
-        v-model="message"
-        label="Message"
-        required
-        showMarker
-        placeholder="Please provide details about your inquiry"
-        description="Be as specific as possible to help us assist you better"
-      />
-    </div>
-    <div>
-      <button type="submit" class="px-4 py-2 bg-primary-500 text-white rounded">
-        Submit
-      </button>
-    </div>
-  </div>
-</form>
+<template>
+  <form @submit.prevent="submitForm">
+    <TextField v-model="name" label="Name" required showMarker />
+    <TextField v-model="email" label="Email" type="email" required showMarker />
+    <TextEditor
+      v-model="message"
+      label="Message"
+      required
+      showMarker
+      placeholder="Please provide details about your inquiry"
+      description="Be as specific as possible to help us assist you better"
+    />
+    <Action type="submit" kind="primary">Submit</Action>
+  </form>
+</template>
 ```
 
 ### Character Count
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div>
-    <TextEditor
-      label="Bio"
-      placeholder="Tell us about yourself in 150 characters or less"
-    />
-    <div class="text-right text-sm text-base-500">
-      <span>120</span>/150 characters
-    </div>
-  </div>
-</div>
+<div>
 
 ```vue
 <script setup>

@@ -6,20 +6,14 @@ The Card component is a versatile container that displays content in a structure
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Card
     headline="Card Title"
     subhead="Supporting text"
     text="This is a basic card with headline, subhead, and text content."
   />
-</div>
-
-```vue
-<Card
-  headline="Card Title"
-  subhead="Supporting text"
-  text="This is a basic card with headline, subhead, and text content."
-/>
+</template>
 ```
 
 ## Props
@@ -43,57 +37,44 @@ The Card component is a versatile container that displays content in a structure
 | `default` | Main content area. Falls back to the `text` prop if not provided. |
 | `footer` | Footer content area. By default, contains an action button when `actionLabel` and `href` are provided. |
 
-## Variants/Options
+## Visual Variants
 
-### Visual Variants
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4 md:grid-cols-3">
+```vue
+<template>
   <Card
     variant="outlined"
     headline="Outlined Card"
     subhead="Default variant"
     text="Cards with the outlined variant have a thin border."
   />
+
+  <Card
+    variant="outlined"
+    headline="Outlined Card"
+    subhead="Default variant"
+    text="Cards with the outlined variant have a thin border."
+  />
+
   <Card
     variant="filled"
     headline="Filled Card"
     subhead="Filled background"
     text="Filled cards have a subtle background color with no border."
   />
+
   <Card
     variant="elevated"
     headline="Elevated Card"
     subhead="With shadow"
     text="Elevated cards appear to float above the surface with a shadow effect."
   />
-</div>
-
-```vue
-<Card
-  variant="outlined"
-  headline="Outlined Card"
-  subhead="Default variant"
-  text="Cards with the outlined variant have a thin border."
-/>
-
-<Card
-  variant="filled"
-  headline="Filled Card"
-  subhead="Filled background"
-  text="Filled cards have a subtle background color with no border."
-/>
-
-<Card
-  variant="elevated"
-  headline="Elevated Card"
-  subhead="With shadow"
-  text="Elevated cards appear to float above the surface with a shadow effect."
-/>
+</template>
 ```
 
-### Clickable Cards (Link)
+## Clickable Cards (Link)
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Card
     headline="Clickable Card"
     subhead="Click anywhere to navigate"
@@ -102,22 +83,13 @@ The Card component is a versatile container that displays content in a structure
     actionLabel="Learn More"
     kind="primary"
   />
-</div>
-
-```vue
-<Card
-  headline="Clickable Card"
-  subhead="Click anywhere to navigate"
-  text="When a href prop is provided, the entire card becomes a clickable link."
-  href="#"
-  actionLabel="Learn More"
-  kind="primary"
-/>
+</template>
 ```
 
-### Different Kinds
+## Different Kinds
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4 md:grid-cols-3">
+```vue
+<template>
   <Card
     headline="Primary Action"
     subhead="Call to action"
@@ -126,6 +98,7 @@ The Card component is a versatile container that displays content in a structure
     actionLabel="Continue"
     kind="primary"
   />
+
   <Card
     headline="Success Message"
     subhead="Confirmation"
@@ -134,6 +107,7 @@ The Card component is a versatile container that displays content in a structure
     actionLabel="View Details"
     kind="success"
   />
+
   <Card
     headline="Warning Alert"
     subhead="Attention required"
@@ -142,83 +116,24 @@ The Card component is a versatile container that displays content in a structure
     actionLabel="Review"
     kind="warning"
   />
-</div>
-
-```vue
-<Card
-  headline="Primary Action"
-  subhead="Call to action"
-  text="The primary kind is used for main actions."
-  href="#"
-  actionLabel="Continue"
-  kind="primary"
-/>
-
-<Card
-  headline="Success Message"
-  subhead="Confirmation"
-  text="Success kind indicates completion or positive outcomes."
-  href="#"
-  actionLabel="View Details"
-  kind="success"
-/>
-
-<Card
-  headline="Warning Alert"
-  subhead="Attention required"
-  text="Warning kind draws attention to potential issues."
-  href="#"
-  actionLabel="Review"
-  kind="warning"
-/>
+</template>
 ```
 
 ## Custom Content
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Card
     headline="Custom Content Example"
     subhead="With slot contents"
   >
-    <div class="space-y-4">
-      <p>Cards can contain any content, including:</p>
-      <ul class="list-disc pl-5">
-        <li>Lists of information</li>
-        <li>Images and media</li>
-        <li>Interactive elements</li>
-      </ul>
-      <img src="https://placeholder.pics/svg/300x150" alt="Placeholder" class="rounded w-full" />
-    </div>
+    <p>Cards can contain any content, including lists, images, and interactive elements.</p>
     <template #footer>
-      <div class="mt-4 flex justify-between items-center">
-        <span class="text-sm text-base-500">Last updated: Today</span>
-        <Action kind="primary">View Details</Action>
-      </div>
+      <span>Last updated: Today</span>
+      <Action kind="primary">View Details</Action>
     </template>
   </Card>
-</div>
-
-```vue
-<Card
-  headline="Custom Content Example"
-  subhead="With slot contents"
->
-  <div class="space-y-4">
-    <p>Cards can contain any content, including:</p>
-    <ul class="list-disc pl-5">
-      <li>Lists of information</li>
-      <li>Images and media</li>
-      <li>Interactive elements</li>
-    </ul>
-    <img src="/path/to/image.jpg" alt="Example image" class="rounded w-full" />
-  </div>
-  <template #footer>
-    <div class="mt-4 flex justify-between items-center">
-      <span class="text-sm text-base-500">Last updated: Today</span>
-      <Action kind="primary">View Details</Action>
-    </div>
-  </template>
-</Card>
+</template>
 ```
 
 ## Best Practices
@@ -245,85 +160,30 @@ The Card component is a versatile container that displays content in a structure
 
 ### Product Card
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Card variant="elevated">
-    <img src="https://placeholder.pics/svg/300x200" alt="Product" class="rounded w-full mb-4" />
-    <h3 class="text-xl font-bold">Premium Headphones</h3>
-    <p class="text-base-600 dark:text-base-400 mt-1">Wireless Noise Cancelling</p>
-    <p class="mt-4 text-lg font-semibold">$129.99</p>
-    <div class="flex items-center mt-2">
-      <div class="flex">
-        <Icon icon="material-symbols:star" width="16" height="16" class="text-warning-500" />
-        <Icon icon="material-symbols:star" width="16" height="16" class="text-warning-500" />
-        <Icon icon="material-symbols:star" width="16" height="16" class="text-warning-500" />
-        <Icon icon="material-symbols:star" width="16" height="16" class="text-warning-500" />
-        <Icon icon="material-symbols:star" width="16" height="16" class="text-base-300" />
-      </div>
-      <span class="text-sm text-base-500 ml-2">4.0 (128 reviews)</span>
-    </div>
+    <h3>Premium Headphones</h3>
+    <p>Wireless Noise Cancelling</p>
+    <p>$129.99</p>
+    <p>⭐⭐⭐⭐☆ 4.0 (128 reviews)</p>
     <template #footer>
-      <div class="mt-4 flex justify-end">
-        <Action kind="primary">Add to Cart</Action>
-      </div>
+      <Action kind="primary">Add to Cart</Action>
     </template>
   </Card>
-</div>
-
-```vue
-<Card variant="elevated">
-  <img src="/products/headphones.jpg" alt="Product" class="rounded w-full mb-4" />
-  <h3 class="text-xl font-bold">Premium Headphones</h3>
-  <p class="text-base-600 dark:text-base-400 mt-1">Wireless Noise Cancelling</p>
-  <p class="mt-4 text-lg font-semibold">$129.99</p>
-  <div class="flex items-center mt-2">
-    <div class="flex">
-      <Icon icon="material-symbols:star" width="16" height="16" class="text-warning-500" />
-      <!-- Repeat for all stars -->
-    </div>
-    <span class="text-sm text-base-500 ml-2">4.0 (128 reviews)</span>
-  </div>
-  <template #footer>
-    <div class="mt-4 flex justify-end">
-      <Action kind="primary">Add to Cart</Action>
-    </div>
-  </template>
-</Card>
+</template>
 ```
 
 ### Dashboard Stats Card
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 grid gap-4 md:grid-cols-3">
-  <Card variant="filled">
-    <div class="flex justify-between items-start">
-      <div>
-        <p class="text-base-500 dark:text-base-400 text-sm">Total Revenue</p>
-        <p class="text-2xl font-bold mt-1">$24,345</p>
-        <p class="text-success-600 dark:text-success-400 text-sm flex items-center mt-2">
-          <Icon icon="material-symbols:trending-up" width="16" height="16" class="mr-1" />
-          12% increase
-        </p>
-      </div>
-      <div class="p-3 bg-primary-100 dark:bg-primary-900 rounded-full">
-        <Icon icon="material-symbols:attach-money" width="24" height="24" class="text-primary-600 dark:text-primary-400" />
-      </div>
-    </div>
-  </Card>
-</div>
-
 ```vue
-<Card variant="filled">
-  <div class="flex justify-between items-start">
-    <div>
-      <p class="text-base-500 dark:text-base-400 text-sm">Total Revenue</p>
-      <p class="text-2xl font-bold mt-1">$24,345</p>
-      <p class="text-success-600 dark:text-success-400 text-sm flex items-center mt-2">
-        <Icon icon="material-symbols:trending-up" width="16" height="16" class="mr-1" />
-        12% increase
-      </p>
-    </div>
-    <div class="p-3 bg-primary-100 dark:bg-primary-900 rounded-full">
-      <Icon icon="material-symbols:attach-money" width="24" height="24" class="text-primary-600 dark:text-primary-400" />
-    </div>
-  </div>
-</Card>
+<template>
+  <Card
+    variant="filled"
+    headline="Total Revenue"
+    text="$24,345"
+  >
+    <p>📈 12% increase</p>
+  </Card>
+</template>
 ```

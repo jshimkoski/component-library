@@ -6,12 +6,10 @@ The Badge component is a small visual indicator typically used to highlight stat
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Badge label="New" />
-</div>
-
 ```vue
-<Badge label="New" />
+<template>
+  <Badge label="New" />
+</template>
 ```
 
 ## Props
@@ -21,46 +19,30 @@ The Badge component is a small visual indicator typically used to highlight stat
 | `label` | String | `undefined` | Text content to display in the badge. When undefined, renders as a small dot. |
 | `kind` | `"primary" \| "secondary" \| "success" \| "info" \| "warning" \| "danger"` | `"danger"` | Color theme of the badge. |
 
-## Variants/Options
+## Kinds
 
-### Kinds
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+```vue
+<template>
   <Badge label="Primary" kind="primary" />
   <Badge label="Secondary" kind="secondary" />
   <Badge label="Success" kind="success" />
   <Badge label="Info" kind="info" />
   <Badge label="Warning" kind="warning" />
   <Badge label="Danger" kind="danger" />
-</div>
-
-```vue
-<Badge label="Primary" kind="primary" />
-<Badge label="Secondary" kind="secondary" />
-<Badge label="Success" kind="success" />
-<Badge label="Info" kind="info" />
-<Badge label="Warning" kind="warning" />
-<Badge label="Danger" kind="danger" />
+</template>
 ```
 
-### Dot Variant (No Label)
+## Dot Variant (No Label)
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-4">
+```vue
+<template>
   <Badge kind="primary" />
   <Badge kind="secondary" />
   <Badge kind="success" />
   <Badge kind="info" />
   <Badge kind="warning" />
   <Badge kind="danger" />
-</div>
-
-```vue
-<Badge kind="primary" />
-<Badge kind="secondary" />
-<Badge kind="success" />
-<Badge kind="info" />
-<Badge kind="warning" />
-<Badge kind="danger" />
+</template>
 ```
 
 ## Best Practices
@@ -88,92 +70,30 @@ The Badge component is a small visual indicator typically used to highlight stat
 
 ### Notification Badge
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="relative inline-block">
-    <Icon icon="material-symbols:notifications" width="24" height="24" />
-    <span class="absolute -top-1 -right-1">
-      <Badge label="5" kind="danger" />
-    </span>
-  </div>
-</div>
-
 ```vue
-<div class="relative inline-block">
-  <Icon icon="material-symbols:notifications" width="24" height="24" />
-  <span class="absolute -top-1 -right-1">
+<template>
+  <Action icon="material-symbols:notifications">
     <Badge label="5" kind="danger" />
-  </span>
-</div>
+  </Action>
+</template>
 ```
 
-### Status Indicator
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="space-y-2">
-    <div class="flex items-center gap-2">
-      <Badge kind="success" />
-      <span>Online</span>
-    </div>
-    <div class="flex items-center gap-2">
-      <Badge kind="warning" />
-      <span>Away</span>
-    </div>
-    <div class="flex items-center gap-2">
-      <Badge kind="danger" />
-      <span>Offline</span>
-    </div>
-  </div>
-</div>
+### Status Indicators
 
 ```vue
-<div class="space-y-2">
-  <div class="flex items-center gap-2">
-    <Badge kind="success" />
-    <span>Online</span>
-  </div>
-  <div class="flex items-center gap-2">
-    <Badge kind="warning" />
-    <span>Away</span>
-  </div>
-  <div class="flex items-center gap-2">
-    <Badge kind="danger" />
-    <span>Offline</span>
-  </div>
-</div>
+<template>
+  <Badge kind="success" /> Online
+  <Badge kind="warning" /> Away  
+  <Badge kind="danger" /> Offline
+</template>
 ```
 
 ### Feature Tags
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="flex flex-col gap-2">
-    <div class="flex items-center">
-      <span class="mr-2">Enhanced Security</span>
-      <Badge label="New" kind="primary" />
-    </div>
-    <div class="flex items-center">
-      <span class="mr-2">Dark Mode</span>
-      <Badge label="Beta" kind="info" />
-    </div>
-    <div class="flex items-center">
-      <span class="mr-2">Legacy Integration</span>
-      <Badge label="Deprecated" kind="warning" />
-    </div>
-  </div>
-</div>
-
 ```vue
-<div class="flex flex-col gap-2">
-  <div class="flex items-center">
-    <span class="mr-2">Enhanced Security</span>
-    <Badge label="New" kind="primary" />
-  </div>
-  <div class="flex items-center">
-    <span class="mr-2">Dark Mode</span>
-    <Badge label="Beta" kind="info" />
-  </div>
-  <div class="flex items-center">
-    <span class="mr-2">Legacy Integration</span>
-    <Badge label="Deprecated" kind="warning" />
-  </div>
-</div>
+<template>
+  Enhanced Security <Badge label="New" kind="primary" />
+  Dark Mode <Badge label="Beta" kind="info" />
+  Legacy Integration <Badge label="Deprecated" kind="warning" />
+</template>
 ```

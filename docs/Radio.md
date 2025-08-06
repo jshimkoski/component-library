@@ -6,12 +6,10 @@ The Radio component allows users to select a single option from a set of mutuall
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Radio label="Option 1" name="example" value="option1" />
-</div>
-
 ```vue
-<Radio v-model="selectedOption" label="Option 1" name="example" value="option1" />
+<template>
+  <Radio v-model="selectedOption" label="Option 1" name="example" value="option1" />
+</template>
 ```
 
 ## Props
@@ -36,73 +34,49 @@ The component supports v-model for two-way binding of the selected value.
 |------|-------------|
 | `default` | Replaces the label text. Falls back to the `label` prop if not provided. |
 
-## Variants/Options
+## With Description
 
-### With Description
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Radio 
+    v-model="shippingMethod"
     label="Standard Shipping" 
     description="7-10 business days (Free)"
     name="shipping"
     value="standard"
   />
-</div>
-
-```vue
-<Radio 
-  v-model="shippingMethod"
-  label="Standard Shipping" 
-  description="7-10 business days (Free)"
-  name="shipping"
-  value="standard"
-/>
+</template>
 ```
 
-### Required Radio
+## Required Radio
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Radio 
+    v-model="agreement"
     label="I agree to the terms and conditions" 
     required
     showMarker
     name="agreement"
     value="agreed"
   />
-</div>
-
-```vue
-<Radio 
-  v-model="agreement"
-  label="I agree to the terms and conditions" 
-  required
-  showMarker
-  name="agreement"
-  value="agreed"
-/>
+</template>
 ```
 
 ## States
 
 ### Disabled
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Radio 
+    v-model="selection"
     label="Unavailable option" 
     disabled
     name="disabled-example"
     value="unavailable"
   />
-</div>
-
-```vue
-<Radio 
-  v-model="selection"
-  label="Unavailable option" 
-  disabled
-  name="disabled-example"
-  value="unavailable"
-/>
+</template>
 ```
 
 ## Best Practices
@@ -127,29 +101,7 @@ The component supports v-model for two-way binding of the selected value.
 
 ### Radio Group for Shipping Options
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="space-y-3">
-    <h3 class="font-semibold text-lg mb-2">Select Shipping Method</h3>
-    <Radio 
-      name="shipping-method" 
-      value="standard" 
-      label="Standard Shipping" 
-      description="Delivery in 5-7 business days (Free)"
-    />
-    <Radio 
-      name="shipping-method" 
-      value="express" 
-      label="Express Shipping" 
-      description="Delivery in 2-3 business days ($5.99)"
-    />
-    <Radio 
-      name="shipping-method" 
-      value="overnight" 
-      label="Overnight Shipping" 
-      description="Next business day delivery ($12.99)"
-    />
-  </div>
-</div>
+<h3 class="font-semibold text-lg mb-2">Select Shipping Method</h3>
 
 ```vue
 <script setup>
@@ -157,120 +109,29 @@ const shippingMethod = ref('standard');
 </script>
 
 <template>
-  <div class="space-y-3">
-    <h3 class="font-semibold text-lg mb-2">Select Shipping Method</h3>
-    <Radio 
-      v-model="shippingMethod" 
-      name="shipping-method" 
-      value="standard" 
-      label="Standard Shipping" 
-      description="Delivery in 5-7 business days (Free)"
-    />
-    <Radio 
-      v-model="shippingMethod" 
-      name="shipping-method" 
-      value="express" 
-      label="Express Shipping" 
-      description="Delivery in 2-3 business days ($5.99)"
-    />
-    <Radio 
-      v-model="shippingMethod" 
-      name="shipping-method" 
-      value="overnight" 
-      label="Overnight Shipping" 
-      description="Next business day delivery ($12.99)"
-    />
-  </div>
+  <h3 class="font-semibold text-lg mb-2">Select Shipping Method</h3>
+  <Radio 
+    v-model="shippingMethod" 
+    name="shipping-method" 
+    value="standard" 
+    label="Standard Shipping" 
+    description="Delivery in 5-7 business days (Free)"
+  />
+
+  <Radio 
+    v-model="shippingMethod" 
+    name="shipping-method" 
+    value="express" 
+    label="Express Shipping" 
+    description="Delivery in 2-3 business days ($5.99)"
+  />
+
+  <Radio 
+    v-model="shippingMethod" 
+    name="shipping-method" 
+    value="overnight" 
+    label="Overnight Shipping" 
+    description="Next business day delivery ($12.99)"
+  />
 </template>
-```
-
-### Payment Method Selection
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <form class="space-y-4">
-    <div>
-      <h3 class="font-semibold text-lg mb-3">Select Payment Method</h3>
-      <div class="space-y-3">
-        <Radio 
-          name="payment-method" 
-          value="credit-card" 
-          label="Credit Card"
-        />
-        <Radio 
-          name="payment-method" 
-          value="paypal" 
-          label="PayPal"
-        />
-        <Radio 
-          name="payment-method" 
-          value="bank-transfer" 
-          label="Bank Transfer"
-        />
-      </div>
-    </div>
-    <div>
-      <Action kind="primary" type="submit">Continue to Payment</Action>
-    </div>
-  </form>
-</div>
-
-```vue
-<script setup>
-const paymentMethod = ref('credit-card');
-
-function submitForm() {
-  // Process form submission
-}
-</script>
-
-<template>
-  <form @submit.prevent="submitForm" class="space-y-4">
-    <div>
-      <h3 class="font-semibold text-lg mb-3">Select Payment Method</h3>
-      <div class="space-y-3">
-        <Radio 
-          v-model="paymentMethod" 
-          name="payment-method" 
-          value="credit-card" 
-          label="Credit Card"
-        />
-        <Radio 
-          v-model="paymentMethod" 
-          name="payment-method" 
-          value="paypal" 
-          label="PayPal"
-        />
-        <Radio 
-          v-model="paymentMethod" 
-          name="payment-method" 
-          value="bank-transfer" 
-          label="Bank Transfer"
-        />
-      </div>
-    </div>
-    <div>
-      <Action kind="primary" type="submit">Continue to Payment</Action>
-    </div>
-  </form>
-</template>
-```
-
-### Custom Label Content
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Radio name="custom-label" value="premium">
-    <div>
-      <span class="font-bold">Premium Plan</span>
-      <Badge label="Recommended" kind="primary" class="ml-2" />
-    </div>
-  </Radio>
-</div>
-
-```vue
-<Radio v-model="selectedPlan" name="custom-label" value="premium">
-  <div>
-    <span class="font-bold">Premium Plan</span>
-    <Badge label="Recommended" kind="primary" class="ml-2" />
-  </div>
-</Radio>
 ```

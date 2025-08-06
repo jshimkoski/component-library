@@ -1,801 +1,532 @@
 <template>
-  <div class="space-y-8">
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">Basic Table</h2>
-      <Table
-        :fields="basicFields"
-        :items="basicItems"
-      />
-    </section>
+  <div class="content">
+    <h1 class="text-3xl font-bold mb-6">Table</h1>
 
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">Selectable Rows</h2>
-      <Table
-        v-model="selectedUsers"
-        :fields="userFields"
-        :items="users"
-        selectable
-      >
-        <template #controls>
-          <span
-            v-if="selectedUsers.length > 0"
-            class="text-sm text-base-600 dark:text-base-400"
-          >
-            {{ selectedUsers.length }} users selected
-          </span>
-        </template>
-      </Table>
-      <div
-        v-if="selectedUsers.length > 0"
-        class="mt-4 p-4 bg-base-50 dark:bg-base-900 rounded-base radius-2xl:rounded-2xl"
-      >
-        <h3 class="font-medium mb-2">Selected Users:</h3>
-        <ul class="ml-4 list-disc space-y-1">
-          <li
-            v-for="user in selectedUsers"
-            :key="user.id"
-          >
-            {{ user.name }} ({{ user.email }})
-          </li>
-        </ul>
+    <Prose>
+      <h2>Overview</h2>
+      <p>The Table component provides a feature-rich data table with support for sorting, selection, expansion, and custom cell rendering. It's designed to handle tabular data efficiently while maintaining accessibility and providing a flexible API for customization.</p>
+    </Prose>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
+      
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <Table
+        :fields="fields"
+        :items="items"
+        />
+      </div>
+
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Table 
+    :fields="fields"
+    :items="items"
+  /&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+const fields = [
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'email', label: 'Email' },
+  { key: 'role', label: 'Role' },
+  { key: 'status', label: 'Status' }
+];
+
+const items = [
+  { name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active' },
+  { name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active' },
+  { name: 'Bob Johnson', email: 'bob@example.com', role: 'User', status: 'Inactive' }
+];
+&lt;/script&gt;</code></pre>
       </div>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">Sortable Columns</h2>
-      <p class="text-base-600 dark:text-base-400">
-        Click on a column header to sort.
-      </p>
-      <Table
-        :fields="productFields"
-        :items="products"
-        @sort="onProductSort"
-      >
-        <template #cell-price="{ value }">
-          <span class="font-medium">{{ formatCurrency(value) }}</span>
-        </template>
-        <template #cell-stock="{ value }">
-          <Chip
-            :kind="
-              value > 50
-                ? 'success'
-                : value > 10
-                  ? 'warning'
-                  : 'danger'
-            "
-            variant="subtle"
-            :label="`${value.toString()} in stock`"
-          />
-        </template>
-      </Table>
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Props</h2>
+            <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Type</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Default</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>fields</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Array</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>[]</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Array of field definitions that define table columns.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>items</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Array</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>[]</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Array of data objects to display in the table.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>modelValue</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Array</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>[]</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Selected items when selectable is true (v-model).</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>selectable</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether rows can be selected with checkboxes.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>expandable</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether rows can be expanded to show additional content.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>striped</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether to apply striped row styling.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>hover</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>true</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether rows have hover effects.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>bordered</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether to show borders around the table.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>small</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether to use compact row spacing.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>caption</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Optional table caption for accessibility.</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">Expandable Rows</h2>
-      <Table
-        :fields="orderFields"
-        :items="orders"
-        expandable
-      >
-        <template #row-actions="{ item }">
-          <button
-            class="text-sm font-medium text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300"
-            @click="viewOrder(item)"
-          >
-            View
-          </button>
-        </template>
-        <template #expanded-content="{ item }">
-          <div class="p-4 space-y-4">
-            <h3 class="font-medium">Order Items</h3>
-            <div class="grid grid-cols-3 gap-4">
-              <div
-                v-for="product in item.products"
-                :key="product.id"
-                class="p-3 bg-white dark:bg-base-800 rounded-base flex items-center space-x-3"
-              >
-                <div
-                  class="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-base flex items-center justify-center"
-                >
-                  <span
-                    class="text-primary-700 dark:text-primary-300 font-medium"
-                    >{{ product.id.slice(0, 2) }}</span
-                  >
-                </div>
-                <div>
-                  <div class="font-medium">{{ product.name }}</div>
-                  <div class="text-sm text-base-500 dark:text-base-400">
-                    {{ formatCurrency(product.price) }} x {{ product.quantity }}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="flex justify-between items-center pt-2 border-t border-base-200 dark:border-base-700"
-            >
-              <span class="text-base-600 dark:text-base-400"
-                >Shipped to: {{ item.shippingAddress }}</span
-              >
-              <span class="font-medium"
-                >Total: {{ formatCurrency(item.total) }}</span
-              >
-            </div>
-          </div>
-        </template>
-      </Table>
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Events</h2>
+            <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Parameters</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>update:modelValue</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>(selected: Array)</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when selection changes.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>row-clicked</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>(item: Object, index: Number)</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when a row is clicked.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>row-expanded</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>(item: Object)</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when a row is expanded.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>row-collapsed</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>(item: Object)</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when a row is collapsed.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>sort</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>(field: String, direction: &amp;quot;asc&amp;quot; | &amp;quot;desc&amp;quot;)</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when column sorting changes.</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-xl font-bold">Complete Example</h2>
-      <Table
-        v-model="selectedEmployees"
-        :fields="employeeFields"
-        :items="paginatedEmployees"
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Field Definition</h2>
+      
+      <Prose>
+        <p>interface TableField {</p>
+        <p>key: string;           // Property key in data object</p>
+        <p>label: string;         // Column header text</p>
+        <p>sortable?: boolean;    // Whether column is sortable</p>
+        <p>visible?: boolean;     // Whether column is visible (default: true)</p>
+        <p>width?: string;        // CSS width value</p>
+        <p>class?: string;        // CSS classes for header cell</p>
+        <p>headerClass?: string;  // CSS classes for header cell</p>
+        <p>cellClass?: string;    // CSS classes for data cells</p>
+        <p>formatter?: Function;  // Function to format cell values</p>
+        <p>}</p>
+      </Prose>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Slots</h2>
+            <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
+            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>controls</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Content displayed above the table (e.g., search, filters, actions).</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>cell-{key}</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom content for cells in the specified column. Receives <code>{ value, item, field }</code>.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>header-{key}</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom content for the header cell in the specified column. Receives <code>{ field }</code>.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>expanded-content</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Content displayed when a row is expanded. Receives <code>{ item, index }</code>.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>empty</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Content displayed when no items are provided.</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>loading</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Content displayed during loading state.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Selectable Table</h2>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <Table
+        v-model="selected"
+        :fields="fields"
+        :items="items"
         selectable
-        expandable
-        :loading-items="loading"
-      >
-        <template #controls>
-          <button
-            class="px-3 py-1 text-sm bg-primary-500 text-white hover:bg-primary-600 rounded-base"
-            @click="loading = !loading"
-          >
-            {{ loading ? "Stop loading" : "Simulate loading" }}
-          </button>
-        </template>
-        <template #cell-status="{ value }">
-          <Chip
-            :kind="
-              value === 'Active'
-                ? 'success'
-                : value === 'On Leave'
-                  ? 'warning'
-                  : 'danger'"
-            :label="value"
-          />
-        </template>
-        <template #cell-skills="{ value }">
-          <div class="flex flex-wrap gap-1">
-            <Chip
-              v-for="skill in value"
-              :key="skill"
-              kind="secondary"
-              variant="subtle"
-            >{{ skill }}</Chip>
-          </div>
-        </template>
-        <template #row-actions="{ item }">
-          <div class="flex items-center space-x-2">
-            <button
-              class="p-1 text-base-500 hover:text-primary-600 dark:text-base-400 dark:hover:text-primary-400"
-              @click.stop="editEmployee(item)"
-            >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                />
-              </svg>
-            </button>
-            <button
-              class="p-1 text-base-500 hover:text-danger-600 dark:text-base-400 dark:hover:text-danger-400"
-              @click.stop="deleteEmployee(item)"
-            >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                />
-              </svg>
-            </button>
-          </div>
-        </template>
-        <template #expanded-content="{ item }">
-          <div class="p-4">
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <h3 class="font-medium mb-2">Employment Details</h3>
-                <dl class="space-y-2">
-                  <div class="flex justify-between">
-                    <dt class="text-base-500 dark:text-base-400">
-                      Department:
-                    </dt>
-                    <dd>{{ item.department }}</dd>
-                  </div>
-                  <div class="flex justify-between">
-                    <dt class="text-base-500 dark:text-base-400">Manager:</dt>
-                    <dd>{{ item.manager }}</dd>
-                  </div>
-                  <div class="flex justify-between">
-                    <dt class="text-base-500 dark:text-base-400">
-                      Start Date:
-                    </dt>
-                    <dd>{{ formatDate(item.startDate) }}</dd>
-                  </div>
-                  <div class="flex justify-between">
-                    <dt class="text-base-500 dark:text-base-400">Salary:</dt>
-                    <dd>{{ formatCurrency(item.salary) }}</dd>
-                  </div>
-                </dl>
-              </div>
-              <div>
-                <h3 class="font-medium mb-2">Contact Information</h3>
-                <dl class="space-y-2">
-                  <div class="flex justify-between">
-                    <dt class="text-base-500 dark:text-base-400">Email:</dt>
-                    <dd>{{ item.email }}</dd>
-                  </div>
-                  <div class="flex justify-between">
-                    <dt class="text-base-500 dark:text-base-400">Phone:</dt>
-                    <dd>{{ item.phone }}</dd>
-                  </div>
-                  <div class="flex justify-between">
-                    <dt class="text-base-500 dark:text-base-400">Address:</dt>
-                    <dd>{{ item.address }}</dd>
-                  </div>
-                </dl>
-              </div>
-            </div>
-            <div
-              class="mt-4 pt-4 border-t border-base-200 dark:border-base-700"
-            >
-              <h3 class="font-medium mb-2">Performance</h3>
-              <div
-                class="h-10 bg-base-100 dark:bg-base-800 rounded-base overflow-hidden"
-              >
-                <div
-                  class="h-full bg-primary-500"
-                  :style="{ width: `${item.performance * 10}%` }"
-                ></div>
-              </div>
-            </div>
-          </div>
-        </template>
-        <template #pagination>
-          <Paginator
-            v-model:page="currentPage"
-            :total-items="employees.length"
-            :items-per-page="pageSize"
-            :available-page-sizes="[5, 10, 25, 50]"
-          />
-        </template>
-      </Table>
+        />
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Table 
+    v-model="selected"
+    :fields="fields"
+    :items="items"
+    selectable
+  /&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+const selected = ref([]);
+// When items are selected, they will be available in the selected array
+&lt;/script&gt;</code></pre>
+      </div>
     </section>
 
-    <div class="mt-8">
-      <h2 class="text-xl font-bold mb-4">Component Usage</h2>
-      <pre
-        class="bg-base-50 dark:bg-base-900 p-4 rounded-base radius-2xl:rounded-2xl overflow-x-auto text-sm"
-      ><code>&lt;!-- Basic usage --&gt;
-&lt;Table :fields="fields" :items="items" /&gt;
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Expandable Rows</h2>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <h4 class="font-semibold mb-2">Additional Details</h4>
+        <p>More information about {{ item.name }}...</p>
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Table 
+    :fields="fields"
+    :items="items"
+    expandable
+  &gt;
+    &lt;template #expanded-content="{ item }"&gt;
+      &lt;div class="p-4 bg-base-50 dark:bg-base-800"&gt;
+        &lt;h4 class="font-semibold mb-2"&gt;Additional Details&lt;/h4&gt;
+        &lt;p&gt;More information about &#123;&#123; item.name &#125;&#125;...&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/template&gt;
+  &lt;/Table&gt;
+&lt;/template&gt;</code></pre>
+      </div>
+    </section>
 
-&lt;!-- Selectable rows --&gt;
-&lt;Table
-  v-model="selected"
-  :fields="fields"
-  :items="items"
-  selectable
-/&gt;
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Custom Cell Rendering</h2>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <Table
+        :fields="fields"
+        :items="items"
+        >
+        <template #cell-status="{ value }">
+        <Badge
+        :label="value"
+        :kind="value === 'Active' ? 'success' : 'warning'"
+        size="sm"
+        />
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Table 
+    :fields="fields"
+    :items="items"
+  &gt;
+    &lt;template #cell-status="{ value }"&gt;
+      &lt;Badge 
+        :label="value" 
+        :kind="value === 'Active' ? 'success' : 'warning'"
+        size="sm"
+      /&gt;
+    &lt;/template&gt;
+    &lt;template #cell-actions="{ item }"&gt;
+      &lt;Action size="xs" variant="ghost" @click="editItem(item)"&gt;Edit&lt;/Action&gt;
+      &lt;Action size="xs" variant="ghost" kind="danger" @click="deleteItem(item)"&gt;Delete&lt;/Action&gt;
+    &lt;/template&gt;
+  &lt;/Table&gt;
+&lt;/template&gt;</code></pre>
+      </div>
+    </section>
 
-&lt;!-- Expandable rows --&gt;
-&lt;Table
-  :fields="fields"
-  :items="items"
-  expandable
-&gt;
-  &lt;template #expanded-content="{ item }"&gt;
-    &lt;div&gt;Additional content for { { item.name } }&lt;/div&gt;
-  &lt;/template&gt;
-&lt;/Table&gt;
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">With Controls</h2>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <Table
+        :fields="fields"
+        :items="filteredItems"
+        >
+        <template #controls>
+        <TextField
+        v-model="searchTerm"
+        placeholder="Search users..."
+        icon="material-symbols:search"
+        class="max-w-sm"
+        />
+        <Action kind="primary">Add User</Action>
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Table 
+    :fields="fields"
+    :items="filteredItems"
+  &gt;
+    &lt;template #controls&gt;
+      &lt;TextField 
+        v-model="searchTerm"
+        placeholder="Search users..."
+        icon="material-symbols:search"
+        class="max-w-sm"
+      /&gt;
+      &lt;Action kind="primary"&gt;Add User&lt;/Action&gt;
+    &lt;/template&gt;
+  &lt;/Table&gt;
+&lt;/template&gt;</code></pre>
+      </div>
+    </section>
 
-&lt;!-- Custom cell rendering --&gt;
-&lt;Table :fields="fields" :items="items"&gt;
-  &lt;template #cell-status="{ value }"&gt;
-    &lt;span :class="getStatusClass(value)"&gt;{ { value } }&lt;/span&gt;
-  &lt;/template&gt;
-&lt;/Table&gt;
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Table Styling Options</h2>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+        <Table
+        :fields="fields"
+        :items="items"
+        striped
+        />
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;Table 
+    :fields="fields"
+    :items="items"
+    striped
+  /&gt;
+&lt;/template&gt;</code></pre>
+      </div>
+    </section>
 
-&lt;!-- Full example --&gt;
-&lt;Table
-  v-model="selected"
-  :fields="fields"
-  :items="items"
-  selectable
-  expandable
-&gt;
-  &lt;template #controls&gt;
-    &lt;button @click="addItem"&gt;Add Item&lt;/button&gt;
-  &lt;/template&gt;
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
+      
+      <Prose>
+        <ul>
+          <li>Define clear, descriptive field labels for table headers</li>
+          <li>Use sortable columns for data that users might want to organize</li>
+          <li>Implement pagination for large datasets to maintain performance</li>
+          <li>Use custom cell rendering for complex data types (dates, status badges, actions)</li>
+          <li>Provide empty state messaging when no data is available</li>
+          <li>Use selection carefully - only when bulk actions are available</li>
+          <li>Consider responsive design for mobile viewports</li>
+          <li>Use hover effects to improve usability</li>
+          <li>Implement loading states for async data</li>
+          <li>Group related actions in the controls slot</li>
+        </ul>
+      </Prose>
+    </section>
 
-  &lt;template #cell-price="{ value }"&gt;
-    { { formatCurrency(value) } }
-  &lt;/template&gt;
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Examples</h2>
+      <h3 class="text-lg font-medium mt-6 mb-3">User Management Table</h3>
+      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+              <div><strong>Department:</strong> {{ item.department }}</div>
+        <div><strong>Location:</strong> {{ item.location }}</div>
+        <div><strong>Phone:</strong> {{ item.phone }}</div>
+        <div><strong>Notes:</strong> {{ item.notes || 'No notes available' }}</div>
+      </div>
+      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
+        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;Table 
+      v-model="selectedUsers"
+      :fields="userFields"
+      :items="users"
+      selectable
+      expandable
+      striped
+      @row-clicked="handleRowClick"
+      @sort="handleSort"
+    &gt;
+      &lt;template #controls&gt;
+        &lt;div class="flex gap-4"&gt;
+          &lt;TextField 
+            v-model="search"
+            placeholder="Search users..."
+            icon="material-symbols:search"
+          /&gt;
+          &lt;Select 
+            v-model="statusFilter"
+            :options="statusOptions"
+            placeholder="Filter by status"
+          /&gt;
+          &lt;Action 
+            v-if="selectedUsers.length &gt; 0" 
+            @click="bulkAction"
+            variant="outline"
+          &gt;
+            Bulk Edit (&#123;&#123; selectedUsers.length &#125;&#125;)
+          &lt;/Action&gt;
+          &lt;Action kind="primary" @click="addUser"&gt;Add User&lt;/Action&gt;
+        &lt;/div&gt;
+      &lt;/template&gt;
 
-  &lt;template #row-actions="{ item }"&gt;
-    &lt;button @click="editItem(item)"&gt;Edit&lt;/button&gt;
-    &lt;button @click="deleteItem(item)"&gt;Delete&lt;/button&gt;
-  &lt;/template&gt;
+      &lt;template #cell-avatar="{ item }"&gt;
+        &lt;Avatar :src="item.avatar" :alt="item.name" size="sm" /&gt;
+      &lt;/template&gt;
 
-  &lt;template #expanded-content="{ item }"&gt;
-    &lt;div&gt;Expanded details for { { item.name } }&lt;/div&gt;
-  &lt;/template&gt;
+      &lt;template #cell-status="{ value }"&gt;
+        &lt;Badge 
+          :label="value" 
+          :kind="getStatusKind(value)"
+          size="sm"
+        /&gt;
+      &lt;/template&gt;
 
-  &lt;template #pagination&gt;
-    &lt;div&gt;Custom pagination controls&lt;/div&gt;
-  &lt;/template&gt;
-&lt;/Table&gt;</code></pre>
-    </div>
+      &lt;template #cell-lastLogin="{ value }"&gt;
+        &#123;&#123; formatDate(value) &#125;&#125;
+      &lt;/template&gt;
 
-    <div class="mt-8">
-      <h2 class="text-xl font-bold mb-4">Props</h2>
-      <Table
-        :fields="propFields"
-        :items="propItems"
-      />
-    </div>
+      &lt;template #cell-actions="{ item }"&gt;
+        &lt;Menu label="Actions" auto-width&gt;
+          &lt;MenuItem label="View Profile" @click="viewProfile(item)" /&gt;
+          &lt;MenuItem label="Edit User" @click="editUser(item)" /&gt;
+          &lt;MenuDivider /&gt;
+          &lt;MenuItem 
+            label="Deactivate" 
+            @click="deactivateUser(item)"
+            :disabled="item.status === 'Inactive'"
+          /&gt;
+        &lt;/Menu&gt;
+      &lt;/template&gt;
 
-    <div class="mt-8">
-      <h2 class="text-xl font-bold mb-4">Events</h2>
-      <Table
-        :fields="eventFields"
-        :items="eventItems"
-      />
-    </div>
+      &lt;template #expanded-content="{ item }"&gt;
+        &lt;div class="p-4 bg-base-50 dark:bg-base-800 space-y-2"&gt;
+          &lt;div&gt;&lt;strong&gt;Department:&lt;/strong&gt; &#123;&#123; item.department &#125;&#125;&lt;/div&gt;
+          &lt;div&gt;&lt;strong&gt;Location:&lt;/strong&gt; &#123;&#123; item.location &#125;&#125;&lt;/div&gt;
+          &lt;div&gt;&lt;strong&gt;Phone:&lt;/strong&gt; &#123;&#123; item.phone &#125;&#125;&lt;/div&gt;
+          &lt;div&gt;&lt;strong&gt;Notes:&lt;/strong&gt; &#123;&#123; item.notes || 'No notes available' &#125;&#125;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/template&gt;
 
-    <div class="mt-8">
-      <h2 class="text-xl font-bold mb-4">Slots</h2>
-      <Table
-        :fields="slotFields"
-        :items="slotItems"
-      />
-    </div>
+      &lt;template #empty&gt;
+        &lt;div class="text-center py-8"&gt;
+          &lt;p class="text-base-500"&gt;No users found matching your criteria.&lt;/p&gt;
+          &lt;Action kind="primary" @click="addUser" class="mt-2"&gt;
+            Add First User
+          &lt;/Action&gt;
+        &lt;/div&gt;
+      &lt;/template&gt;
+    &lt;/Table&gt;
+    
+    &lt;div class="mt-4 flex justify-between items-center"&gt;
+      &lt;p class="text-sm text-base-600"&gt;
+        Showing &#123;&#123; users.length &#125;&#125; of &#123;&#123; totalUsers &#125;&#125; users
+      &lt;/p&gt;
+      &lt;Paginator 
+        v-model="currentPage"
+        :total-pages="totalPages"
+        :total-items="totalUsers"
+      /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+const selectedUsers = ref([]);
+const search = ref('');
+const statusFilter = ref('');
+const currentPage = ref(1);
+
+const userFields = [
+  { key: 'avatar', label: '', width: '48px' },
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'email', label: 'Email', sortable: true },
+  { key: 'role', label: 'Role' },
+  { key: 'status', label: 'Status', sortable: true },
+  { key: 'lastLogin', label: 'Last Login', sortable: true },
+  { key: 'actions', label: 'Actions', width: '100px' }
+];
+
+function getStatusKind(status) {
+  const kindMap = {
+    'Active': 'success',
+    'Inactive': 'warning',
+    'Suspended': 'danger'
+  };
+  return kindMap[status] || 'secondary';
+}
+&lt;/script&gt;</code></pre>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-  // Basic example
-  const basicFields: TableField[] = [
-    { key: "id", label: "ID", sortable: true },
-    { key: "name", label: "Name", sortable: true },
-    { key: "email", label: "Email" },
-  ];
+import { ref } from 'vue';
+import Badge from '../components/Badge.vue';
+import TextField from '../components/TextField.vue';
+import Action from '../components/Action.vue';
 
-  const basicItems = [
-    { id: 1, name: "John Doe", email: "john@example.com" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com" },
-    { id: 3, name: "Bob Johnson", email: "bob@example.com" },
-  ];
-
-  // Selectable rows example
-  const userFields: TableField[] = [
-    { key: "id", label: "ID" },
-    { key: "name", label: "Name", sortable: true },
-    { key: "email", label: "Email" },
-    { key: "role", label: "Role" },
-    { key: "active", label: "Active", type: "boolean" },
-  ];
-
-  const users = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      role: "Admin",
-      active: true,
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane@example.com",
-      role: "Editor",
-      active: true,
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bob@example.com",
-      role: "Viewer",
-      active: false,
-    },
-    {
-      id: 4,
-      name: "Alice Brown",
-      email: "alice@example.com",
-      role: "Editor",
-      active: true,
-    },
-    {
-      id: 5,
-      name: "Charlie Davis",
-      email: "charlie@example.com",
-      role: "Viewer",
-      active: true,
-    },
-  ];
-
-  const selectedUsers = ref<typeof users>([]);
-
-  // Sortable columns example
-  const productFields: TableField[] = [
-    { key: "id", label: "ID" },
-    { key: "name", label: "Product Name", sortable: true },
-    { key: "category", label: "Category", sortable: true },
-    { key: "price", label: "Price", type: "number", sortable: true },
-    { key: "stock", label: "Stock", type: "number", sortable: true },
-    { key: "createdAt", label: "Created At", type: "date", sortable: true },
-  ];
-
-  const products = [
-    {
-      id: "P001",
-      name: "Wireless Headphones",
-      category: "Electronics",
-      price: 129.99,
-      stock: 45,
-      createdAt: "2023-01-15",
-    },
-    {
-      id: "P002",
-      name: "Smartphone",
-      category: "Electronics",
-      price: 899.99,
-      stock: 12,
-      createdAt: "2023-02-20",
-    },
-    {
-      id: "P003",
-      name: "Running Shoes",
-      category: "Clothing",
-      price: 89.99,
-      stock: 78,
-      createdAt: "2023-03-10",
-    },
-    {
-      id: "P004",
-      name: "Coffee Maker",
-      category: "Kitchen",
-      price: 59.99,
-      stock: 23,
-      createdAt: "2023-04-05",
-    },
-    {
-      id: "P005",
-      name: "Desk Lamp",
-      category: "Home Office",
-      price: 39.99,
-      stock: 67,
-      createdAt: "2023-05-12",
-    },
-  ];
-
-  function onProductSort(field: string, direction: "asc" | "desc") {
-    console.log(`Sorting by ${field} in ${direction} order`);
-  }
-
-  // Expandable rows example
-  const orderFields: TableField[] = [
-    { key: "id", label: "Order ID" },
-    { key: "customer", label: "Customer" },
-    { key: "date", label: "Order Date", type: "date" },
-    { key: "status", label: "Status" },
-    { key: "total", label: "Total", type: "number" },
-  ];
-
-  const orders = [
-    {
-      id: "ORD-1001",
-      customer: "John Doe",
-      date: "2023-06-15",
-      status: "Delivered",
-      total: 235.87,
-      shippingAddress: "123 Main St, Anytown, USA",
-      products: [
-        { id: "P001", name: "Wireless Headphones", price: 129.99, quantity: 1 },
-        { id: "P005", name: "Desk Lamp", price: 39.99, quantity: 2 },
-      ],
-    },
-    {
-      id: "ORD-1002",
-      customer: "Jane Smith",
-      date: "2023-06-17",
-      status: "Shipped",
-      total: 899.99,
-      shippingAddress: "456 Oak Ave, Somewhere, USA",
-      products: [
-        { id: "P002", name: "Smartphone", price: 899.99, quantity: 1 },
-      ],
-    },
-    {
-      id: "ORD-1003",
-      customer: "Bob Johnson",
-      date: "2023-06-18",
-      status: "Processing",
-      total: 149.98,
-      shippingAddress: "789 Pine St, Nowhere, USA",
-      products: [
-        { id: "P004", name: "Coffee Maker", price: 59.99, quantity: 1 },
-        { id: "P005", name: "Desk Lamp", price: 39.99, quantity: 1 },
-        { id: "P006", name: "Notebook", price: 12.99, quantity: 2 },
-      ],
-    },
-  ];
-
-  function viewOrder(order: any) {
-    console.log("Viewing order:", order.id);
-  }
-
-  // Complete example
-  const employeeFields: TableField[] = [
-    { key: "id", label: "ID" },
-    { key: "name", label: "Name", sortable: true },
-    { key: "position", label: "Position", sortable: true },
-    { key: "department", label: "Department", sortable: true },
-    { key: "status", label: "Status", sortable: true },
-    { key: "skills", label: "Skills" },
-  ];
-
-  const employees = [
-    {
-      id: "EMP001",
-      name: "John Doe",
-      position: "Senior Developer",
-      department: "Engineering",
-      status: "Active",
-      skills: ["JavaScript", "Vue", "Node.js"],
-      manager: "Jane Smith",
-      email: "john@example.com",
-      phone: "(555) 123-4567",
-      address: "123 Main St, Anytown, USA",
-      startDate: "2020-03-15",
-      salary: 85000,
-      performance: 8.5,
-    },
-    {
-      id: "EMP002",
-      name: "Jane Smith",
-      position: "Engineering Manager",
-      department: "Engineering",
-      status: "Active",
-      skills: ["Leadership", "Project Management", "Architecture"],
-      manager: "Michael Brown",
-      email: "jane@example.com",
-      phone: "(555) 234-5678",
-      address: "456 Oak Ave, Somewhere, USA",
-      startDate: "2018-06-10",
-      salary: 110000,
-      performance: 9.2,
-    },
-    {
-      id: "EMP003",
-      name: "Bob Johnson",
-      position: "UX Designer",
-      department: "Design",
-      status: "On Leave",
-      skills: ["UI/UX", "Figma", "User Research"],
-      manager: "Sarah Williams",
-      email: "bob@example.com",
-      phone: "(555) 345-6789",
-      address: "789 Pine St, Nowhere, USA",
-      startDate: "2021-01-20",
-      salary: 75000,
-      performance: 7.8,
-    },
-    {
-      id: "EMP004",
-      name: "Alice Brown",
-      position: "Marketing Specialist",
-      department: "Marketing",
-      status: "Active",
-      skills: ["SEO", "Content Strategy", "Analytics"],
-      manager: "David Clark",
-      email: "alice@example.com",
-      phone: "(555) 456-7890",
-      address: "101 Elm St, Elsewhere, USA",
-      startDate: "2022-05-05",
-      salary: 68000,
-      performance: 8.1,
-    },
-    {
-      id: "EMP005",
-      name: "Charlie Wilson",
-      position: "QA Engineer",
-      department: "Engineering",
-      status: "Terminated",
-      skills: ["Test Automation", "Manual Testing", "QA Processes"],
-      manager: "Jane Smith",
-      email: "charlie@example.com",
-      phone: "(555) 567-8901",
-      address: "202 Cedar Dr, Anytown, USA",
-      startDate: "2019-11-12",
-      salary: 72000,
-      performance: 6.4,
-    },
-
-  ];
-
-  // Pagination state for employees table
-  const currentPage = ref(1);
-  const pageSize = ref(10);
-  const paginatedEmployees = computed(() => {
-    const start = (currentPage.value - 1) * pageSize.value;
-    return employees.slice(start, start + pageSize.value);
-  });
-
-  const selectedEmployees = ref<typeof employees>([]);
-  const loading = ref(false);
-
-  function editEmployee(employee: any) {
-    console.log("Editing employee:", employee.id);
-  }
-
-  function deleteEmployee(employee: any) {
-    console.log("Deleting employee:", employee.id);
-  }
-
-  // Documentation tables
-  const propFields: TableField[] = [
-    { key: "name", label: "Prop Name" },
-    { key: "type", label: "Type" },
-    { key: "default", label: "Default" },
-    { key: "description", label: "Description" },
-  ];
-
-  const propItems = [
-    {
-      name: "fields",
-      type: "TableField[]",
-      default: "[]",
-      description: "Array of column definitions",
-    },
-    {
-      name: "items",
-      type: "any[]",
-      default: "[]",
-      description: "Array of data items to display in the table",
-    },
-    {
-      name: "selectable",
-      type: "Boolean",
-      default: "false",
-      description: "Enable row selection",
-    },
-    {
-      name: "expandable",
-      type: "Boolean",
-      default: "false",
-      description: "Enable expandable rows",
-    },
-    {
-      name: "sortable",
-      type: "Boolean",
-      default: "true",
-      description: "Enable column sorting",
-    },
-    {
-      name: "idField",
-      type: "String",
-      default: "id",
-      description: "Field to use as unique identifier",
-    },
-    {
-      name: "modelValue",
-      type: "any[]",
-      default: "[]",
-      description: "Selected items (v-model)",
-    },
-    {
-      name: "loadingItems",
-      type: "Boolean",
-      default: "false",
-      description: "Show loading state",
-    },
-  ];
-
-  const eventFields: TableField[] = [
-    { key: "name", label: "Event Name" },
-    { key: "parameters", label: "Parameters" },
-    { key: "description", label: "Description" },
-  ];
-
-  const eventItems = [
-    {
-      name: "update:modelValue",
-      parameters: "value: any[]",
-      description: "Emitted when the selection changes",
-    },
-    {
-      name: "row-click",
-      parameters: "item: any",
-      description: "Emitted when a row is clicked",
-    },
-    {
-      name: "row-expanded",
-      parameters: "item: any",
-      description: "Emitted when a row is expanded",
-    },
-    {
-      name: "row-collapsed",
-      parameters: "item: any",
-      description: "Emitted when a row is collapsed",
-    },
-    {
-      name: "sort",
-      parameters: 'field: string, direction: "asc" | "desc"',
-      description: "Emitted when a column is sorted",
-    },
-  ];
-
-  const slotFields: TableField[] = [
-    { key: "name", label: "Slot Name" },
-    { key: "props", label: "Slot Props" },
-    { key: "description", label: "Description" },
-  ];
-
-  const slotItems = [
-    {
-      name: "controls",
-      props: "-",
-      description: "Custom controls to display above the table",
-    },
-    {
-      name: "cell-{fieldKey}",
-      props: "{ item, value, field }",
-      description: "Custom cell rendering for specific column",
-    },
-    {
-      name: "row-actions",
-      props: "{ item, index }",
-      description: "Actions to display for each row",
-    },
-    {
-      name: "expanded-content",
-      props: "{ item, index }",
-      description: "Content to display when a row is expanded",
-    },
-    {
-      name: "empty-state",
-      props: "-",
-      description: "Content to display when there are no items",
-    },
-    {
-      name: "loading-state",
-      props: "-",
-      description: "Content to display when the table is loading",
-    },
-    {
-      name: "pagination",
-      props: "-",
-      description: "Custom pagination controls",
-    },
-  ];
-
-  // Helper functions
-  function formatCurrency(value: number): string {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(value);
-  }
-
-  function formatDate(dateString: string): string {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  }
+const fields = ref([
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'email', label: 'Email' },
+  { key: 'role', label: 'Role' },
+  { key: 'status', label: 'Status' }
+]);
+const items = ref([
+  { name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active' },
+  { name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active' },
+  { name: 'Bob Johnson', email: 'bob@example.com', role: 'User', status: 'Inactive' }
+]);
 </script>

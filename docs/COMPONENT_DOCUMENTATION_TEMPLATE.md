@@ -12,8 +12,7 @@ Each component's documentation page should include the following sections:
    - Any important conceptual information
 
 2. **Basic Usage**
-   - Simple example showing the component with minimal props
-   - Code snippet matching the example
+   - Simple code snippet showing the component with minimal props
 
 3. **Props**
    - Table with columns for:
@@ -33,22 +32,10 @@ Each component's documentation page should include the following sections:
      - Name (with code formatting)
      - Description
 
-6. **Variants/Options**
-   - Visual examples of different component configurations
-   - Code examples for each variant
-
-7. **States** (if applicable)
-   - Examples of different states (disabled, loading, active, etc.)
-   - Code snippets for each state
-
 8. **Best Practices**
    - List of recommended usage patterns
    - Accessibility considerations
    - Common pitfalls to avoid
-
-9. **Examples**
-   - Real-world examples showing the component in context
-   - More complex implementation scenarios
 
 ## Styling Guidelines
 
@@ -61,7 +48,23 @@ Each component's documentation page should include the following sections:
 ## Code Examples
 
 - All examples should be fully functional
-- Include only the necessary code in snippets (avoid unnecessary props or attributes)
+- Do not include live code examples; only static code snippets
+- Use `<template>` tags for Vue examples
+- Use `<script setup>` for Vue 3 examples
+- Use Vue SFC syntax for all examples
+- Ensure code examples are relevant to the component's functionality
+- Use `v-model` for two-way binding where applicable
+- Avoid using unnecessary props or attributes in examples
+- Use descriptive variable names in examples
+- Ensure code is formatted correctly with proper indentation
+- All examples should be as concise as possible while still demonstrating the component's functionality
+- Include only the necessary code in snippets
+- Prioritize the use of other components from the library in examples where relevant
+- Avoid using custom HTML elements or attributes that are not part of the component library
+- Avoid using extraneous CSS classes
+- Avoid using inline styles; prefer classes from the design system
+- Ensure code is clean and follows the project's coding standards
+- Use consistent naming conventions for variables and components
 - Format code with proper indentation
 - Include comments for complex examples
 - Ensure code examples match the visual examples
@@ -71,37 +74,8 @@ Each component's documentation page should include the following sections:
 - Show components in context when possible
 - Include examples for all variants and states
 - For components with multiple sizes, show size comparisons
-- Include dark mode examples where appropriate
 - Group related examples together
-
-## Implementation Example
-
-```vue
-<template>
-  <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Component Name</h1>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Overview</h2>
-      <p class="mb-4">
-        Description of the component and its purpose...
-      </p>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Example component implementation -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code><!-- Code example --></code></pre>
-      </div>
-    </section>
-
-    <!-- Other sections following the structure above -->
-  </div>
-</template>
-```
+- Follow the code example guidelines above
 
 ## Review Checklist
 

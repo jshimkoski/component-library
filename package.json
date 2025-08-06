@@ -46,7 +46,10 @@
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
-    "build:lib": "vue-tsc -b && vite build --config vite-lib.config.ts --mode lib && vue-tsc -p tsconfig.build.json"
+    "build:lib": "vue-tsc -b && vite build --config vite-lib.config.ts --mode lib && vue-tsc -p tsconfig.build.json",
+    "sync-docs": "node scripts/sync-docs.cjs",
+    "sync-docs:dry-run": "node scripts/sync-docs.cjs --dry-run",
+    "sync-docs:list": "node scripts/sync-docs.cjs --list"
   },
   "dependencies": {
     "vue": "^3.5.13"

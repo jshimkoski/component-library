@@ -6,18 +6,13 @@ The Avatar component displays a user or entity's profile image with flexible siz
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Avatar 
     src="https://i.pravatar.cc/300" 
     alt="User Avatar" 
   />
-</div>
-
-```vue
-<Avatar 
-  src="https://i.pravatar.cc/300" 
-  alt="User Avatar" 
-/>
+</template>
 ```
 
 ## Props
@@ -29,11 +24,10 @@ The Avatar component displays a user or entity's profile image with flexible siz
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "3xl" \| "4xl" \| "5xl" \| "6xl" \| "7xl" \| "8xl"` | `"md"` | Size of the avatar. |
 | `shape` | `"circle" \| "square"` | `"circle"` | Shape of the avatar. |
 
-## Variants/Options
+## Sizes
 
-### Sizes
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex items-end gap-4 flex-wrap">
+```vue
+<template>
   <Avatar src="https://i.pravatar.cc/300" size="xs" alt="Extra Small Avatar" />
   <Avatar src="https://i.pravatar.cc/300" size="sm" alt="Small Avatar" />
   <Avatar src="https://i.pravatar.cc/300" size="md" alt="Medium Avatar" />
@@ -41,46 +35,29 @@ The Avatar component displays a user or entity's profile image with flexible siz
   <Avatar src="https://i.pravatar.cc/300" size="xl" alt="Extra Large Avatar" />
   <Avatar src="https://i.pravatar.cc/300" size="2xl" alt="2XL Avatar" />
   <Avatar src="https://i.pravatar.cc/300" size="3xl" alt="3XL Avatar" />
-</div>
-
-```vue
-<Avatar src="https://i.pravatar.cc/300" size="xs" alt="Extra Small Avatar" />
-<Avatar src="https://i.pravatar.cc/300" size="sm" alt="Small Avatar" />
-<Avatar src="https://i.pravatar.cc/300" size="md" alt="Medium Avatar" />
-<Avatar src="https://i.pravatar.cc/300" size="lg" alt="Large Avatar" />
-<Avatar src="https://i.pravatar.cc/300" size="xl" alt="Extra Large Avatar" />
-<Avatar src="https://i.pravatar.cc/300" size="2xl" alt="2XL Avatar" />
-<Avatar src="https://i.pravatar.cc/300" size="3xl" alt="3XL Avatar" />
+</template>
 ```
 
-### Shapes
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex gap-4">
-  <Avatar src="https://i.pravatar.cc/300" shape="circle" alt="Circle Avatar" />
-  <Avatar src="https://i.pravatar.cc/300" shape="square" alt="Square Avatar" />
-</div>
+## Shapes
 
 ```vue
-<Avatar src="https://i.pravatar.cc/300" shape="circle" alt="Circle Avatar" />
-<Avatar src="https://i.pravatar.cc/300" shape="square" alt="Square Avatar" />
+<template>
+  <Avatar src="https://i.pravatar.cc/300" shape="circle" alt="Circle Avatar" />
+  <Avatar src="https://i.pravatar.cc/300" shape="square" alt="Square Avatar" />
+</template>
 ```
 
 ## Error Handling
 
 The Avatar component automatically displays a fallback image if the provided image URL fails to load.
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Avatar 
     src="https://invalid-url-that-will-fail.com/image.jpg" 
     alt="Fallback Example" 
   />
-</div>
-
-```vue
-<Avatar 
-  src="https://invalid-url-that-will-fail.com/image.jpg" 
-  alt="Fallback Example" 
-/>
+</template>
 ```
 
 ## Best Practices
@@ -102,58 +79,28 @@ The Avatar component automatically displays a fallback image if the provided ima
 
 ### User Profile Header
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="flex items-center gap-4">
-    <Avatar 
-      src="https://i.pravatar.cc/300" 
-      size="xl"
-      alt="Jane Doe's profile picture"
-    />
-    <div>
-      <h3 class="text-xl font-bold">Jane Doe</h3>
-      <p class="text-base-600 dark:text-base-400">Product Designer</p>
-    </div>
-  </div>
-</div>
-
 ```vue
-<div class="flex items-center gap-4">
+<template>
   <Avatar 
     src="https://i.pravatar.cc/300" 
     size="xl"
     alt="Jane Doe's profile picture"
   />
+
   <div>
-    <h3 class="text-xl font-bold">Jane Doe</h3>
-    <p class="text-base-600 dark:text-base-400">Product Designer</p>
+    <h3>Jane Doe</h3>
+    <p>Product Designer</p>
   </div>
-</div>
+</template>
 ```
 
 ### User List
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <ul class="space-y-3">
-    <li class="flex items-center gap-3">
-      <Avatar src="https://i.pravatar.cc/300?u=1" size="sm" alt="User 1" />
-      <span>Alex Johnson</span>
-    </li>
-    <li class="flex items-center gap-3">
-      <Avatar src="https://i.pravatar.cc/300?u=2" size="sm" alt="User 2" />
-      <span>Sam Taylor</span>
-    </li>
-    <li class="flex items-center gap-3">
-      <Avatar src="https://i.pravatar.cc/300?u=3" size="sm" alt="User 3" />
-      <span>Jordan Smith</span>
-    </li>
-  </ul>
-</div>
-
 ```vue
-<ul class="space-y-3">
-  <li v-for="user in users" :key="user.id" class="flex items-center gap-3">
+<template>
+  <div v-for="user in users" :key="user.id">
     <Avatar :src="user.avatarUrl" size="sm" :alt="`${user.name}'s avatar`" />
-    <span>{{ user.name }}</span>
-  </li>
-</ul>
+    {{ user.name }}
+  </div>
+</template>
 ```

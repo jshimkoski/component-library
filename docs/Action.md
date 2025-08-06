@@ -6,12 +6,10 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Action label="Click me" />
-</div>
-
 ```vue
-<Action label="Click me" />
+<template>
+  <Action label="Click me" />
+</template>
 ```
 
 ## Props
@@ -45,132 +43,81 @@ The Action component is a versatile interactive element that can be rendered as 
 |------|-------------|
 | `default` | Content of the action. Receives `label` prop as a slot prop. |
 
-## Variants/Options
+## Kinds
 
-### Kinds
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+```vue
+<template>
   <Action kind="primary">Primary</Action>
   <Action kind="secondary">Secondary</Action>
   <Action kind="success">Success</Action>
   <Action kind="info">Info</Action>
   <Action kind="warning">Warning</Action>
   <Action kind="danger">Danger</Action>
-</div>
-
-```vue
-<Action kind="primary">Primary</Action>
-<Action kind="secondary">Secondary</Action>
-<Action kind="success">Success</Action>
-<Action kind="info">Info</Action>
-<Action kind="warning">Warning</Action>
-<Action kind="danger">Danger</Action>
+</template>
 ```
 
-### Visual Variants
+## Visual Variants
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+```vue
+<template>
   <Action kind="primary" variant="solid">Solid</Action>
   <Action kind="primary" variant="outline">Outline</Action>
   <Action kind="primary" variant="ghost">Ghost</Action>
   <Action kind="primary" variant="link">Link</Action>
-</div>
-
-```vue
-<Action kind="primary" variant="solid">Solid</Action>
-<Action kind="primary" variant="outline">Outline</Action>
-<Action kind="primary" variant="ghost">Ghost</Action>
-<Action kind="primary" variant="link">Link</Action>
+</template>
 ```
 
-### Sizes
+## Sizes
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap items-center gap-2">
+```vue
+<template>
   <Action size="xs">Extra Small</Action>
   <Action size="sm">Small</Action>
   <Action size="md">Medium</Action>
   <Action size="lg">Large</Action>
   <Action size="xl">Extra Large</Action>
-</div>
-
-```vue
-<Action size="xs">Extra Small</Action>
-<Action size="sm">Small</Action>
-<Action size="md">Medium</Action>
-<Action size="lg">Large</Action>
-<Action size="xl">Extra Large</Action>
+</template>
 ```
 
-### Square Actions
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap items-center gap-2">
-  <Action square size="xs">
-    <Icon icon="material-symbols:check" width="16" height="16" />
-  </Action>
-  <Action square size="sm">
-    <Icon icon="material-symbols:check" width="16" height="16" />
-  </Action>
-  <Action square size="md">
-    <Icon icon="material-symbols:check" width="20" height="20" />
-  </Action>
-  <Action square size="lg">
-    <Icon icon="material-symbols:check" width="24" height="24" />
-  </Action>
-  <Action square size="xl">
-    <Icon icon="material-symbols:check" width="32" height="32" />
-  </Action>
-</div>
+## Square Actions
 
 ```vue
-<Action square size="md">
-  <Icon icon="material-symbols:check" width="20" height="20" />
-</Action>
+<template>
+  <Action square size="md" icon="material-symbols:check" />
+</template>
 ```
 
 ## States
 
 ### Disabled
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+```vue
+<template>
   <Action disabled>Disabled Button</Action>
   <Action disabled kind="primary" variant="solid">Disabled Primary</Action>
   <Action disabled kind="danger" variant="outline">Disabled Outline</Action>
-</div>
-
-```vue
-<Action disabled>Disabled Button</Action>
-<Action disabled kind="primary" variant="solid">Disabled Primary</Action>
-<Action disabled kind="danger" variant="outline">Disabled Outline</Action>
+</template>
 ```
 
 ### Active
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+```vue
+<template>
   <Action active>Active Default</Action>
   <Action active activeKind="primary">Active Primary</Action>
   <Action active activeKind="success">Active Success</Action>
   <Action active activeKind="danger">Active Danger</Action>
-</div>
-
-```vue
-<Action active>Active Default</Action>
-<Action active activeKind="primary">Active Primary</Action>
-<Action active activeKind="success">Active Success</Action>
-<Action active activeKind="danger">Active Danger</Action>
+</template>
 ```
 
 ## Link Actions
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
+```vue
+<template>
   <Action href="#" target="_blank">Link Button</Action>
   <Action href="#" kind="primary" variant="solid">Primary Link</Action>
   <Action href="#" kind="info" variant="link">Info Link Style</Action>
-</div>
-
-```vue
-<Action href="#" target="_blank">Link Button</Action>
-<Action href="#" kind="primary" variant="solid">Primary Link</Action>
-<Action href="#" kind="info" variant="link">Info Link Style</Action>
+</template>
 ```
 
 ## Best Practices
@@ -196,64 +143,34 @@ The Action component is a versatile interactive element that can be rendered as 
 
 ### Button Group
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="flex gap-1">
-    <Action kind="primary">Save</Action>
-    <Action variant="outline">Cancel</Action>
-  </div>
-</div>
-
 ```vue
-<div class="flex gap-1">
+<template>
   <Action kind="primary">Save</Action>
   <Action variant="outline">Cancel</Action>
-</div>
+</template>
 ```
 
 ### Icon with Text
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4 flex flex-wrap gap-2">
-  <Action kind="primary">
-    <Icon icon="material-symbols:save" width="16" height="16" class="mr-1" />
-    Save
-  </Action>
-  <Action kind="danger" variant="outline">
-    <Icon icon="material-symbols:delete" width="16" height="16" class="mr-1" />
-    Delete
-  </Action>
-</div>
-
 ```vue
-<Action kind="primary">
-  <Icon icon="material-symbols:save" width="16" height="16" class="mr-1" />
-  Save
-</Action>
+<template>
+  <Action
+    kind="primary"
+    icon="material-symbols:save"
+    label="Save"
+  />
+</template>
 ```
 
 ### Form Submit Button
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <form class="flex flex-col gap-4">
+```vue
+<template>
+  <form @submit.prevent="submitForm">
+    <Input v-model="email" type="email" label="Email" />
     <div>
-      <label class="block mb-1">Email</label>
-      <input type="email" class="border rounded px-2 py-1 w-full" />
-    </div>
-    <div>
-      <Action type="submit" kind="primary" size="lg" class="w-full">Sign In</Action>
+      <Action type="submit" kind="primary" size="lg">Sign In</Action>
     </div>
   </form>
-</div>
-
-```vue
-<form @submit.prevent="submitForm">
-  <div class="flex flex-col gap-4">
-    <div>
-      <label class="block mb-1">Email</label>
-      <input v-model="email" type="email" class="border rounded px-2 py-1 w-full" />
-    </div>
-    <div>
-      <Action type="submit" kind="primary" size="lg" class="w-full">Sign In</Action>
-    </div>
-  </div>
-</form>
+</template>
 ```

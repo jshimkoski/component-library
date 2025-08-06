@@ -6,14 +6,6 @@ The Select component provides a dropdown interface for selecting one or multiple
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Select 
-    v-model="basicSelection"
-    label="Choose an option"
-    :options="basicOptions"
-  />
-</div>
-
 ```vue
 <template>
   <Select 
@@ -71,42 +63,22 @@ interface SelectOption {
 }
 ```
 
-## Variants/Options
+## With Icon
 
-### With Icon
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Select 
-    v-model="iconSelection"
+    v-model="country"
     label="Select Country"
     icon="material-symbols:public"
     :options="countryOptions"
     description="Choose your country"
   />
-</div>
-
-```vue
-<Select 
-  v-model="country"
-  label="Select Country"
-  icon="material-symbols:public"
-  :options="countryOptions"
-  description="Choose your country"
-/>
+</template>
 ```
 
-### Multiple Selection
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Select 
-    v-model="multipleSelection"
-    label="Select Skills"
-    :options="skillOptions"
-    multiple
-    description="Hold Ctrl/Cmd to select multiple options"
-  />
-</div>
-
+## Multiple Selection
+/>
 ```vue
 <template>
   <Select 
@@ -130,16 +102,7 @@ const skillOptions = [
 </script>
 ```
 
-### With Disabled Options
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Select 
-    v-model="planSelection"
-    label="Select Plan"
-    :options="planOptions"
-    description="Some plans may not be available"
-  />
-</div>
+## With Disabled Options
 
 ```vue
 <template>
@@ -162,111 +125,34 @@ const planOptions = [
 </script>
 ```
 
-### Required Field
+## Required Field
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Select 
-    v-model="requiredSelection"
+    v-model="priority"
     label="Priority Level"
     :options="priorityOptions"
     required
     description="This field is required"
   />
-</div>
-
-```vue
-<Select 
-  v-model="priority"
-  label="Priority Level"
-  :options="priorityOptions"
-  required
-  description="This field is required"
-/>
+</template>
 ```
 
 ## States
 
 ### Disabled Select
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Select 
-    v-model="disabledSelection"
+    v-model="selection"
     label="Disabled Select"
-    :options="basicOptions"
+    :options="options"
     disabled
     description="This select is disabled"
   />
-</div>
-
-```vue
-<Select 
-  v-model="selection"
-  label="Disabled Select"
-  :options="options"
-  disabled
-  description="This select is disabled"
-/>
-```
-
-### Form Integration
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <form @submit.prevent="handleSubmit" class="space-y-4">
-    <Select 
-      v-model="formData.category"
-      label="Category"
-      :options="categoryOptions"
-      required
-      name="category"
-    />
-    
-    <Select 
-      v-model="formData.tags"
-      label="Tags"
-      :options="tagOptions"
-      multiple
-      name="tags"
-      description="Select one or more tags"
-    />
-    
-    <Action type="submit" kind="primary">Submit</Action>
-  </form>
-</div>
-
-```vue
-<template>
-  <form @submit.prevent="handleSubmit" class="space-y-4">
-    <Select 
-      v-model="formData.category"
-      label="Category"
-      :options="categoryOptions"
-      required
-      name="category"
-    />
-    
-    <Select 
-      v-model="formData.tags"
-      label="Tags"
-      :options="tagOptions"
-      multiple
-      name="tags"
-      description="Select one or more tags"
-    />
-    
-    <Action type="submit" kind="primary">Submit</Action>
-  </form>
 </template>
-
-<script setup>
-const formData = reactive({
-  category: '',
-  tags: []
-});
-
-function handleSubmit() {
-  console.log('Form submitted:', formData);
-}
-</script>
 ```
 
 ## Best Practices
@@ -283,106 +169,21 @@ function handleSubmit() {
 
 ## Examples
 
-### Dynamic Options Loading
-
-```vue
-<template>
-  <Select 
-    v-model="selectedCity"
-    label="Select City"
-    :options="cityOptions"
-    :disabled="!selectedCountry || loadingCities"
-    description="Select a country first"
-  />
-</template>
-
-<script setup>
-const selectedCountry = ref('');
-const selectedCity = ref('');
-const loadingCities = ref(false);
-const cityOptions = ref([]);
-
-watch(selectedCountry, async (country) => {
-  if (!country) {
-    cityOptions.value = [];
-    return;
-  }
-  
-  loadingCities.value = true;
-  try {
-    const cities = await fetchCitiesForCountry(country);
-    cityOptions.value = cities.map(city => ({
-      label: city.name,
-      value: city.id
-    }));
-  } finally {
-    loadingCities.value = false;
-  }
-});
-</script>
-```
-
-### Grouped Options (using optgroup)
-
-```vue
-<template>
-  <div class="grid items-center gap-1">
-    <label :for="id" class="cursor-pointer block font-semibold">
-      {{ label }}
-    </label>
-    <select v-model="model" :id="id" class="form-select">
-      <optgroup v-for="group in groupedOptions" :key="group.label" :label="group.label">
-        <option 
-          v-for="option in group.options" 
-          :key="option.value" 
-          :value="option.value"
-          :disabled="option.disabled"
-        >
-          {{ option.label }}
-        </option>
-      </optgroup>
-    </select>
-  </div>
-</template>
-
-<script setup>
-const groupedOptions = [
-  {
-    label: 'Fruits',
-    options: [
-      { label: 'Apple', value: 'apple' },
-      { label: 'Banana', value: 'banana' }
-    ]
-  },
-  {
-    label: 'Vegetables',
-    options: [
-      { label: 'Carrot', value: 'carrot' },
-      { label: 'Broccoli', value: 'broccoli' }
-    ]
-  }
-];
-</script>
-```
-
 ### Search and Filter Integration
 
 ```vue
 <template>
-  <div class="space-y-2">
-    <TextField 
-      v-model="searchTerm"
-      placeholder="Search options..."
-      icon="material-symbols:search"
-    />
-    
-    <Select 
-      v-model="selection"
-      label="Select Option"
-      :options="filteredOptions"
-      description="Type above to filter options"
-    />
-  </div>
+  <TextField
+    v-model="searchTerm"
+    placeholder="Search options..."
+    icon="material-symbols:search"
+  />
+  <Select 
+    v-model="selection"
+    label="Select Option"
+    :options="filteredOptions"
+    description="Type above to filter options"
+  />
 </template>
 
 <script setup>

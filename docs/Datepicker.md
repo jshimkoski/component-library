@@ -6,10 +6,6 @@ The Datepicker component provides a user-friendly interface for selecting dates 
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Datepicker label="Select Date" placeholder="Choose a date" />
-</div>
-
 ```vue
 <script setup>
 const selectedDate = ref(null);
@@ -52,17 +48,7 @@ const selectedDate = ref(null);
 |------|-------------|
 | `label` | Custom content for the label. Falls back to the `label` prop if not provided. |
 
-## Variants/Options
-
-### Single Date Selection
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Datepicker 
-    mode="single"
-    label="Event Date"
-    placeholder="Select event date"
-  />
-</div>
+## Single Date Selection
 
 ```vue
 <script setup>
@@ -79,15 +65,7 @@ const eventDate = ref(null);
 </template>
 ```
 
-### Date Range Selection
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Datepicker 
-    mode="range"
-    label="Booking Period"
-    placeholder="Select check-in and check-out dates"
-  />
-</div>
+## Date Range Selection
 
 ```vue
 <script setup>
@@ -104,16 +82,7 @@ const bookingRange = ref(null);
 </template>
 ```
 
-### With Min and Max Date Constraints
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Datepicker 
-    label="Schedule Meeting"
-    placeholder="Select a date"
-    :min-date="new Date(2023, 0, 1)"
-    :max-date="new Date(2023, 11, 31)"
-  />
-</div>
+## With Min and Max Date Constraints
 
 ```vue
 <script setup>
@@ -133,15 +102,7 @@ const maxDate = new Date(2023, 11, 31); // December 31, 2023
 </template>
 ```
 
-### With Description
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Datepicker 
-    label="Delivery Date"
-    placeholder="Select preferred delivery date"
-    description="We typically deliver between 9 AM and 5 PM"
-  />
-</div>
+## With Description
 
 ```vue
 <script setup>
@@ -162,14 +123,6 @@ const deliveryDate = ref(null);
 
 ### Disabled
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <Datepicker 
-    label="Unavailable Dates"
-    placeholder="This calendar is disabled"
-    disabled
-  />
-</div>
-
 ```vue
 <Datepicker 
   v-model="unavailableDates"
@@ -181,23 +134,16 @@ const deliveryDate = ref(null);
 
 ### Required
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Datepicker 
+    v-model="requiredDate"
     label="Required Date"
     placeholder="Please select a date"
     required
     showMarker
   />
-</div>
-
-```vue
-<Datepicker 
-  v-model="requiredDate"
-  label="Required Date"
-  placeholder="Please select a date"
-  required
-  showMarker
-/>
+</template>
 ```
 
 ## Best Practices
@@ -221,24 +167,6 @@ const deliveryDate = ref(null);
 ## Examples
 
 ### Appointment Scheduling
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <form class="space-y-4">
-    <TextField label="Your Name" required showMarker />
-    <TextField label="Email" type="email" required showMarker />
-    <Datepicker 
-      label="Appointment Date"
-      placeholder="Select a date"
-      required
-      showMarker
-      description="Appointments available Monday through Friday"
-      :min-date="new Date()"
-    />
-    <div class="flex justify-end">
-      <Action kind="primary" type="submit">Schedule Appointment</Action>
-    </div>
-  </form>
-</div>
 
 ```vue
 <script setup>
@@ -268,56 +196,12 @@ function submitForm() {
       description="Appointments available Monday through Friday"
       :min-date="today"
     />
-    <div class="flex justify-end">
-      <Action kind="primary" type="submit">Schedule Appointment</Action>
-    </div>
+    <Action kind="primary" type="submit">Schedule Appointment</Action>
   </form>
 </template>
 ```
 
 ### Hotel Booking
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-  <div class="space-y-4">
-    <h3 class="text-lg font-semibold">Book Your Stay</h3>
-    <Datepicker 
-      mode="range"
-      label="Stay Dates"
-      placeholder="Select check-in and check-out dates"
-      :min-date="new Date()"
-      required
-      showMarker
-    />
-    <div class="flex items-center gap-4">
-      <div class="w-1/2">
-        <Select
-          label="Guests"
-          placeholder="Select number of guests"
-          :options="[
-            { value: '1', label: '1 Guest' },
-            { value: '2', label: '2 Guests' },
-            { value: '3', label: '3 Guests' },
-            { value: '4', label: '4 Guests' },
-          ]"
-        />
-      </div>
-      <div class="w-1/2">
-        <Select
-          label="Room Type"
-          placeholder="Select room type"
-          :options="[
-            { value: 'standard', label: 'Standard Room' },
-            { value: 'deluxe', label: 'Deluxe Room' },
-            { value: 'suite', label: 'Suite' },
-          ]"
-        />
-      </div>
-    </div>
-    <div class="flex justify-end">
-      <Action kind="primary">Check Availability</Action>
-    </div>
-  </div>
-</div>
 
 ```vue
 <script setup>
@@ -331,8 +215,7 @@ function checkAvailability() {
 </script>
 
 <template>
-  <div class="space-y-4">
-    <h3 class="text-lg font-semibold">Book Your Stay</h3>
+  <h3 class="text-lg font-semibold">Book Your Stay</h3>
     <Datepicker 
       v-model="stayDates"
       mode="range"
@@ -342,8 +225,8 @@ function checkAvailability() {
       required
       showMarker
     />
-    <div class="flex items-center gap-4">
-      <div class="w-1/2">
+
+    <div class="w-1/2">
         <Select
           v-model="guests"
           label="Guests"
@@ -355,23 +238,21 @@ function checkAvailability() {
             { value: '4', label: '4 Guests' },
           ]"
         />
-      </div>
-      <div class="w-1/2">
-        <Select
-          v-model="roomType"
-          label="Room Type"
-          placeholder="Select room type"
-          :options="[
-            { value: 'standard', label: 'Standard Room' },
-            { value: 'deluxe', label: 'Deluxe Room' },
-            { value: 'suite', label: 'Suite' },
-          ]"
-        />
-      </div>
     </div>
-    <div class="flex justify-end">
-      <Action kind="primary" @click="checkAvailability">Check Availability</Action>
+
+    <div class="w-1/2">
+      <Select
+        v-model="roomType"
+        label="Room Type"
+        placeholder="Select room type"
+        :options="[
+          { value: 'standard', label: 'Standard Room' },
+          { value: 'deluxe', label: 'Deluxe Room' },
+          { value: 'suite', label: 'Suite' },
+        ]"
+      />
     </div>
+    <Action kind="primary" @click="checkAvailability">Check Availability</Action>
   </div>
 </template>
 ```

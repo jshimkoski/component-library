@@ -6,20 +6,14 @@ The MenuItem component represents an individual interactive item within a Menu. 
 
 ## Basic Usage
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Menu label="Actions">
     <MenuItem label="Edit Document" />
     <MenuItem label="Share" />
     <MenuItem label="Download" />
   </Menu>
-</div>
-
-```vue
-<Menu label="Actions">
-  <MenuItem label="Edit Document" />
-  <MenuItem label="Share" />
-  <MenuItem label="Download" />
-</Menu>
+</template>
 ```
 
 ## Props
@@ -46,24 +40,16 @@ The MenuItem component represents an individual interactive item within a Menu. 
 |------|-------------|
 | `default` | Custom content for the menu item. Overrides the label prop. |
 
-## Variants/Options
+## Menu Items with Actions
 
-### Menu Items with Actions
-
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Menu label="Document Actions">
     <MenuItem label="Edit" @click="handleEdit" />
     <MenuItem label="Duplicate" @click="handleDuplicate" />
     <MenuItem label="Move to Trash" @click="handleDelete" />
   </Menu>
-</div>
-
-```vue
-<Menu label="Document Actions">
-  <MenuItem label="Edit" @click="handleEdit" />
-  <MenuItem label="Duplicate" @click="handleDuplicate" />
-  <MenuItem label="Move to Trash" @click="handleDelete" />
-</Menu>
+</template>
 
 <script setup>
 function handleEdit() {
@@ -80,9 +66,10 @@ function handleDelete() {
 </script>
 ```
 
-### Menu Items as Links
+## Menu Items as Links
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Menu label="Navigation">
     <MenuItem label="Home" href="/" />
     <MenuItem label="About" href="/about" />
@@ -94,86 +81,43 @@ function handleDelete() {
       rel="noopener noreferrer" 
     />
   </Menu>
-</div>
-
-```vue
-<Menu label="Navigation">
-  <MenuItem label="Home" href="/" />
-  <MenuItem label="About" href="/about" />
-  <MenuItem label="Contact" href="/contact" />
-  <MenuItem 
-    label="External Link" 
-    href="https://example.com" 
-    target="_blank" 
-    rel="noopener noreferrer" 
-  />
-</Menu>
+</template>
 ```
 
-### Menu Items with Custom Content
+## Menu Items with Custom Content
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Menu label="User Options">
     <MenuItem>
-      <div class="flex items-center gap-2">
-        <div class="w-6 h-6 rounded-full bg-success-100 flex items-center justify-center">
-          <span class="text-success-600 text-xs">✓</span>
-        </div>
+      <div class="w-6 h-6 rounded-full bg-success-100 flex items-center justify-center">
+          ✓
         <span>Mark as Complete</span>
       </div>
     </MenuItem>
     <MenuItem>
-      <div class="flex items-center gap-2">
-        <div class="w-6 h-6 rounded-full bg-warning-100 flex items-center justify-center">
-          <span class="text-warning-600 text-xs">!</span>
-        </div>
+      <div class="w-6 h-6 rounded-full bg-warning-100 flex items-center justify-center">
+          !
         <span>Flag as Important</span>
       </div>
     </MenuItem>
   </Menu>
-</div>
-
-```vue
-<Menu label="User Options">
-  <MenuItem>
-    <div class="flex items-center gap-2">
-      <div class="w-6 h-6 rounded-full bg-success-100 flex items-center justify-center">
-        <span class="text-success-600 text-xs">✓</span>
-      </div>
-      <span>Mark as Complete</span>
-    </div>
-  </MenuItem>
-  <MenuItem>
-    <div class="flex items-center gap-2">
-      <div class="w-6 h-6 rounded-full bg-warning-100 flex items-center justify-center">
-        <span class="text-warning-600 text-xs">!</span>
-      </div>
-      <span>Flag as Important</span>
-    </div>
-  </MenuItem>
-</Menu>
+</template>
 ```
 
 ## States
 
 ### Disabled Menu Items
 
-<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
+```vue
+<template>
   <Menu label="Mixed States">
     <MenuItem label="Available Action" />
     <MenuItem label="Disabled Action" disabled />
     <MenuItem label="Active Action" active />
     <MenuItem label="Disabled Link" href="/disabled" disabled />
   </Menu>
-</div>
-
-```vue
-<Menu label="Mixed States">
-  <MenuItem label="Available Action" />
-  <MenuItem label="Disabled Action" disabled />
-  <MenuItem label="Active Action" active />
-  <MenuItem label="Disabled Link" href="/disabled" disabled />
-</Menu>
+</template>
 ```
 
 ## Best Practices
@@ -188,32 +132,6 @@ function handleDelete() {
 - Provide clear visual feedback for interactive states (hover, focus, active)
 
 ## Examples
-
-### Menu with Icons and Descriptions
-
-```vue
-<Menu label="File Operations">
-  <MenuItem @click="createNew">
-    <div class="flex flex-col">
-      <div class="flex items-center gap-2">
-        <Icon icon="material-symbols:add" class="text-sm" />
-        <span class="font-medium">New Document</span>
-      </div>
-      <span class="text-xs text-base-500 ml-6">Create a new document</span>
-    </div>
-  </MenuItem>
-  
-  <MenuItem @click="openExisting">
-    <div class="flex flex-col">
-      <div class="flex items-center gap-2">
-        <Icon icon="material-symbols:folder-open" class="text-sm" />
-        <span class="font-medium">Open</span>
-      </div>
-      <span class="text-xs text-base-500 ml-6">Open an existing document</span>
-    </div>
-  </MenuItem>
-</Menu>
-```
 
 ### Conditional Menu Items
 
@@ -237,19 +155,17 @@ const isLoggedIn = ref(true);
 ### Menu Item with Keyboard Shortcuts
 
 ```vue
-<Menu label="Edit">
-  <MenuItem @click="undo">
-    <div class="flex items-center justify-between w-full">
+<template>
+  <Menu label="Edit">
+    <MenuItem @click="undo">
       <span>Undo</span>
-      <kbd class="text-xs bg-base-200 dark:bg-base-700 px-2 py-1 rounded">⌘Z</kbd>
-    </div>
-  </MenuItem>
-  
-  <MenuItem @click="redo">
-    <div class="flex items-center justify-between w-full">
+        <kbd class="text-xs bg-base-200 dark:bg-base-700 px-2 py-1 rounded">⌘Z</kbd>
+    </MenuItem>
+
+    <MenuItem @click="redo">
       <span>Redo</span>
-      <kbd class="text-xs bg-base-200 dark:bg-base-700 px-2 py-1 rounded">⌘⇧Z</kbd>
-    </div>
-  </MenuItem>
-</Menu>
+        <kbd class="text-xs bg-base-200 dark:bg-base-700 px-2 py-1 rounded">⌘⇧Z</kbd>
+    </MenuItem>
+  </Menu>
+</template>
 ```
