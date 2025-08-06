@@ -1,6 +1,14 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [v0.0.16-beta.9] - 2025-08-06
+
+- fix: simplify sync-docs script (0de6941)
+- docs: update README to reflect active development status and component work-in-progress (3e2e550)
+- fix: improve component docs (5cbec30)
+- fix: update header to reflect package name "@jasonshimmy/components" (808c077)
+
+
 ## [v0.0.16-beta.8] - 2025-08-05
 
 - fix: update header to reflect package name "@jasonshimmy/components" (808c077)
