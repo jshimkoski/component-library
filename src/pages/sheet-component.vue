@@ -1,28 +1,11 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Sheet</h1>
-
     <Prose>
+      <h1>Sheet</h1>
       <h2>Overview</h2>
       <p>The Sheet component creates a sliding panel that appears from the left or right side of the screen. It's commonly used for secondary navigation, detail panels, or forms that don't require the full screen. The Sheet component offers various configuration options including different variants, placements, and styling capabilities.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <button @click="standardSheetOpen = true">
-        Open standard sheet
-        </button>
-        <Sheet v-model="standardSheetOpen" headline="Standard Sheet">
-        <div class="p-4">
-        <p>This is a standard sheet that slides in from the right side.</p>
-        </div>
-        </Sheet>
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const standardSheetOpen = ref(false);
 &lt;/script&gt;
 
@@ -37,12 +20,8 @@ const standardSheetOpen = ref(false);
     &lt;/div&gt;
   &lt;/Sheet&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -53,36 +32,15 @@ const standardSheetOpen = ref(false);
         </thead>
         <tbody>
           <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>triggerElement</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>HTMLElement | null</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Reference to the element that triggered the sheet. Focus returns to this element when the sheet closes.</td>
-          </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>variant</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;standard&amp;quot; | &amp;quot;modal&amp;quot; | &amp;quot;inset-modal&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;standard&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Determines the visual style and behavior: &quot;standard&quot; has no overlay, &quot;modal&quot; has overlay and edge alignment, &quot;inset-modal&quot; has overlay and inset margins.</td>
-          </tr>
-          <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>headline</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">The title displayed in the sheet header.</td>
           </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>placement</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;left&amp;quot; | &amp;quot;right&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;right&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Determines if the sheet slides in from the left or right side.</td>
-          </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -104,20 +62,10 @@ const standardSheetOpen = ref(false);
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">v-model</h2>
-      
-      <Prose>
-        <p>The component supports v-model for controlling the sheet's visibility.</p>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Modal Variant</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h2>v-model</h2>
+      <p>The component supports v-model for controlling the sheet's visibility.</p>
+      <h2>Modal Variant</h2>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const modalSheetOpen = ref(false);
 &lt;/script&gt;
 
@@ -132,13 +80,8 @@ const modalSheetOpen = ref(false);
     &lt;/div&gt;
   &lt;/Sheet&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Inset Modal Variant</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h2>Inset Modal Variant</h2>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const insetModalSheetOpen = ref(false);
 &lt;/script&gt;
 
@@ -153,23 +96,8 @@ const insetModalSheetOpen = ref(false);
     &lt;/div&gt;
   &lt;/Sheet&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Left Placement</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <button @click="leftSheetOpen = true">
-        Open left sheet
-        </button>
-        <Sheet v-model="leftSheetOpen" placement="left" headline="Left Sheet">
-        <div class="p-4">
-        <p>This sheet slides in from the left side of the screen.</p>
-        </div>
-        </Sheet>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h2>Left Placement</h2>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const leftSheetOpen = ref(false);
 &lt;/script&gt;
 
@@ -184,42 +112,8 @@ const leftSheetOpen = ref(false);
     &lt;/div&gt;
   &lt;/Sheet&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Using the Footer Slot</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <button @click="formSheetOpen = true">
-        Open form sheet
-        </button>
-        <Sheet v-model="formSheetOpen" variant="modal" headline="Edit Profile">
-        <div class="p-4 space-y-4">
-        <div>
-        <label class="block mb-1">Name</label>
-        <input v-model="name" type="text" class="border rounded px-2 py-1 w-full" />
-        </div>
-        <div>
-        <label class="block mb-1">Email</label>
-        <input v-model="email" type="email" class="border rounded px-2 py-1 w-full" />
-        </div>
-        </div>
-        <template #footer="{ close }">
-        <button
-        class="px-3 py-1 border rounded"
-        @click="close"
-        >
-        Cancel
-        </button>
-        <button
-        class="px-3 py-1 bg-primary-500 text-white rounded"
-        @click="saveForm(close)"
-        >
-        Save
-        </button>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h2>Using the Footer Slot</h2>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const formSheetOpen = ref(false);
 
 function saveForm(close) {
@@ -260,23 +154,8 @@ function saveForm(close) {
     &lt;/template&gt;
   &lt;/Sheet&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Custom Headline</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <button @click="customHeadlineSheetOpen = true">
-        Open sheet with custom headline
-        </button>
-        <Sheet v-model="customHeadlineSheetOpen">
-        <template #headline>
-        <div class="w-6 h-6 rounded-full bg-green-500">
-        <span>User is Online</span>
-        </div>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h2>Custom Headline</h2>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const customHeadlineSheetOpen = ref(false);
 &lt;/script&gt;
 
@@ -297,51 +176,31 @@ const customHeadlineSheetOpen = ref(false);
     &lt;/div&gt;
   &lt;/Sheet&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Use the appropriate variant based on the content importance and user flow:</li>
-          <li>**Standard**: For non-critical content like site navigation or settings that don't require user decisions</li>
-          <li>**Modal**: For content that requires user attention or decision</li>
-          <li>**Inset Modal**: For more prominent content that visually appears more elevated/important</li>
-          <li>Consider which side the sheet should appear from:</li>
-          <li>**Right**: Better for detail views, settings, or forms (common default)</li>
-          <li>**Left**: Better for navigation menus or structure-related content</li>
-          <li>Always provide a clear headline to indicate the purpose of the sheet</li>
-          <li>For sheets with forms or actions, use the footer slot to provide consistent action buttons</li>
-          <li>Pass the <code>triggerElement</code> when possible to improve accessibility by returning focus properly</li>
-          <li>Keep content organized and scrollable for longer content</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Accessibility Considerations</h2>
-      
-      <Prose>
-        <ul>
-          <li>The component uses <code>aria-modal="true"</code> to indicate its role to assistive technologies</li>
-          <li>Focus is trapped within the sheet when modal variants are used, preventing users from accidentally interacting with content behind the overlay</li>
-          <li>The Escape key can be used to close modal variants</li>
-          <li>Focus returns to the triggering element when the sheet is closed (if <code>triggerElement</code> is provided)</li>
-          <li>Clicking outside the sheet will close modal variants</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Navigation Menu</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use the appropriate variant based on the content importance and user flow:</li>
+        <li>**Standard**: For non-critical content like site navigation or settings that don't require user decisions</li>
+        <li>**Modal**: For content that requires user attention or decision</li>
+        <li>**Inset Modal**: For more prominent content that visually appears more elevated/important</li>
+        <li>Consider which side the sheet should appear from:</li>
+        <li>**Right**: Better for detail views, settings, or forms (common default)</li>
+        <li>**Left**: Better for navigation menus or structure-related content</li>
+        <li>Always provide a clear headline to indicate the purpose of the sheet</li>
+        <li>For sheets with forms or actions, use the footer slot to provide consistent action buttons</li>
+        <li>Pass the <code>triggerElement</code> when possible to improve accessibility by returning focus properly</li>
+        <li>Keep content organized and scrollable for longer content</li>
+      </ul>
+      <h2>Accessibility Considerations</h2>
+      <ul>
+        <li>The component uses <code>aria-modal="true"</code> to indicate its role to assistive technologies</li>
+        <li>Focus is trapped within the sheet when modal variants are used, preventing users from accidentally interacting with content behind the overlay</li>
+        <li>The Escape key can be used to close modal variants</li>
+        <li>Focus returns to the triggering element when the sheet is closed (if <code>triggerElement</code> is provided)</li>
+        <li>Clicking outside the sheet will close modal variants</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>Navigation Menu</h3>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const navSheetOpen = ref(false);
 &lt;/script&gt;
 
@@ -360,13 +219,9 @@ const navSheetOpen = ref(false);
     &lt;/div&gt;
   &lt;/Sheet&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const standardSheetOpen = ref(false);
 </script>

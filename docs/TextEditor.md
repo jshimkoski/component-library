@@ -1,4 +1,4 @@
-# TextEditor
+# Text Editor
 
 ## Overview
 

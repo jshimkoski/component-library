@@ -1,31 +1,11 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">TabPanel</h1>
-
     <Prose>
+      <h1>Tab Panel</h1>
       <h2>Overview</h2>
       <p>The TabPanel component represents individual content panels within a Tabs component. Each TabPanel contains the content that will be displayed when its corresponding tab is active. It's designed to work seamlessly with the declarative API of the Tabs component.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Tabs>
-        <TabPanel label="First Tab">
-        <p>Content for the first tab panel.</p>
-        </TabPanel>
-        <TabPanel label="Second Tab">
-        <p>Content for the second tab panel.</p>
-        </TabPanel>
-        <TabPanel label="Third Tab">
-        <p>Content for the third tab panel.</p>
-        </TabPanel>
-        </Tabs>
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tabs&gt;
     &lt;TabPanel label="First Tab"&gt;
       &lt;p&gt;Content for the first tab panel.&lt;/p&gt;
@@ -38,12 +18,8 @@
     &lt;/TabPanel&gt;
   &lt;/Tabs&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -66,36 +42,15 @@
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Optional badge text displayed next to the label.</td>
           </tr>
           <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>badgeKind</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot; | &amp;quot;secondary&amp;quot; | &amp;quot;success&amp;quot; | &amp;quot;info&amp;quot; | &amp;quot;warning&amp;quot; | &amp;quot;danger&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Color theme for the badge.</td>
-          </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>icon</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String | Component</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Icon to display in the tab header.</td>
-          </tr>
-          <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>disabled</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Boolean</td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether the tab is disabled and cannot be selected.</td>
           </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>id</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String | Number</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Unique identifier for the tab panel.</td>
-          </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -109,34 +64,8 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">TabPanel with Icons</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Tabs>
-        <TabPanel label="Dashboard" icon="material-symbols:dashboard">
-        <div class="p-4">
-        <h3 class="text-lg font-semibold mb-2">Dashboard Overview</h3>
-        <p>Welcome to your dashboard. Here you can see an overview of your account.</p>
-        </div>
-        </TabPanel>
-        <TabPanel label="Settings" icon="material-symbols:settings">
-        <div class="p-4">
-        <h3 class="text-lg font-semibold mb-2">Settings</h3>
-        <p>Configure your account settings and preferences here.</p>
-        </div>
-        </TabPanel>
-        <TabPanel label="Profile" icon="material-symbols:person">
-        <div class="p-4">
-        <h3 class="text-lg font-semibold mb-2">User Profile</h3>
-        <p>Manage your personal information and profile details.</p>
-        </div>
-        </TabPanel>
-        </Tabs>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>TabPanel with Icons</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tabs&gt;
     &lt;TabPanel label="Dashboard" icon="material-symbols:dashboard"&gt;
       &lt;div class="p-4"&gt;
@@ -158,17 +87,9 @@
     &lt;/TabPanel&gt;
   &lt;/Tabs&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">States</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Disabled TabPanel</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>States</h2>
+      <h3>Disabled TabPanel</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tabs&gt;
     &lt;TabPanel label="Available"&gt;
       &lt;p class="p-4"&gt;This tab is available and can be selected.&lt;/p&gt;
@@ -181,35 +102,21 @@
     &lt;/TabPanel&gt;
   &lt;/Tabs&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Keep tab labels concise and descriptive</li>
-          <li>Use icons to enhance recognition and improve usability</li>
-          <li>Use badges sparingly to highlight important information (counts, status, etc.)</li>
-          <li>Organize content logically within each panel</li>
-          <li>Consider lazy loading for complex content in tabs that aren't immediately visible</li>
-          <li>Ensure disabled tabs provide clear feedback about why they're unavailable</li>
-          <li>Use consistent padding and spacing within tab panels</li>
-          <li>Group related content together in the same tab panel</li>
-          <li>Avoid nesting tabs within tabs for better user experience</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Settings Panel with Multiple Sections</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Keep tab labels concise and descriptive</li>
+        <li>Use icons to enhance recognition and improve usability</li>
+        <li>Use badges sparingly to highlight important information (counts, status, etc.)</li>
+        <li>Organize content logically within each panel</li>
+        <li>Consider lazy loading for complex content in tabs that aren't immediately visible</li>
+        <li>Ensure disabled tabs provide clear feedback about why they're unavailable</li>
+        <li>Use consistent padding and spacing within tab panels</li>
+        <li>Group related content together in the same tab panel</li>
+        <li>Avoid nesting tabs within tabs for better user experience</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>Settings Panel with Multiple Sections</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tabs&gt;
     &lt;TabPanel label="General" icon="material-symbols:settings"&gt;
       &lt;div class="p-6 space-y-6"&gt;
@@ -266,13 +173,8 @@
     &lt;/TabPanel&gt;
   &lt;/Tabs&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Dynamic Content Loading</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Dynamic Content Loading</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tabs @tab-change="handleTabChange"&gt;
     &lt;TabPanel 
       v-for="category in categories" 
@@ -329,12 +231,9 @@ async function handleTabChange(tabIndex) {
   }
 }
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import Tabs from '../components/Tabs.vue';
-
 </script>

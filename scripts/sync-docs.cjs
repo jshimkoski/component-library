@@ -3,7 +3,14 @@
 /**
  * Documentation Synchronization Script
  * 
- * This script automatically synchronizes component documentation from docs/ 
+ * This script automatically     return `<template>
+  <div class="content">
+    <Prose>
+      <h1>${title}</h1>
+${htmlContent}
+    </Prose>
+  </div>
+</template>`;zes component documentation from docs/ 
  * to their corresponding Vue component pages in src/pages/.
  * 
  * Usage:
@@ -90,38 +97,290 @@ class VueComponentGenerator {
    */
   generateVuePage(parsedData, componentName) {
     const title = parsedData.title || componentName;
-    const sections = parsedData.sections || [];
+    const content = parsedData.rawContent || '';
     
-    const templateContent = this.generateTemplate(title, sections);
-    const scriptContent = this.generateScript(parsedData, componentName);
+    // Convert the entire markdown content to HTML, excluding the title
+    const contentWithoutTitle = this.removeMainTitle(content);
+    const htmlContent = this.convertMarkdownToHtml(contentWithoutTitle);
     
     return `<template>
   <div class="content">
-${templateContent}
+    <Prose>
+      <h1>${title}</h1>
+${htmlContent}
+    </Prose>
   </div>
 </template>
 
-${scriptContent}`;
+<script setup lang="ts">
+</script>`;
   }
 
   /**
-   * Generate the template section of the Vue component
+   * Remove the main title (# Title) from markdown content
    */
-  generateTemplate(title, sections) {
-    const contentParts = [];
+  removeMainTitle(content) {
+    const lines = content.split('\n');
+    let startIndex = 0;
     
-    // Add title
-    contentParts.push(`    <h1 class="text-3xl font-bold mb-6">${title}</h1>`);
-    
-    // Process sections
-    for (const section of sections) {
-      const sectionContent = this.processSection(section);
-      if (sectionContent) {
-        contentParts.push(sectionContent);
+    // Find and skip the first # title line
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].startsWith('# ')) {
+        startIndex = i + 1;
+        break;
       }
     }
     
-    return contentParts.join('\n\n');
+    return lines.slice(startIndex).join('\n');
+  }
+
+  /**
+   * Convert markdown content to HTML
+   */
+  convertMarkdownToHtml(content) {
+    const lines = content.split('\n');
+    const htmlParts = [];
+    let inList = false;
+    let inCodeBlock = false;
+    let currentCodeBlock = [];
+    let codeLanguage = '';
+    let inTable = false;
+    let tableLines = [];
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const trimmedLine = line.trim();
+      
+      // Handle code blocks
+      if (trimmedLine.startsWith('```')) {
+        if (inCodeBlock) {
+          // End of code block
+          if (currentCodeBlock.length > 0) {
+            const codeContent = currentCodeBlock.join('\n');
+            const escapedCode = this.escapeHtml(codeContent);
+            htmlParts.push(`      <pre><code${codeLanguage ? ` class="language-${codeLanguage}"` : ''}>${escapedCode}</code></pre>`);
+          }
+          inCodeBlock = false;
+          currentCodeBlock = [];
+          codeLanguage = '';
+        } else {
+          // Start of code block
+          inCodeBlock = true;
+          const langMatch = trimmedLine.match(/^```(\w+)/);
+          if (langMatch) {
+            codeLanguage = langMatch[1];
+          }
+        }
+        continue;
+      }
+      
+      if (inCodeBlock) {
+        currentCodeBlock.push(line);
+        continue;
+      }
+      
+      // Handle tables
+      if (trimmedLine.includes('|') && (trimmedLine.startsWith('|') || trimmedLine.split('|').length >= 3)) {
+        if (!inTable) {
+          inTable = true;
+          tableLines = [];
+        }
+        tableLines.push(trimmedLine);
+        continue;
+      } else if (inTable) {
+        // End of table
+        const tableHtml = this.convertTableToHtml(tableLines);
+        htmlParts.push(tableHtml);
+        inTable = false;
+        tableLines = [];
+        // Continue processing current line
+      }
+      
+      // Skip empty lines
+      if (!trimmedLine) {
+        // Close any open list
+        if (inList) {
+          htmlParts.push(inList === 'ul' ? '      </ul>' : '      </ol>');
+          inList = false;
+        }
+        continue;
+      }
+      
+      // Handle lists
+      if (trimmedLine.startsWith('- ')) {
+        if (inList && inList !== 'ul') {
+          htmlParts.push('      </ol>');
+          inList = false;
+        }
+        if (!inList) {
+          htmlParts.push('      <ul>');
+          inList = 'ul';
+        }
+        const listItem = trimmedLine.substring(2).trim();
+        const formattedItem = this.formatInlineCode(listItem);
+        htmlParts.push(`        <li>${formattedItem}</li>`);
+      } else if (/^\d+\.\s/.test(trimmedLine)) {
+        // Handle numbered lists
+        if (inList && inList !== 'ol') {
+          htmlParts.push('      </ul>');
+          inList = false;
+        }
+        if (!inList) {
+          htmlParts.push('      <ol>');
+          inList = 'ol';
+        }
+        const listItem = trimmedLine.replace(/^\d+\.\s/, '').trim();
+        const formattedItem = this.formatInlineCode(listItem);
+        htmlParts.push(`        <li>${formattedItem}</li>`);
+      } else {
+        // Close any open list
+        if (inList) {
+          htmlParts.push(inList === 'ul' ? '      </ul>' : '      </ol>');
+          inList = false;
+        }
+        
+        // Handle headings
+        if (trimmedLine.startsWith('### ')) {
+          const heading = trimmedLine.substring(4).trim();
+          const escapedHeading = this.escapeHtml(heading);
+          htmlParts.push(`      <h3>${escapedHeading}</h3>`);
+        } else if (trimmedLine.startsWith('## ')) {
+          const heading = trimmedLine.substring(3).trim();
+          const escapedHeading = this.escapeHtml(heading);
+          htmlParts.push(`      <h2>${escapedHeading}</h2>`);
+        } else if (trimmedLine.startsWith('# ')) {
+          // Skip main headings as they're handled separately
+          continue;
+        } else if (trimmedLine.match(/^<\/?.+\/?>/)) {
+          // Skip HTML tags (both opening and closing) as they're typically example containers
+          continue;
+        } else {
+          // Regular paragraph
+          const formattedLine = this.formatInlineCode(trimmedLine);
+          htmlParts.push(`      <p>${formattedLine}</p>`);
+        }
+      }
+    }
+    
+    // Close any remaining code block
+    if (inCodeBlock && currentCodeBlock.length > 0) {
+      const codeContent = currentCodeBlock.join('\n');
+      const escapedCode = this.escapeHtml(codeContent);
+      htmlParts.push(`      <pre><code${codeLanguage ? ` class="language-${codeLanguage}"` : ''}>${escapedCode}</code></pre>`);
+    }
+    
+    // Close any remaining table
+    if (inTable && tableLines.length > 0) {
+      const tableHtml = this.convertTableToHtml(tableLines);
+      htmlParts.push(tableHtml);
+    }
+    
+    // Close any open list
+    if (inList) {
+      htmlParts.push(inList === 'ul' ? '      </ul>' : '      </ol>');
+    }
+    
+    return htmlParts.join('\n');
+  }
+
+  /**
+   * Convert table lines to HTML
+   */
+  convertTableToHtml(tableLines) {
+    if (tableLines.length < 2) {
+      return '      <p>No table data found</p>';
+    }
+    
+    // Parse header
+    const headerLine = tableLines[0];
+    const header = this.parseTableRow(headerLine);
+    
+    // Parse data rows (skip separator line at index 1)
+    const dataRows = [];
+    for (let i = 2; i < tableLines.length; i++) {
+      const row = this.parseTableRow(tableLines[i]);
+      if (row.length === header.length) {
+        dataRows.push(row);
+      }
+    }
+    
+    // Generate HTML table
+    const tableHtml = [
+      '      <table class="w-full text-left border-collapse">',
+      '        <thead>',
+      '          <tr>'
+    ];
+    
+    for (const cell of header) {
+      tableHtml.push(`            <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">${cell}</th>`);
+    }
+    
+    tableHtml.push('          </tr>');
+    tableHtml.push('        </thead>');
+    tableHtml.push('        <tbody>');
+    
+    for (const row of dataRows) {
+      tableHtml.push('          <tr>');
+      for (const cell of row) {
+        tableHtml.push(`            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">${cell}</td>`);
+      }
+      tableHtml.push('          </tr>');
+    }
+    
+    tableHtml.push('        </tbody>');
+    tableHtml.push('      </table>');
+    
+    return tableHtml.join('\n');
+  }
+
+  /**
+   * Parse a table row and return array of cells
+   */
+  parseTableRow(line) {
+    return line
+      .split('|')
+      .map(cell => cell.trim())
+      .filter((cell, index, arr) => {
+        // Remove empty cells at start and end (from leading/trailing |)
+        return !(index === 0 && cell === '') && !(index === arr.length - 1 && cell === '');
+      })
+      .map(cell => {
+        // Format inline code in table cells
+        const formatted = this.formatInlineCode(cell);
+        // Escape any remaining HTML in table cells
+        const escaped = formatted.replace(/"/g, '&quot;');
+        return escaped;
+      });
+  }
+
+  /**
+   * Format inline code within text
+   */
+  formatInlineCode(text) {
+    // Handle inline code blocks first
+    let result = text.replace(/`([^`]+)`/g, (match, code) => {
+      return `<code>${this.escapeHtml(code)}</code>`;
+    });
+    
+    // Escape all remaining angle brackets
+    result = result.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    
+    // Restore our code tags
+    result = result.replace(/&lt;code&gt;/g, '<code>').replace(/&lt;\/code&gt;/g, '</code>');
+    
+    return result;
+  }
+
+  /**
+   * Escape HTML characters for code display
+   */
+  escapeHtml(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\{\{/g, '&#123;&#123;')
+      .replace(/\}\}/g, '&#125;&#125;');
   }
 
   /**
@@ -134,8 +393,6 @@ ${scriptContent}`;
     // Special handling for different section types
     if (title.toLowerCase() === 'overview') {
       return this.generateOverviewSection(content);
-    } else if (title.toLowerCase() === 'basic usage') {
-      return this.generateBasicUsageSection(title, content);
     } else if (['props', 'events', 'slots'].includes(title.toLowerCase())) {
       // Check if content contains a table
       if (content.includes('|') && content.split('\n').filter(line => line.includes('|')).length >= 2) {
@@ -144,19 +401,10 @@ ${scriptContent}`;
         // Handle as prose content for non-table Events/Slots
         return this.generateProseSection(title, content);
       }
-    } else if (this.isExampleSection(title)) {
-      return this.generateExampleSection(title, content);
     } else {
-      return this.generateGenericSection(title, content);
+      // All other sections as prose with code snippets
+      return this.generateProseSection(title, content);
     }
-  }
-
-  /**
-   * Check if a section is an example/variant/state section
-   */
-  isExampleSection(title) {
-    const keywords = ['example', 'variant', 'state', 'best practices', 'accessibility'];
-    return keywords.some(keyword => title.toLowerCase().includes(keyword));
   }
 
   /**
@@ -188,53 +436,6 @@ ${scriptContent}`;
   }
 
   /**
-   * Generate basic usage section with example and code
-   */
-  generateBasicUsageSection(title, content) {
-    const codeBlocks = this.extractCodeBlocks(content);
-    const divExamples = this.extractDivExamples(content);
-    
-    let basicExample = '';
-    let codeExample = '';
-    
-    // Prefer div examples if they exist (legacy support)
-    if (divExamples.length > 0) {
-      basicExample = divExamples[0];
-    }
-    
-    if (codeBlocks.length > 0) {
-      codeExample = codeBlocks[0];
-      
-      // If no div example, generate live example from code
-      if (!basicExample) {
-        const liveExample = this.generateLiveExampleFromCode(codeExample);
-        if (liveExample) {
-          basicExample = liveExample;
-        }
-      }
-    }
-    
-    // If no specific example found, create a placeholder
-    if (!basicExample && !codeExample) {
-      const componentName = title.replace(/\s+/g, '');
-      basicExample = `<${componentName} label="Click me" />`;
-      codeExample = `<${componentName} label="Click me" />`;
-    }
-    
-    return `    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">${title}</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        ${basicExample}
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>${this.escapeHtml(codeExample)}</code></pre>
-      </div>
-    </section>`;
-  }
-
-  /**
    * Generate a section with a table (Props, Events, Slots)
    */
   generateTableSection(title, content) {
@@ -244,188 +445,6 @@ ${scriptContent}`;
       <h2 class="text-xl font-semibold mb-4">${title}</h2>
       ${tableHtml}
     </section>`;
-  }
-
-  /**
-   * Generate example sections
-   */
-  generateExampleSection(title, content) {
-    if (['best practices', 'accessibility considerations'].includes(title.toLowerCase())) {
-      return this.generateProseSection(title, content);
-    }
-    
-    const subsections = this.extractSubsections(content);
-    
-    const sectionContent = [`    <section class="mb-10">`];
-    sectionContent.push(`      <h2 class="text-xl font-semibold mb-4">${title}</h2>`);
-    
-    if (subsections.length === 0) {
-      const processedContent = this.processContentBlock(content);
-      sectionContent.push(`      ${processedContent}`);
-    } else {
-      for (const subsection of subsections) {
-        const subsectionHtml = this.processSubsection(subsection);
-        sectionContent.push(`      ${subsectionHtml}`);
-      }
-    }
-    
-    sectionContent.push('    </section>');
-    
-    return sectionContent.join('\n');
-  }
-
-  /**
-   * Generate a section with mixed content (interactive examples + code)
-   */
-  generateMixedContentSection(title, content, divExamples, codeBlocks) {
-    const sectionParts = [`    <section class="mb-10">`];
-    sectionParts.push(`      <h2 class="text-xl font-semibold mb-4">${title}</h2>`);
-    
-    // Generate live example from code block (if no div examples)
-    if (divExamples.length === 0 && codeBlocks.length > 0) {
-      const liveExample = this.generateLiveExampleFromCode(codeBlocks[0]);
-      if (liveExample) {
-        sectionParts.push(`      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">`);
-        sectionParts.push(`        ${liveExample}`);
-        sectionParts.push(`      </div>`);
-      }
-    }
-    
-    // Add interactive example from div (legacy support)
-    if (divExamples.length > 0) {
-      sectionParts.push(`      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">`);
-      sectionParts.push(`        ${divExamples[0]}`);
-      sectionParts.push(`      </div>`);
-    }
-    
-    // Add any descriptive text content (non-div, non-code)
-    const textContent = this.extractTextContent(content);
-    if (textContent.trim()) {
-      sectionParts.push(`      <Prose>`);
-      const proseContent = this.convertToProseHtml(textContent);
-      sectionParts.push(`        ${proseContent}`);
-      sectionParts.push(`      </Prose>`);
-    }
-    
-    // Add code example
-    if (codeBlocks.length > 0) {
-      sectionParts.push(`      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">`);
-      sectionParts.push(`        <pre class="text-sm overflow-x-auto"><code>${this.escapeHtml(codeBlocks[0])}</code></pre>`);
-      sectionParts.push(`      </div>`);
-    }
-    
-    sectionParts.push(`    </section>`);
-    return sectionParts.join('\n');
-  }
-
-  /**
-   * Generate a section with only interactive content
-   */
-  generateInteractiveSection(title, content, divExamples) {
-    const sectionParts = [`    <section class="mb-10">`];
-    sectionParts.push(`      <h2 class="text-xl font-semibold mb-4">${title}</h2>`);
-    
-    sectionParts.push(`      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">`);
-    sectionParts.push(`        ${divExamples[0]}`);
-    sectionParts.push(`      </div>`);
-    
-    // Add any descriptive text content
-    const textContent = this.extractTextContent(content);
-    if (textContent.trim()) {
-      sectionParts.push(`      <Prose>`);
-      const proseContent = this.convertToProseHtml(textContent);
-      sectionParts.push(`        ${proseContent}`);
-      sectionParts.push(`      </Prose>`);
-    }
-    
-    sectionParts.push(`    </section>`);
-    return sectionParts.join('\n');
-  }
-
-  /**
-   * Generate a section with only code content
-   */
-  generateCodeSection(title, content, codeBlocks) {
-    const sectionParts = [`    <section class="mb-10">`];
-    sectionParts.push(`      <h2 class="text-xl font-semibold mb-4">${title}</h2>`);
-    
-    // Generate live example from code block
-    if (codeBlocks.length > 0) {
-      const liveExample = this.generateLiveExampleFromCode(codeBlocks[0]);
-      if (liveExample) {
-        sectionParts.push(`      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">`);
-        sectionParts.push(`        ${liveExample}`);
-        sectionParts.push(`      </div>`);
-      }
-    }
-    
-    // Add any descriptive text content
-    const textContent = this.extractTextContent(content);
-    if (textContent.trim()) {
-      sectionParts.push(`      <Prose>`);
-      const proseContent = this.convertToProseHtml(textContent);
-      sectionParts.push(`        ${proseContent}`);
-      sectionParts.push(`      </Prose>`);
-    }
-    
-    sectionParts.push(`      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">`);
-    sectionParts.push(`        <pre class="text-sm overflow-x-auto"><code>${this.escapeHtml(codeBlocks[0])}</code></pre>`);
-    sectionParts.push(`      </div>`);
-    
-    sectionParts.push(`    </section>`);
-    return sectionParts.join('\n');
-  }
-
-  /**
-   * Extract text content (non-div, non-code blocks)
-   */
-  extractTextContent(content) {
-    const lines = content.split('\n');
-    const textLines = [];
-    let inCodeBlock = false;
-    let inDivBlock = false;
-    let divDepth = 0;
-    
-    for (const line of lines) {
-      const trimmedLine = line.trim();
-      
-      // Skip empty lines
-      if (!trimmedLine) continue;
-      
-      // Handle code blocks
-      if (trimmedLine.startsWith('```')) {
-        inCodeBlock = !inCodeBlock;
-        continue;
-      }
-      
-      if (inCodeBlock) continue;
-      
-      // Handle div blocks
-      if (trimmedLine.startsWith('<div')) {
-        inDivBlock = true;
-        divDepth++;
-        continue;
-      }
-      
-      if (inDivBlock) {
-        if (trimmedLine.includes('<div')) divDepth++;
-        if (trimmedLine.includes('</div>')) {
-          divDepth--;
-          if (divDepth === 0) {
-            inDivBlock = false;
-          }
-        }
-        continue;
-      }
-      
-      // Skip section headers
-      if (trimmedLine.startsWith('#')) continue;
-      
-      // This is text content
-      textLines.push(trimmedLine);
-    }
-    
-    return textLines.join('\n');
   }
 
   /**
@@ -441,139 +460,6 @@ ${scriptContent}`;
         ${proseContent}
       </Prose>
     </section>`;
-  }
-
-  /**
-   * Generate a generic section
-   */
-  generateGenericSection(title, content) {
-    const divExamples = this.extractDivExamples(content);
-    const codeBlocks = this.extractCodeBlocks(content);
-    
-    // If section has both div examples and code blocks, handle as mixed content
-    if (divExamples.length > 0 && codeBlocks.length > 0) {
-      return this.generateMixedContentSection(title, content, divExamples, codeBlocks);
-    }
-    
-    // If section has only div examples, handle as interactive content
-    if (divExamples.length > 0) {
-      return this.generateInteractiveSection(title, content, divExamples);
-    }
-    
-    // If section has only code blocks, handle as code section
-    if (codeBlocks.length > 0) {
-      return this.generateCodeSection(title, content, codeBlocks);
-    }
-    
-    return this.generateProseSection(title, content);
-  }
-
-  /**
-   * Extract code blocks from markdown content
-   */
-  extractCodeBlocks(content) {
-    const pattern = /```(?:vue)?\n(.*?)\n```/gs;
-    const matches = [];
-    let match;
-    
-    while ((match = pattern.exec(content)) !== null) {
-      matches.push(match[1].trim());
-    }
-    
-    return matches;
-  }
-
-  /**
-   * Generate live example from Vue code snippet
-   */
-  generateLiveExampleFromCode(codeBlock) {
-    if (!codeBlock || !codeBlock.trim()) {
-      return null;
-    }
-
-    try {
-      // Parse the Vue code to extract components
-      const templateMatch = codeBlock.match(/<template[^>]*>(.*?)<\/template>/s);
-      let templateContent = '';
-      
-      if (templateMatch) {
-        // Full Vue SFC - extract template content
-        templateContent = templateMatch[1].trim();
-      } else {
-        // Just component tags - use as is
-        templateContent = codeBlock.trim();
-      }
-
-      // Clean up the template content and format for live example
-      templateContent = templateContent
-        .split('\n')
-        .map(line => line.trim())
-        .filter(line => line.length > 0)
-        .join('\n        ');
-
-      return templateContent;
-    } catch (error) {
-      console.warn('Could not parse code block for live example:', error.message);
-      return null;
-    }
-  }
-
-  /**
-   * Extract component examples from <div> blocks
-   */
-  extractDivExamples(content) {
-    const matches = [];
-    const lines = content.split('\n');
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      
-      // Look for div with bg-base-50 class
-      if (line.includes('<div') && line.includes('bg-base-50')) {
-        const startIndex = i;
-        let divCount = 1; // Count the opening div
-        let endIndex = -1;
-        const contentLines = [];
-        
-        // Find the matching closing div
-        for (let j = i + 1; j < lines.length; j++) {
-          const currentLine = lines[j];
-          
-          // Count opening and closing divs
-          const openingDivs = (currentLine.match(/<div/g) || []).length;
-          const closingDivs = (currentLine.match(/<\/div>/g) || []).length;
-          
-          divCount += openingDivs - closingDivs;
-          
-          if (divCount === 0) {
-            endIndex = j;
-            break;
-          } else {
-            contentLines.push(currentLine);
-          }
-        }
-        
-        if (endIndex !== -1) {
-          // Extract the content between the divs (excluding the wrapper div)
-          let innerContent = contentLines.join('\n').trim();
-          
-          if (innerContent) {
-            // Clean up indentation
-            const cleanedLines = innerContent
-              .split('\n')
-              .map(line => line.trim())
-              .filter(line => line.length > 0);
-            
-            if (cleanedLines.length > 0) {
-              const formattedContent = cleanedLines.join('\n        ');
-              matches.push(formattedContent);
-            }
-          }
-        }
-      }
-    }
-    
-    return matches;
   }
 
   /**
@@ -650,219 +536,126 @@ ${scriptContent}`;
   }
 
   /**
-   * Parse a table row from markdown
-   */
-  parseTableRow(line) {
-    // Handle lines that start and end with |
-    if (line.startsWith('|') && line.endsWith('|')) {
-      line = line.slice(1, -1);
-    }
-    
-    // Split by | but be careful about escaped pipes and pipes in code blocks
-    const cells = [];
-    let currentCell = '';
-    let inCodeBlock = false;
-    let escapeNext = false;
-    
-    for (let i = 0; i < line.length; i++) {
-      const char = line[i];
-      const nextChar = line[i + 1];
-      
-      if (escapeNext) {
-        currentCell += char;
-        escapeNext = false;
-        continue;
-      }
-      
-      if (char === '\\') {
-        // Handle escaped characters - don't include the backslash in output
-        if (nextChar === '|') {
-          // This is an escaped pipe, add the pipe without the backslash
-          currentCell += '|';
-          i++; // Skip the next character since we've processed it
-          continue;
-        } else {
-          // For other escaped characters, include the backslash
-          escapeNext = true;
-          currentCell += char;
-          continue;
-        }
-      }
-      
-      if (char === '`') {
-        inCodeBlock = !inCodeBlock;
-        currentCell += char;
-        continue;
-      }
-      
-      if (char === '|' && !inCodeBlock) {
-        cells.push(currentCell.trim());
-        currentCell = '';
-        continue;
-      }
-      
-      currentCell += char;
-    }
-    
-    // Add the last cell
-    if (currentCell || cells.length > 0) {
-      cells.push(currentCell.trim());
-    }
-    
-    return cells;
-  }
-
-  /**
-   * Extract subsections from content
-   */
-  extractSubsections(content) {
-    const subsections = [];
-    const lines = content.split('\n');
-    let currentSubsection = null;
-    let currentContent = [];
-    
-    for (const line of lines) {
-      if (line.startsWith('### ')) {
-        if (currentSubsection) {
-          subsections.push({
-            title: currentSubsection,
-            content: currentContent.join('\n').trim()
-          });
-        }
-        currentSubsection = line.substring(4).trim();
-        currentContent = [];
-      } else {
-        currentContent.push(line);
-      }
-    }
-    
-    if (currentSubsection) {
-      subsections.push({
-        title: currentSubsection,
-        content: currentContent.join('\n').trim()
-      });
-    }
-    
-    return subsections;
-  }
-
-  /**
-   * Process a subsection with examples
-   */
-  processSubsection(subsection) {
-    const title = subsection.title;
-    const content = subsection.content;
-    
-    const divExamples = this.extractDivExamples(content);
-    const codeBlocks = this.extractCodeBlocks(content);
-    
-    const htmlParts = [`<h3 class="text-lg font-medium mt-6 mb-3">${title}</h3>`];
-    
-    // Add example div
-    const exampleContent = divExamples.length > 0 ? divExamples[0] : '<!-- Add interactive example here -->';
-    htmlParts.push('<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">');
-    
-    // Handle multi-line content properly
-    if (exampleContent.includes('\n')) {
-      htmlParts.push(`        ${exampleContent}`);
-    } else {
-      htmlParts.push(`  ${exampleContent}`);
-    }
-    
-    htmlParts.push('</div>');
-    
-    // Add code block if found
-    if (codeBlocks.length > 0) {
-      const code = codeBlocks[0];
-      const escapedCode = this.escapeHtml(code);
-      htmlParts.push('<div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">');
-      htmlParts.push(`  <pre class="text-sm overflow-x-auto"><code>${escapedCode}</code></pre>`);
-      htmlParts.push('</div>');
-    }
-    
-    return htmlParts.join('\n      ');
-  }
-
-  /**
-   * Process a content block that may contain examples
-   */
-  processContentBlock(content) {
-    const divExamples = this.extractDivExamples(content);
-    const codeBlocks = this.extractCodeBlocks(content);
-    
-    if (divExamples.length === 0 && codeBlocks.length === 0) {
-      return `<p>${content.substring(0, 100)}...</p>`;
-    }
-    
-    const htmlParts = [];
-    
-    if (divExamples.length > 0) {
-      htmlParts.push('<div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">');
-      
-      const exampleContent = divExamples[0];
-      if (exampleContent.includes('\n')) {
-        htmlParts.push(`        ${exampleContent}`);
-      } else {
-        htmlParts.push(`  ${exampleContent}`);
-      }
-      
-      htmlParts.push('</div>');
-    }
-    
-    if (codeBlocks.length > 0) {
-      htmlParts.push('<div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">');
-      htmlParts.push(`  <pre class="text-sm overflow-x-auto"><code>${this.escapeHtml(codeBlocks[0])}</code></pre>`);
-      htmlParts.push('</div>');
-    }
-    
-    return htmlParts.join('\n      ');
-  }
-
-  /**
    * Convert markdown content to HTML for Prose component
    */
   convertToProseHtml(content) {
     const lines = content.split('\n');
     const htmlParts = [];
     let inList = false;
+    let inCodeBlock = false;
+    let currentCodeBlock = [];
+    let codeLanguage = '';
     
     for (const line of lines) {
       const trimmedLine = line.trim();
+      
+      // Handle code blocks
+      if (trimmedLine.startsWith('```')) {
+        if (inCodeBlock) {
+          // End of code block
+          if (currentCodeBlock.length > 0) {
+            const codeContent = currentCodeBlock.join('\n');
+            const escapedCode = this.escapeHtml(codeContent);
+            htmlParts.push(`<pre><code${codeLanguage ? ` class="language-${codeLanguage}"` : ''}>${escapedCode}</code></pre>`);
+          }
+          inCodeBlock = false;
+          currentCodeBlock = [];
+          codeLanguage = '';
+        } else {
+          // Start of code block
+          inCodeBlock = true;
+          // Extract language if specified (e.g., ```vue, ```javascript)
+          const langMatch = trimmedLine.match(/^```(\w+)/);
+          if (langMatch) {
+            codeLanguage = langMatch[1];
+          }
+        }
+        continue;
+      }
+      
+      if (inCodeBlock) {
+        currentCodeBlock.push(line); // Preserve original line formatting in code blocks
+        continue;
+      }
+      
+      // Skip empty lines
       if (!trimmedLine) continue;
       
+      // Handle lists
       if (trimmedLine.startsWith('- ')) {
+        if (inList && inList !== 'ul') {
+          htmlParts.push('</ol>');
+          inList = false;
+        }
         if (!inList) {
           htmlParts.push('<ul>');
-          inList = true;
+          inList = 'ul';
         }
         const listItem = trimmedLine.substring(2).trim();
-        const formattedItem = listItem.replace(/`([^`]+)`/g, (match, code) => {
-          return `<code>${this.escapeHtml(code)}</code>`;
-        });
+        const formattedItem = this.formatInlineCode(listItem);
         htmlParts.push(`  <li>${formattedItem}</li>`);
-      } else {
-        if (inList) {
+      } else if (/^\d+\.\s/.test(trimmedLine)) {
+        // Handle numbered lists
+        if (inList && inList !== 'ol') {
           htmlParts.push('</ul>');
           inList = false;
         }
+        if (!inList) {
+          htmlParts.push('<ol>');
+          inList = 'ol';
+        }
+        const listItem = trimmedLine.replace(/^\d+\.\s/, '').trim();
+        const formattedItem = this.formatInlineCode(listItem);
+        htmlParts.push(`  <li>${formattedItem}</li>`);
+      } else {
+        // Close any open list
+        if (inList) {
+          htmlParts.push(inList === 'ul' ? '</ul>' : '</ol>');
+          inList = false;
+        }
         
-        if (!trimmedLine.startsWith('#') && 
-            !trimmedLine.startsWith('<div') && 
-            !trimmedLine.startsWith('```')) {
-          const formattedLine = trimmedLine.replace(/`([^`]+)`/g, (match, code) => {
-            return `<code>${this.escapeHtml(code)}</code>`;
-          });
-          htmlParts.push(`<p>${formattedLine}</p>`);
+        // Handle headings
+        if (trimmedLine.startsWith('### ')) {
+          const heading = trimmedLine.substring(4).trim();
+          // Escape HTML characters in method signatures
+          const escapedHeading = this.escapeHtml(heading);
+          htmlParts.push(`<h3>${escapedHeading}</h3>`);
+        } else if (trimmedLine.startsWith('## ')) {
+          const heading = trimmedLine.substring(3).trim();
+          // Escape HTML characters in method signatures
+          const escapedHeading = this.escapeHtml(heading);
+          htmlParts.push(`<h2>${escapedHeading}</h2>`);
+        } else if (trimmedLine.startsWith('# ')) {
+          // Skip main headings as they're handled separately
+          continue;
+        } else if (trimmedLine.startsWith('<div') || trimmedLine.startsWith('<form') || trimmedLine.match(/^<\/?\w+/)) {
+          // Skip HTML tags (both opening and closing) as they're typically example containers
+          continue;
+        } else {
+          // Regular paragraph - skip HTML tags and closing tags
+          if (!trimmedLine.match(/^<\/?\w+/)) {
+            const formattedLine = this.formatInlineCode(trimmedLine);
+            htmlParts.push(`<p>${formattedLine}</p>`);
+          }
         }
       }
     }
     
+    // Close any remaining code block
+    if (inCodeBlock && currentCodeBlock.length > 0) {
+      const codeContent = currentCodeBlock.join('\n');
+      const escapedCode = this.escapeHtml(codeContent);
+      htmlParts.push(`<pre><code${codeLanguage ? ` class="language-${codeLanguage}"` : ''}>${escapedCode}</code></pre>`);
+    }
+    
+    // Close any open list
     if (inList) {
-      htmlParts.push('</ul>');
+      htmlParts.push(inList === 'ul' ? '</ul>' : '</ol>');
     }
     
     return htmlParts.join('\n        ');
   }
+
 
   /**
    * Escape HTML characters for code display
@@ -876,341 +669,7 @@ ${scriptContent}`;
       .replace(/\}\}/g, '&#125;&#125;');
   }
 
-  /**
-   * Generate the script section of the Vue component
-   */
-  generateScript(parsedData, componentName) {
-    // First generate the template to see what variables and components are actually used
-    const sections = parsedData.sections || [];
-    const templateContent = this.generateTemplate(parsedData.title || componentName, sections);
-    
-    // Extract variables that are actually used in the final template
-    const usedVariables = this.extractUsedVariables(templateContent);
-    const usedComponents = this.extractUsedComponents(templateContent, componentName);
-    
-    if (usedVariables.length === 0 && usedComponents.length === 0) {
-      return '<script setup lang="ts">\n</script>';
-    }
-    
-    // Now find declarations for these variables from the documentation
-    const variableDeclarations = this.findVariableDeclarations(parsedData, usedVariables);
-    
-    const imports = [];
-    const scriptLines = [];
-    
-    // Add Vue imports if needed
-    const vueImports = [];
-    if (variableDeclarations.some(v => v.includes('ref('))) {
-      vueImports.push('ref');
-    }
-    if (variableDeclarations.some(v => v.includes('reactive('))) {
-      vueImports.push('reactive');
-    }
-    
-    if (vueImports.length > 0) {
-      imports.push(`import { ${vueImports.join(', ')} } from 'vue';`);
-    }
-    
-    // Add component imports
-    for (const comp of usedComponents) {
-      if (comp === 'Icon') {
-        imports.push(`import { Icon } from '@iconify/vue';`);
-      } else {
-        imports.push(`import ${comp} from '../components/${comp}.vue';`);
-      }
-    }
-    
-    if (imports.length > 0) {
-      scriptLines.push(...imports);
-      scriptLines.push('');
-    }
-    scriptLines.push(...variableDeclarations);
-    
-    return `<script setup lang="ts">
-${scriptLines.join('\n')}
-</script>`;
-  }
 
-  /**
-   * Extract variables that are actually used in the template
-   */
-  extractUsedVariables(templateContent) {
-    const variables = new Set();
-    
-    // Only look at the first interactive example section (Basic Usage)
-    // This avoids picking up variables from later complex examples
-    const basicUsageMatch = templateContent.match(/<section class="mb-10">\s*<h2 class="text-xl font-semibold mb-4">Basic Usage<\/h2>([\s\S]*?)<\/section>/);
-    
-    let contentToAnalyze = templateContent;
-    if (basicUsageMatch) {
-      contentToAnalyze = basicUsageMatch[1];
-    }
-    
-    // Extract v-model variables
-    const vModelMatches = contentToAnalyze.match(/v-model="([^"]+)"/g);
-    if (vModelMatches) {
-      for (const match of vModelMatches) {
-        const varName = match.match(/v-model="([^"]+)"/)[1];
-        if (!varName.includes('.') && this.isValidVariableName(varName)) {
-          variables.add(varName);
-        }
-      }
-    }
-    
-    // Extract bound variables (:prop="variable") - but only actual variables, not literals
-    const bindMatches = contentToAnalyze.match(/:[\w-]+="([^"]+)"/g);
-    if (bindMatches) {
-      for (const match of bindMatches) {
-        const varName = match.match(/:[\w-]+="([^"]+)"/)[1];
-        if (this.isValidVariableName(varName) && 
-            !varName.includes('.') && 
-            !varName.includes('(') && 
-            !varName.startsWith('"') &&
-            !this.isLiteral(varName)) {
-          variables.add(varName);
-        }
-      }
-    }
-    
-    return Array.from(variables);
-  }
-
-  /**
-   * Extract components that are actually used in the template
-   */
-  extractUsedComponents(templateContent, currentComponentName) {
-    const components = new Set();
-    
-    // Look for component usage in the template (capital letter component names)
-    const componentMatches = templateContent.match(/<[A-Z][a-zA-Z0-9]*(?:\s|>|\/)/g);
-    if (componentMatches) {
-      for (const match of componentMatches) {
-        const compName = match.replace(/[<>\s/]/g, '');
-        // Don't include the current component being documented or globally available components
-        if (compName !== currentComponentName && 
-            !['Prose'].includes(compName)) { // Prose is globally available, Icon is handled specially
-          components.add(compName);
-        }
-      }
-    }
-    
-    return Array.from(components);
-  }
-
-  /**
-   * Check if a string is a valid JavaScript variable name
-   */
-  isValidVariableName(name) {
-    return /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(name);
-  }
-
-  /**
-   * Check if a value is a literal (number, boolean, etc.)
-   */
-  isLiteral(value) {
-    return /^(true|false|\d+|null|undefined)$/.test(value);
-  }
-
-  /**
-   * Find variable declarations from documentation for the used variables
-   */
-  findVariableDeclarations(parsedData, usedVariables) {
-    const declarations = [];
-    const foundVars = new Set();
-    
-    for (const varName of usedVariables) {
-      if (foundVars.has(varName)) continue;
-      
-      // Try to find declaration in code examples - prefer exact match
-      let declaration = this.findVariableInCodeExamples(parsedData, varName);
-      
-      if (!declaration) {
-        // Generate a sensible default based on variable name and usage pattern
-        declaration = this.generateDefaultDeclaration(varName);
-      }
-      
-      declarations.push(declaration);
-      foundVars.add(varName);
-    }
-    
-    return declarations;
-  }
-
-  /**
-   * Find a variable declaration in code examples
-   */
-  findVariableInCodeExamples(parsedData, varName) {
-    for (const section of parsedData.sections || []) {
-      const codeBlocks = this.extractCodeBlocks(section.content);
-      
-      for (const code of codeBlocks) {
-        // Look for the specific variable declaration
-        const refPattern = new RegExp(`const\\s+${varName}\\s*=\\s*ref\\([^)]*\\);`, 'g');
-        const refMatch = code.match(refPattern);
-        if (refMatch) {
-          return refMatch[0];
-        }
-        
-        // Look for array/object declarations and convert to ref
-        const arrayPattern = new RegExp(`const\\s+${varName}\\s*=\\s*(\\[[\\s\\S]*?\\]);`, 'gm');
-        const arrayMatch = arrayPattern.exec(code);
-        if (arrayMatch) {
-          return `const ${varName} = ref(${arrayMatch[1]});`;
-        }
-      }
-    }
-    
-    return null;
-  }
-
-  /**
-   * Generate a sensible default declaration for a variable
-   */
-  generateDefaultDeclaration(varName) {
-    if (varName.toLowerCase().includes('slide') && !varName.toLowerCase().includes('slides')) {
-      return `const ${varName} = ref(0);`;
-    } else if (varName.toLowerCase().includes('current')) {
-      return `const ${varName} = ref(0);`;
-    } else if (varName.toLowerCase().includes('slides') || varName.toLowerCase().includes('items')) {
-      return `const ${varName} = ref([
-  { content: 'Slide 1 Content', image: 'https://placeholder.pics/svg/400x200' },
-  { content: 'Slide 2 Content', image: 'https://placeholder.pics/svg/400x200' },
-  { content: 'Slide 3 Content', image: 'https://placeholder.pics/svg/400x200' }
-]);`;
-    } else {
-      return `const ${varName} = ref(null);`;
-    }
-  }
-
-  /**
-   * Extract variables from template and code examples
-   */
-  extractVariablesFromContent(parsedData) {
-    const variables = [];
-    const foundVars = new Set();
-    
-    // First pass: Extract from template usage (higher priority)
-    for (const section of parsedData.sections || []) {
-      const divExamples = this.extractDivExamples(section.content);
-      
-      // Extract from div examples (template usage)
-      for (const example of divExamples) {
-        const templateVars = this.extractTemplateVariables(example);
-        for (const varInfo of templateVars) {
-          if (!foundVars.has(varInfo.name)) {
-            foundVars.add(varInfo.name);
-            variables.push(varInfo);
-          }
-        }
-      }
-    }
-    
-    // Second pass: Extract from code blocks only if not already found in templates
-    for (const section of parsedData.sections || []) {
-      const codeBlocks = this.extractCodeBlocks(section.content);
-      
-      // Extract from code blocks (script examples) - only add if not in template
-      for (const code of codeBlocks) {
-        const scriptVars = this.extractScriptVariables(code);
-        for (const varInfo of scriptVars) {
-          if (!foundVars.has(varInfo.name)) {
-            foundVars.add(varInfo.name);
-            variables.push(varInfo);
-          }
-        }
-      }
-    }
-    
-    return variables;
-  }
-
-  /**
-   * Extract variables from template content
-   */
-  extractTemplateVariables(templateContent) {
-    const variables = [];
-    
-    // Extract v-model variables
-    const vModelMatches = templateContent.match(/v-model="([^"]+)"/g);
-    if (vModelMatches) {
-      for (const match of vModelMatches) {
-        const varName = match.match(/v-model="([^"]+)"/)[1];
-        if (varName.includes('.')) continue; // Skip object properties
-        
-        variables.push({
-          name: varName,
-          type: 'ref',
-          declaration: `const ${varName} = ref(0);`
-        });
-      }
-    }
-    
-    // Extract :items or other array props
-    const itemsMatches = templateContent.match(/:items="([^"]+)"/g);
-    if (itemsMatches) {
-      for (const match of itemsMatches) {
-        const varName = match.match(/:items="([^"]+)"/)[1];
-        if (varName.includes('.')) continue; // Skip object properties
-        
-        // Generate appropriate default data based on component
-        let defaultValue = '[]';
-        if (varName.includes('slide')) {
-          defaultValue = `[
-  { content: 'Slide 1 Content', image: 'https://placeholder.pics/svg/400x200' },
-  { content: 'Slide 2 Content', image: 'https://placeholder.pics/svg/400x200' },
-  { content: 'Slide 3 Content', image: 'https://placeholder.pics/svg/400x200' }
-]`;
-        }
-        
-        variables.push({
-          name: varName,
-          type: 'ref',
-          declaration: `const ${varName} = ref(${defaultValue});`
-        });
-      }
-    }
-    
-    return variables;
-  }
-
-  /**
-   * Extract variables from script content
-   */
-  extractScriptVariables(scriptContent) {
-    const variables = [];
-    
-    // Look for variable declarations in script examples
-    const refMatches = scriptContent.match(/const\s+(\w+)\s*=\s*ref\([^)]*\);/g);
-    if (refMatches) {
-      for (const match of refMatches) {
-        const varMatch = match.match(/const\s+(\w+)\s*=\s*(ref\([^)]*\));/);
-        if (varMatch) {
-          variables.push({
-            name: varMatch[1],
-            type: 'ref',
-            declaration: `const ${varMatch[1]} = ${varMatch[2]};`
-          });
-        }
-      }
-    }
-    
-    // Look for array/object declarations - convert to ref for reactivity
-    const arrayMatches = scriptContent.match(/const\s+(\w+)\s*=\s*\[[^\]]*\];/gs);
-    if (arrayMatches) {
-      for (const match of arrayMatches) {
-        const varMatch = match.match(/const\s+(\w+)\s*=\s*(\[[\s\S]*?\]);/);
-        if (varMatch) {
-          variables.push({
-            name: varMatch[1],
-            type: 'ref',
-            declaration: `const ${varMatch[1]} = ref(${varMatch[2]});`
-          });
-        }
-      }
-    }
-    
-    return variables;
-  }
 }
 
 class DocumentationSynchronizer {

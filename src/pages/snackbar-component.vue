@@ -1,25 +1,11 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Snackbar</h1>
-
     <Prose>
+      <h1>Snackbar</h1>
       <h2>Overview</h2>
       <p>The Snackbar component displays brief messages at the bottom or top of the screen. It's commonly used for providing feedback about an operation, such as confirming an action was completed, alerting users to a condition, or providing a brief message with an optional action.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Action @click="basicSnackbar = true">Show Snackbar</Action>
-        <Snackbar
-        v-model="basicSnackbar"
-        message="This is a basic snackbar message"
-        />
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const basicSnackbar = ref(false);
 &lt;/script&gt;
 
@@ -30,12 +16,8 @@ const basicSnackbar = ref(false);
     message="This is a basic snackbar message"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -56,18 +38,6 @@ const basicSnackbar = ref(false);
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Optional title text to display above the main message.</td>
-          </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>kind</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot; | &amp;quot;success&amp;quot; | &amp;quot;info&amp;quot; | &amp;quot;warning&amp;quot; | &amp;quot;danger&amp;quot; | &amp;quot;secondary&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">The style variant of the snackbar.</td>
-          </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>position</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;top&amp;quot; | &amp;quot;bottom&amp;quot; | &amp;quot;top-left&amp;quot; | &amp;quot;top-right&amp;quot; | &amp;quot;bottom-left&amp;quot; | &amp;quot;bottom-right&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;bottom-right&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Position of the snackbar on the screen.</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>showIcon</code></td>
@@ -101,11 +71,8 @@ const basicSnackbar = ref(false);
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Events</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Events</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -131,19 +98,10 @@ const basicSnackbar = ref(false);
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">v-model</h2>
-      
-      <Prose>
-        <p>The component supports v-model for controlling the snackbar's visibility.</p>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>v-model</h2>
+      <p>The component supports v-model for controlling the snackbar's visibility.</p>
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -157,26 +115,8 @@ const basicSnackbar = ref(false);
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Different Kinds</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Action @click="primarySnackbar = true">Primary</Action>
-        <Snackbar
-        v-model="primarySnackbar"
-        kind="primary"
-        message="This is a primary snackbar"
-        />
-        <Action @click="successSnackbar = true">Success</Action>
-        <Snackbar
-        v-model="successSnackbar"
-        kind="success"
-        message="Operation completed successfully"
-        />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h2>Different Kinds</h2>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const primarySnackbar = ref(false);
 const successSnackbar = ref(false);
 const infoSnackbar = ref(false);
@@ -200,51 +140,31 @@ const secondarySnackbar = ref(false);
     message="Operation completed successfully"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Keep snackbar messages concise and clear</li>
-          <li>Use the appropriate <code>kind</code> to reflect the nature of the message:</li>
-          <li><code>success</code>: For successful operations</li>
-          <li><code>info</code>: For neutral informational messages</li>
-          <li><code>warning</code>: For potential issues that need attention</li>
-          <li><code>danger</code>: For errors or critical issues</li>
-          <li><code>primary</code>: For general application messages</li>
-          <li><code>secondary</code>: For less important notifications</li>
-          <li>Position snackbars consistently throughout your application</li>
-          <li>For important messages that shouldn't be missed, consider using <code>:auto-close="false"</code></li>
-          <li>Avoid showing multiple snackbars simultaneously, as it can overwhelm users</li>
-          <li>Include an action button only when there's a clear and immediate action the user might want to take</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Accessibility Considerations</h2>
-      
-      <Prose>
-        <ul>
-          <li>Snackbars use <code>role="status"</code> and <code>aria-live="polite"</code> to ensure they're announced by screen readers</li>
-          <li>The component automatically pauses its auto-close timer when hovered or focused, allowing users more time to read</li>
-          <li>Dismissible snackbars have a properly labeled close button</li>
-          <li>The component handles focus management appropriately</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Form Submission Feedback</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Keep snackbar messages concise and clear</li>
+        <li>Use the appropriate <code>kind</code> to reflect the nature of the message:</li>
+        <li><code>success</code>: For successful operations</li>
+        <li><code>info</code>: For neutral informational messages</li>
+        <li><code>warning</code>: For potential issues that need attention</li>
+        <li><code>danger</code>: For errors or critical issues</li>
+        <li><code>primary</code>: For general application messages</li>
+        <li><code>secondary</code>: For less important notifications</li>
+        <li>Position snackbars consistently throughout your application</li>
+        <li>For important messages that shouldn't be missed, consider using <code>:auto-close="false"</code></li>
+        <li>Avoid showing multiple snackbars simultaneously, as it can overwhelm users</li>
+        <li>Include an action button only when there's a clear and immediate action the user might want to take</li>
+      </ul>
+      <h2>Accessibility Considerations</h2>
+      <ul>
+        <li>Snackbars use <code>role="status"</code> and <code>aria-live="polite"</code> to ensure they're announced by screen readers</li>
+        <li>The component automatically pauses its auto-close timer when hovered or focused, allowing users more time to read</li>
+        <li>Dismissible snackbars have a properly labeled close button</li>
+        <li>The component handles focus management appropriately</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>Form Submission Feedback</h3>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const formSubmitSnackbar = ref(false);
 
 function showFormSubmitSnackbar() {
@@ -266,14 +186,9 @@ function showFormSubmitSnackbar() {
     kind="success"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import Action from '../components/Action.vue';
-
-const basicSnackbar = ref(false);
 </script>

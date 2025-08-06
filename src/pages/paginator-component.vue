@@ -1,26 +1,12 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Paginator</h1>
-
     <Prose>
+      <h1>Paginator</h1>
+      <p>The Paginator component provides a standardized way to implement pagination for large datasets, allowing users to navigate through pages of content with various configuration options.</p>
       <h2>Overview</h2>
       <p>The Paginator offers a comprehensive solution for dividing large datasets into manageable pages. It supports multiple display modes, customizable controls, and localization options to fit various application needs.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Paginator
-        :total-items="100"
-        v-model:page="currentPage"
-        v-model:items-per-page="itemsPerPage"
-        @page-change="handlePageChange"
-        />
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Paginator 
     :total-items="100" 
     v-model:page="currentPage" 
@@ -39,12 +25,8 @@ const handlePageChange = (page) =&gt; {
   console.log(`Navigated to page ${page}`);
 };
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -97,12 +79,6 @@ const handlePageChange = (page) =&gt; {
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Maximum number of page buttons to display in buttons mode</td>
           </tr>
           <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>mode</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;buttons&amp;#39; | &amp;#39;input&amp;#39;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;buttons&amp;#39;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Display mode: buttons for multiple page buttons, input for a page number input</td>
-          </tr>
-          <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>showPageSizeSelector</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Boolean</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
@@ -123,34 +99,31 @@ const handlePageChange = (page) =&gt; {
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>itemRangeText</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;Showing {start} to {end} of {total} items&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>'Showing {start} to {end} of {total} items'</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Template for the items range text</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>pageSizeLabel</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;Items per page:&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>'Items per page:'</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Label for the page size selector</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>pageLabel</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;Page&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>'Page'</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Label for the page input in input mode</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>ofLabel</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;of&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>'of'</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Text for the &quot;of&quot; label in input mode</td>
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Events</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Events</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -176,11 +149,8 @@ const handlePageChange = (page) =&gt; {
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -206,85 +176,51 @@ const handlePageChange = (page) =&gt; {
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Variants</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Button Mode (Default)</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Variants</h2>
+      <h3>Button Mode (Default)</h3>
+      <p>Displays numbered page buttons for navigation.</p>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Paginator 
     :total-items="100" 
     mode="buttons"
     :visible-page-button-limit="5"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Input Mode</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Input Mode</h3>
+      <p>Uses a number input field to enter the desired page number.</p>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Paginator 
     :total-items="100" 
     mode="input"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">With First/Last Buttons</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>With First/Last Buttons</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Paginator 
     :total-items="100" 
     :show-first-last-buttons="true"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">With Page Size Selector</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>With Page Size Selector</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Paginator 
     :total-items="100" 
     :show-page-size-selector="true"
     :available-page-sizes="[10, 20, 50, 100]"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Use the Paginator for datasets with more than 10-20 items</li>
-          <li>Position the Paginator below the content it controls</li>
-          <li>For mobile views, consider using a more compact layout or fewer visible page buttons</li>
-          <li>Provide clear visual feedback for the current page</li>
-          <li>Maintain the same page position when changing page size</li>
-          <li>Consider accessibility: ensure the component is usable with keyboard navigation</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Table Pagination</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use the Paginator for datasets with more than 10-20 items</li>
+        <li>Position the Paginator below the content it controls</li>
+        <li>For mobile views, consider using a more compact layout or fewer visible page buttons</li>
+        <li>Provide clear visual feedback for the current page</li>
+        <li>Maintain the same page position when changing page size</li>
+        <li>Consider accessibility: ensure the component is usable with keyboard navigation</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>Table Pagination</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Table 
     :fields="fields" 
     :items="displayedItems" 
@@ -333,14 +269,9 @@ onMounted(() =&gt; {
   fetchItems();
 });
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const currentPage = ref(1);
-const itemsPerPage = ref(10);
 </script>

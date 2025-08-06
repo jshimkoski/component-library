@@ -1,4 +1,4 @@
-# MenuDivider
+# Menu Divider
 
 ## Overview
 

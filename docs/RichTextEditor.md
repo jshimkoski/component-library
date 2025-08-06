@@ -1,4 +1,4 @@
-# RichTextEditor
+# Rich Text Editor
 
 ## Overview
 

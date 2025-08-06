@@ -1,21 +1,20 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Tree</h1>
-
     <Prose>
+      <h1>Tree</h1>
+      <p>A hierarchical tree component for displaying nested navigation items with expandable/collapsible sections. The Tree component is ideal for representing file systems, site navigation, categories, or any data that has a nested structure. For parent items without specific actions, the entire heading acts as an expand/collapse toggle for better usability.</p>
       <h2>Overview</h2>
       <p>The Tree component offers a flexible way to display hierarchical data in a tree structure. It supports:</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Tree :items="items" @node-click="handleNodeClick" />
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <ul>
+        <li>Nested navigation items with expand/collapse functionality</li>
+        <li>Custom icons or no icons</li>
+        <li>Positioning of expand/collapse controls on either left or right side</li>
+        <li>Automatic expand/collapse behavior when clicking parent items that don't have links</li>
+        <li>Events for node click, expansion, and collapse operations</li>
+        <li>Default expansion of specified nodes</li>
+      </ul>
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tree :items="items" @node-click="handleNodeClick" /&gt;
 &lt;/template&gt;
 
@@ -47,12 +46,8 @@ function handleNodeClick(node) {
   console.log(`Clicked on: ${node.label}`);
 }
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -86,19 +81,10 @@ function handleNodeClick(node) {
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether to hide file/folder icons next to items.</td>
           </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>activeItemId</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String | Number | null</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>null</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">ID of the currently active/selected tree item.</td>
-          </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Events</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Events</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -124,11 +110,8 @@ function handleNodeClick(node) {
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -146,16 +129,10 @@ function handleNodeClick(node) {
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Variants</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">With Custom Icons</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Variants</h2>
+      <h3>With Custom Icons</h3>
+      <p>You can customize the icons displayed for each node using the <code>icon</code> slot:</p>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tree :items="items"&gt;
     &lt;template #icon="{ item }"&gt;
       &lt;div class="w-5 h-5 flex items-center justify-center"&gt;
@@ -169,99 +146,68 @@ function handleNodeClick(node) {
     &lt;/template&gt;
   &lt;/Tree&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Without Icons</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Without Icons</h3>
+      <p>If you prefer a more minimal look or want to save horizontal space, you can disable the default icons:</p>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tree :items="items" :show-icons="false" /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Right Controls</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Right Controls</h3>
+      <p>You can position the expand/collapse controls on the right side of each node:</p>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tree :items="items" controls-position="right" /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Default Expanded Nodes</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Default Expanded Nodes</h3>
+      <p>You can specify which nodes should be expanded by default using their IDs:</p>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tree :items="items" :default-expanded-keys="['docs', 'components']" /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Expand All Nodes</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Expand All Nodes</h3>
+      <p>To expand all nodes by default:</p>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Tree :items="items" :default-expand-all="true" /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>**Unique IDs**: Ensure each item has a unique ID to properly track expansion state</li>
-          <li>**Hierarchical Structure**: Keep the nesting logical and not too deep - deep nesting can make navigation difficult</li>
-          <li>**Visual Distinction**: Add visual cues to distinguish between different levels</li>
-          <li>**Appropriate Labels**: Use concise, clear labels for tree items</li>
-          <li>**Icon Usage**: Use icons that clearly communicate the item type or purpose</li>
-          <li>**Keyboard Navigation**: The component supports keyboard navigation for accessibility</li>
-          <li>**Action vs Navigation**: For parent items that should only expand/collapse, don't specify a <code>to</code>, <code>href</code>, or other action properties</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Accessibility</h2>
-      <p>- The component uses proper ARIA attributes for tree structure
-- Expand/collapse controls are proper...</p>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Data Structure</h2>
-      
-      <Prose>
-        <p>The Tree component expects the data to be in the following format:</p>
-        <p>const items = [</p>
-        <p>{</p>
-        <p>id: "unique-id-1",     // Required: Unique identifier</p>
-        <p>label: "Item Label",   // Required: Display text</p>
-        <p>children: [            // Optional: Nested items</p>
-        <p>{</p>
-        <p>id: "child-id-1",</p>
-        <p>label: "Child Item",</p>
-        <p>children: [...]    // Can be nested further</p>
-        <p>}</p>
-        <p>],</p>
-        <p>// For items that should navigate or perform actions:</p>
-        <p>to: "/path",           // Optional: Router path (if using vue-router)</p>
-        <p>href: "https://...",   // Optional: Direct URL (renders as <a> tag)</p>
-        <p>action: function(){},  // Optional: Custom action to perform</p>
-        <p>// You can include any other properties to use in custom rendering</p>
-        <p>type: "folder",        // Optional: Can be used for custom icon rendering</p>
-        <p>// ...other custom properties</p>
-        <p>}</p>
-        <p>]</p>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Implementation Example</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>**Unique IDs**: Ensure each item has a unique ID to properly track expansion state</li>
+        <li>**Hierarchical Structure**: Keep the nesting logical and not too deep - deep nesting can make navigation difficult</li>
+        <li>**Visual Distinction**: Add visual cues to distinguish between different levels</li>
+        <li>**Appropriate Labels**: Use concise, clear labels for tree items</li>
+        <li>**Icon Usage**: Use icons that clearly communicate the item type or purpose</li>
+        <li>**Keyboard Navigation**: The component supports keyboard navigation for accessibility</li>
+        <li>**Action vs Navigation**: For parent items that should only expand/collapse, don't specify a <code>to</code>, <code>href</code>, or other action properties</li>
+      </ul>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>The component uses proper ARIA attributes for tree structure</li>
+        <li>Expand/collapse controls are properly labeled for screen readers</li>
+        <li>Keyboard navigation is supported</li>
+        <li>Focus states are visible for keyboard users</li>
+      </ul>
+      <h2>Data Structure</h2>
+      <p>The Tree component expects the data to be in the following format:</p>
+      <pre><code class="language-js">const items = [
+  {
+    id: "unique-id-1",     // Required: Unique identifier
+    label: "Item Label",   // Required: Display text
+    children: [            // Optional: Nested items
+      {
+        id: "child-id-1",
+        label: "Child Item",
+        children: [...]    // Can be nested further
+      }
+    ],
+    // For items that should navigate or perform actions:
+    to: "/path",           // Optional: Router path (if using vue-router)
+    href: "https://...",   // Optional: Direct URL (renders as &lt;a&gt; tag)
+    action: function(){},  // Optional: Custom action to perform
+    // You can include any other properties to use in custom rendering
+    type: "folder",        // Optional: Can be used for custom icon rendering
+    // ...other custom properties
+  }
+]</code></pre>
+      <h2>Implementation Example</h2>
+      <p>Here's an example of a file system navigator implemented with Tree:</p>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;div class="file-explorer p-4 border rounded-lg"&gt;
     &lt;h3 class="text-lg font-medium mb-4"&gt;Project Files&lt;/h3&gt;
     &lt;Tree
@@ -328,32 +274,9 @@ function onFolderOpen(node) {
   }
 }
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const items = ref([
-  {
-    id: "home",
-    label: "Home"
-  },
-  {
-    id: "docs",
-    label: "Documentation",
-    children: [
-      {
-        id: "getting-started",
-        label: "Getting Started"
-      },
-      {
-        id: "api",
-        label: "API Reference"
-      }
-    ]
-  }
-]);
 </script>

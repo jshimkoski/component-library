@@ -1,33 +1,19 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Progress</h1>
-
     <Prose>
+      <h1>Progress</h1>
       <h2>Overview</h2>
       <p>The Progress component displays the completion progress of a task or operation using a horizontal progress bar. It supports various sizes, colors, and optional labels to provide clear visual feedback to users about ongoing processes or completion status.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Progress v-model="progress" :max="100" />
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Progress v-model="progress" :max="100" /&gt;
 &lt;/template&gt;
 
 &lt;script setup&gt;
 const progress = ref(65);
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -67,25 +53,10 @@ const progress = ref(65);
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>false</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Whether to display the percentage value.</td>
           </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>kind</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot; | &amp;quot;secondary&amp;quot; | &amp;quot;success&amp;quot; | &amp;quot;info&amp;quot; | &amp;quot;warning&amp;quot; | &amp;quot;danger&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Color theme of the progress bar.</td>
-          </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>size</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;xs&amp;quot; | &amp;quot;sm&amp;quot; | &amp;quot;md&amp;quot; | &amp;quot;lg&amp;quot; | &amp;quot;xl&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;md&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Size of the progress bar.</td>
-          </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -99,32 +70,16 @@ const progress = ref(65);
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Sizes</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Progress v-model="progress" size="xs" label="Extra Small" />
-        <Progress v-model="progress" size="sm" label="Small" />
-        <Progress v-model="progress" size="md" label="Medium" />
-        <Progress v-model="progress" size="lg" label="Large" />
-        <Progress v-model="progress" size="xl" label="Extra Large" />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Sizes</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Progress v-model="progress" size="xs" label="Extra Small" /&gt;
   &lt;Progress v-model="progress" size="sm" label="Small" /&gt;
   &lt;Progress v-model="progress" size="md" label="Medium" /&gt;
   &lt;Progress v-model="progress" size="lg" label="Large" /&gt;
   &lt;Progress v-model="progress" size="xl" label="Extra Large" /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Color Variants (Kind)</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Color Variants (Kind)</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Progress v-model="progress" kind="primary" label="Primary" /&gt;
   &lt;Progress v-model="progress" kind="secondary" label="Secondary" /&gt;
   &lt;Progress v-model="progress" kind="success" label="Success" /&gt;
@@ -132,42 +87,13 @@ const progress = ref(65);
   &lt;Progress v-model="progress" kind="warning" label="Warning" /&gt;
   &lt;Progress v-model="progress" kind="danger" label="Danger" /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">With Value Display</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Progress v-model="downloadProgress" label="Download Progress" show-value />
-        <Progress v-model="uploadProgress" label="Upload Progress" show-value kind="success" />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>With Value Display</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Progress v-model="downloadProgress" label="Download Progress" show-value /&gt;
   &lt;Progress v-model="uploadProgress" label="Upload Progress" show-value kind="success" /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">With Description</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Progress
-        v-model="processProgress"
-        label="File Processing"
-        description="Processing your files, please wait..."
-        show-value
-        />
-        <Progress
-        v-model="installProgress"
-        label="Installation"
-        description="Installing dependencies and setting up your project."
-        show-value
-        kind="info"
-        />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>With Description</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Progress 
     v-model="processProgress" 
     label="File Processing" 
@@ -183,35 +109,16 @@ const progress = ref(65);
     kind="info"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Custom Label Content</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Progress v-model="uploadProgress" show-value>
-        <Icon icon="material-symbols:cloud-upload" />
-        <span>Uploading to Cloud Storage</span>
-        </Progress>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Custom Label Content</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Progress v-model="uploadProgress" show-value&gt;
     &lt;Icon icon="material-symbols:cloud-upload" /&gt;
     &lt;span&gt;Uploading to Cloud Storage&lt;/span&gt;
   &lt;/Progress&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">States</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Different Progress States</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>States</h2>
+      <h3>Different Progress States</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;!-- Different states --&gt;
   &lt;Progress :model-value="0" label="Not Started" description="Waiting to begin..." /&gt;
   &lt;Progress :model-value="25" label="In Progress" description="Working on it..." kind="info" show-value /&gt;
@@ -219,34 +126,20 @@ const progress = ref(65);
   &lt;Progress :model-value="75" label="Warning State" description="Proceeding with caution" kind="warning" show-value /&gt;
   &lt;Progress :model-value="45" label="Error State" description="Issues encountered during processing" kind="danger" show-value /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Use appropriate colors (kind) to convey meaning - success for completed tasks, warning for issues, danger for errors</li>
-          <li>Include labels when the context isn't immediately obvious</li>
-          <li>Show percentage values for long-running operations where users benefit from specific progress information</li>
-          <li>Use appropriate sizes based on the importance and context of the progress indicator</li>
-          <li>Provide meaningful descriptions to explain what's happening during the process</li>
-          <li>Consider using intermediate progress states rather than jumping from 0 to 100</li>
-          <li>For file uploads/downloads, consider showing additional context like transfer speed or remaining time</li>
-          <li>Use consistent progress indicators throughout your application</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">File Upload Progress</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use appropriate colors (kind) to convey meaning - success for completed tasks, warning for issues, danger for errors</li>
+        <li>Include labels when the context isn't immediately obvious</li>
+        <li>Show percentage values for long-running operations where users benefit from specific progress information</li>
+        <li>Use appropriate sizes based on the importance and context of the progress indicator</li>
+        <li>Provide meaningful descriptions to explain what's happening during the process</li>
+        <li>Consider using intermediate progress states rather than jumping from 0 to 100</li>
+        <li>For file uploads/downloads, consider showing additional context like transfer speed or remaining time</li>
+        <li>Use consistent progress indicators throughout your application</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>File Upload Progress</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Progress 
     v-model="uploadProgress" 
     label="Uploading Files" 
@@ -285,13 +178,8 @@ function startUpload() {
   }, 500);
 }
 &lt;/script&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Dashboard Statistics</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Dashboard Statistics</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Card&gt;
     &lt;template #header&gt;
       &lt;h4 class="font-semibold"&gt;Monthly Goals&lt;/h4&gt;
@@ -322,14 +210,9 @@ function startUpload() {
     /&gt;
   &lt;/Card&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Icon } from '@iconify/vue';
-
-const progress = ref(65);
 </script>

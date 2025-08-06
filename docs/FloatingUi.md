@@ -1,4 +1,4 @@
-# FloatingUi
+# Floating UI
 
 ## Overview
 

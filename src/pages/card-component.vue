@@ -1,37 +1,19 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Card</h1>
-
     <Prose>
+      <h1>Card</h1>
       <h2>Overview</h2>
       <p>The Card component is a versatile container that displays content in a structured format with optional headline, subhead, content, and action elements. Cards are commonly used to present related information in a cohesive, visually distinct container.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Card
-        headline="Card Title"
-        subhead="Supporting text"
-        text="This is a basic card with headline, subhead, and text content."
-        />
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Card
     headline="Card Title"
     subhead="Supporting text"
     text="This is a basic card with headline, subhead, and text content."
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -60,18 +42,6 @@
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Body text content of the card.</td>
           </tr>
           <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>variant</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;elevated&amp;quot; | &amp;quot;filled&amp;quot; | &amp;quot;outlined&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;outlined&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Visual style variant of the card.</td>
-          </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>kind</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;primary&amp;quot; | &amp;quot;secondary&amp;quot; | &amp;quot;success&amp;quot; | &amp;quot;info&amp;quot; | &amp;quot;warning&amp;quot; | &amp;quot;danger&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;secondary&amp;quot;</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Color theme used for actions and accents.</td>
-          </tr>
-          <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>actionLabel</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>undefined</code></td>
@@ -97,11 +67,8 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -119,12 +86,8 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Visual Variants</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Visual Variants</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Card
     variant="outlined"
     headline="Outlined Card"
@@ -153,23 +116,8 @@
     text="Elevated cards appear to float above the surface with a shadow effect."
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Clickable Cards (Link)</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Card
-        headline="Clickable Card"
-        subhead="Click anywhere to navigate"
-        text="When a href prop is provided, the entire card becomes a clickable link."
-        href="#"
-        actionLabel="Learn More"
-        kind="primary"
-        />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Clickable Cards (Link)</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Card
     headline="Clickable Card"
     subhead="Click anywhere to navigate"
@@ -179,39 +127,8 @@
     kind="primary"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Different Kinds</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Card
-        headline="Primary Action"
-        subhead="Call to action"
-        text="The primary kind is used for main actions."
-        href="#"
-        actionLabel="Continue"
-        kind="primary"
-        />
-        <Card
-        headline="Success Message"
-        subhead="Confirmation"
-        text="Success kind indicates completion or positive outcomes."
-        href="#"
-        actionLabel="View Details"
-        kind="success"
-        />
-        <Card
-        headline="Warning Alert"
-        subhead="Attention required"
-        text="Warning kind draws attention to potential issues."
-        href="#"
-        actionLabel="Review"
-        kind="warning"
-        />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Different Kinds</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Card
     headline="Primary Action"
     subhead="Call to action"
@@ -239,23 +156,8 @@
     kind="warning"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Custom Content</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Card
-        headline="Custom Content Example"
-        subhead="With slot contents"
-        >
-        <p>Cards can contain any content, including lists, images, and interactive elements.</p>
-        <template #footer>
-        <span>Last updated: Today</span>
-        <Action kind="primary">View Details</Action>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Custom Content</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Card
     headline="Custom Content Example"
     subhead="With slot contents"
@@ -267,49 +169,29 @@
     &lt;/template&gt;
   &lt;/Card&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Use consistent card variants within the same view for visual coherence</li>
-          <li>Include clear, concise headlines that describe the card's content</li>
-          <li>Limit text content to avoid overcrowding; cards work best with focused information</li>
-          <li>For clickable cards:</li>
-          <li>Include a clear action label to indicate the result of clicking</li>
-          <li>Consider adding hover effects to reinforce interactivity</li>
-          <li>Choose the appropriate variant based on information hierarchy:</li>
-          <li>Elevated cards for primary content</li>
-          <li>Filled cards for secondary information</li>
-          <li>Outlined cards for tertiary or supporting content</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Accessibility Considerations</h2>
-      
-      <Prose>
-        <ul>
-          <li>Cards with interactive elements should have appropriate focus indicators</li>
-          <li>When using cards as links, ensure that the clickable area includes appropriate ARIA attributes</li>
-          <li>Maintain appropriate color contrast between text and background for all variants</li>
-          <li>Organizing content with semantic headings helps screen reader users understand the content hierarchy</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Product Card</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use consistent card variants within the same view for visual coherence</li>
+        <li>Include clear, concise headlines that describe the card's content</li>
+        <li>Limit text content to avoid overcrowding; cards work best with focused information</li>
+        <li>For clickable cards:</li>
+        <li>Include a clear action label to indicate the result of clicking</li>
+        <li>Consider adding hover effects to reinforce interactivity</li>
+        <li>Choose the appropriate variant based on information hierarchy:</li>
+        <li>Elevated cards for primary content</li>
+        <li>Filled cards for secondary information</li>
+        <li>Outlined cards for tertiary or supporting content</li>
+      </ul>
+      <h2>Accessibility Considerations</h2>
+      <ul>
+        <li>Cards with interactive elements should have appropriate focus indicators</li>
+        <li>When using cards as links, ensure that the clickable area includes appropriate ARIA attributes</li>
+        <li>Maintain appropriate color contrast between text and background for all variants</li>
+        <li>Organizing content with semantic headings helps screen reader users understand the content hierarchy</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>Product Card</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Card variant="elevated"&gt;
     &lt;h3&gt;Premium Headphones&lt;/h3&gt;
     &lt;p&gt;Wireless Noise Cancelling&lt;/p&gt;
@@ -320,13 +202,8 @@
     &lt;/template&gt;
   &lt;/Card&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Dashboard Stats Card</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Dashboard Stats Card</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Card
     variant="filled"
     headline="Total Revenue"
@@ -335,12 +212,9 @@
     &lt;p&gt;📈 12% increase&lt;/p&gt;
   &lt;/Card&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import Action from '../components/Action.vue';
-
 </script>

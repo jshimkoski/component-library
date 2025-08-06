@@ -1,24 +1,11 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Table</h1>
-
     <Prose>
+      <h1>Table</h1>
       <h2>Overview</h2>
       <p>The Table component provides a feature-rich data table with support for sorting, selection, expansion, and custom cell rendering. It's designed to handle tabular data efficiently while maintaining accessibility and providing a flexible API for customization.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Table
-        :fields="fields"
-        :items="items"
-        />
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Table 
     :fields="fields"
     :items="items"
@@ -39,12 +26,8 @@ const items = [
   { name: 'Bob Johnson', email: 'bob@example.com', role: 'User', status: 'Inactive' }
 ];
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -116,11 +99,8 @@ const items = [
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Events</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Events</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -149,36 +129,22 @@ const items = [
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>(item: Object)</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when a row is collapsed.</td>
           </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>sort</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>(field: String, direction: &amp;quot;asc&amp;quot; | &amp;quot;desc&amp;quot;)</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Emitted when column sorting changes.</td>
-          </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Field Definition</h2>
-      
-      <Prose>
-        <p>interface TableField {</p>
-        <p>key: string;           // Property key in data object</p>
-        <p>label: string;         // Column header text</p>
-        <p>sortable?: boolean;    // Whether column is sortable</p>
-        <p>visible?: boolean;     // Whether column is visible (default: true)</p>
-        <p>width?: string;        // CSS width value</p>
-        <p>class?: string;        // CSS classes for header cell</p>
-        <p>headerClass?: string;  // CSS classes for header cell</p>
-        <p>cellClass?: string;    // CSS classes for data cells</p>
-        <p>formatter?: Function;  // Function to format cell values</p>
-        <p>}</p>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Field Definition</h2>
+      <pre><code class="language-typescript">interface TableField {
+  key: string;           // Property key in data object
+  label: string;         // Column header text
+  sortable?: boolean;    // Whether column is sortable
+  visible?: boolean;     // Whether column is visible (default: true)
+  width?: string;        // CSS width value
+  class?: string;        // CSS classes for header cell
+  headerClass?: string;  // CSS classes for header cell
+  cellClass?: string;    // CSS classes for data cells
+  formatter?: Function;  // Function to format cell values
+}</code></pre>
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -212,20 +178,8 @@ const items = [
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Selectable Table</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Table
-        v-model="selected"
-        :fields="fields"
-        :items="items"
-        selectable
-        />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Selectable Table</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Table 
     v-model="selected"
     :fields="fields"
@@ -238,17 +192,8 @@ const items = [
 const selected = ref([]);
 // When items are selected, they will be available in the selected array
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Expandable Rows</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <h4 class="font-semibold mb-2">Additional Details</h4>
-        <p>More information about {{ item.name }}...</p>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Expandable Rows</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Table 
     :fields="fields"
     :items="items"
@@ -262,25 +207,8 @@ const selected = ref([]);
     &lt;/template&gt;
   &lt;/Table&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Custom Cell Rendering</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Table
-        :fields="fields"
-        :items="items"
-        >
-        <template #cell-status="{ value }">
-        <Badge
-        :label="value"
-        :kind="value === 'Active' ? 'success' : 'warning'"
-        size="sm"
-        />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Custom Cell Rendering</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Table 
     :fields="fields"
     :items="items"
@@ -298,27 +226,8 @@ const selected = ref([]);
     &lt;/template&gt;
   &lt;/Table&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">With Controls</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Table
-        :fields="fields"
-        :items="filteredItems"
-        >
-        <template #controls>
-        <TextField
-        v-model="searchTerm"
-        placeholder="Search users..."
-        icon="material-symbols:search"
-        class="max-w-sm"
-        />
-        <Action kind="primary">Add User</Action>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>With Controls</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Table 
     :fields="fields"
     :items="filteredItems"
@@ -334,59 +243,47 @@ const selected = ref([]);
     &lt;/template&gt;
   &lt;/Table&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Table Styling Options</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Table
-        :fields="fields"
-        :items="items"
-        striped
-        />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Table Styling Options</h2>
+      <h3>Striped Rows</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Table 
     :fields="fields"
     :items="items"
     striped
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Define clear, descriptive field labels for table headers</li>
-          <li>Use sortable columns for data that users might want to organize</li>
-          <li>Implement pagination for large datasets to maintain performance</li>
-          <li>Use custom cell rendering for complex data types (dates, status badges, actions)</li>
-          <li>Provide empty state messaging when no data is available</li>
-          <li>Use selection carefully - only when bulk actions are available</li>
-          <li>Consider responsive design for mobile viewports</li>
-          <li>Use hover effects to improve usability</li>
-          <li>Implement loading states for async data</li>
-          <li>Group related actions in the controls slot</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">User Management Table</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-              <div><strong>Department:</strong> {{ item.department }}</div>
-        <div><strong>Location:</strong> {{ item.location }}</div>
-        <div><strong>Phone:</strong> {{ item.phone }}</div>
-        <div><strong>Notes:</strong> {{ item.notes || 'No notes available' }}</div>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Bordered Table</h3>
+      <pre><code class="language-vue">&lt;template&gt;
+  &lt;Table 
+    :fields="fields"
+    :items="items"
+    bordered
+  /&gt;
+&lt;/template&gt;</code></pre>
+      <h3>Compact Table</h3>
+      <pre><code class="language-vue">&lt;template&gt;
+  &lt;Table 
+    :fields="fields"
+    :items="items"
+    small
+  /&gt;
+&lt;/template&gt;</code></pre>
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Define clear, descriptive field labels for table headers</li>
+        <li>Use sortable columns for data that users might want to organize</li>
+        <li>Implement pagination for large datasets to maintain performance</li>
+        <li>Use custom cell rendering for complex data types (dates, status badges, actions)</li>
+        <li>Provide empty state messaging when no data is available</li>
+        <li>Use selection carefully - only when bulk actions are available</li>
+        <li>Consider responsive design for mobile viewports</li>
+        <li>Use hover effects to improve usability</li>
+        <li>Implement loading states for async data</li>
+        <li>Group related actions in the controls slot</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>User Management Table</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;div&gt;
     &lt;Table 
       v-model="selectedUsers"
@@ -507,26 +404,9 @@ function getStatusKind(status) {
   return kindMap[status] || 'secondary';
 }
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import Badge from '../components/Badge.vue';
-import TextField from '../components/TextField.vue';
-import Action from '../components/Action.vue';
-
-const fields = ref([
-  { key: 'name', label: 'Name', sortable: true },
-  { key: 'email', label: 'Email' },
-  { key: 'role', label: 'Role' },
-  { key: 'status', label: 'Status' }
-]);
-const items = ref([
-  { name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active' },
-  { name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active' },
-  { name: 'Bob Johnson', email: 'bob@example.com', role: 'User', status: 'Inactive' }
-]);
 </script>

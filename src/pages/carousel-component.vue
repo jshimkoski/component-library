@@ -1,26 +1,11 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Carousel</h1>
-
     <Prose>
+      <h1>Carousel</h1>
       <h2>Overview</h2>
       <p>The Carousel component is a Material Design-compliant slideshow for Vue 3 that displays a series of content items in a rotating fashion. It supports swiping, keyboard navigation, looping, auto-play, custom slides, and accessibility features. The component is ideal for showcasing images, testimonials, or any content that benefits from a sliding presentation.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Carousel
-        v-model="currentSlide"
-        :items="slides"
-        :auto-play="true"
-        :interval="4000"
-        />
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Carousel 
     v-model="currentSlide"
     :items="slides" 
@@ -39,12 +24,8 @@ const slides = [
   { src: '/image3.jpg', alt: 'Third slide' }
 ];
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Prop</th>
@@ -105,25 +86,25 @@ const slides = [
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>containerClass</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">&#39;&#39;</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">''</td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Additional classes for the root container.</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>ariaLabel</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">&#39;carousel&#39;</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">'carousel'</td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">ARIA label for accessibility.</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>prevLabel</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">&#39;Previous slide&#39;</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">'Previous slide'</td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">ARIA label for previous arrow.</td>
           </tr>
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>nextLabel</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">&#39;Next slide&#39;</td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">'Next slide'</td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">ARIA label for next arrow.</td>
           </tr>
           <tr>
@@ -132,42 +113,20 @@ const slides = [
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">See code</td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Function to generate ARIA label for indicators.</td>
           </tr>
-          <tr>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>itemKey</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Function(item, idx): string | number</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">See code</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Function to generate unique key for each slide.</td>
-          </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Events</h2>
-      
-      <Prose>
-        <ul>
-          <li><code>update:modelValue</code> — Emitted when the active slide changes (for v-model).</li>
-          <li><code>change</code> — Emitted when the active slide changes.</li>
-          <li><code>slide</code> — Emitted when the active slide changes (alias for <code>change</code>).</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-      
-      <Prose>
-        <ul>
-          <li><code>slide</code> — Custom slot for rendering each slide. Receives <code>{ item, index }</code> as slot props.</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Usage Example</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Events</h2>
+      <ul>
+        <li><code>update:modelValue</code> — Emitted when the active slide changes (for v-model).</li>
+        <li><code>change</code> — Emitted when the active slide changes.</li>
+        <li><code>slide</code> — Emitted when the active slide changes (alias for <code>change</code>).</li>
+      </ul>
+      <h2>Slots</h2>
+      <ul>
+        <li><code>slide</code> — Custom slot for rendering each slide. Receives <code>{ item, index }</code> as slot props.</li>
+      </ul>
+      <h2>Usage Example</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Carousel
     v-model="current"
     :items="slides"
@@ -197,49 +156,28 @@ const slides = [
   { src: '/img/slide3.jpg', alt: 'Slide 3', caption: 'Third Slide' },
 ];
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Accessibility</h2>
-      <p>- Keyboard navigation: left/right arrows move slides.
-- ARIA roles and labels for region, controls, ...</p>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Notes</h2>
-      
-      <Prose>
-        <ul>
-          <li>The default slot renders an image if <code>item.src</code> is present, but you can fully customize the slide content using the <code>slide</code> slot.</li>
-          <li>The carousel is responsive and supports both light and dark themes.</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Use clear and descriptive labels</li>
-          <li>Consider accessibility requirements</li>
-          <li>Follow consistent patterns across your application</li>
-          <li>Test with keyboard navigation</li>
-          <li>Ensure proper color contrast for readability</li>
-        </ul>
-      </Prose>
-    </section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>Keyboard navigation: left/right arrows move slides.</li>
+        <li>ARIA roles and labels for region, controls, and indicators.</li>
+        <li>Indicators and arrows are focusable and labeled.</li>
+      </ul>
+      <h2>Notes</h2>
+      <ul>
+        <li>The default slot renders an image if <code>item.src</code> is present, but you can fully customize the slide content using the <code>slide</code> slot.</li>
+        <li>The carousel is responsive and supports both light and dark themes.</li>
+      </ul>
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use clear and descriptive labels</li>
+        <li>Consider accessibility requirements</li>
+        <li>Follow consistent patterns across your application</li>
+        <li>Test with keyboard navigation</li>
+        <li>Ensure proper color contrast for readability</li>
+      </ul>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const currentSlide = ref(0);
-const slides = ref([
-  { src: '/image1.jpg', alt: 'First slide' },
-  { src: '/image2.jpg', alt: 'Second slide' },
-  { src: '/image3.jpg', alt: 'Third slide' }
-]);
 </script>

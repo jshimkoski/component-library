@@ -1,37 +1,12 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Scrollspy</h1>
-
     <Prose>
+      <h1>Scrollspy</h1>
+      <p>The Scrollspy component tracks scroll position on a page and automatically highlights the corresponding navigation link as the user scrolls through different sections.</p>
       <h2>Overview</h2>
       <p>Scrollspy is a navigation aid that provides visual feedback about which section of content is currently in the viewport. It's especially useful for long-form content, documentation pages, or single-page applications with multiple sections.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Scrollspy>
-        <!-- Content with sections -->
-        <div>
-        <section id="section1" data-scrollspy>
-        <h2 data-scrollspy-title>Section 1</h2>
-        <p>Content for section 1...</p>
-        </section>
-        <section id="section2" data-scrollspy>
-        <h2 data-scrollspy-title>Section 2</h2>
-        <p>Content for section 2...</p>
-        </section>
-        <section id="section3" data-scrollspy>
-        <h2 data-scrollspy-title>Section 3</h2>
-        <p>Content for section 3...</p>
-        </section>
-        </div>
-        </Scrollspy>
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Scrollspy&gt;
     &lt;!-- Content with sections --&gt;
     &lt;div&gt;
@@ -52,12 +27,8 @@
     &lt;/div&gt;
   &lt;/Scrollspy&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -70,7 +41,7 @@
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>selector</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;[data-scrollspy]&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>'[data-scrollspy]'</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">CSS selector for identifying sections</td>
           </tr>
           <tr>
@@ -100,7 +71,7 @@
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>listClass</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;space-y-1&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>'space-y-1'</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom class for the list element</td>
           </tr>
           <tr>
@@ -124,7 +95,7 @@
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>contentClass</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>String</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;#39;flex-grow&amp;#39;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>'flex-grow'</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Custom class for the content container</td>
           </tr>
           <tr>
@@ -141,11 +112,8 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Events</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Events</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -166,11 +134,8 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -192,28 +157,16 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Types</h2>
-      
-      <Prose>
-        <p>interface ScrollspySection {</p>
-        <p>id: string;</p>
-        <p>title: string;</p>
-        <p>icon?: Component;</p>
-        <p>}</p>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Variants</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Auto-Detected Sections (Default)</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Types</h2>
+      <pre><code class="language-typescript">interface ScrollspySection {
+  id: string;
+  title: string;
+  icon?: Component;
+}</code></pre>
+      <h2>Variants</h2>
+      <h3>Auto-Detected Sections (Default)</h3>
+      <p>Uses <code>data-scrollspy</code> attributes to automatically detect sections on the page.</p>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Scrollspy&gt;
     &lt;div&gt;
       &lt;section id="introduction" data-scrollspy&gt;
@@ -224,13 +177,9 @@
     &lt;/div&gt;
   &lt;/Scrollspy&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Manually Defined Sections</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Manually Defined Sections</h3>
+      <p>Explicitly define sections via props instead of auto-detection.</p>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Scrollspy :sections="sections" :auto-detect="false"&gt;
     &lt;div&gt;
       &lt;section id="intro"&gt;
@@ -255,13 +204,8 @@ const sections = [
   { id: 'api', title: 'API Reference' }
 ];
 &lt;/script&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">With Custom Icons</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>With Custom Icons</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Scrollspy :sections="sections"&gt;
     &lt;template #icon="{ section, active }"&gt;
       &lt;component 
@@ -284,33 +228,19 @@ const sections = [
   { id: 'about', title: 'About', icon: IconMdiInformation }
 ];
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Ensure each section has a unique ID</li>
-          <li>Apply sufficient spacing between sections for clear distinction</li>
-          <li>Use descriptive section titles for better navigation</li>
-          <li>For longer pages, consider using a sticky position for the navigation</li>
-          <li>Set an appropriate offset based on your header height and layout</li>
-          <li>Ensure the component works with keyboard navigation for accessibility</li>
-          <li>Consider different viewport sizes in your implementation</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Documentation Page Layout</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Ensure each section has a unique ID</li>
+        <li>Apply sufficient spacing between sections for clear distinction</li>
+        <li>Use descriptive section titles for better navigation</li>
+        <li>For longer pages, consider using a sticky position for the navigation</li>
+        <li>Set an appropriate offset based on your header height and layout</li>
+        <li>Ensure the component works with keyboard navigation for accessibility</li>
+        <li>Consider different viewport sizes in your implementation</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>Documentation Page Layout</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;!-- Sticky sidebar with Scrollspy --&gt;
   &lt;Scrollspy 
     nav-class="sticky top-24 max-h-[calc(100vh-12rem)] overflow-y-auto pr-6 w-64"
@@ -345,13 +275,8 @@ const sections = [
     &lt;/div&gt;
   &lt;/Scrollspy&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Programmatic Control</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Programmatic Control</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;div&gt;
     &lt;div class="mb-4 flex gap-2"&gt;
       &lt;Action v-for="section in sections" :key="section.id" @click="scrollTo(section.id)"&gt;
@@ -387,8 +312,7 @@ const scrollTo = (id) =&gt; {
   scrollspy.value.scrollToSection(id);
 };
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 

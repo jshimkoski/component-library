@@ -1,27 +1,11 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Menu</h1>
-
     <Prose>
+      <h1>Menu</h1>
       <h2>Overview</h2>
       <p>The Menu component is a versatile dropdown menu system that provides a flexible foundation for creating context menus, navigation dropdowns, and action menus. It uses FloatingUI for positioning and supports nested menus, custom content, and various trigger options. The Menu component works seamlessly with MenuItem, MenuHeader, MenuContent, and MenuDivider components to create rich interactive experiences.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Menu label="Actions">
-        <MenuItem label="Edit" />
-        <MenuItem label="Duplicate" />
-        <MenuDivider />
-        <MenuItem label="Archive" />
-        <MenuItem label="Delete" />
-        </Menu>
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Menu label="Actions"&gt;
     &lt;MenuItem label="Edit" /&gt;
     &lt;MenuItem label="Duplicate" /&gt;
@@ -30,12 +14,8 @@
     &lt;MenuItem label="Delete" /&gt;
   &lt;/Menu&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -48,7 +28,7 @@
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>label</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">String</td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;&amp;quot;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&quot;&quot;</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Text label for the menu trigger button.</td>
           </tr>
           <tr>
@@ -66,7 +46,7 @@
           <tr>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>placement</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>Placement</code></td>
-            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&amp;quot;bottom-start&amp;quot;</code></td>
+            <td class="py-2 px-4 border-b border-base-200 dark:border-base-800"><code>&quot;bottom-start&quot;</code></td>
             <td class="py-2 px-4 border-b border-base-200 dark:border-base-800">Positioning of the menu relative to the trigger.</td>
           </tr>
           <tr>
@@ -83,19 +63,10 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Events</h2>
-      
-      <Prose>
-        <p>The Menu component doesn't emit custom events directly, but MenuItem components within it can emit click events.</p>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Events</h2>
+      <p>The Menu component doesn't emit custom events directly, but MenuItem components within it can emit click events.</p>
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -113,24 +84,8 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Nested Menus</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Menu label="File">
-        <MenuItem label="New" />
-        <MenuItem label="Open" />
-        <MenuDivider />
-        <Menu label="Export As" nested>
-        <MenuItem label="PDF" />
-        <MenuItem label="Excel" />
-        <MenuItem label="CSV" />
-        </Menu>
-        </Menu>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Nested Menus</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Menu label="File"&gt;
     &lt;MenuItem label="New" /&gt;
     &lt;MenuItem label="Open" /&gt;
@@ -142,28 +97,8 @@
     &lt;/Menu&gt;
   &lt;/Menu&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Menu with Custom Content</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Menu label="User Account" auto-width>
-        <MenuHeader label="Account" />
-        <MenuContent>
-        <Avatar src="https://i.pravatar.cc/32" size="sm" alt="John Doe" />
-        <div>
-        <div>John Doe</div>
-        <div>john.doe@example.com</div>
-        </div>
-        </MenuContent>
-        <MenuDivider />
-        <MenuItem label="Profile Settings" />
-        <MenuItem label="Log Out" />
-        </Menu>
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Menu with Custom Content</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Menu label="User Account" auto-width&gt;
     &lt;MenuHeader label="Account" /&gt;
     &lt;MenuContent&gt;
@@ -178,31 +113,8 @@
     &lt;MenuItem label="Log Out" /&gt;
   &lt;/Menu&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Menu Placement Options</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Different placement options -->
-        <Menu label="Top Start" placement="top-start">
-        <MenuItem label="Item 1" />
-        <MenuItem label="Item 2" />
-        </Menu>
-        <Menu label="Bottom End" placement="bottom-end">
-        <MenuItem label="Item 1" />
-        <MenuItem label="Item 2" />
-        </Menu>
-        <Menu label="Right Start" placement="right-start">
-        <MenuItem label="Item 1" />
-        <MenuItem label="Item 2" />
-        </Menu>
-      </div>
-      <Prose>
-        <p></Menu></p>
-      </Prose>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Menu Placement Options</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;!-- Different placement options --&gt;
   &lt;Menu label="Top Start" placement="top-start"&gt;
     &lt;MenuItem label="Item 1" /&gt;
@@ -219,50 +131,28 @@
     &lt;MenuItem label="Item 2" /&gt;
   &lt;/Menu&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">States</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Disabled Menu</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>States</h2>
+      <h3>Disabled Menu</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Menu label="Disabled Menu" disabled&gt;
     &lt;MenuItem label="Item 1" /&gt;
     &lt;MenuItem label="Item 2" /&gt;
   &lt;/Menu&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Use MenuItem components for interactive menu options</li>
-          <li>Use MenuDivider to visually separate related menu sections</li>
-          <li>Use MenuHeader to provide section titles within complex menus</li>
-          <li>Use MenuContent for custom content like user profiles or complex controls</li>
-          <li>Keep menu labels concise and descriptive</li>
-          <li>Use nested menus sparingly to avoid overwhelming users</li>
-          <li>Consider using <code>autoWidth</code> for menus with varying content lengths</li>
-          <li>Use appropriate placement values to ensure menus don't overflow the viewport</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Context Menu with Actions</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use MenuItem components for interactive menu options</li>
+        <li>Use MenuDivider to visually separate related menu sections</li>
+        <li>Use MenuHeader to provide section titles within complex menus</li>
+        <li>Use MenuContent for custom content like user profiles or complex controls</li>
+        <li>Keep menu labels concise and descriptive</li>
+        <li>Use nested menus sparingly to avoid overwhelming users</li>
+        <li>Consider using <code>autoWidth</code> for menus with varying content lengths</li>
+        <li>Use appropriate placement values to ensure menus don't overflow the viewport</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>Context Menu with Actions</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;div @contextmenu.prevent="showContextMenu"&gt;
     Right-click me for context menu
     &lt;Menu v-if="contextMenuVisible" :style="contextMenuStyle"&gt;
@@ -288,13 +178,8 @@ function showContextMenu(event) {
   };
 }
 &lt;/script&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Complex Nested Menu Structure</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>Complex Nested Menu Structure</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Menu label="Tools"&gt;
     &lt;MenuItem label="Text Editor" /&gt;
     &lt;MenuItem label="Code Editor" /&gt;
@@ -318,16 +203,9 @@ function showContextMenu(event) {
     &lt;/Menu&gt;
   &lt;/Menu&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import MenuItem from '../components/MenuItem.vue';
-import MenuDivider from '../components/MenuDivider.vue';
-import MenuHeader from '../components/MenuHeader.vue';
-import MenuContent from '../components/MenuContent.vue';
-import Avatar from '../components/Avatar.vue';
-
 </script>

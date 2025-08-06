@@ -1,21 +1,12 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">Slider</h1>
-
     <Prose>
+      <h1>Slider</h1>
+      <p>The Slider component provides an interactive way for users to select a value from a specific range.</p>
       <h2>Overview</h2>
       <p>The Slider component allows users to select a value or range by moving a handle along a track. It's useful for adjusting settings like volume, brightness, or filtering by price or date ranges.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <Slider v-model="value" :min="0" :max="100" :step="1" label="Volume" />
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Slider v-model="value" :min="0" :max="100" :step="1" label="Volume" /&gt;
 &lt;/template&gt;
 
@@ -24,12 +15,8 @@ import { ref } from 'vue';
 
 const value = ref(50);
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -101,11 +88,8 @@ const value = ref(50);
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Events</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Events</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -121,16 +105,9 @@ const value = ref(50);
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Variants</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">With Custom Formatter</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Variants</h2>
+      <h3>With Custom Formatter</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Slider 
     v-model="price" 
     :min="0" 
@@ -150,13 +127,8 @@ const formatCurrency = (value) =&gt; {
   return `$${value.toFixed(2)}`;
 };
 &lt;/script&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">With Tick Marks</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h3>With Tick Marks</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Slider 
     v-model="rating" 
     :min="0" 
@@ -173,17 +145,9 @@ import { ref } from 'vue';
 
 const rating = ref(5);
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">States</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Disabled</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>States</h2>
+      <h3>Disabled</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;Slider 
     v-model="volume" 
     :min="0" 
@@ -199,38 +163,28 @@ import { ref } from 'vue';
 
 const volume = ref(50);
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Use sliders for selecting values where visual, interactive feedback is helpful</li>
-          <li>Include a label that clearly describes what the slider controls</li>
-          <li>Consider using tick marks for discrete values to improve usability</li>
-          <li>Use appropriate step values based on the range (smaller ranges benefit from smaller steps)</li>
-          <li>Format displayed values to match user expectations (e.g., currency, percentage)</li>
-          <li>Consider adding text input alongside sliders for precise input when needed</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Accessibility</h2>
-      <p>- The component includes proper ARIA attributes for screen readers
-- Keyboard navigation is fully su...</p>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Temperature Control</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use sliders for selecting values where visual, interactive feedback is helpful</li>
+        <li>Include a label that clearly describes what the slider controls</li>
+        <li>Consider using tick marks for discrete values to improve usability</li>
+        <li>Use appropriate step values based on the range (smaller ranges benefit from smaller steps)</li>
+        <li>Format displayed values to match user expectations (e.g., currency, percentage)</li>
+        <li>Consider adding text input alongside sliders for precise input when needed</li>
+      </ul>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>The component includes proper ARIA attributes for screen readers</li>
+        <li>Keyboard navigation is fully supported:</li>
+        <li>Arrow keys (left/right or up/down) adjust the value by one step</li>
+        <li>Page Up/Down keys adjust the value by larger steps</li>
+        <li>Home/End keys set the value to min/max</li>
+        <li>Focus states are clearly visible for keyboard users</li>
+        <li>The slider handle can be operated via keyboard, mouse, or touch interactions</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>Temperature Control</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;div class="p-4 bg-base-100 rounded-lg"&gt;
     &lt;Slider 
       v-model="temperature" 
@@ -266,13 +220,9 @@ const temperatureDescription = computed(() =&gt; {
   return "Too hot";
 });
 &lt;/script&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const value = ref(50);
 </script>

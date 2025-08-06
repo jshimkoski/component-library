@@ -1,26 +1,11 @@
 <template>
   <div class="content">
-    <h1 class="text-3xl font-bold mb-6">TextEditor</h1>
-
     <Prose>
+      <h1>Text Editor</h1>
       <h2>Overview</h2>
       <p>The TextEditor component provides a multi-line text input field with supporting elements like labels and descriptions. It's designed for collecting longer text input from users while maintaining the design system's visual aesthetics and accessibility standards.</p>
-    </Prose>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Basic Usage</h2>
-      
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <TextEditor
-        v-model="notes"
-        label="Notes"
-        placeholder="Enter your notes here"
-        description="These notes will be visible to the team"
-        />
-      </div>
-
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Basic Usage</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;TextEditor
     v-model="notes"
     label="Notes"
@@ -28,12 +13,8 @@
     description="These notes will be visible to the team"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Props</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Props</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -87,11 +68,8 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Slots</h2>
-            <table class="w-full text-left border-collapse">
+      <h2>Slots</h2>
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
             <th class="py-2 px-4 border-b-2 border-base-200 dark:border-base-800">Name</th>
@@ -105,28 +83,10 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">v-model</h2>
-      
-      <Prose>
-        <p>The component supports v-model for two-way binding of the textarea value.</p>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">With Description</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <TextEditor
-        v-model="aboutMe"
-        label="About Me"
-        placeholder="Tell us about yourself"
-        description="This information will appear on your public profile"
-        />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>v-model</h2>
+      <p>The component supports v-model for two-way binding of the textarea value.</p>
+      <h2>With Description</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;TextEditor
     v-model="aboutMe"
     label="About Me"
@@ -134,22 +94,8 @@
     description="This information will appear on your public profile"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Required Field</h2>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <TextEditor
-        v-model="feedback"
-        label="Feedback"
-        required
-        showMarker
-        placeholder="Please provide your feedback"
-        />
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Required Field</h2>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;TextEditor
     v-model="feedback"
     label="Feedback"
@@ -158,17 +104,9 @@
     placeholder="Please provide your feedback"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">States</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Disabled</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>States</h2>
+      <h3>Disabled</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;TextEditor
     v-model="comments"
     label="Comments"
@@ -176,45 +114,25 @@
     placeholder="Comments are currently disabled"
   /&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Best Practices</h2>
-      
-      <Prose>
-        <ul>
-          <li>Use clear, concise labels that describe what information is expected</li>
-          <li>Include placeholder text to provide examples or additional context</li>
-          <li>Use the description prop to clarify expectations or explain how the information will be used</li>
-          <li>For required fields, enable both the <code>required</code> and <code>showMarker</code> props to provide visual indication</li>
-          <li>Maintain consistent use of descriptions across your application's forms</li>
-          <li>Consider the appropriate height for your use case (the default height is 6rem)</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Accessibility Considerations</h2>
-      
-      <Prose>
-        <ul>
-          <li>The component automatically generates a unique ID to associate the label with the textarea</li>
-          <li>Labels are properly associated with the textarea for screen readers</li>
-          <li>The required attribute is applied to the textarea when the required prop is true</li>
-          <li>Focus states are clearly visible for keyboard navigation</li>
-        </ul>
-      </Prose>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">Examples</h2>
-      <h3 class="text-lg font-medium mt-6 mb-3">Form Integration</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;template&gt;
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use clear, concise labels that describe what information is expected</li>
+        <li>Include placeholder text to provide examples or additional context</li>
+        <li>Use the description prop to clarify expectations or explain how the information will be used</li>
+        <li>For required fields, enable both the <code>required</code> and <code>showMarker</code> props to provide visual indication</li>
+        <li>Maintain consistent use of descriptions across your application's forms</li>
+        <li>Consider the appropriate height for your use case (the default height is 6rem)</li>
+      </ul>
+      <h2>Accessibility Considerations</h2>
+      <ul>
+        <li>The component automatically generates a unique ID to associate the label with the textarea</li>
+        <li>Labels are properly associated with the textarea for screen readers</li>
+        <li>The required attribute is applied to the textarea when the required prop is true</li>
+        <li>Focus states are clearly visible for keyboard navigation</li>
+      </ul>
+      <h2>Examples</h2>
+      <h3>Form Integration</h3>
+      <pre><code class="language-vue">&lt;template&gt;
   &lt;form @submit.prevent="submitForm"&gt;
     &lt;TextField v-model="name" label="Name" required showMarker /&gt;
     &lt;TextField v-model="email" label="Email" type="email" required showMarker /&gt;
@@ -229,13 +147,8 @@
     &lt;Action type="submit" kind="primary"&gt;Submit&lt;/Action&gt;
   &lt;/form&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-      <h3 class="text-lg font-medium mt-6 mb-3">Character Count</h3>
-      <div class="bg-base-50 dark:bg-base-900 p-6 rounded-lg mb-4">
-        <!-- Add interactive example here -->
-      </div>
-      <div class="bg-base-50 dark:bg-base-900 p-4 rounded-lg mb-6">
-        <pre class="text-sm overflow-x-auto"><code>&lt;script setup&gt;
+      <h3>Character Count</h3>
+      <pre><code class="language-vue">&lt;script setup&gt;
 const bio = ref('');
 const maxLength = 150;
 
@@ -256,13 +169,9 @@ const charactersLeft = computed(() =&gt; {
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/template&gt;</code></pre>
-      </div>
-    </section>
+    </Prose>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const notes = ref(null);
 </script>

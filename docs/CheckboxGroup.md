@@ -1,4 +1,4 @@
-# CheckboxGroup
+# Checkbox Group
 
 ## Overview
 
