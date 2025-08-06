@@ -2,6 +2,8 @@
 
 A comprehensive collection of Vue 3 components built with TypeScript and Vite, designed for modern web applications.
 
+**Please Note:** This library is under active development. Nothing is set in stone, and breaking changes may occur.
+
 ## Overview
 
 This component library provides a set of highly customizable, accessible, and reusable Vue 3 components. Built with TypeScript and Vite, it offers excellent developer experience and runtime performance.
@@ -20,8 +22,6 @@ This component library provides a set of highly customizable, accessible, and re
 - Node.js 16.x or higher (LTS recommended)
 - npm 8.x or higher
 - Vue 3.x or higher
-- Nuxt (optional, for Nuxt applications)
-- Tailwind CSS (optional but recommended)
 
 ## Installation & Usage
 
@@ -171,7 +171,7 @@ This library includes 30+ components organized by category:
 - **[Carousel](./docs/Carousel.md)** - Image/content slider with navigation controls
 - **[Progress](./docs/Progress.md)** - Linear progress bar for loading or completion status
 - **[Prose](./docs/Prose.md)** - Styled container for rich text content
-- **[RichTextEditor](./docs/RichTextEditor.md)** - (ALPHA) - WYSIWYG editor for formatted text input
+- **[RichTextEditor](./docs/RichTextEditor.md)** - (WIP) - WYSIWYG editor for formatted text input
 - **[Table](./docs/Table.md)** - Table for displaying tabular data
 - **[TextEditor](./docs/TextEditor.md)** - Simple text editor input
 
@@ -183,7 +183,7 @@ This library includes 30+ components organized by category:
 - **[MenuHeader](./docs/MenuHeader.md)** - Header/title for menu sections
 - **[MenuItem](./docs/MenuItem.md)** - Selectable item within a menu
 - **[Paginator](./docs/Paginator.md)** - Pagination controls for navigating data sets
-- **[Scrollspy](./docs/Scrollspy.md)** - Navigation aid that highlights sections as you scroll
+- **[Scrollspy](./docs/Scrollspy.md)** - (WIP) -Navigation aid that highlights sections as you scroll
 - **[Sheet](./docs/Sheet.md)** - Sliding panel for side-drawers or overlays
 - **[TabPanel](./docs/TabPanel.md)** - Content panel for use within Tabs
 - **[Tabs](./docs/Tabs.md)** - Tabbed navigation and content switching
